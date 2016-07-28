@@ -80,6 +80,9 @@
 		a.update_by AS "updateBy.id",
 		a.update_date,
 		a.del_flag,
+		a.tenant_id AS "tenantId",
+		a.category,
+		a.address,
     	c.name AS "company.name",
     	c.parent_id AS "company.parent.id",
     	c.parent_ids AS "company.parentIds",
@@ -244,7 +247,12 @@
 			remarks, 
 			login_flag, 
 			photo, 
-			del_flag
+			del_flag,
+			tenant_id,
+			category,
+			address,
+			effective_date,
+			expiry_date
 		) VALUES (
 			#{id}, 
 			#{company.id}, 
@@ -264,7 +272,12 @@
 			#{remarks}, 
 			#{loginFlag}, 
 			#{photo}, 
-			#{delFlag}
+			#{delFlag},
+			#{tenantId},
+			#{category},
+			#{address},
+			#{effectiveDate},
+			#{expiryDate}
 		)
 	</insert>
 	
@@ -285,7 +298,11 @@
 			update_date = #{updateDate}, 
 			remarks = #{remarks},
 			login_flag = #{loginFlag},
-			photo = #{photo}
+			photo = #{photo},
+			category = #{category},
+			address = #{address},
+			effective_date = #{effectiveDate},
+			expiry_date = #{expiryDate}
 		WHERE id = #{id}
 	</update>
 	

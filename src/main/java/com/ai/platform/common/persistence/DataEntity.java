@@ -29,7 +29,11 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	protected User updateBy;	// 更新者
 	protected Date updateDate;	// 更新日期
 	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
+	protected String tenantId;  //租户id
 	
+	
+
+
 	public DataEntity() {
 		super();
 		this.delFlag = DEL_FLAG_NORMAL;
@@ -76,6 +80,16 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	@JsonIgnore
+	@Length(min=1, max=64)
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
 	}
 	
 	@JsonIgnore

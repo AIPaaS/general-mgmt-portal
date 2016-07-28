@@ -50,6 +50,14 @@ public class User extends DataEntity<User> {
 	private String oldLoginIp;	// 上次登陆IP
 	private Date oldLoginDate;	// 上次登陆日期
 	
+	//	update20160728-扩充字段
+	private String category; //员工类别
+	private String address;//地址
+	private Date effectiveDate;//生效时间
+	private Date expiryDate;//失效时间
+	//update20160728-扩充结束
+	
+	
 	private Role role;	// 根据角色查询用户条件
 	
 	private List<Role> roleList = Lists.newArrayList(); // 拥有角色列表
@@ -115,6 +123,48 @@ public class User extends DataEntity<User> {
 
 	public void setOffice(Office office) {
 		this.office = office;
+	}
+
+	@JsonIgnore
+	@Length(min=1, max=1)
+	@ExcelField(title="员工类别", align=2, sort=75)
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	
+	
+	@JsonIgnore
+	@Length(min=1, max=200, message="联系地址长度必须介于 1 和 200 之间")
+	@ExcelField(title="联系地址", align=2, sort=76)
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@ExcelField(title="生效时间", type=0, align=1, sort=90)
+	public Date getEffectiveDate() {
+		return effectiveDate;
+	}
+
+	public void setEffectiveDate(Date effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+	
+	@ExcelField(title="失效时间", type=0, align=1, sort=90)
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
 	}
 
 	@Length(min=1, max=100, message="登录名长度必须介于 1 和 100 之间")

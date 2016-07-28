@@ -16,6 +16,7 @@
 		a.update_by AS "updateBy.id",
 		a.update_date,
 		a.del_flag,
+		a.tenant_id AS "tenantId",
 		p.name AS "parent.name"
 	</sql>
 	
@@ -76,6 +77,7 @@
 			update_by, 
 			update_date, 
 			remarks, 
+			tenant_id,
 			del_flag
 		) VALUES (
 			#{id}, 
@@ -90,6 +92,7 @@
 			#{updateBy.id}, 
 			#{updateDate}, 
 			#{remarks}, 
+			#{tenantId},
 			#{delFlag}
 		)
 	</insert>

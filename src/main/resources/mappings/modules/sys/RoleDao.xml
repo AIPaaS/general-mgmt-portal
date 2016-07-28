@@ -42,6 +42,7 @@
 		a.update_by AS "updateBy.id",
 		a.update_date,
 		a.del_flag,
+		a.tenant_id AS "tenantId",
     	o.name AS "office.name",
     	o.code,
     	a.useable AS useable,
@@ -133,6 +134,9 @@
 			remarks, 
 			del_flag,
 			is_sys,
+			tenant_id,
+			effective_date,
+			expiry_date,
 			useable
 		) VALUES (
 			#{id}, 
@@ -148,6 +152,9 @@
 			#{remarks}, 
 			#{delFlag},
 			#{sysData},
+			#{tenant_id},
+			#{effectiveDate},
+			#{expiryDate},
 			#{useable}
 		)
 	</insert>
@@ -163,7 +170,9 @@
 			update_date = #{updateDate}, 
 			remarks = #{remarks},
 			is_sys = #{sysData},
-			useable = #{useable}
+			useable = #{useable},
+			effective_date = #{effectiveDate},
+			expiry_date = #{expiryDate}
 		WHERE id = #{id}
 	</update>
 	

@@ -24,6 +24,7 @@
 		a.update_by AS "updateBy.id",
 		a.update_date,
 		a.del_flag,
+		a.tenant_id AS "tenantId",
 		a.useable AS useable,
 		a.primary_person AS "primaryPerson.id",
 		a.deputy_person AS "deputyPerson.id",
@@ -104,6 +105,7 @@
 			del_flag,
 			useable,
 			primary_person,
+			tenant_id,
 			deputy_person
 		) VALUES (
 			#{id}, 
@@ -129,6 +131,7 @@
 			#{delFlag},
 			#{useable},
 			#{primaryPerson.id},
+			#{tenantId},
 			#{deputyPerson.id}
 		)
 	</insert>

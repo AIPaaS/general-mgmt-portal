@@ -16,6 +16,7 @@
 		a.remarks,
 		a.create_by AS "createBy.id",
 		a.create_date,
+		a.tenant_id AS "tenantId",
 		a.update_by AS "updateBy.id",
 		a.update_date,
 		a.del_flag,
@@ -83,6 +84,7 @@
 			update_by, 
 			update_date, 
 			remarks, 
+			tenant_id,
 			del_flag
 		) VALUES (
 			#{id}, 
@@ -100,6 +102,7 @@
 			#{updateBy.id}, 
 			#{updateDate}, 
 			#{remarks}, 
+			#{tenantId},
 			#{delFlag}
 		)
 	</insert>
