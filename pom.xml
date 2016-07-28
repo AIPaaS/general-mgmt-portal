@@ -180,9 +180,19 @@
 		
 		<!-- connection pool -->
 		<dependency>
-		     <groupId>com.alibaba</groupId>
-		     <artifactId>druid</artifactId>
-		     <version>${druid.version}</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.alibaba</groupId>
+					<artifactId>jconsole</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.alibaba</groupId>
+					<artifactId>tools</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- jdbc driver -->
