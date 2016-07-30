@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ai.slp.common.test.ipaddr.IpAddrTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-07-30T13:55:08" hostname="PC-20160107GBNE" time="0.058">
-  <properties/>
-  <testcase name="testGetIpAddr" classname="com.ai.slp.common.test.ipaddr.IpAddrTest" time="0.058"/>
-  <system-out><![CDATA[result=null
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
