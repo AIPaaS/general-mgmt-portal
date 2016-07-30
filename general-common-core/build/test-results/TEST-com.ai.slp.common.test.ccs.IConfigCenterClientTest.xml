@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ai.slp.common.test.ccs.IConfigCenterClientTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-07-30T13:55:08" hostname="PC-20160107GBNE" time="0.053">
+  <properties/>
+  <testcase name="addMcsConfig" classname="com.ai.slp.common.test.ccs.IConfigCenterClientTest" time="0.021"/>
+  <testcase name="addServiceIdPwdMap" classname="com.ai.slp.common.test.ccs.IConfigCenterClientTest" time="0.014"/>
+  <testcase name="addDbConfInfo" classname="com.ai.slp.common.test.ccs.IConfigCenterClientTest" time="0.014"/>
+  <testcase name="readMcsConfig" classname="com.ai.slp.common.test.ccs.IConfigCenterClientTest" time="0.003"/>
+  <system-out><![CDATA[DBConf config ... start
+DBConf config ... end
+cachesns:{"com.ai.slp.common.cache.gnsysparam":"MCS008","com.ai.slp.common.cache.gnarea":"MCS008","com.ai.slp.common.cache.gnservicenum":"MCS008","com.ai.slp.common.cache.gnsubject":"MCS008","com.ai.slp.common.cache.gnsubjectfund":"MCS008","com.ai.slp.common.cache.gnsettlerule":"MCS008"}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

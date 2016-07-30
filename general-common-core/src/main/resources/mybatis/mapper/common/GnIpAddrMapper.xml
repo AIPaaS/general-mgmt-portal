@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.slp.common.dao.mapper.interfaces.GnIpAddrMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.common.dao.mapper.bo.GnIpAddr" >
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="START_IP" property="startIp" jdbcType="VARCHAR" />
+    <result column="END_IP" property="endIp" jdbcType="VARCHAR" />
+    <result column="START_NUM" property="startNum" jdbcType="BIGINT" />
+    <result column="END_NUM" property="endNum" jdbcType="BIGINT" />
+    <result column="PROVINCE_CODE" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR" />
+    <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR" />
+    <result column="DISTRICT_CODE" property="districtCode" jdbcType="VARCHAR" />
+    <result column="DISTRICT" property="district" jdbcType="VARCHAR" />
+    <result column="BASIC_ORG_ID" property="basicOrgId" jdbcType="VARCHAR" />
+    <result column="BASIC_ORG_NAME" property="basicOrgName" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="VARCHAR" />
+    <result column="LATITUDE" property="latitude" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ORDER_NO, START_IP, END_IP, START_NUM, END_NUM, PROVINCE_CODE, PROVINCE_NAME, CITY_CODE, 
+    CITY_NAME, DISTRICT_CODE, DISTRICT, BASIC_ORG_ID, BASIC_ORG_NAME, LONGITUDE, LATITUDE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.common.dao.mapper.bo.GnIpAddrCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from gn_ip_addr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ai.slp.common.dao.mapper.bo.GnIpAddrCriteria" >
+    delete from gn_ip_addr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.slp.common.dao.mapper.bo.GnIpAddr" >
+    insert into gn_ip_addr (ORDER_NO, START_IP, END_IP, 
+      START_NUM, END_NUM, PROVINCE_CODE, 
+      PROVINCE_NAME, CITY_CODE, CITY_NAME, 
+      DISTRICT_CODE, DISTRICT, BASIC_ORG_ID, 
+      BASIC_ORG_NAME, LONGITUDE, LATITUDE
+      )
+    values (#{orderNo,jdbcType=VARCHAR}, #{startIp,jdbcType=VARCHAR}, #{endIp,jdbcType=VARCHAR}, 
+      #{startNum,jdbcType=BIGINT}, #{endNum,jdbcType=BIGINT}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{provinceName,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
+      #{districtCode,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{basicOrgId,jdbcType=VARCHAR}, 
+      #{basicOrgName,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.slp.common.dao.mapper.bo.GnIpAddr" >
+    insert into gn_ip_addr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="startIp != null" >
+        START_IP,
+      </if>
+      <if test="endIp != null" >
+        END_IP,
+      </if>
+      <if test="startNum != null" >
+        START_NUM,
+      </if>
+      <if test="endNum != null" >
+        END_NUM,
+      </if>
+      <if test="provinceCode != null" >
+        PROVINCE_CODE,
+      </if>
+      <if test="provinceName != null" >
+        PROVINCE_NAME,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME,
+      </if>
+      <if test="districtCode != null" >
+        DISTRICT_CODE,
+      </if>
+      <if test="district != null" >
+        DISTRICT,
+      </if>
+      <if test="basicOrgId != null" >
+        BASIC_ORG_ID,
+      </if>
+      <if test="basicOrgName != null" >
+        BASIC_ORG_NAME,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="startIp != null" >
+        #{startIp,jdbcType=VARCHAR},
+      </if>
+      <if test="endIp != null" >
+        #{endIp,jdbcType=VARCHAR},
+      </if>
+      <if test="startNum != null" >
+        #{startNum,jdbcType=BIGINT},
+      </if>
+      <if test="endNum != null" >
+        #{endNum,jdbcType=BIGINT},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="basicOrgId != null" >
+        #{basicOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="basicOrgName != null" >
+        #{basicOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.slp.common.dao.mapper.bo.GnIpAddrCriteria" resultType="java.lang.Integer" >
+    select count(*) from gn_ip_addr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gn_ip_addr
+    <set >
+      <if test="record.orderNo != null" >
+        ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startIp != null" >
+        START_IP = #{record.startIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endIp != null" >
+        END_IP = #{record.endIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startNum != null" >
+        START_NUM = #{record.startNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.endNum != null" >
+        END_NUM = #{record.endNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.provinceCode != null" >
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceName != null" >
+        PROVINCE_NAME = #{record.provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null" >
+        CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtCode != null" >
+        DISTRICT_CODE = #{record.districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.district != null" >
+        DISTRICT = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicOrgId != null" >
+        BASIC_ORG_ID = #{record.basicOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicOrgName != null" >
+        BASIC_ORG_NAME = #{record.basicOrgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gn_ip_addr
+    set ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      START_IP = #{record.startIp,jdbcType=VARCHAR},
+      END_IP = #{record.endIp,jdbcType=VARCHAR},
+      START_NUM = #{record.startNum,jdbcType=BIGINT},
+      END_NUM = #{record.endNum,jdbcType=BIGINT},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      PROVINCE_NAME = #{record.provinceName,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
+      DISTRICT_CODE = #{record.districtCode,jdbcType=VARCHAR},
+      DISTRICT = #{record.district,jdbcType=VARCHAR},
+      BASIC_ORG_ID = #{record.basicOrgId,jdbcType=VARCHAR},
+      BASIC_ORG_NAME = #{record.basicOrgName,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=VARCHAR},
+      LATITUDE = #{record.latitude,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

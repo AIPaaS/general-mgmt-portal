@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+    </Console>
+    <RollingFile name="RollingFile" fileName="logs/runner-sys.log"
+                     filePattern="logs/$${date:yyyy-MM}/runner-sys-%d{yyyy-MM-dd}-%i.log.gz">
+       <PatternLayout>
+         <Pattern>%d %-5p [%t] %C{2} (%F:%L) - %m%n</Pattern>
+       </PatternLayout>
+       <Policies>
+         <TimeBasedTriggeringPolicy />
+         <SizeBasedTriggeringPolicy size="250 MB"/>
+       </Policies>
+       <DefaultRolloverStrategy max="20"/>
+     </RollingFile>
+    <Async name="ASYNC">
+      <AppenderRef ref="RollingFile"/>
+      <AppenderRef ref="STDOUT"/>
+    </Async>
+  </Appenders>
+  <Loggers>
+    <logger name="com.ai.runner.utils" level="info" additivity="false">
+         <AppenderRef ref="RollingFile" />
+         <AppenderRef ref="STDOUT" />
+    </logger>
+    <logger name="com.ai.runner.sdk" level="info" additivity="false">
+         <AppenderRef ref="RollingFile" />
+         <AppenderRef ref="STDOUT" />
+    </logger>
+    <Root level="error">
+      <AppenderRef ref="RollingFile" />
+      <AppenderRef ref="STDOUT" />
+    </Root>
+  </Loggers>
+</Configuration>

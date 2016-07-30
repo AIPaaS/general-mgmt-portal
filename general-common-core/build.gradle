@@ -1,0 +1,17 @@
+dependencies {
+    compile project(":general-common-api")
+    compile 'org.mybatis:mybatis:3.2.8'
+    compile 'org.mybatis:mybatis-spring:1.2.2'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+
+    compile 'com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT'
+
+
+    testCompile(
+            "org.springframework:spring-test:3.2.13.RELEASE",
+            "junit:junit:4.11"
+    )
+
+}

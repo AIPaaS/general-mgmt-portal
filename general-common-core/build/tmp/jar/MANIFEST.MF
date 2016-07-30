@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+packageName: general-common-core
+Built-By: gradle 2.2
+create-date: 2016-07-30 21:54:53
+

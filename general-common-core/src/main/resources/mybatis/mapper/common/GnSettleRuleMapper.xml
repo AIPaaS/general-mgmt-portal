@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.slp.common.dao.mapper.interfaces.GnSettleRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.common.dao.mapper.bo.GnSettleRuleKey" >
+    <id column="TENANT_ID" property="tenantId" jdbcType="VARCHAR" />
+    <id column="industry_code" property="industryCode" jdbcType="VARCHAR" />
+    <id column="SUBJECT_ID" property="subjectId" jdbcType="BIGINT" />
+    <id column="FEE_SUBJECT_ID" property="feeSubjectId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TENANT_ID, industry_code, SUBJECT_ID, FEE_SUBJECT_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.common.dao.mapper.bo.GnSettleRuleCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from gn_settle_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ai.slp.common.dao.mapper.bo.GnSettleRuleKey" >
+    delete from gn_settle_rule
+    where TENANT_ID = #{tenantId,jdbcType=VARCHAR}
+      and industry_code = #{industryCode,jdbcType=VARCHAR}
+      and SUBJECT_ID = #{subjectId,jdbcType=BIGINT}
+      and FEE_SUBJECT_ID = #{feeSubjectId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.slp.common.dao.mapper.bo.GnSettleRuleCriteria" >
+    delete from gn_settle_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.slp.common.dao.mapper.bo.GnSettleRuleKey" >
+    insert into gn_settle_rule (TENANT_ID, industry_code, SUBJECT_ID, 
+      FEE_SUBJECT_ID)
+    values (#{tenantId,jdbcType=VARCHAR}, #{industryCode,jdbcType=VARCHAR}, #{subjectId,jdbcType=BIGINT}, 
+      #{feeSubjectId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.slp.common.dao.mapper.bo.GnSettleRuleKey" >
+    insert into gn_settle_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        TENANT_ID,
+      </if>
+      <if test="industryCode != null" >
+        industry_code,
+      </if>
+      <if test="subjectId != null" >
+        SUBJECT_ID,
+      </if>
+      <if test="feeSubjectId != null" >
+        FEE_SUBJECT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenantId != null" >
+        #{tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectId != null" >
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="feeSubjectId != null" >
+        #{feeSubjectId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.slp.common.dao.mapper.bo.GnSettleRuleCriteria" resultType="java.lang.Integer" >
+    select count(*) from gn_settle_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gn_settle_rule
+    <set >
+      <if test="record.tenantId != null" >
+        TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryCode != null" >
+        industry_code = #{record.industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subjectId != null" >
+        SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.feeSubjectId != null" >
+        FEE_SUBJECT_ID = #{record.feeSubjectId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gn_settle_rule
+    set TENANT_ID = #{record.tenantId,jdbcType=VARCHAR},
+      industry_code = #{record.industryCode,jdbcType=VARCHAR},
+      SUBJECT_ID = #{record.subjectId,jdbcType=BIGINT},
+      FEE_SUBJECT_ID = #{record.feeSubjectId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

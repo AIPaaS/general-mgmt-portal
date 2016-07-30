@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ai.slp.common.test.industry.IndustryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2016-07-30T13:55:08" hostname="PC-20160107GBNE" time="0.051">
+  <properties/>
+  <testcase name="industryTest2" classname="com.ai.slp.common.test.industry.IndustryTest" time="0.051"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
