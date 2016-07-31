@@ -2,7 +2,7 @@ package com.ai.slp.common.api.office.param;
 
 import com.ai.opt.base.vo.BaseInfo;
 
-public class OfficeListOfUserQueryRequest extends BaseInfo{
+public class OfficeChildrenListQueryRequest extends BaseInfo{
 
 	private static final long serialVersionUID = 1L;
 	

@@ -1,7 +1,7 @@
 package com.ai.slp.common.api.sysuser.interfaces;
 
-import org.omg.CORBA.SystemException;
-
+import com.ai.opt.base.exception.BusinessException;
+import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.common.api.sysuser.param.SysUserQueryRequest;
 import com.ai.slp.common.api.sysuser.param.SysUserQueryResponse;
 

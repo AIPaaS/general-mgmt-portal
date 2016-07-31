@@ -2,11 +2,13 @@ package com.ai.slp.common.service.atom.sysuser.impl;
 
 import java.util.List;
 
-import com.ai.slp.common.dao.mapper.bo.GnSubjectCriteria;
+import org.springframework.stereotype.Component;
+
+import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.slp.common.dao.mapper.bo.SysUser;
 import com.ai.slp.common.dao.mapper.bo.SysUserCriteria;
 import com.ai.slp.common.dao.mapper.factory.MapperFactory;
-import com.ai.slp.common.dao.mapper.interfaces.GnSubjectMapper;
 import com.ai.slp.common.dao.mapper.interfaces.SysUserMapper;
 import com.ai.slp.common.service.atom.sysuser.ISysUserAtomSV;
 

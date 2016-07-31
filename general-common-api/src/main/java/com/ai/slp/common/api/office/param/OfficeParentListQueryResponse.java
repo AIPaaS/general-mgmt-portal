@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ai.opt.base.vo.BaseResponse;
 
-public class OfficeListOfUserQueryResponse extends BaseResponse{
+public class OfficeParentListQueryResponse extends BaseResponse{
 
 	private static final long serialVersionUID = 1L;
 	

@@ -83,6 +83,7 @@
 		a.tenant_id AS "tenantId",
 		a.category,
 		a.address,
+		a.theme,
     	c.name AS "company.name",
     	c.parent_id AS "company.parent.id",
     	c.parent_ids AS "company.parentIds",
@@ -302,6 +303,7 @@
 			category = #{category},
 			address = #{address},
 			effective_date = #{effectiveDate},
+			theme = #{theme},
 			expiry_date = #{expiryDate}
 		WHERE id = #{id}
 	</update>
@@ -336,12 +338,17 @@
 	</update>
 	
 	<!-- 更新用户密码 -->
+	<update id="updateThemeById">
+		UPDATE sys_user SET 
+			theme = #{theme} 
+		WHERE id = #{id}
+	</update>
+	<!-- 更新用户密码 -->
 	<update id="updatePasswordById">
 		UPDATE sys_user SET 
 			password = #{password} 
 		WHERE id = #{id}
-	</update>
-	
+	</update>	
 	<!-- 更新登录信息，如登录IP、登录时间 -->
 	<update id="updateLoginInfo">
 		UPDATE sys_user SET 

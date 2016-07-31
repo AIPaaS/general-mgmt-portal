@@ -528,4 +528,17 @@
       tenant_id = #{tenantId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectParentIdList" parameterType="com.ai.slp.common.office.mapper.bo.SysOfficeCriteria" resultType="java.util.List" >
+    select distinct parent_id from sys_office where
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart>=0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
 </mapper>
