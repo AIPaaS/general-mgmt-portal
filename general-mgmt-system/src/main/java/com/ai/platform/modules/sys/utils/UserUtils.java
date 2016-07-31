@@ -253,7 +253,10 @@ public class UserUtils {
 	public static Principal getPrincipal(){
 		try{
 			Subject subject = SecurityUtils.getSubject();
-			Principal principal = (Principal)subject.getPrincipal();
+			
+//			Principal principal = (Principal)subject.getPrincipal();
+			User user =getByLoginName(subject.getPrincipal()+"");
+			Principal principal =new Principal(user, false);
 			if (principal != null){
 				return principal;
 			}
@@ -265,6 +268,9 @@ public class UserUtils {
 		}
 		return null;
 	}
+	
+	
+	
 	
 	public static Session getSession(){
 		try{

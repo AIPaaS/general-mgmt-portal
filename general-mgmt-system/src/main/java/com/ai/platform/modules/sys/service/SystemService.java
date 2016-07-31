@@ -3,6 +3,8 @@
  */
 package com.ai.platform.modules.sys.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -18,12 +20,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
-import com.ai.platform.common.security.Digests;
 import com.ai.platform.common.security.shiro.session.SessionDAO;
 import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.service.ServiceException;
 import com.ai.platform.common.utils.CacheUtils;
-import com.ai.platform.common.utils.Encodes;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.Servlets;
 import com.ai.platform.modules.sys.dao.MenuDao;
@@ -206,25 +206,25 @@ public class SystemService extends BaseService implements InitializingBean {
 	/**
 	 * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
 	 */
-	public static String entryptPassword(String plainPassword) {
-		String plain = Encodes.unescapeHtml(plainPassword);
-		byte[] salt = Digests.generateSalt(SALT_SIZE);
-		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
-		return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
-	}
-	
-	/**
-	 * 验证密码
-	 * @param plainPassword 明文密码
-	 * @param password 密文密码
-	 * @return 验证成功返回true
-	 */
-	public static boolean validatePassword(String plainPassword, String password) {
-		String plain = Encodes.unescapeHtml(plainPassword);
-		byte[] salt = Encodes.decodeHex(password.substring(0,16));
-		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
-		return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
-	}
+//	public static String entryptPassword(String plainPassword) {
+//		String plain = Encodes.unescapeHtml(plainPassword);
+//		byte[] salt = Digests.generateSalt(SALT_SIZE);
+//		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
+//		return Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword);
+//	}
+//	
+//	/**
+//	 * 验证密码
+//	 * @param plainPassword 明文密码
+//	 * @param password 密文密码
+//	 * @return 验证成功返回true
+//	 */
+//	public static boolean validatePassword(String plainPassword, String password) {
+//		String plain = Encodes.unescapeHtml(plainPassword);
+//		byte[] salt = Encodes.decodeHex(password.substring(0,16));
+//		byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
+//		return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
+//	}
 	
 	/**
 	 * 获得活动会话
@@ -539,6 +539,48 @@ public class SystemService extends BaseService implements InitializingBean {
 			identityService.deleteUser(userId);
 		}
 	}
+	
+	/**
+	 * 生成安全的MD5密码
+	 */
+	public static String entryptPassword(String plainPassword) {
+		String s = plainPassword;
+		if (s == null) {
+			return "";
+		}
+		String value = null;
+		MessageDigest md5 = null;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException ex) {
+		}
+		sun.misc.BASE64Encoder baseEncoder = new sun.misc.BASE64Encoder();
+		try {
+			value = baseEncoder.encode(md5.digest(s.getBytes("utf-8")));
+		} catch (Exception ex) {
+		}
+		return value;
+	}
+
+	
+	
+
+	/**
+	 * 验证密码
+	 * 
+	 * @param plainPassword
+	 *            明文密码
+	 * @param password
+	 *            密文密码
+	 * @return 验证成功返回true
+	 */
+	public static boolean validatePassword(String plainPassword, String password) {
+		String plain = entryptPassword(plainPassword);
+		
+		return password.equals(plain);
+	}
+	
+	
 	@Transactional(readOnly = false)
 	public void updateTheme(String theme) {
 		// TODO Auto-generated method stub
