@@ -4,6 +4,8 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.slp.common.api.sysuser.param.SysUserQueryRequest;
 import com.ai.slp.common.api.sysuser.param.SysUserQueryResponse;
+import com.ai.slp.common.api.sysuser.param.SysUserThemeRequest;
+import com.ai.slp.common.api.sysuser.param.SysUserThemeResponse;
 
 public interface ISysUserQuerySV {
 	/**
@@ -25,5 +27,5 @@ public interface ISysUserQuerySV {
 	 * @author zhanglh
 	 * @ApiCode
 	 */
-	String queryUserTheme(String userId)throws BusinessException,SystemException;
+	SysUserThemeResponse queryUserTheme(SysUserThemeRequest request)throws BusinessException,SystemException;
 }

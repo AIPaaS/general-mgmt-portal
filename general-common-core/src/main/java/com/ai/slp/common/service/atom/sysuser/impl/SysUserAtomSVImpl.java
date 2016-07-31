@@ -34,6 +34,7 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 		if (!StringUtil.isBlank(user.getLoginName())) {
 			criteria.andNoEqualTo(user.getLoginName());
 		}
+		criteria.andDelFlagEqualTo("0");
 		SysUserMapper mapper = MapperFactory.getSysUserMapper();
 		List<SysUser> userList = mapper.selectByExample(example);
 		if (!CollectionUtil.isEmpty(userList)) {
@@ -43,11 +44,22 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 	}
 
 	@Override
-	public String queryUserTheme(String id) {
-		  SysUser user = MapperFactory.getSysUserMapper().selectByPrimaryKey(id);
-		  if(user!=null){
-			  return user.getTheme();
-		  }else{
+	public String queryUserTheme(String id,String tenantId) {
+		SysUserCriteria example = new SysUserCriteria();
+		SysUserCriteria.Criteria criteria = example.createCriteria();
+		if (!StringUtil.isBlank(tenantId)) {
+			criteria.andTenantIdEqualTo(tenantId);
+		}
+		if (!StringUtil.isBlank(id)) {
+			criteria.andIdEqualTo(id);
+		}
+		criteria.andDelFlagEqualTo("0");
+		SysUserMapper mapper = MapperFactory.getSysUserMapper();
+		List<SysUser> userList = mapper.selectByExample(example);
+		if (!CollectionUtil.isEmpty(userList)) {
+			SysUser user =userList.get(0);
+			return user.getTheme();
+		}else{
 			  return null;
 		  }
 	}
