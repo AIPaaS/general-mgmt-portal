@@ -16,4 +16,14 @@ public interface ISysUserQuerySV {
 	 * @ApiCode
 	 */
 	SysUserQueryResponse queryUserInfo(SysUserQueryRequest request)throws BusinessException,SystemException;
+	/**
+	 * 查询用户主题
+	 * @param userId
+	 * @return
+	 * @throws BusinessException
+	 * @throws SystemException
+	 * @author zhanglh
+	 * @ApiCode
+	 */
+	String queryUserTheme(String userId)throws BusinessException,SystemException;
 }

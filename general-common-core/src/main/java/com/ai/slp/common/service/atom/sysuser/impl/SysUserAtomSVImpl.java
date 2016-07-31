@@ -40,4 +40,14 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 		return null;
 	}
 
+	@Override
+	public String queryUserTheme(String id) {
+		  SysUser user = MapperFactory.getSysUserMapper().selectByPrimaryKey(id);
+		  if(user!=null){
+			  return user.getTheme();
+		  }else{
+			  return null;
+		  }
+	}
+
 }

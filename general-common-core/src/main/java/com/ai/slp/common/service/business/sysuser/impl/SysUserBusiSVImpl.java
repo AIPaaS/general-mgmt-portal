@@ -4,6 +4,8 @@ import com.ai.slp.common.constants.ResultCodeConstants;
 import com.ai.slp.common.dao.mapper.bo.SysUser;
 import com.ai.slp.common.service.atom.sysuser.ISysUserAtomSV;
 import com.ai.slp.common.service.business.sysuser.ISysUserBusiSV;
+import com.ai.slp.common.service.business.sysuser.SysUserQueryRequest;
+import com.ai.slp.common.service.business.sysuser.SysUserQueryResponse;
 @Service
 @Transactional
 public class SysUserBusiSVImpl implements ISysUserBusiSV {   
@@ -30,6 +32,11 @@ public class SysUserBusiSVImpl implements ISysUserBusiSV {
 		    response.setResponseHeader(responseHeader);
 		}
 		return response;
+	}
+
+	@Override
+	public String queryUserTheme(String id) {
+		return iSysUserAtomSV.queryUserTheme(id);
 	}
 
 }
