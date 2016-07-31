@@ -71,11 +71,7 @@ dependencies {
 
 providedCompile "javax:javaee-api:6.0"
  
-   def tomcatVersion = '7.0.59'
-   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
-    "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
-      "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
-
+  
     compile(group: 'org.springframework', name: 'spring-core', version:'4.1.9.RELEASE') {
 exclude(module: 'commons-logging')
     }
