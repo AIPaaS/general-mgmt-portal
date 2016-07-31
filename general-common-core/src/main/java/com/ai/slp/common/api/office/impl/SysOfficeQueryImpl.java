@@ -15,6 +15,7 @@ import com.ai.slp.common.api.office.param.OfficeDetailQueryResponse;
 import com.ai.slp.common.api.office.param.OfficeParentListQueryRequest;
 import com.ai.slp.common.api.office.param.OfficeParentListQueryResponse;
 import com.ai.slp.common.service.business.office.ISysofficeBusinessService;
+import com.ai.slp.common.util.SystemValidateUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 
 @Service
@@ -27,6 +28,7 @@ public class SysOfficeQueryImpl implements ISysOfficeQuerySV {
 	@Override
 	public OfficeDetailQueryResponse queryOfficeDetail(OfficeDetailQueryRequest queryRequest) throws BusinessException,
 			SystemException {
+		SystemValidateUtil.validateQueryOfficeDetail(queryRequest);
 		return iSysofficeBusinessService.queryOfficeDetail(queryRequest);
 	}
 
@@ -34,6 +36,7 @@ public class SysOfficeQueryImpl implements ISysOfficeQuerySV {
 	public OfficeParentListQueryResponse queryParentOfficeList(
 			OfficeParentListQueryRequest queryRequest)
 			throws BusinessException, SystemException {
+		SystemValidateUtil.validateQueryParentOfficeList(queryRequest);
 		return iSysofficeBusinessService.queryParentOfficeList(queryRequest);
 	}
 
@@ -41,12 +44,14 @@ public class SysOfficeQueryImpl implements ISysOfficeQuerySV {
 	public OfficeChildrenListQueryResponse queryChildrenOfficeList(
 			OfficeChildrenListQueryRequest queryRequest)
 			throws BusinessException, SystemException {
+		SystemValidateUtil.validateQueryChildrenOfficeList(queryRequest);
 		return iSysofficeBusinessService.queryChildrenOfficeList(queryRequest);
 	}
 
 	@Override
 	public OfficeAllQueryResponse queryOfficeAll(BaseInfo queryRequest)
 			throws BusinessException, SystemException {
+		SystemValidateUtil.validateQueryOfficeAll(queryRequest);
 		return iSysofficeBusinessService.queryOfficeAll(queryRequest);
 	}
 
