@@ -41,7 +41,7 @@ public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 		OfficeDetailQueryResponse queryResponse = new OfficeDetailQueryResponse();
 		if(sysOfficeInfo != null){
 			OfficeVO officeVo = new OfficeVO();
-			BeanUtils.copyProperties(sysOfficeInfo, officeVo);
+			BeanUtils.copyProperties(officeVo,sysOfficeInfo);
 			queryResponse.setOfficeVo(officeVo );
 			ResponseHeader responseHeader=new ResponseHeader(true, ResultCodeConstants.SUCCESS_CODE, "查询成功");
 			queryResponse.setResponseHeader(responseHeader);
@@ -61,7 +61,7 @@ public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 			String parentIds = sysOfficeInfo.getParentIds();
 			//转换返回类型
 			OfficeVO officeVoSelf = new OfficeVO();
-			BeanUtils.copyProperties(sysOfficeInfo, officeVoSelf);
+			BeanUtils.copyProperties(officeVoSelf,sysOfficeInfo);
 			//添加父组织列表
 			if(!StringUtils.isBlank(parentIds)){
 				String[] officeIdArray = parentIds.split(",");

@@ -34,10 +34,11 @@ public class OfficeQueryTest {
 	@Test
 	public void queryChildrenOfficeList(){
 		OfficeChildrenListQueryRequest queryRequest=new OfficeChildrenListQueryRequest();
-		queryRequest.setId("25");
+		queryRequest.setId("0");
 		queryRequest.setTenantId("SLP");
 		OfficeChildrenListQueryResponse queryChildrenOfficeList = sv.queryChildrenOfficeList(queryRequest);
 		System.out.println(JSonUtil.toJSon(queryChildrenOfficeList));
+		System.out.println(queryChildrenOfficeList.getOfficeList().size());
 	}
 	@Test
 	public void queryParentOfficeList(){
@@ -48,7 +49,7 @@ public class OfficeQueryTest {
 		System.out.println(JSonUtil.toJSon(queryParentOfficeList));
 	}
 	@Test
-	public void testGetServiceNumCount(){
+	public void queryOfficeAll(){
 		BaseInfo queryRequest = new BaseInfo();
 		queryRequest.setTenantId("SLP");
 		OfficeAllQueryResponse queryOfficeAll = sv.queryOfficeAll(queryRequest );
