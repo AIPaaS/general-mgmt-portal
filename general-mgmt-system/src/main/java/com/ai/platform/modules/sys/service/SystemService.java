@@ -539,6 +539,20 @@ public class SystemService extends BaseService implements InitializingBean {
 			identityService.deleteUser(userId);
 		}
 	}
+	@Transactional(readOnly = false)
+	public void updateTheme(String theme) {
+		// TODO Auto-generated method stub
+		User user = (User)UserUtils.getUser();
+		if(StringUtils.isNotBlank(theme)){
+			user.setTheme(theme);
+			
+		}else{
+			user.setTheme(UserUtils.USER_DEFAULT_THEME);	
+		}
+		userDao.updateThemeById(user);
+	}
+
+
 	
 	///////////////// Synchronized to the Activiti end //////////////////
 	

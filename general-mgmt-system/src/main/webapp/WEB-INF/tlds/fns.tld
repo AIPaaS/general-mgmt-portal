@@ -63,7 +63,13 @@
     <function-signature>com.ai.platform.modules.sys.entity.User get(java.lang.String)</function-signature>
     <example>${fns:getUserById(id)}</example>  
   </function>
-  
+   <function>
+    <description>根据编码获取用户主题</description>
+    <name>getTheme</name>
+    <function-class>com.ai.platform.modules.sys.utils.UserUtils</function-class>
+    <function-signature>com.ai.platform.modules.sys.entity.User getTheme()</function-signature>
+    <example>${fns:getTheme()}</example>  
+  </function> 
   <function>
     <description>获取授权用户信息</description>
     <name>getPrincipal</name>

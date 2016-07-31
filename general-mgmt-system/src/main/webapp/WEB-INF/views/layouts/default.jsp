@@ -12,12 +12,10 @@
 <body>
 	<sitemesh:body/>
 	<script type="text/javascript">//<!-- 无框架时，左上角显示菜单图标按钮。
-	alert("111");
 		if(!(self.frameElement && self.frameElement.tagName=="IFRAME")){
 			$("body").prepend("<i id=\"btnMenu\" class=\"icon-th-list\" style=\"cursor:pointer;float:right;margin:10px;\"></i><div id=\"menuContent\"></div>");
 			$("#btnMenu").click(function(){
-				alert("22222");
-				alert(<shiro:principal property="sessionid"/>);
+				
 				top.$.jBox('get:${ctx}/sys/menu/treeselect;JSESSIONID=<shiro:principal property="sessionid"/>', {title:'选择菜单', buttons:{'关闭':true}, width:300, height: 350, top:10});
 				//if ($("#menuContent").html()==""){$.get("${ctx}/sys/menu/treeselect", function(data){$("#menuContent").html(data);});}else{$("#menuContent").toggle(100);}
 			});

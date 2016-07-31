@@ -125,6 +125,11 @@ public class UserController extends BaseController {
 			}
 		}
 		user.setRoleList(roleList);
+		//插入用户时给予用户默认主题
+		if (StringUtils.isNotBlank(user.getTheme())){
+			user.setTheme(Global.getDefTheme());
+		}
+		
 		// 保存用户信息
 		systemService.saveUser(user);
 		// 清除当前用户缓存

@@ -11,9 +11,11 @@ import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import com.ai.platform.common.config.Global;
 import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
+import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.AreaDao;
 import com.ai.platform.modules.sys.dao.MenuDao;
 import com.ai.platform.modules.sys.dao.OfficeDao;
@@ -43,12 +45,14 @@ public class UserUtils {
 	public static final String USER_CACHE_ID_ = "id_";
 	public static final String USER_CACHE_LOGIN_NAME_ = "ln";
 	public static final String USER_CACHE_LIST_BY_OFFICE_ID_ = "oid_";
-
+	public static final String USER_CACHE_Theme = "theme";
 	public static final String CACHE_ROLE_LIST = "roleList";
 	public static final String CACHE_MENU_LIST = "menuList";
 	public static final String CACHE_AREA_LIST = "areaList";
 	public static final String CACHE_OFFICE_LIST = "officeList";
 	public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
+	
+	public static final String USER_DEFAULT_THEME = Global.getDefTheme();
 	
 	/**
 	 * 根据ID获取用户
@@ -67,6 +71,22 @@ public class UserUtils {
 			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getLoginName(), user);
 		}
 		return user;
+	}
+	/**
+	 * 获取当前用户主题
+	 * @param id
+	 * @return 取不到返回null
+	 */
+	public static String getTheme(){
+		String theme = "";
+		User user = (User)getUser();
+		theme = user.getTheme();
+		if(StringUtils.isNotBlank(theme)){
+			theme = theme;
+		}else{
+			theme = USER_DEFAULT_THEME;
+		}
+		return theme;
 	}
 	
 	/**

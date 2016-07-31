@@ -50,6 +50,8 @@ public interface UserDao extends CrudDao<User> {
 	 * @return
 	 */
 	public int updateLoginInfo(User user);
+	
+	public int updateThemeById(User user);
 
 	/**
 	 * 删除用户角色关联数据

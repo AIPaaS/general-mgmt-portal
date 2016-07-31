@@ -57,7 +57,10 @@ public class User extends DataEntity<User> {
 	private Date expiryDate;//失效时间
 	//update20160728-扩充结束
 	
+	private String theme;//当前主题
 	
+
+
 	private Role role;	// 根据角色查询用户条件
 	
 	private List<Role> roleList = Lists.newArrayList(); // 拥有角色列表
@@ -213,7 +216,17 @@ public class User extends DataEntity<User> {
 	public String getEmail() {
 		return email;
 	}
+	
+	@JsonIgnore
+	public String getTheme() {
+		return theme;
+	}
 
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+	
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}

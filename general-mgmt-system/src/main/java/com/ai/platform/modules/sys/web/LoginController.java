@@ -28,6 +28,7 @@ import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.security.FormAuthenticationFilter;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
+import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Maps;
 
@@ -42,6 +43,8 @@ public class LoginController extends BaseController{
 	@Autowired
 	private SessionDAO sessionDAO;
 	
+	@Autowired
+	private SystemService SystemService;
 	/**
 	 * 管理登录
 	 */
@@ -190,16 +193,12 @@ public class LoginController extends BaseController{
 	public String getThemeInCookie(@PathVariable String theme, HttpServletRequest request, HttpServletResponse response){
 		if (StringUtils.isNotBlank(theme)){
 			
-		  
-			CookieUtils.setCookie(response, "theme", theme);
-
-			CacheUtils.remove("SYS_THEME",UserUtils.getUser().getName());
-
-			CacheUtils.put("SYS_THEME",UserUtils.getUser().getName(), theme);
-
+			SystemService.updateTheme(theme);
+//			CookieUtils.setCookie(response, "theme", theme);
+			CacheUtils.put("userCache", UserUtils.USER_CACHE_Theme, theme);
 		}else{
-			theme = CookieUtils.getCookie(request, "theme");
-			CacheUtils.put("SYS_THEME",UserUtils.getUser().getName(), "default");
+//			theme = CookieUtils.getCookie(request, "theme");
+			theme = (String) CacheUtils.get("userCache", UserUtils.USER_CACHE_Theme);
 		}
 		return "redirect:"+request.getParameter("url");
 	}
