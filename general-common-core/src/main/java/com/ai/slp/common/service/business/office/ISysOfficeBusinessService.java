@@ -9,7 +9,7 @@ import com.ai.slp.common.api.office.param.OfficeDetailQueryResponse;
 import com.ai.slp.common.api.office.param.OfficeParentListQueryRequest;
 import com.ai.slp.common.api.office.param.OfficeParentListQueryResponse;
 
-public interface ISysofficeBusinessService {
+public interface ISysOfficeBusinessService {
 	/**
 	 * 查询机构详情
 	 * @param queryRequest

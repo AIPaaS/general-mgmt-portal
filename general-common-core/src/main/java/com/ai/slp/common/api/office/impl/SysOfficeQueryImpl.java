@@ -14,7 +14,7 @@ import com.ai.slp.common.api.office.param.OfficeDetailQueryRequest;
 import com.ai.slp.common.api.office.param.OfficeDetailQueryResponse;
 import com.ai.slp.common.api.office.param.OfficeParentListQueryRequest;
 import com.ai.slp.common.api.office.param.OfficeParentListQueryResponse;
-import com.ai.slp.common.service.business.office.ISysofficeBusinessService;
+import com.ai.slp.common.service.business.office.ISysOfficeBusinessService;
 import com.ai.slp.common.util.SystemValidateUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 
@@ -23,7 +23,7 @@ import com.alibaba.dubbo.config.annotation.Service;
 public class SysOfficeQueryImpl implements ISysOfficeQuerySV {
 
 	@Autowired
-	ISysofficeBusinessService iSysofficeBusinessService;
+	ISysOfficeBusinessService iSysofficeBusinessService;
 	
 	@Override
 	public OfficeDetailQueryResponse queryOfficeDetail(OfficeDetailQueryRequest queryRequest) throws BusinessException,

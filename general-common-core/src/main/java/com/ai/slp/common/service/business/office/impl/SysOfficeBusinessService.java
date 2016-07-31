@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.base.vo.BaseInfo;
 import com.ai.opt.base.vo.ResponseHeader;
@@ -21,12 +23,14 @@ import com.ai.slp.common.api.office.param.OfficeVO;
 import com.ai.slp.common.constants.ResultCodeConstants;
 import com.ai.slp.common.dao.mapper.bo.SysOffice;
 import com.ai.slp.common.service.atom.office.ISysOfficeAtomService;
-import com.ai.slp.common.service.business.office.ISysofficeBusinessService;
+import com.ai.slp.common.service.business.office.ISysOfficeBusinessService;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class SysOfficeBusinessService implements ISysofficeBusinessService{
+@Service
+@Transactional
+public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 
 	@Autowired
 	private ISysOfficeAtomService ISysOfficeAtomService;
