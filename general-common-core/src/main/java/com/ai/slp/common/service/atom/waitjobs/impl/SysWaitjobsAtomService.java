@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.ai.opt.sdk.components.sequence.factory.SeqClientFactory;
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.slp.common.constants.VOConstants.WaitjobsStatusConstant;
