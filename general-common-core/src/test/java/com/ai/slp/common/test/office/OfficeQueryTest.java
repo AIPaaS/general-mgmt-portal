@@ -47,6 +47,7 @@ public class OfficeQueryTest {
 		queryRequest.setTenantId("SLP");
 		OfficeParentListQueryResponse queryParentOfficeList = sv.queryParentOfficeList(queryRequest);
 		System.out.println(JSonUtil.toJSon(queryParentOfficeList));
+		System.out.println(queryParentOfficeList.getOfficeList().size());
 	}
 	@Test
 	public void queryOfficeAll(){
@@ -54,6 +55,7 @@ public class OfficeQueryTest {
 		queryRequest.setTenantId("SLP");
 		OfficeAllQueryResponse queryOfficeAll = sv.queryOfficeAll(queryRequest );
 		System.out.println(JSonUtil.toJSon(queryOfficeAll));
+		System.out.println(queryOfficeAll.getAllOffice().size());
 	}
     
     
