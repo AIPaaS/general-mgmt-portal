@@ -39,6 +39,7 @@ public class MenuController extends BaseController {
 	@Autowired
 	private SystemService systemService;
 	
+	
 	@ModelAttribute("menu")
 	public Menu get(@RequestParam(required=false) String id) {
 		if (StringUtils.isNotBlank(id)){
@@ -172,5 +173,12 @@ public class MenuController extends BaseController {
 			}
 		}
 		return mapList;
+	}
+	
+	@RequiresPermissions("user")
+	@ResponseBody
+	public List<Menu> nodeMenu(@RequestParam(required=false) String rootId){
+		List<Menu> list = UserUtils.getMenuNodesbyId(rootId);
+		return list;
 	}
 }

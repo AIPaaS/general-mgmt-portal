@@ -85,7 +85,13 @@
     <function-signature>java.util.List getMenuList()</function-signature>
     <example>${fns:getMenuList()}</example>  
   </function>
-  
+    <function>
+    <description>获取当前用户的菜单对象列表</description>
+    <name>getChildsMenu</name>
+    <function-class>com.ai.platform.modules.sys.utils.UserUtils</function-class>
+    <function-signature>java.util.List getMenuNodesbyId(java.lang.String)</function-signature>
+    <example>${fns:getChildsMenu(id)}</example>  
+  </function>
   <function>
     <description>获取当前用户的区域对象列表</description>
     <name>getAreaList</name>

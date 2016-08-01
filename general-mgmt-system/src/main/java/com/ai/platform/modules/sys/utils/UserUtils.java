@@ -32,7 +32,7 @@ import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
  * 用户工具类
  * @author ThinkGem
  * @version 2013-12-05
- */
+ */ 
 public class UserUtils {
 
 	private static UserDao userDao = SpringContextHolder.getBean(UserDao.class);
@@ -48,6 +48,7 @@ public class UserUtils {
 	public static final String USER_CACHE_Theme = "theme";
 	public static final String CACHE_ROLE_LIST = "roleList";
 	public static final String CACHE_MENU_LIST = "menuList";
+	public static final String CACHE_MENU_CHILDLIST = "menuChildList";
 	public static final String CACHE_AREA_LIST = "areaList";
 	public static final String CACHE_OFFICE_LIST = "officeList";
 	public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
@@ -189,6 +190,27 @@ public class UserUtils {
 			}
 			putCache(CACHE_MENU_LIST, menuList);
 		}
+		return menuList;
+	}
+
+	/**
+	 * 根据父节点ID获取子节点菜单
+	 * @return
+	 */
+	public static List<Menu> getMenuNodesbyId(String id){
+		@SuppressWarnings("unchecked")
+//		List<Menu> menuList = (List<Menu>)getCache(CACHE_MENU_CHILDLIST+id);
+//		if (menuList == null || menuList.isEmpty()){
+//			
+			Menu menu = new Menu();
+			Menu menuParent = new Menu();
+			menuParent.setId(id);
+			menu.setParent(menuParent);
+					
+			List<Menu> menuList = menuDao.findMenuChilds(menu);
+			
+//			putCache(CACHE_MENU_CHILDLIST+menu.getId(), menuList);
+//		}
 		return menuList;
 	}
 	

@@ -5,6 +5,8 @@ package com.ai.platform.modules.sys.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ai.platform.common.persistence.CrudDao;
 import com.ai.platform.common.persistence.annotation.MyBatisDao;
 import com.ai.platform.modules.sys.entity.Menu;
@@ -24,5 +26,7 @@ public interface MenuDao extends CrudDao<Menu> {
 	public int updateParentIds(Menu menu);
 	
 	public int updateSort(Menu menu);
+
+	public List<Menu> findMenuChilds(Menu menu);
 	
 }
