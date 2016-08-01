@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
+import com.ai.slp.common.constants.VOConstants.DeleteFlagConstant;
 import com.ai.slp.common.dao.mapper.bo.SysUser;
 import com.ai.slp.common.dao.mapper.bo.SysUserCriteria;
 import com.ai.slp.common.dao.mapper.factory.MapperFactory;
@@ -38,7 +39,7 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 		if (!StringUtil.isBlank(user.getLoginName())) {
 			criteria.andNoEqualTo(user.getLoginName());
 		}
-		criteria.andDelFlagEqualTo("0");
+		criteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		 Date crruntDate = DateUtil.getDate();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	     String dateStr = sdf.format(crruntDate);
@@ -65,7 +66,7 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 		if (!StringUtil.isBlank(id)) {
 			criteria.andIdEqualTo(id);
 		}
-		criteria.andDelFlagEqualTo("0");
+		criteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		Date crruntDate = DateUtil.getDate();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	     String dateStr = sdf.format(crruntDate);
