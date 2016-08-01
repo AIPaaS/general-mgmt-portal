@@ -277,10 +277,13 @@ public class UserUtils {
 			Subject subject = SecurityUtils.getSubject();
 			
 //			Principal principal = (Principal)subject.getPrincipal();
-			User user =getByLoginName(subject.getPrincipal()+"");
-			Principal principal =new Principal(user, false);
-			if (principal != null){
-				return principal;
+			String loginName =(String)subject.getPrincipal();
+				if(!"".equals(loginName) && loginName != null){
+				User user =getByLoginName(loginName);
+				Principal principal =new Principal(user, false);
+				if (principal != null){
+					return principal;
+				}
 			}
 //			subject.logout();
 		}catch (UnavailableSecurityManagerException e) {
