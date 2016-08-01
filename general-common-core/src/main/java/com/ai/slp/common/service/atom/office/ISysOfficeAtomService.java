@@ -8,6 +8,25 @@ public interface ISysOfficeAtomService {
 	
 	SysOffice selectSysOfficeInfo(String id);
 	
-	List<SysOffice> selectSysOfficeList(List<String> idList);
+	/**
+	 * 查询当前租户所有机构数据
+	 * @param tenantId
+	 * @return
+	 */
+	List<SysOffice> selectSysOfficeAll(String tenantId);
+	
+	/**
+	 * 获取当前id及所有上级节点
+	 * @param ids
+	 * @return
+	 */
+	List<SysOffice> selectSysOfficeList(List<String> ids);
+	
+	/**
+	 * 查询当前id及所有子集几点对象集合
+	 * @param id
+	 * @return
+	 */
+	List<SysOffice> selectChildrenOfficeList(String id, String tenantId);
 	
 }

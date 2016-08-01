@@ -8,6 +8,10 @@ dependencies {
 
     compile 'com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT'
 
+ 	compile(group: 'com.alibaba', name: 'druid', version:'1.0.18') {
+	exclude(module: 'jconsole')
+	exclude(module: 'tools')
+    }
 
     testCompile(
             "org.springframework:spring-test:3.2.13.RELEASE",

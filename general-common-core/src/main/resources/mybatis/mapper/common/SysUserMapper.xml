@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.slp.common.user.mapper.interfaces.SysUserMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.slp.common.user.mapper.bo.SysUser" >
+<mapper namespace="com.ai.slp.common.dao.mapper.interfaces.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.slp.common.dao.mapper.bo.SysUser" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="company_id" property="companyId" jdbcType="VARCHAR" />
     <result column="office_id" property="officeId" jdbcType="VARCHAR" />
@@ -94,7 +94,7 @@
     update_date, remarks, del_flag, tenant_id, category, address, effective_date, expiry_date, 
     theme
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.common.user.mapper.bo.SysUserCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.common.dao.mapper.bo.SysUserCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -122,13 +122,13 @@
     delete from sys_user
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.slp.common.user.mapper.bo.SysUserCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.slp.common.dao.mapper.bo.SysUserCriteria" >
     delete from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.slp.common.user.mapper.bo.SysUser" >
+  <insert id="insert" parameterType="com.ai.slp.common.dao.mapper.bo.SysUser" >
     insert into sys_user (id, company_id, office_id, 
       login_name, password, no, 
       name, email, phone, 
@@ -150,7 +150,7 @@
       #{effectiveDate,jdbcType=TIMESTAMP}, #{expiryDate,jdbcType=TIMESTAMP}, #{theme,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.slp.common.user.mapper.bo.SysUser" >
+  <insert id="insertSelective" parameterType="com.ai.slp.common.dao.mapper.bo.SysUser" >
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -319,7 +319,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.slp.common.user.mapper.bo.SysUserCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.slp.common.dao.mapper.bo.SysUserCriteria" resultType="java.lang.Integer" >
     select count(*) from sys_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -447,7 +447,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.common.user.mapper.bo.SysUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.common.dao.mapper.bo.SysUser" >
     update sys_user
     <set >
       <if test="companyId != null" >
@@ -531,7 +531,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.slp.common.user.mapper.bo.SysUser" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.slp.common.dao.mapper.bo.SysUser" >
     update sys_user
     set company_id = #{companyId,jdbcType=VARCHAR},
       office_id = #{officeId,jdbcType=VARCHAR},

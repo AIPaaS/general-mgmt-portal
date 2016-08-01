@@ -1,5 +1,6 @@
 package com.ai.slp.common.service.atom.office.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -15,15 +16,61 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 
 	@Override
 	public SysOffice selectSysOfficeInfo(String id) {
-		return MapperFactory.getSysOfficeMapper().selectByPrimaryKey(id);
+		//return MapperFactory.getSysOfficeMapper().selectByPrimaryKey(id);
+		SysOfficeCriteria example = new SysOfficeCriteria();
+		Criteria officeCriteria = example.createCriteria();
+		officeCriteria.andIdEqualTo(id);
+		officeCriteria.andUseableEqualTo("1");
+		officeCriteria.andDelFlagEqualTo("0");
+		List<SysOffice> sysOfficeList = MapperFactory.getSysOfficeMapper().selectByExample(example);
+		if(sysOfficeList != null){
+			return sysOfficeList.get(0);
+		}else{
+			return null;
+		}
 	}
 
 	@Override
-	public List<SysOffice> selectSysOfficeList(List<String> idList) {
+	public List<SysOffice> selectSysOfficeList(List<String> ids) {
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
-		officeCriteria.andIdIn(idList);
+		officeCriteria.andIdIn(ids);
+		officeCriteria.andUseableEqualTo("1");
+		officeCriteria.andDelFlagEqualTo("0");
 		return MapperFactory.getSysOfficeMapper().selectByExample(example );
+	}
+
+	@Override
+	public List<SysOffice> selectSysOfficeAll(String tenantId) {
+		SysOfficeCriteria example = new SysOfficeCriteria();
+		Criteria officeCriteria = example.createCriteria();
+		officeCriteria.andTenantIdEqualTo(tenantId);
+		officeCriteria.andUseableEqualTo("1");
+		officeCriteria.andDelFlagEqualTo("0");
+		return MapperFactory.getSysOfficeMapper().selectByExample(example);
+	}
+
+	@Override
+	public List<SysOffice> selectChildrenOfficeList(String id,String tenantId) {
+		List<SysOffice> childrenOfficeList = new LinkedList<SysOffice>();
+		getChildrenOffices(id, tenantId, childrenOfficeList);
+		return childrenOfficeList;
+	}
+	
+	private void getChildrenOffices(String id,String tenantId,List<SysOffice> OfficeList){
+		SysOfficeCriteria example = new SysOfficeCriteria();
+		Criteria officeCriteria = example.createCriteria();
+		officeCriteria.andTenantIdEqualTo(tenantId);
+		officeCriteria.andUseableEqualTo("1");
+		officeCriteria.andDelFlagEqualTo("0");
+		officeCriteria.andParentIdEqualTo(id);
+		List<SysOffice> selectByExample = MapperFactory.getSysOfficeMapper().selectByExample(example);
+		if(selectByExample != null){
+			OfficeList.addAll(selectByExample);
+			for(SysOffice sysOffice : selectByExample){
+				getChildrenOffices(sysOffice.getId(),tenantId,OfficeList);
+			}
+		}
 	}
 
 }

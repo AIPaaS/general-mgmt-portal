@@ -5,5 +5,5 @@ import com.ai.slp.common.dao.mapper.bo.SysUser;
 public interface ISysUserAtomSV {
 	SysUser queryUser(SysUser user);
 
-	String queryUserTheme(String id);
+	String queryUserTheme(String id,String tenantId);
 }

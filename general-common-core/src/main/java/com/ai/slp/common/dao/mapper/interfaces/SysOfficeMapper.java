@@ -19,6 +19,8 @@ public interface SysOfficeMapper {
     int insertSelective(SysOffice record);
 
     List<SysOffice> selectByExample(SysOfficeCriteria example);
+    
+    List<String> selectParentIdList(SysOfficeCriteria example);
 
     SysOffice selectByPrimaryKey(String id);
 

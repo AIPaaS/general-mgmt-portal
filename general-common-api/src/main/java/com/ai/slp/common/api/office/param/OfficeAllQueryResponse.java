@@ -8,13 +8,13 @@ public class OfficeAllQueryResponse extends BaseResponse{
 
 	private static final long serialVersionUID = 1L;
 	
-	private List<List<OfficeVO>> allOffice;
+	private List<OfficeVO> allOffice;
 
-	public List<List<OfficeVO>> getAllOffice() {
+	public List<OfficeVO> getAllOffice() {
 		return allOffice;
 	}
 
-	public void setAllOffice(List<List<OfficeVO>> allOffice) {
+	public void setAllOffice(List<OfficeVO> allOffice) {
 		this.allOffice = allOffice;
 	}
 
