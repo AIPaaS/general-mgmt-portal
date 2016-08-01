@@ -24,7 +24,7 @@ webAppDirName = 'WebContent'
 sourceSets.main.java.srcDir 'src'   // 设置 Java 源码所在目录
 description = "general-mgmt-system"
 
-sourceCompatibility = 1.7
+
 targetCompatibility = 1.7
 //扩展属性放在ext的内部类中
 ext{
@@ -69,7 +69,7 @@ group = 'com.ai'
 
 dependencies {
 
-providedCompile "javax:javaee-api:6.0"
+
  
   
     compile(group: 'org.springframework', name: 'spring-core', version:'4.1.9.RELEASE') {
@@ -79,7 +79,8 @@ exclude(module: 'commons-logging')
     compile files('lib/UserAgentUtils-1.13.jar', 'lib/ckfinder-2.3.jar','lib/apache-ant-zip-2.3.jar',
     'lib/ckfinderplugin-fileeditor-2.3.jar','lib/ckfinderplugin-imageresize-2.3.jar',
     'lib/analyzer-2012_u6.jar','lib/thumbnailator-0.4.2.jar')
-     
+    compile group: 'com.sun.faces', name: 'jsf-api', version: '2.2.13'
+    compile group: 'com.sun.faces', name: 'jsf-impl', version: '2.2.13' 
     compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
     compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.1'
     compile group: 'org.springframework', name: 'spring-beans', version:'4.1.9.RELEASE'
