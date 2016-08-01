@@ -216,7 +216,7 @@
             <li class="dropdown profile-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="${mgmtStatic}/img/robert-300.jpg" alt=""/>
-                <span class="hidden-xs">熊熊熊二</span> <b class="caret"></b>
+                <span class="hidden-xs">您好, ${fns:getUser().name}</span> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="#"><i class="fa fa-user"></i>个人中心</a></li>
@@ -226,7 +226,8 @@
             </li>
          <!--/用户信息结束-->
          <!--退出icon-->    
-            <li class="hidden-xxs"><a class="btn"><i class="fa fa-power-off"></i></a></li>
+            <li class="hidden-xxs"><a class="btn" href="${ctx}/logout"
+						title="退出登录"><i class="fa fa-power-off"></i></a></li>
          <!--/退出icon-->       
             </ul>
             </div>
