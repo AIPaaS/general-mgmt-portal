@@ -6,7 +6,7 @@ dependencies {
     compile 'org.springframework:spring-tx:4.1.7.RELEASE'
     compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
 
-    compile 'com.ai.opt.sdk:opt-sdk:2.0-SNAPSHOT'
+    compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
 
  	compile(group: 'com.alibaba', name: 'druid', version:'1.0.18') {
 	exclude(module: 'jconsole')
