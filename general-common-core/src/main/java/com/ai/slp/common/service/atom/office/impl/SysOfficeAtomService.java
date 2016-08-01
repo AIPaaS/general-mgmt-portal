@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.ai.slp.common.constants.VOConstants.DeleteFlagConstant;
+import com.ai.slp.common.constants.VOConstants.UseableFlagConstant;
 import com.ai.slp.common.dao.mapper.bo.SysOffice;
 import com.ai.slp.common.dao.mapper.bo.SysOfficeCriteria;
 import com.ai.slp.common.dao.mapper.bo.SysOfficeCriteria.Criteria;
@@ -20,8 +22,8 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
 		officeCriteria.andIdEqualTo(id);
-		officeCriteria.andUseableEqualTo("1");
-		officeCriteria.andDelFlagEqualTo("0");
+		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
+		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		List<SysOffice> sysOfficeList = MapperFactory.getSysOfficeMapper().selectByExample(example);
 		if(sysOfficeList != null){
 			return sysOfficeList.get(0);
@@ -35,8 +37,8 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
 		officeCriteria.andIdIn(ids);
-		officeCriteria.andUseableEqualTo("1");
-		officeCriteria.andDelFlagEqualTo("0");
+		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
+		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		return MapperFactory.getSysOfficeMapper().selectByExample(example );
 	}
 
@@ -45,8 +47,8 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
 		officeCriteria.andTenantIdEqualTo(tenantId);
-		officeCriteria.andUseableEqualTo("1");
-		officeCriteria.andDelFlagEqualTo("0");
+		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
+		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		return MapperFactory.getSysOfficeMapper().selectByExample(example);
 	}
 
@@ -61,8 +63,8 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
 		officeCriteria.andTenantIdEqualTo(tenantId);
-		officeCriteria.andUseableEqualTo("1");
-		officeCriteria.andDelFlagEqualTo("0");
+		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
+		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		officeCriteria.andParentIdEqualTo(id);
 		List<SysOffice> selectByExample = MapperFactory.getSysOfficeMapper().selectByExample(example);
 		if(selectByExample != null){
