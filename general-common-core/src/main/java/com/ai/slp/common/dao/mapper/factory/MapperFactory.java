@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.ai.slp.common.dao.mapper.interfaces.SysOfficeMapper;
 import com.ai.slp.common.dao.mapper.interfaces.SysUserMapper;
+import com.ai.slp.common.dao.mapper.interfaces.SysWaitjobsMapper;
 
 @Component
 public class MapperFactory {
@@ -37,5 +38,9 @@ public class MapperFactory {
     
     public static SysUserMapper getSysUserMapper(){
     	return sqlSessionTemplate.getMapper(SysUserMapper.class);
+    }
+    
+    public static SysWaitjobsMapper getSysWaitjobsMapper(){
+    	return sqlSessionTemplate.getMapper(SysWaitjobsMapper.class);
     }
 }

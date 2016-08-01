@@ -36,5 +36,24 @@ public class VOConstants {
 		 */
 		public static final String NO = "0";
 	}
+	
+	/**
+	 * 代办事物状态
+	 * @author jiaxs
+	 *
+	 */
+	public class WaitjobsStatusConstant{
+		private WaitjobsStatusConstant(){}
+		
+		/**
+		 * 代办
+		 */
+		public static final String WAIT = "0";
+		
+		/**
+		 * 办结
+		 */
+		public static final String END = "1";
+	}
 
 }
