@@ -6,6 +6,7 @@ package com.ai.platform.modules.sys.web;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.config.Global;
+import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
+import com.ai.platform.modules.sys.entity.Log;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.OfficeService;
@@ -54,16 +57,36 @@ public class OfficeController extends BaseController {
 	@RequestMapping(value = {""})
 	public String index(Office office, Model model) {
 //        model.addAttribute("list", officeService.findAll());
-		return "modules/sys/officeIndex";
+		return "modules/mgmtsys/officeIndex";
 	}
 
+	@RequiresPermissions("sys:office:view")
+	@RequestMapping(value = {"treePage"})
+	public String tree(Office office, Model model) {
+//        model.addAttribute("list", officeService.findAll());
+		return "modules/mgmtsys/officetree";
+	}
+	
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {"list"})
 	public String list(Office office, Model model) {
         model.addAttribute("list", officeService.findList(office));
-		return "modules/sys/officeList";
+		return "modules/mgmtsys/officeList";
 	}
 	
+	@RequiresPermissions("sys:office:view")
+	@RequestMapping(value = {"page"})
+	public String page(Office office, HttpServletRequest request, HttpServletResponse response,Model model) {
+        //翻译机构类别
+		Page<Office> pge = officeService.findPage(new Page<Office>(request, response), office);
+		List<Office> list = pge.getList();
+		for(Office o : list){
+			String a = DictUtils.getDictLabel(o.getType(), "sys_office_type", "未知");
+			o.setType(a);
+		}
+		model.addAttribute("page", pge);
+		return "modules/mgmtsys/officeList";
+	}
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = "form")
 	public String form(Office office, Model model) {
