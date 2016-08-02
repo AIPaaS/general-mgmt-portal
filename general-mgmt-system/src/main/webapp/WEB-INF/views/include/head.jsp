@@ -2,7 +2,7 @@
 <%@ taglib prefix="fns" uri="/WEB-INF/tlds/fns.tld" %>
 <meta name="renderer" content="webkit"><meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
 <meta http-equiv="Expires" content="0"><meta http-equiv="Cache-Control" content="no-cache"><meta http-equiv="Cache-Control" content="no-store">
-<%-- <script src="${ctxStatic}/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="${ctxStatic}/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
 <link href="${ctxStatic}/bootstrap/2.3.1/css_${fns:getTheme()}/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap.min.js" type="text/javascript"></script>
 <link href="${ctxStatic}/bootstrap/2.3.1/awesome/font-awesome.min.css" type="text/css" rel="stylesheet" />
@@ -14,21 +14,11 @@
 <link href="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.css" type="text/css" rel="stylesheet" />
 <script src="${ctxStatic}/jquery-validation/1.11.0/jquery.validate.min.js" type="text/javascript"></script>
 <link href="${ctxStatic}/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
-<script src="${ctxStatic}/jquery-jbox/2.3/jquery.jBox-2.3.min.js" type="text/javascript"></script> --%>
+<script src="${ctxStatic}/jquery-jbox/2.3/jquery.jBox-2.3.min.js" type="text/javascript"></script>
 <script src="${ctxStatic}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script src="${ctxStatic}/common/mustache.min.js" type="text/javascript"></script>
 <link href="${ctxStatic}/common/jeesite.css" type="text/css" rel="stylesheet" />
 <script src="${ctxStatic}/common/jeesite.js" type="text/javascript"></script>
 
 <script type="text/javascript">var ctx = '${ctx}', ctxStatic='${ctxStatic}',mgmt='${mgmtStatic}';</script>
-<script src="${mgmtStatic}/scripts/modular/demo-skin-changer.js"></script>  
-<script src="${mgmtStatic}/scripts/modular/jquery.js"></script>
-<script src="${mgmtStatic}/scripts/modular/bootstrap.js"></script>
-<script src="${mgmtStatic}/scripts/modular/jquery.nanoscroller.min.js"></script>
-<script src="${mgmtStatic}/scripts/modular/demo.js"></script>  
-<script src="${mgmtStatic}/scripts/modular/scripts.js"></script>
-<link rel="stylesheet" type="text/css" href="${mgmtStatic}/css/bootstrap/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="${mgmtStatic}/css/bootstrap/font-awesome.css"/>
-<link rel="stylesheet" type="text/css" href="${mgmtStatic}/css/modular/frame.css"/>
-<link rel="stylesheet" type="text/css" href="${mgmtStatic}/css/modular/global.css"/>
-<script src="${mgmtStatic}/scripts/modular/demo-rtl.js"></script>
+
