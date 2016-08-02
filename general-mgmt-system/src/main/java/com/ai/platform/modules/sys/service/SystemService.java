@@ -256,6 +256,10 @@ public class SystemService extends BaseService implements InitializingBean {
 		return roleDao.findList(role);
 	}
 	
+	public List<Role> findPageRole(Role role){
+		return roleDao.findPageList(role);
+	}
+	
 	public List<Role> findAllRole(){
 		return UserUtils.getRoleList();
 	}
