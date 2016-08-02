@@ -32,11 +32,11 @@ public class SysWaitjobsBusinessService implements ISysWaitjobsBusinessService{
 		BeanUtils.copyProperties(waitjobs, waijobsVo);
 		String id = iSysWaitjobsAtomService.insertWaitjobs(waitjobs);
 		if(StringUtils.isEmpty(id)){
-			insertResponse.setId(id);
-			ResponseHeader responseHeader=new ResponseHeader(true,ResultCodeConstants.SUCCESS_CODE,"插入成功");
+			ResponseHeader responseHeader=new ResponseHeader(false,ResultCodeConstants.ERROR_CODE,"插入失败");
 			insertResponse.setResponseHeader(responseHeader);
 		}else{
-			ResponseHeader responseHeader=new ResponseHeader(false,ResultCodeConstants.ERROR_CODE,"插入失败");
+			insertResponse.setId(id);
+			ResponseHeader responseHeader=new ResponseHeader(true,ResultCodeConstants.SUCCESS_CODE,"插入成功");
 			insertResponse.setResponseHeader(responseHeader);
 		}
 		return insertResponse;
