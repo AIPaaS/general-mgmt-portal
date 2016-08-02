@@ -61,7 +61,7 @@ public class RoleController extends BaseController {
 	public String list(Role role, Model model) {
 		List<Role> list = systemService.findAllRole();
 		model.addAttribute("list", list);
-		return "modules/sys/roleList";
+		return "modules/mgmtsys/roleList";
 	}
 
 	@RequiresPermissions("sys:role:view")
