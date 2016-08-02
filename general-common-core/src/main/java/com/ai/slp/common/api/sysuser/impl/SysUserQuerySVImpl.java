@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.slp.common.api.sysuser.interfaces.ISysUserQuerySV;
+import com.ai.slp.common.api.sysuser.param.SysUserListQueryRequest;
+import com.ai.slp.common.api.sysuser.param.SysUserListQueryResponse;
 import com.ai.slp.common.api.sysuser.param.SysUserQueryRequest;
 import com.ai.slp.common.api.sysuser.param.SysUserQueryResponse;
 import com.ai.slp.common.api.sysuser.param.SysUserThemeRequest;
@@ -48,5 +50,19 @@ public class SysUserQuerySVImpl implements ISysUserQuerySV {
 					ExceptCodeConstants.Special.PARAM_IS_NULL, "用戶ID不能为空");
 		}
 		return iSysUserBusiSV.queryUserTheme(request);
+	}
+
+	@Override
+	public SysUserListQueryResponse queryUserByOfficeId(SysUserListQueryRequest request)
+			throws BusinessException, com.ai.opt.base.exception.SystemException {
+		if (StringUtils.isEmpty(request.getTenantId())) {
+			throw new BusinessException(
+					ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
+		}
+		if (StringUtils.isEmpty(request.getOfficeId())) {
+			throw new BusinessException(
+					ExceptCodeConstants.Special.PARAM_IS_NULL, "机构ID不能为空");
+		}
+		return iSysUserBusiSV.queryUserByOfficeId(request);
 	}
 }

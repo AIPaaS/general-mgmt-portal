@@ -84,4 +84,32 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 		  }
 	}
 
+	@Override
+	public List<SysUser> selectSysUserByOfficeId(String tenantId, String officeId) {
+		SysUserCriteria example = new SysUserCriteria();
+		SysUserCriteria.Criteria criteria = example.createCriteria();
+		if (!StringUtil.isBlank(tenantId)) {
+			criteria.andTenantIdEqualTo(tenantId);
+		}
+		if (!StringUtil.isBlank(officeId)) {
+			criteria.andOfficeIdEqualTo(officeId);
+		}
+		criteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
+		 Date crruntDate = DateUtil.getDate();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	     String dateStr = sdf.format(crruntDate);
+	     Timestamp crurentTs = Timestamp.valueOf(dateStr);  
+	     //添加有效时间限制
+	      criteria.andEffectiveDateLessThanOrEqualTo(crurentTs);
+	      criteria.andExpiryDateGreaterThanOrEqualTo(crurentTs);
+
+		SysUserMapper mapper = MapperFactory.getSysUserMapper();
+		List<SysUser> userList = mapper.selectByExample(example);
+		if (!CollectionUtil.isEmpty(userList)) {
+			return userList;
+		}else{
+			  return null;
+		  }
+	}
+
 }

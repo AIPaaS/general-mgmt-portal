@@ -108,6 +108,18 @@ public class SysUserQueryResponse extends BaseResponse {
 	 * 失效时间
 	 */
 	private Timestamp expiryDate;
+	/**
+	 * 用户主题
+	 */
+	private String theme;
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
 
 	public String getId() {
 		return id;
