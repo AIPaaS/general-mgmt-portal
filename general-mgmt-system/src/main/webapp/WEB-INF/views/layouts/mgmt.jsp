@@ -5,7 +5,7 @@
 <html style="overflow-x:auto;overflow-y:auto;">
 <head>
 	<title>运营管理平台<sitemesh:title/></title>
-	<%@include file="/WEB-INF/views/include/mgmt/head.jsp" %>		
+	<%@include file="/WEB-INF/views/include/iot/head.jsp" %>		
 
 	<sitemesh:head/>
 </head>
@@ -13,12 +13,12 @@
 <sitemesh:body/>
 
  
-<script src="${mgmtStatic}/scripts/modular/demo-skin-changer.js"></script>  
-<script src="${mgmtStatic}/scripts/modular/jquery.js"></script>
-<script src="${mgmtStatic}/scripts/modular/bootstrap.js"></script>
-<script src="${mgmtStatic}/scripts/modular/jquery.nanoscroller.min.js"></script>
-<script src="${mgmtStatic}/scripts/modular/demo.js"></script>  
-<script src="${mgmtStatic}/scripts/modular/scripts.js"></script>
+<script src="${iotStatic}/scripts/modular/demo-skin-changer.js"></script>  
+<script src="${iotStatic}/scripts/modular/jquery.js"></script>
+<script src="${iotStatic}/scripts/modular/bootstrap.js"></script>
+<script src="${iotStatic}/scripts/modular/jquery.nanoscroller.min.js"></script>
+<script src="${iotStatic}/scripts/modular/demo.js"></script>  
+<script src="${iotStatic}/scripts/modular/scripts.js"></script>
 
 </body>
 </html>
