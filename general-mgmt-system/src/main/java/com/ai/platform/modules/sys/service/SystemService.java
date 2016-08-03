@@ -267,6 +267,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	 */
 	public List<Role> findRoleList(Role role){
 		//return roleDao.findListByParams(role);
+		role.setTenantId("changhong");
 		return UserUtils.getRoleList(role);
 	}
 	

@@ -189,10 +189,10 @@ public class UserUtils {
 		List<Role> roleList = null;
 		User user = getUser();
 		if (user.isAdmin()) {
-			roleList = roleDao.findListByParams(role);
+			roleList = roleDao.findAllByParams(role);
 		} else {
 			role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
-			roleList = roleDao.findAllByParams(role);
+			roleList = roleDao.findListByParams(role);
 		}
 		return roleList;
 	}
