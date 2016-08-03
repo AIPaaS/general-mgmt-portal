@@ -8,6 +8,7 @@
 <body>
 <ul id="treeDemo" class="ztree"></ul>
 <input type="hidden" id="selectOfficeId" value=""/>
+<input type="hidden" id="selectOfficeCode" value=""/>
 <input type="hidden" id="selectOfficeName" value=""/>
 <script>
     
@@ -15,6 +16,7 @@
     		callback: {
                 onClick: function (event, treeId, treeNode) {
                     $("#selectOfficeId").val(treeNode.id);
+                    $("#selectOfficeCode").val(treeNode.code);
                     $("#selectOfficeName").val(treeNode.name);
                 }
             },

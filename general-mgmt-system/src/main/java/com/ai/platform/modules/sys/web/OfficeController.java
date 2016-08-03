@@ -23,7 +23,6 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
-import com.ai.platform.modules.sys.entity.Log;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.OfficeService;
@@ -77,8 +76,9 @@ public class OfficeController extends BaseController {
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {"page"})
 	public String page(Office office, HttpServletRequest request, HttpServletResponse response,Model model) {
-        //翻译机构类别
-		Page<Office> pge = officeService.findPage(new Page<Office>(request, response), office);
+		 request.setAttribute("searchName", office.getName());
+		//翻译机构类别
+		Page<Office> pge = officeService.findPage(new Page<Office>(request, response,5), office);
 		List<Office> list = pge.getList();
 		for(Office o : list){
 			String a = DictUtils.getDictLabel(o.getType(), "sys_office_type", "未知");
@@ -188,6 +188,7 @@ public class OfficeController extends BaseController {
 				map.put("pId", e.getParentId());
 				map.put("pIds", e.getParentIds());
 				map.put("name", e.getName());
+				map.put("code", e.getCode());
 				if (type != null && "3".equals(type)){
 					map.put("isParent", true);
 				}

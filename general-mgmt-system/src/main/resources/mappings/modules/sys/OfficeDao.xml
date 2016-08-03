@@ -34,7 +34,30 @@
 		pp.name AS "primaryPerson.name",
 		dp.name AS "deputyPerson.name"
 	</sql>
-	
+		<sql id="officePageColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		a.area_id AS "area.id",
+		a.code,
+		a.name,
+		a.sort,
+		a.type,
+		a.grade,
+		a.address, 
+		a.zip_code, 
+		a.master, 
+		a.phone, 
+		a.fax, 
+		a.email, 
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag,
+		a.tenant_id AS "tenantId"
+	</sql>
 	<sql id="officeJoins">
 		LEFT JOIN sys_office p ON p.id = a.parent_id
 		LEFT JOIN sys_area ar ON ar.id = a.area_id
@@ -52,13 +75,19 @@
 	
 	<select id="findList" resultType="Office">
 		SELECT
-			<include refid="officeColumns"/>
+			<include refid="officePageColumns"/>
 		FROM sys_office a
-		<include refid="officeJoins"/>
+		 <!--  <include refid="officeJoins"/> -->
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="code != null and code != ''">
+				AND a.code=#{code}
+		</if>
+		<if test="id != null and id != ''">
+				AND a.id=#{id}
+		</if>
 		<!-- 数据范围过滤 -->
-		${sqlMap.dsf}
-		OR a.id = #{currentUser.office.id}
+		  <!-- ${sqlMap.dsf} -->
+		<!--   OR a.id = #{currentUser.office.id}-->
 		ORDER BY a.code
 	</select>
 			

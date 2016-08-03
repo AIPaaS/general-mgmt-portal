@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>机构管理</title>
-	<meta name="decorator" content="default"/>
+	<meta name="decorator" content="mgmt"/>
 	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
 	<script src="${mgmtStatic}/bootbox/bootbox.js"></script>
 	<script type="text/javascript">
@@ -13,6 +13,10 @@
 				$("#searchForm").submit();
 		    	return false;
 		    }
+		$(document).ready(function(){
+			var a = $("#searchName").val();//取出值
+			 $("#officetName").val(a);
+		});
 	</script>
 </head>
 <body>
@@ -22,7 +26,7 @@
 	</ul>
 	<sys:message content="${message}"/>
 	<!-- ceshi -->
-	
+	<input type="hidden" name="searchName" id="searchName" value="${requestScope.searchName}"/>
 		  <!--框架标签结束-->
       <div class="row"><!--外围框架-->
      	<div class="col-lg-12"><!--删格化-->
@@ -39,7 +43,7 @@
 					                    <p class="word">机构编码</p>
 					                  <p>
 					                  <input type="text" id="officetName" class="int-text int-medium" readonly onclick="showTree()"></p>
-					                  <input type="hidden" id="searchOfficeId"/>
+					                  <input type="hidden" id="id" name="id"/>
 					                </li>
 					                 <li class="width-xlag">
 					                <p><input id="btnSubmit" type="submit" class="biu-btn  btn-primary btn-blue btn-large ml-15" value="查  询"></p>
@@ -99,7 +103,7 @@
                                 </div>
                              <!--/table表格结束-->
                                 	 <!--分页-->
-								<div class="pagination">${page}</div>
+								<div class="paging">${page}</div>
                             </div>
                         </div>
                     </div>
@@ -122,10 +126,11 @@
             		title : "机构",
     				message : data,
     				callback:function () {
-    					 var departName = $("#selectOfficeName").val();
-	                     $("#officetName").val(departName);
+    					 var officeName = $("#selectOfficeName").val();
+	                     $("#officetName").val(officeName);
+	                    // $.cookie('selectName', officeName);
 	                     var officeId = $("#selectOfficeId").val();
-	                     $("#searchOfficeId").val(officeId);
+	                     $("#id").val(officeId);
                     },
                     buttons:{
                     	ok:{
