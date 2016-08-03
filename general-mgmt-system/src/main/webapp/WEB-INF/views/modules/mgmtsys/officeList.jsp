@@ -4,8 +4,11 @@
 <head>
 	<title>机构管理</title>
 	<meta name="decorator" content="mgmt"/>
-	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
+	<script src="${ctxStatic}/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="${ctxStatic}/common/jeesite.css" type="text/css" rel="stylesheet" />
 	<script src="${mgmtStatic}/bootbox/bootbox.js"></script>
+	
 	<script type="text/javascript">
 		function page(n,s){
 				$("#pageNo").val(n);
