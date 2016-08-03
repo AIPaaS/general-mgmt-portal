@@ -62,7 +62,7 @@ public class RoleController extends BaseController {
 	public String pagelist(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<Role> page = new Page<Role>(request, response, 5);
 		role.setPage(page);
-		List<Role> list = systemService.findPageRole(role);
+		List<Role> list = systemService.findRoleList(role);
 		page.setList(list);
 		model.addAttribute("page", page);
 		return "modules/mgmtsys/roleList";

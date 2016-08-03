@@ -275,7 +275,7 @@ public class Page<T> {
 //		sb.append(funcName+"("+pageNo+",this.value,'"+funcParam+"');\" onclick=\"this.select();\"/> 条，");
 //		sb.append("共 " + count + " 条"+(message!=null?message:"")+"</a></li>\n");
 		
-		sb.append("<li class=\"disabled controls\"><a href=\"javascript:\">&emsp;共 " + count + " 条"+(message!=null?message:"")+"</a></li>\n");
+		sb.append("<li class=\"disabled controls\"><a href=\"javascript:\">共 " + count + " 条"+(message!=null?message:"")+"</a></li>\n");
 
 //		sb.insert(0,"<ul>\n").append("</ul>\n");
 		sb.insert(0,"<ul class='pagination'>\n").append("</ul>\n");

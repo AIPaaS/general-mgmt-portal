@@ -39,7 +39,26 @@ public interface RoleDao extends CrudDao<Role> {
 
 	public int insertRoleOffice(Role role);
 	
+	/**
+	 * 过滤权限 根据条件查询所有
+	 * @param role
+	 * @return
+	 * @author jiaxs
+	 * @ApiDocMethod
+	 * @ApiCode
+	 * @RestRelativeURL
+	 */
+	public List<Role> findListByParams(Role role);
 	
-	public List<Role> findPageList(Role role);
+	/**
+	 * 不过滤权限 根据条件查询所有
+	 * @param role
+	 * @return
+	 * @author jiaxs
+	 * @ApiDocMethod
+	 * @ApiCode
+	 * @RestRelativeURL
+	 */
+	public List<Role> findAllByParams(Role role);
 	
 }
