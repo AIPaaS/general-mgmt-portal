@@ -22,7 +22,7 @@ allprojects {
 	    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 	    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
  	}
-    group="com.ai.slp.common"
+    group="com.ai.platform.common"
 }
 
 subprojects {
@@ -63,7 +63,7 @@ subprojects {
 project("general-common-api") {
     project.ext {
         appName = "general-common-api"
-        apiDir =  "src/main/java/com/ai/slp/common/api/"
+        apiDir =  "src/main/java/com/ai/platform/common/api/"
     }
 
     jar {
@@ -85,7 +85,7 @@ project("general-common-core") {
     jar {
         baseName appName
         version moduleVersion
-		include "com/ai/slp/common/*/*/**"
+		include "com/ai/platform/common/*/*/**"
         manifest {
             attributes 'packageName': appName, 'Built-By': builtBy, 'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
         }

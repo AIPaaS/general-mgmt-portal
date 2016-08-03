@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.slp.common.dao.mapper.interfaces.SysOfficeMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.slp.common.dao.mapper.bo.SysOffice" >
+<mapper namespace="com.ai.platform.common.dao.mapper.interfaces.SysOfficeMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.platform.common.dao.mapper.bo.SysOffice" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
     <result column="parent_ids" property="parentIds" jdbcType="VARCHAR" />
@@ -91,7 +91,7 @@
     master, phone, fax, email, USEABLE, PRIMARY_PERSON, DEPUTY_PERSON, create_by, create_date, 
     update_by, update_date, remarks, del_flag, tenant_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.common.dao.mapper.bo.SysOfficeCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.platform.common.dao.mapper.bo.SysOfficeCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -119,13 +119,13 @@
     delete from sys_office
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.slp.common.dao.mapper.bo.SysOfficeCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.platform.common.dao.mapper.bo.SysOfficeCriteria" >
     delete from sys_office
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.slp.common.dao.mapper.bo.SysOffice" >
+  <insert id="insert" parameterType="com.ai.platform.common.dao.mapper.bo.SysOffice" >
     insert into sys_office (id, parent_id, parent_ids, 
       name, sort, area_id, 
       code, type, grade, address, 
@@ -145,7 +145,7 @@
       #{remarks,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}, #{tenantId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.slp.common.dao.mapper.bo.SysOffice" >
+  <insert id="insertSelective" parameterType="com.ai.platform.common.dao.mapper.bo.SysOffice" >
     insert into sys_office
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -302,7 +302,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.slp.common.dao.mapper.bo.SysOfficeCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.platform.common.dao.mapper.bo.SysOfficeCriteria" resultType="java.lang.Integer" >
     select count(*) from sys_office
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -422,7 +422,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.slp.common.dao.mapper.bo.SysOffice" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.platform.common.dao.mapper.bo.SysOffice" >
     update sys_office
     <set >
       <if test="parentId != null" >
@@ -500,7 +500,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.slp.common.dao.mapper.bo.SysOffice" >
+  <update id="updateByPrimaryKey" parameterType="com.ai.platform.common.dao.mapper.bo.SysOffice" >
     update sys_office
     set parent_id = #{parentId,jdbcType=VARCHAR},
       parent_ids = #{parentIds,jdbcType=VARCHAR},
@@ -529,7 +529,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   
-  <select id="selectParentIdList" parameterType="com.ai.slp.common.dao.mapper.bo.SysOfficeCriteria" resultType="java.util.List" >
+  <select id="selectParentIdList" parameterType="com.ai.platform.common.dao.mapper.bo.SysOfficeCriteria" resultType="java.util.List" >
     select distinct parent_id from sys_office where
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
