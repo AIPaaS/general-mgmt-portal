@@ -50,7 +50,7 @@ ext {
 group = 'com.ai'
 
 dependencies {
-	//compile project(":general-common-core")
+	compile project(":general-common-core")
   
     compile(group: 'org.springframework', name: 'spring-core', version:'4.1.9.RELEASE') {
 exclude(module: 'commons-logging')
