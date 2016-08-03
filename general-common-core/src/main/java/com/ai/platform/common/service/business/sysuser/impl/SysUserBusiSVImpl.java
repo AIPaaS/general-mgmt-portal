@@ -41,6 +41,7 @@ public class SysUserBusiSVImpl implements ISysUserBusiSV {
 			ResponseHeader responseHeader = new ResponseHeader();
 		    responseHeader.setIsSuccess(true);
 		    responseHeader.setResultCode(ResultCodeConstants.SUCCESS_CODE);
+		    responseHeader.setResultMessage("查询成功");
 		    response.setResponseHeader(responseHeader);
 		}else{
 			response =new SysUserQueryResponse();
@@ -63,6 +64,7 @@ public class SysUserBusiSVImpl implements ISysUserBusiSV {
 			ResponseHeader responseHeader = new ResponseHeader();
 		    responseHeader.setIsSuccess(true);
 		    responseHeader.setResultCode(ResultCodeConstants.SUCCESS_CODE);
+		    responseHeader.setResultMessage("查询成功");
 		    response.setResponseHeader(responseHeader);
 		}else{
 			response =new SysUserThemeResponse();
