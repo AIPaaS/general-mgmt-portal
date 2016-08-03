@@ -257,7 +257,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	}
 	
 	/**
-	 * 添加权限过滤
+	 * 添加条件过滤查询
 	 * @param role
 	 * @return
 	 * @author jiaxs
@@ -267,7 +267,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	 */
 	public List<Role> findRoleList(Role role){
 		//return roleDao.findListByParams(role);
-		role.setTenantId("changhong");
+		role.setTenantId(Global.getTenantID());
 		return UserUtils.getRoleList(role);
 	}
 	
