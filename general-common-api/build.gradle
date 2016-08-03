@@ -59,7 +59,7 @@ for(Map<String,String> apiMap:apiList){
         baseName apiArtifactId
         from sourceSets.main.output
         destinationDir file("$buildDir/api-libs")
-        include 'com/ai/slp/common/api/'+apiName+'/**'
+        include 'com/ai/platform/common/api/'+apiName+'/**'
         manifest {
             attributes 'artifactId': apiArtifactId, 'Built-By': builtBy,'Built-date': new Date().format('yyyy-MM-dd HH:mm:ss'),'Manifest-Version':apiVersion
         }
@@ -70,15 +70,15 @@ for(Map<String,String> apiMap:apiList){
     	dependsOn apiJarProcessTask
         //esconfig = "[{ip:10.1.234.160, port:14999}]"
         esconfig = "{\"clusterName\":\"elasticsearch_for_sol\",\"ip\":\"10.1.234.160\", \"port\":14999}"
-        source = fileTree(dir: 'src/main/java', include: 'com/ai/slp/common/api/'+apiName+'/**/*.java')+fileTree(dir:"$buildDir/opt-base", include:"**/*.java")
+        source = fileTree(dir: 'src/main/java', include: 'com/ai/platform/common/api/'+apiName+'/**/*.java')+fileTree(dir:"$buildDir/opt-base", include:"**/*.java")
         docletpath = configurations.jaxDoclet.files.asType(List)
         docletClass = 'com.ai.runner.apicollector.doclet.APIDoclet'
         memberLevel = 'private'
         encoding = 'utf-8'
         belong='general-common'
-        ownerType='slp'
+        ownerType='aiplatform'
         owner = 'general-common'
-        groupId = 'com.ai.slp.common'
+        groupId = 'com.ai.platform.common'
         artifactId = apiArtifactId
         version = apiVersion
     }

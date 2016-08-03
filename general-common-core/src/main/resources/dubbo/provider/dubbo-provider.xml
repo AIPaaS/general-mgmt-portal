@@ -16,7 +16,7 @@
     <dubbo:application name="${dubbo.appname}"/>
     <dubbo:registry protocol="${dubbo.registry.protocol}" address="${center.dubbo.registry.address}" file="${dubbo.registry.file}"/>
 
-    <dubbo:protocol name="${dubbo.protocol}" port="${slp.common.dubbo.port}"
+    <dubbo:protocol name="${dubbo.protocol}" port="${platform.common.dubbo.port}"
     	server="${dubbo.protocol.server}" 
 		contextpath="${dubbo.protocol.contextpath}"
 		threads="500" accepts="500"
@@ -25,7 +25,7 @@
 
 	<dubbo:monitor protocol="registry" />
 
-    <dubbo:annotation package="com.ai.slp.common"/>
+    <dubbo:annotation package="com.ai.platform.common"/>
 
     <import resource="../../context/core-context.xml"/>
 </beans>
