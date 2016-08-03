@@ -1,10 +1,9 @@
 package com.ai.platform.common.dao.mapper.interfaces;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
-
 import com.ai.platform.common.dao.mapper.bo.SysWaitjobs;
 import com.ai.platform.common.dao.mapper.bo.SysWaitjobsCriteria;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface SysWaitjobsMapper {
     int countByExample(SysWaitjobsCriteria example);

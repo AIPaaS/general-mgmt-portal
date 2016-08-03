@@ -9,6 +9,8 @@ public class SysWaitjobs {
 
     private String title;
 
+    private String url;
+
     private String userId;
 
     private String presentActiviti;
@@ -43,6 +45,14 @@ public class SysWaitjobs {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 
     public String getUserId() {

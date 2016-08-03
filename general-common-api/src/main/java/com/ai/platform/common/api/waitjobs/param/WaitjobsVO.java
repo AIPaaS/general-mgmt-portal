@@ -5,16 +5,18 @@ import java.io.Serializable;
 public class WaitjobsVO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-    private String systemId;
+	private String systemId;
 
     private String title;
+
+    private String url;
 
     private String userId;
 
     private String presentActiviti;
 
     private String lastUser;
-    
+
     private String tenantId;
 
 	public String getSystemId() {
@@ -63,5 +65,13 @@ public class WaitjobsVO implements Serializable{
 
 	public void setTenantId(String tenantId) {
 		this.tenantId = tenantId;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }
