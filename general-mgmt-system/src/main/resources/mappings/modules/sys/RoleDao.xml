@@ -110,7 +110,7 @@
 	</select>
 	
 	<!-- 权限过滤 -->
-	<select id="findListByParams" resultMap="roleResult">
+	<select id="findListByParams" resultType="Role">
 		SELECT  DISTINCT
 			<include refid="roleColumns"/>
 		FROM sys_role a
@@ -137,13 +137,14 @@
 			<if test="dbName == 'mssql'">'%'+#{enname}+'%'</if>
 			<if test="dbName == 'mysql'">CONCAT('%', #{enname}, '%')</if>
 		</if>
+		AND a.tenant_id = #{tenantId}
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
 		ORDER BY o.code, a.name
 	</select>
 	
 	<!-- 不权限过滤 -->
-	<select id="findAllByParams" resultMap="roleResult">
+	<select id="findAllByParams" resultType="Role">
 		SELECT  DISTINCT
 			<include refid="roleColumns"/>
 		FROM sys_role a
@@ -161,6 +162,7 @@
 			<if test="dbName == 'mssql'">'%'+#{enname}+'%'</if>
 			<if test="dbName == 'mysql'">CONCAT('%', #{enname}, '%')</if>
 		</if>
+		AND a.tenant_id = #{tenantId}
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
 		ORDER BY o.code, a.name
