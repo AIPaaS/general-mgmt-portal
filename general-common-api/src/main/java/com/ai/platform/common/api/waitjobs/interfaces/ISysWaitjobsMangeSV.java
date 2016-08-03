@@ -24,7 +24,7 @@ public interface ISysWaitjobsMangeSV {
 	 * @return 组织机构信息
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
-	 * @ApiCode 
+	 * @ApiCode PLAT_008
 	 * @RestRelativeURL waitjobsservice/queryOfficeDetail
 	 */
 	@POST
@@ -37,7 +37,7 @@ public interface ISysWaitjobsMangeSV {
 	 * @return
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
-	 * @ApiCode 
+	 * @ApiCode PLAT_009
 	 * @RestRelativeURL waitjobsservice/completeWaitjobs
 	 */
 	@POST

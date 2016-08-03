@@ -32,7 +32,7 @@ public interface ISysOfficeQuerySV {
 	 * @return 组织机构信息
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
-	 * @ApiCode 
+	 * @ApiCode PLAT_004
 	 * @RestRelativeURL officeservice/queryOfficeDetail
 	 */
 	@POST
@@ -45,7 +45,7 @@ public interface ISysOfficeQuerySV {
 	 * @return 组织机构List信息
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
-	 * @ApiCode 
+	 * @ApiCode PLAT_005
 	 * @RestRelativeURL officeservice/queryParentOfficeList
 	 */
 	@POST
@@ -58,7 +58,7 @@ public interface ISysOfficeQuerySV {
 	 * @return 组织机构List信息
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
-	 * @ApiCode 
+	 * @ApiCode PLAT_006
 	 * @RestRelativeURL officeservice/queryParentOfficeList
 	 */
 	@POST
@@ -72,7 +72,7 @@ public interface ISysOfficeQuerySV {
 	 * @return 组织机构信息
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
-	 * @ApiCode 
+	 * @ApiCode PLAT_007
 	 * @RestRelativeURL officeservice/queryOfficeAll
 	 */
 	@POST

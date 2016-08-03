@@ -17,7 +17,7 @@ public interface ISysUserQuerySV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhanglh
-	 * @ApiCode
+	 * @ApiCode PLAT_001
 	 */
 	SysUserQueryResponse queryUserInfo(SysUserQueryRequest request)throws BusinessException,SystemException;
 	/**
@@ -27,7 +27,7 @@ public interface ISysUserQuerySV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhanglh
-	 * @ApiCode
+	 * @ApiCode PLAT_002
 	 */
 	SysUserThemeResponse queryUserTheme(SysUserThemeRequest request)throws BusinessException,SystemException;
 	
@@ -38,7 +38,7 @@ public interface ISysUserQuerySV {
 	 * @throws BusinessException
 	 * @throws SystemException
 	 * @author zhanglh
-	 * @ApiCode
+	 * @ApiCode	PLAT_003
 	 */
 	SysUserListQueryResponse queryUserByOfficeId(SysUserListQueryRequest request)throws BusinessException,SystemException;
 }
