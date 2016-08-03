@@ -120,16 +120,7 @@
 			<include refid="roleColumns"/>
 		FROM sys_role a
 		LEFT JOIN sys_office o ON o.id = a.office_id
-		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
-		LEFT JOIN sys_user u ON u.id = ur.user_id
-		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.useable=#{useable}
-		<if test="user != null and user.id != null and user.id != ''">
-			AND u.id = #{user.id}
-		</if>
-		<if test="user != null and user.loginName != null and user.loginName != ''">
-			AND u.login_name = #{user.loginName}
-		</if>
 		<if test="name != null and name != ''">
 			AND a.name LIKE
 			<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>

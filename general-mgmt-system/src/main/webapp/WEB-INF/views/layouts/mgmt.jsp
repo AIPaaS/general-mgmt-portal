@@ -311,7 +311,7 @@
               </div>
          </div>
      </div>	
-     <!--框架标签结束--><iframe id="mainFrame" name="mainFrame" src="" style="overflow:visible;" scrolling="yes" frameborder="no" width="100%" height="650"><sitemesh:body/></iframe>
+     <!--框架标签结束--><sitemesh:body/>
 	
 	    <!--底部-->
     <footer id="footer-bar" class="row">

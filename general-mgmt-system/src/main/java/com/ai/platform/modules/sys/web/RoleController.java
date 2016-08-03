@@ -58,7 +58,7 @@ public class RoleController extends BaseController {
 	}
 	
 	@RequiresPermissions("sys:role:view")
-	@RequestMapping(value = {"list", ""})
+	@RequestMapping(value = {"mgmtlist"})
 	public String pagelist(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<Role> page = new Page<Role>(request, response, 5);
 		role.setPage(page);
@@ -68,13 +68,13 @@ public class RoleController extends BaseController {
 		return "modules/mgmtsys/roleList";
 	}
 	
-//	@RequiresPermissions("sys:role:view")
-//	@RequestMapping(value = {"list", ""})
-//	public String list(Role role, Model model) {
-//		List<Role> list = systemService.findAllRole();
-//		model.addAttribute("list", list);
-//		return "modules/sys/roleList";
-//	}
+	@RequiresPermissions("sys:role:view")
+	@RequestMapping(value = {"list", ""})
+	public String list(Role role, Model model) {
+		List<Role> list = systemService.findAllRole();
+		model.addAttribute("list", list);
+		return "modules/sys/roleList";
+	}
 
 	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "form")

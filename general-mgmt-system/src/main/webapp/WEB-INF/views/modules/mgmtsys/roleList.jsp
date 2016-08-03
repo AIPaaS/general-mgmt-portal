@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>角色管理</title>
-	<meta name="decorator" content="default"/>
+	<meta name="decorator" content="mgmt"/>
 </head>
 <body>
 	<ul class="nav nav-tabs">
@@ -11,7 +11,7 @@
 		<shiro:hasPermission name="sys:role:edit"><li><a href="${ctx}/sys/role/form">角色添加</a></li></shiro:hasPermission>
 	</ul>
 	<sys:message content="${message}"/>
-     <form:form id="searchForm" action="${ctx}/sys/role/" method="post" class="breadcrumb form-search">
+     <form:form id="searchForm" action="${ctx}/sys/role/mgmtlist" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<div class="row"><!--外围框架-->
