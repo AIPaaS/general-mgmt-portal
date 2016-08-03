@@ -4,6 +4,14 @@
 <head>
 	<title>角色管理</title>
 	<meta name="decorator" content="mgmt"/>
+	<script type="text/javascript">
+		function page(n,s){
+				$("#pageNo").val(n);
+				$("#pageSize").val(s);
+				$("#searchForm").submit();
+		    	return false;
+		    }
+	</script>
 </head>
 <body>
 	<ul class="nav nav-tabs">
