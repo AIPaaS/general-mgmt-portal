@@ -1,31 +1,13 @@
-buildscript {
-  repositories {
-  jcenter()
-  }
-  dependencies {
-  classpath "com.bmuschko:gradle-tomcat-plugin:2.2.3"
-  }
-}
-
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'maven-publish'
-apply plugin: 'com.bmuschko.tomcat'
 compileJava.dependsOn clean
 group = 'com.ai.platform'
 version = '1.2.7'
-war.baseName = "platform"
 project.webAppDirName = "src/main/webapp"
 sourceCompatibility = 1.7   // 设置 JDK 版本
-webAppDirName = 'WebContent'
-sourceSets.main.java.srcDir 'src'   // 设置 Java 源码所在目录
-description = "general-mgmt-system"
-
-
-targetCompatibility = 1.7
 //扩展属性放在ext的内部类中
 ext{
   mybatis_version="3.2.8"
@@ -68,9 +50,7 @@ ext {
 group = 'com.ai'
 
 dependencies {
-
-
- 
+	//compile project(":general-common-core")
   
     compile(group: 'org.springframework', name: 'spring-core', version:'4.1.9.RELEASE') {
 exclude(module: 'commons-logging')
@@ -198,8 +178,3 @@ eclipse {
 }
 
 
-tomcat {
-    httpPort = 8080
-    httpsPort = 8091
-    enableSSL = true
-}
