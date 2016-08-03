@@ -56,13 +56,12 @@ public class OfficeController extends BaseController {
 	@RequestMapping(value = {""})
 	public String index(Office office, Model model) {
 //        model.addAttribute("list", officeService.findAll());
-		return "modules/mgmtsys/officeIndex";
+		return "modules/sys/officeIndex";
 	}
 
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {"treePage"})
 	public String tree(Office office, Model model) {
-//        model.addAttribute("list", officeService.findAll());
 		return "modules/mgmtsys/officetree";
 	}
 	
