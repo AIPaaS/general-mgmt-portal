@@ -1,11 +1,5 @@
 package com.ai.platform.common.api.office.interfaces;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseInfo;
@@ -22,9 +16,6 @@ import com.ai.platform.common.api.office.param.OfficeParentListQueryResponse;
  * @author jiaxs
  *
  */
-@Path("/officeservice")
-@Consumes({ MediaType.APPLICATION_JSON })
-@Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
 public interface ISysOfficeQuerySV {
 	/**
 	 * 通过id查询组织机构信息
@@ -33,10 +24,7 @@ public interface ISysOfficeQuerySV {
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
 	 * @ApiCode PLAT_004
-	 * @RestRelativeURL officeservice/queryOfficeDetail
 	 */
-	@POST
-	@Path("/queryOfficeDetail")
 	OfficeDetailQueryResponse queryOfficeDetail(OfficeDetailQueryRequest queryRequest) throws BusinessException,SystemException;
 	
 	/**
@@ -46,10 +34,7 @@ public interface ISysOfficeQuerySV {
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
 	 * @ApiCode PLAT_005
-	 * @RestRelativeURL officeservice/queryParentOfficeList
 	 */
-	@POST
-	@Path("/queryParentOfficeList")
 	OfficeParentListQueryResponse queryParentOfficeList(OfficeParentListQueryRequest queryRequest) throws BusinessException,SystemException;
 
 	/**
@@ -59,10 +44,7 @@ public interface ISysOfficeQuerySV {
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
 	 * @ApiCode PLAT_006
-	 * @RestRelativeURL officeservice/queryParentOfficeList
 	 */
-	@POST
-	@Path("/queryOfficeListOfUser")
 	OfficeChildrenListQueryResponse queryChildrenOfficeList(OfficeChildrenListQueryRequest queryRequest) throws BusinessException,SystemException;
 
 	
@@ -73,11 +55,7 @@ public interface ISysOfficeQuerySV {
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
 	 * @ApiCode PLAT_007
-	 * @RestRelativeURL officeservice/queryOfficeAll
 	 */
-	@POST
-	@Path("/queryOfficeListOfUser")
 	OfficeAllQueryResponse queryOfficeAll(BaseInfo queryRequest) throws BusinessException,SystemException;
 
-	
 }
