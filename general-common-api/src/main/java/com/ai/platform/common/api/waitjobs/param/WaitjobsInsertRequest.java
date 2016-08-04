@@ -6,14 +6,14 @@ public class WaitjobsInsertRequest extends BaseInfo{
 
 	private static final long serialVersionUID = 1L;
 	
-	private WaitjobsVO waijobsVo;
+	private WaitjobsVO waitjobsVo;
 
-	public WaitjobsVO getWaijobsVo() {
-		return waijobsVo;
+	public WaitjobsVO getWaitjobsVo() {
+		return waitjobsVo;
 	}
 
-	public void setWaijobsVo(WaitjobsVO waijobsVo) {
-		this.waijobsVo = waijobsVo;
+	public void setWaitjobsVo(WaitjobsVO waitjobsVo) {
+		this.waitjobsVo = waitjobsVo;
 	}
 
 }
