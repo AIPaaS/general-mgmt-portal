@@ -50,7 +50,7 @@ ext {
 group = 'com.ai'
 
 dependencies {
-	compile project(":general-common-core")
+	compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
   
     compile(group: 'org.springframework', name: 'spring-core', version:'4.1.9.RELEASE') {
 exclude(module: 'commons-logging')
@@ -154,6 +154,17 @@ exclude(module: 'commons-logging')
 
 }
  
+processResources {
+    
+    //from('profile/'+profile) {
+    //    include '**/*'
+    //}
+    
+    from project(":general-common-api").jar
+	from project(":general-common-core").jar
+    from project(":general-common-core").configurations.runtime
+    destinationDir file("$buildDir/resources/main")
+}
 
 war {
     baseName = "general-mgmt-system"  

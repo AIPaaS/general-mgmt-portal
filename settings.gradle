@@ -1,2 +1,2 @@
-include 'general-common-core','general-common-api','general-mgmt-system'
+include 'general-common-core','general-common-api'
 
