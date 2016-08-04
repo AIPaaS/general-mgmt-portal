@@ -6,6 +6,7 @@ package com.ai.platform.modules.sys.web;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.config.Global;
+import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Menu;
+import com.ai.platform.modules.sys.entity.MgmtMenu;
+import com.ai.platform.modules.sys.service.MgmtMenuService;
 import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
@@ -38,6 +42,8 @@ public class MenuController extends BaseController {
 
 	@Autowired
 	private SystemService systemService;
+	@Autowired
+	private MgmtMenuService mgmtMenuService;
 	
 	
 	@ModelAttribute("menu")
@@ -58,7 +64,14 @@ public class MenuController extends BaseController {
         model.addAttribute("list", list);
 		return "modules/sys/menuList";
 	}
-
+	@RequiresPermissions("sys:log:view")
+	@RequestMapping(value = {"page"})
+	public String page(MgmtMenu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
+        Page<MgmtMenu> page = mgmtMenuService.findPage(new Page<MgmtMenu>(request, response,5), menu); 
+        model.addAttribute("page", page);
+		return "modules/mgmtsys/menuList";
+	}
+	
 	@RequiresPermissions("sys:menu:view")
 	@RequestMapping(value = "form")
 	public String form(Menu menu, Model model) {

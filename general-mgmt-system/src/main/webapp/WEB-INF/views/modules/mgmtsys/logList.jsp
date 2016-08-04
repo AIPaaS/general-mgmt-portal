@@ -26,7 +26,7 @@
              <div class="row"><!--内侧框架-->
 	                 <div class="col-lg-12"><!--删格化-->
 	                    <div class="main-box clearfix"><!--白色背景-->
-	                    <form:form id="searchForm" action="${ctx}/sys/log/" method="post" class="breadcrumb form-search">
+	                    <form:form id="searchForm" action="${ctx}/sys/log/page" method="post" class="breadcrumb form-search">
 							<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 							<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 	                    	<!--查询条件-->

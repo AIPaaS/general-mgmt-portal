@@ -47,7 +47,19 @@ public class AreaController extends BaseController {
 			return new Area();
 		}
 	}
-
+	/**
+	 * 地区树
+	 * @param area
+	 * @param model
+	 * @return
+	 * @author zhanglh
+	 * @ApiCode
+	 */
+	@RequiresPermissions("sys:area:view")
+	@RequestMapping(value = {"areaTree"})
+	public String tree(Area area, Model model) {
+		return "modules/mgmtsys/areatree";
+	}
 	@RequiresPermissions("sys:area:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(Area area, Model model) {

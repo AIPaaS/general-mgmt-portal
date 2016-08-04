@@ -86,6 +86,41 @@ public class OfficeController extends BaseController {
 		model.addAttribute("page", pge);
 		return "modules/mgmtsys/officeList";
 	}
+	/**
+	 * 新增机构
+	 * @param office
+	 * @param model
+	 * @return
+	 * @author zhanglh
+	 * @ApiCode
+	 */
+	@RequiresPermissions("sys:office:view")
+	@RequestMapping(value = "add")
+	public String add(Office office, Model model) {
+		User user = UserUtils.getUser();
+		if ((office.getParent()==null || office.getParent().getId()==null)&& user!=null){
+			office.setParent(user.getOffice());
+		}
+		office.setParent(officeService.get(office.getParent().getId()));
+		if (office.getArea()==null && user!=null){
+			office.setArea(user.getOffice().getArea());
+		}
+		// 自动获取排序号
+		if (StringUtils.isBlank(office.getId())&&office.getParent()!=null){
+			int size = 0;
+			List<Office> list = officeService.findAll();
+			for (int i=0; i<list.size(); i++){
+				Office e = list.get(i);
+				if (e.getParent()!=null && e.getParent().getId()!=null
+						&& e.getParent().getId().equals(office.getParent().getId())){
+					size++;
+				}
+			}
+			office.setCode(office.getParent().getCode() + StringUtils.leftPad(String.valueOf(size > 0 ? size+1 : 1), 3, "0"));
+		}
+		model.addAttribute("office", office);
+		return "modules/mgmtsys/officeForm";
+	}
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = "form")
 	public String form(Office office, Model model) {
