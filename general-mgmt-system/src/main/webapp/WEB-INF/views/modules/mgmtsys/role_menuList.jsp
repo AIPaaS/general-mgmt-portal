@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>角色管理</title>
+	<title>权限管理</title>
 	<meta name="decorator" content="mgmt"/>
 	<script type="text/javascript">
 		function page(n,s){
@@ -14,21 +14,19 @@
 	</script>
 </head>
 <body>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/role/">角色列表</a></li>
-		<shiro:hasPermission name="sys:role:edit"><li><a href="${ctx}/sys/role/form">角色添加</a></li></shiro:hasPermission>
-	</ul>
 	<sys:message content="${message}"/>
      <form:form id="searchForm" action="${ctx}/sys/role/mgmtlist" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-		<div class="row"><!--外围框架-->
+		
+		<!--框架标签结束-->
+      <div class="row"><!--外围框架-->
      	<div class="col-lg-12"><!--删格化-->
              <div class="row"><!--内侧框架-->
 	                 <div class="col-lg-12"><!--删格化-->
 	                    <div class="main-box clearfix"><!--白色背景-->
 	                    	<!--查询条件-->
-	                    		 <div class="form-label form-group">
+	                    		 <div class="form-label">
 					           	<ul>
 					                <li class="col-md-6">
 					                    <p class="word">角色名称</p>
@@ -39,7 +37,8 @@
 					                    <p><input id="enname" name="enname" type="text" class="int-text int-medium" value="${role.enname}"></p>
 					                </li>  
 					            </ul> 
-					            <ul>
+					           
+								<ul>
 					                <li class="width-xlag">
 					                <p class="word">&nbsp;</p>
 					                <p><input id="btnSubmit" type="submit" class="biu-btn  btn-primary btn-blue btn-large ml-15" value="查  询"></p>
@@ -52,6 +51,7 @@
               </div>
          </div>
      </div>	
+     <!--框架标签结束-->
 	</form:form>
 	<sys:message content="${message}"/>
 	<!--框架标签结束-->
@@ -78,7 +78,7 @@
                                     <table id="contentTable" class="table table-hover table-border table-bordered">
                                         <thead>
                                             <tr>
-                                            	<shiro:hasPermission name="sys:rolemenu:view"><th>选择</th></shiro:hasPermission>
+                                            	<th>选择</th>
                                                 <th>角色名称</th>
                                                 <th>英文名称</th>
                                                 <th>归属机构</th>
@@ -88,7 +88,7 @@
                                     <tbody>
                                        <c:forEach items="${rolepage.list}" var="role">
 											<tr>
-												<shiro:hasPermission name="sys:role:edit"><td><input type="radio"></td></shiro:hasPermission>	
+												<td><input type="radio"></td>
 												<td><a href="form?id=${role.id}">${role.name}</a></td>
 												<td><a href="form?id=${role.id}">${role.enname}</a></td>
 												<td>${role.office.name}</td>

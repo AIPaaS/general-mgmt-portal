@@ -69,6 +69,18 @@ public class RoleController extends BaseController {
 	}
 	
 	@RequiresPermissions("sys:role:view")
+	@RequestMapping(value = "mgmtform")
+	public String mgmtform(Role role, Model model) {
+		if (role.getOffice()==null){
+			role.setOffice(UserUtils.getUser().getOffice());
+		}
+		model.addAttribute("role", role);
+		//model.addAttribute("menuList", systemService.findAllMenu());
+		model.addAttribute("officeList", officeService.findAll());
+		return "modules/mgmtsys/roleForm";
+	}
+	
+	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(Role role, Model model) {
 		List<Role> list = systemService.findAllRole();
