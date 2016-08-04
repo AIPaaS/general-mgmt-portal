@@ -22,7 +22,7 @@ public interface ISysWaitjobsMangeSV {
 	/**
 	 * 完结代办事物
 	 * @param completeRequest
-	 * @return
+	 * @return 是否成功
 	 * @throws BusinessException,SystemException
 	 * @author jiaxs
 	 * @ApiCode PLAT_009
