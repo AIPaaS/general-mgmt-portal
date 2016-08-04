@@ -28,7 +28,7 @@ public class SysWaitjobsBusinessService implements ISysWaitjobsBusinessService{
 	public WaitjobsInsertResponse insertWaitjobs(WaitjobsInsertRequest insertRequest) {
 		WaitjobsInsertResponse insertResponse = new WaitjobsInsertResponse();
 		SysWaitjobs waitjobs=new SysWaitjobs();
-		WaitjobsVO waijobsVo = insertRequest.getWaijobsVo();
+		WaitjobsVO waijobsVo = insertRequest.getWaitjobsVo();
 		BeanUtils.copyProperties(waitjobs, waijobsVo);
 		String id = iSysWaitjobsAtomService.insertWaitjobs(waitjobs);
 		if(StringUtils.isEmpty(id)){

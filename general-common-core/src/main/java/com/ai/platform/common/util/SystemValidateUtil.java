@@ -102,7 +102,7 @@ public class SystemValidateUtil {
 		if (insertRequest == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		WaitjobsVO waijobsVo = insertRequest.getWaijobsVo();
+		WaitjobsVO waijobsVo = insertRequest.getWaitjobsVo();
 		if (waijobsVo==null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "插入对象不能为空");
 		}

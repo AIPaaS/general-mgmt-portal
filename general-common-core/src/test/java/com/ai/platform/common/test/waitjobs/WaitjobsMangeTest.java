@@ -31,7 +31,7 @@ public class WaitjobsMangeTest {
 		waijobsVo.setTitle("测试");
 		waijobsVo.setUserId("003");
 		waijobsVo.setTenantId("SLP");
-		insertRequest.setWaijobsVo(waijobsVo);
+		insertRequest.setWaitjobsVo(waijobsVo);
 		WaitjobsInsertResponse insertWaitjobs = iSysWaitjobsMangeSV.insertWaitjobs(insertRequest);
 		System.out.println(JSonUtil.toJSon(insertWaitjobs));
 	}
