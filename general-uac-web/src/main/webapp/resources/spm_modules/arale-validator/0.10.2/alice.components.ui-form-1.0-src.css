@@ -1,0 +1,106 @@
+/** begin ---ui-form.css---*/
+/* 
+ * @name: ui-form 
+ * @overview: 通用表单
+ * @require: ui-input,ui-button
+ */
+.ui-form{margin-top:30px}
+.ui-form legend{display:none}
+.ui-form-required{margin-right:6px; font-family:SimSun; font-size:14px; color:#f00}
+.ui-form-explain{padding:3px 0 0; padding:5px 0 0\9; _padding-top:3px; *margin-top:-1px; _margin-left:3px; font-size:12px; color:#B2B2B2}
+.ui-form-other{_display:inline-block; margin-left:4px}
+.ui-form-text{display:inline-block; margin-top:4px; *margin-top:6px; _margin-top:4px; zoom:1}
+.ui-form-status{color:#20B907; background:url(https://img.alipay.com/alice/ui-fm-loading.gif) right bottom no-repeat; padding-right:15px}
+.ui-form-list{_float:left; _width:100%}
+
+/* 标签 */
+.ui-label{float:left; width:170px; margin-left:-170px; padding-top:3px; *padding-top:4px; text-align:right; font-size:14px}
+.ui-label-reset{padding-top:0}
+
+/* 输入框 */
+.ui-input{width:170px;padding: 7px 9px 7px 9px;height:12px;line-height:12px;border:1px solid #ccc;border-top-color:#a6a6a6;}
+.ui-input:hover, .ui-textarea:hover {border:1px #a6a6a6 solid;border-top-color:#808080;}
+.ui-input:focus, .ui-textarea:focus {border:1px #68ACFF solid;outline:1px aqua solid;}
+.ui-input-mini{height:15px; line-height:16px; padding:2px}
+.ui-input-mini:focus{*padding:1px}
+.ui-input-mini{width:150px; vertical-align:middle}
+.ui-input-amount{width:80px; font-weight:700}
+.ui-input-len10, .ui-input-date{width:67px}
+.ui-input-len5, .ui-input-time{width:35px}
+.ui-input-len6{width:44px}
+.ui-input-len8, .ui-input-tel{width:58px}
+.ui-input-len10cn{width:122px}
+.ui-input-len30cn{width:362px}
+.ui-input-len4{width:28px}
+.ui-textarea{ width:422px;  height:79px;  line-height:15px;  border:1px #9C9C9C solid;  padding:1px 3px 0 4px;  _padding:1px 2px 0 5px;  overflow:auto;  font-family:Arial}
+/* input 禁止输入 */
+.ui-input-unwrite,
+.ui-textarea-unwrite {
+    border: 1px solid  #cccccc;
+    background: #f2f2f2;
+}
+.ui-input-unwrite:hover,
+.ui-textarea-unwrite:hover {
+    border: 1px solid  #cccccc;
+    background: #f2f2f2;
+}
+
+.ui-form-item:after{ clear:both;  content:'.';  display:block;  height:0;  visibility:hidden}
+.ui-form-item{padding:0 5px 15px 170px; *padding:0 5px 12px 170px; _padding:0 5px 13px 170px; zoom:1;font-family: tahoma, \5b8b\4f53, \9ED1\4F53, "Hei", sans-serif;}
+.ui-form-item select{vertical-align:middle; margin:4px 0 0; }
+.ui-form-item input{vertical-align:middle}
+.ui-form-item .ui-input{font-size:12px;*font-size:11px; _font-size:12px; color:#595959;vertical-align:middle;*vertical-align:-5px}
+.ui-form-item .ui-button-group .ui-button-text-only{margin:3px 0 0; margin:2px 0 0\0}
+.ui-form-item .ui-button-text-only .ui-button-text{padding:.1em .5em}
+.ui-form-item .ui-button-checkboxes .ui-state-selected{padding-right:2px; background:url(https://img.alipay.com/alice/ui-button-checkboxes-selected.png) right bottom no-repeat}
+.ui-form-item .ui-form-item-placeholder{ color:#B2B2B2}
+
+.ui-form-item-hover .ui-input, .ui-form-item-hover .ui-textarea{border:1px #727272 solid}
+.ui-form-item-focus .ui-input, .ui-form-item-focus .ui-textarea{border:1px #68ACFF solid; outline:1px aqua solid;  *padding:3px 0 3px 2px; *border:2px #95DDFF solid; cursor:text}
+.ui-form-item-focus .ui-textarea{*padding:1px 0 1px 2px}
+.ui-form-item-focus .ui-form-explain, .ui-form-item-hover .ui-form-explain{color:#333;}
+.ui-form-item-error .ui-input, .ui-form-item-error .ui-textarea{border:1px #F00 solid; color:#FF5243}
+.ui-form-item-error .ui-input-reset{border:1px #9C9C9C solid; color:#000}
+.ui-form-item-error .ui-form-explain, .ui-form-item-warn .ui-form-explain, 
+.ui-form-item-success .ui-form-explain{background-image:url(https://img.alipay.com/alice/ui-fm.png); background-repeat:no-repeat; padding-left:20px; *zoom:1}
+.ui-form-item-error .ui-form-explain{color:#FF5243; background-position:-186px 6px}
+.ui-form-item-warn .ui-form-explain{background-position:-138px -80px}
+.ui-form-item-error .ui-input:hover, 
+.ui-form-item-error .ui-textarea:hover{border:1px #a6a6a6 solid;}
+.ui-form-item-error .ui-input:focus, 
+.ui-form-item-error .ui-textarea:focus{border:1px #68ACFF solid; color:#727272}
+.ui-form-item-success .ui-form-explain{ background-position:-114px -123px}
+.ui-form-item-loading .ui-form-explain{ padding-left:20px;    background:url(https://img.alipay.com/alice/ico-loading16.gif) 0 4px no-repeat}
+
+/* 图片验证码样式 */
+.ui-checkcode-input {
+    width: 100px;
+	height:24px;
+	line-height:28px;
+	margin:0;
+	padding:0;
+    color: #000000;
+    font-size: 12px;
+    vertical-align: middle;
+    padding: 2px 5px;
+    border: 1px solid #ccc;
+	border-top-color:#a6a6a6;
+    font-family: Tahoma;
+	_float:left; /* input在ie6下面，如果用div包裹，会发现有1像素（1px）的margin BUG，并且不管你如何block它都无法消除。解决方法：让input自身float */
+}
+.ui-checkcode-imgcode-img {
+	cursor: pointer;
+}
+.ui-checkcode-imgcode-text{
+	color:#07f;
+}
+.ui-checkcode-imgcode-text-limit {
+	width: 48px;
+	position:absolute;
+	left:340px;
+	top:-3px;
+}
+
+/** end ---ui-form.css---*/
+/**Last Changed Author: shuai.shao--Last Changed Date: Wed Dec 07 18:05:07 CST 2011**/
+/**alice.components.ui-form-1.0**/
