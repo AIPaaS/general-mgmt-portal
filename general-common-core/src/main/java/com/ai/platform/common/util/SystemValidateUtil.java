@@ -3,6 +3,7 @@ package com.ai.platform.common.util;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.vo.BaseInfo;
 import com.ai.opt.sdk.constants.ExceptCodeConstants;
+import com.ai.opt.sdk.util.StringUtil;
 import com.ai.platform.common.api.office.param.OfficeChildrenListQueryRequest;
 import com.ai.platform.common.api.office.param.OfficeDetailQueryRequest;
 import com.ai.platform.common.api.office.param.OfficeParentListQueryRequest;
@@ -21,11 +22,11 @@ public class SystemValidateUtil {
 		if (condition == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(condition.getTenantId())) {
+		if (StringUtil.isBlank(condition.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
-		if (StringBlank(condition.getNo()) && StringBlank(condition.getPhone())
-				&& StringBlank(condition.getLoginName()) && StringBlank(condition.getEmail())) {
+		if (StringUtil.isBlank(condition.getNo()) && StringUtil.isBlank(condition.getPhone())
+				&& StringUtil.isBlank(condition.getLoginName()) && StringUtil.isBlank(condition.getEmail())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "手机号、邮箱、工号、登录名至少有一个不可以为空");
 		}
 	}
@@ -33,10 +34,10 @@ public class SystemValidateUtil {
 		if (condition == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(condition.getTenantId())) {
+		if (StringUtil.isBlank(condition.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
-		if (StringBlank(condition.getOfficeId())) {
+		if (StringUtil.isBlank(condition.getOfficeId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "机构ID不能为空");
 		}
 	}
@@ -45,10 +46,10 @@ public class SystemValidateUtil {
 		if (condition == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(condition.getTenantId())) {
+		if (StringUtil.isBlank(condition.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
-		if (StringBlank(condition.getId())) {
+		if (StringUtil.isBlank(condition.getId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "用户ID不能为空");
 		}
 	}
@@ -56,10 +57,10 @@ public class SystemValidateUtil {
 		if (queryRequest == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(queryRequest.getTenantId())) {
+		if (StringUtil.isBlank(queryRequest.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
-		if (StringBlank(queryRequest.getId())) {
+		if (StringUtil.isBlank(queryRequest.getId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "机构ID不能为空");
 		}
 	}
@@ -68,10 +69,10 @@ public class SystemValidateUtil {
 		if (queryRequest == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(queryRequest.getTenantId())) {
+		if (StringUtil.isBlank(queryRequest.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
-		if (StringBlank(queryRequest.getId())) {
+		if (StringUtil.isBlank(queryRequest.getId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "机构ID不能为空");
 		}
 	}
@@ -80,10 +81,10 @@ public class SystemValidateUtil {
 		if (queryRequest == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(queryRequest.getTenantId())) {
+		if (StringUtil.isBlank(queryRequest.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
-		if (StringBlank(queryRequest.getId())) {
+		if (StringUtil.isBlank(queryRequest.getId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "机构ID不能为空");
 		}
 	}
@@ -92,7 +93,7 @@ public class SystemValidateUtil {
 		if (queryRequest == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(queryRequest.getTenantId())) {
+		if (StringUtil.isBlank(queryRequest.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
 	}
@@ -105,19 +106,19 @@ public class SystemValidateUtil {
 		if (waijobsVo==null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "插入对象不能为空");
 		}
-		if (StringBlank(waijobsVo.getSystemId())) {
+		if (StringUtil.isBlank(waijobsVo.getSystemId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "systemId不能为空");
 		}
-		if (StringBlank(waijobsVo.getTenantId())) {
+		if (StringUtil.isBlank(waijobsVo.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "tenantId不能为空");
 		}
-		if (StringBlank(waijobsVo.getTitle())) {
+		if (StringUtil.isBlank(waijobsVo.getTitle())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "title不能为空");
 		}
-		if (StringBlank(waijobsVo.getUserId())) {
+		if (StringUtil.isBlank(waijobsVo.getUserId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "userId不能为空");
 		}
-		if (StringBlank(waijobsVo.getLastUser())) {
+		if (StringUtil.isBlank(waijobsVo.getLastUser())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "lastUser不能为空");
 		}
 	}
@@ -126,21 +127,11 @@ public class SystemValidateUtil {
 		if (completeRequest == null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数对象不能为空");
 		}
-		if (StringBlank(completeRequest.getTenantId())) {
+		if (StringUtil.isBlank(completeRequest.getTenantId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "tenantId不能为空");
 		}
-		if (StringBlank(completeRequest.getId())) {
+		if (StringUtil.isBlank(completeRequest.getId())) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "id不能为空");
 		}
 	}
-	//字符串非空校验
-		public static boolean StringBlank(String str) {
-			if (null == str) {
-				return true;
-			}
-			if ("".equals(str.trim())) {
-				return true;
-			}
-			return false;
-		}
 }
