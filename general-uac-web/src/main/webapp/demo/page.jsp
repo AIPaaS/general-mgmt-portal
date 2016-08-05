@@ -1,5 +1,5 @@
 <%@page import="com.alibaba.fastjson.JSON"%>
-<%@page import="com.ai.opt.uac.web.model.ssoclient.CiticSSOClientUser"%>
+<%@page import="com.ai.opt.uac.web.model.ssoclient.GeneralSSOClientUser"%>
 <%@page import="com.ai.opt.sso.client.filter.SSOClientConstants"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +11,7 @@
 </head>
 <body>
 <%
-CiticSSOClientUser user = (CiticSSOClientUser) session.getAttribute(SSOClientConstants.USER_SESSION_KEY);
+GeneralSSOClientUser user = (GeneralSSOClientUser) session.getAttribute(SSOClientConstants.USER_SESSION_KEY);
 String jsonUser=JSON.toJSONString(user);
 request.setAttribute("jsonUser", jsonUser);
 
