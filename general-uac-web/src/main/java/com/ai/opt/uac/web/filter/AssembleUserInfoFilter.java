@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sso.client.filter.SSOClientConstants;
-import com.ai.opt.uac.web.model.ssoclient.CiticSSOClientUser;
+import com.ai.opt.uac.web.model.ssoclient.GeneralSSOClientUser;
 import com.alibaba.fastjson.JSON;
 
 
@@ -43,7 +43,7 @@ public class AssembleUserInfoFilter implements Filter {
             return;
         }
         HttpSession session = req.getSession();
-        CiticSSOClientUser user = (CiticSSOClientUser) session.getAttribute(SSOClientConstants.USER_SESSION_KEY);
+        GeneralSSOClientUser user = (GeneralSSOClientUser) session.getAttribute(SSOClientConstants.USER_SESSION_KEY);
         if (user == null) {
             user = assembleUser(req);
             if(user!=null){
@@ -71,15 +71,15 @@ public class AssembleUserInfoFilter implements Filter {
      * @param request
      * @return
      */
-    private CiticSSOClientUser assembleUser(HttpServletRequest request) {
-    	CiticSSOClientUser user = null;
+    private GeneralSSOClientUser assembleUser(HttpServletRequest request) {
+    	GeneralSSOClientUser user = null;
         try {
             Principal principal = request.getUserPrincipal();
             if (principal != null) {
-                user = new CiticSSOClientUser();
+                user = new GeneralSSOClientUser();
                 AttributePrincipal attributePrincipal = (AttributePrincipal) principal;
                 Map<String, Object> attributes = attributePrincipal.getAttributes();
-                Field[] fields = CiticSSOClientUser.class.getDeclaredFields();
+                Field[] fields = GeneralSSOClientUser.class.getDeclaredFields();
                 for (Field field : fields) {
                     String value = (String) attributes.get(field.getName());
                     if (value != null) {
