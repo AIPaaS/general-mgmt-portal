@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.slp.common.dao.mapper.interfaces.SysWaitjobsMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.slp.common.dao.mapper.bo.SysWaitjobs" >
+<mapper namespace="com.ai.platform.common.dao.mapper.interfaces.SysWaitjobsMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.platform.common.dao.mapper.bo.SysWaitjobs" >
     <result column="id" property="id" jdbcType="VARCHAR" />
     <result column="system_id" property="systemId" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="present_activiti" property="presentActiviti" jdbcType="VARCHAR" />
     <result column="arrive_data" property="arriveData" jdbcType="TIMESTAMP" />
@@ -71,10 +72,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, system_id, title, user_id, present_activiti, arrive_data, last_user, status, 
+    id, system_id, title, url, user_id, present_activiti, arrive_data, last_user, status, 
     tenant_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.slp.common.dao.mapper.bo.SysWaitjobsCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.platform.common.dao.mapper.bo.SysWaitjobsCriteria" >
     select
     <if test="distinct" >
       distinct
@@ -92,23 +93,23 @@
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.ai.slp.common.dao.mapper.bo.SysWaitjobsCriteria" >
+  <delete id="deleteByExample" parameterType="com.ai.platform.common.dao.mapper.bo.SysWaitjobsCriteria" >
     delete from sys_waitjobs
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.slp.common.dao.mapper.bo.SysWaitjobs" >
+  <insert id="insert" parameterType="com.ai.platform.common.dao.mapper.bo.SysWaitjobs" >
     insert into sys_waitjobs (id, system_id, title, 
-      user_id, present_activiti, arrive_data, 
-      last_user, status, tenant_id
-      )
+      url, user_id, present_activiti, 
+      arrive_data, last_user, status, 
+      tenant_id)
     values (#{id,jdbcType=VARCHAR}, #{systemId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=VARCHAR}, #{presentActiviti,jdbcType=VARCHAR}, #{arriveData,jdbcType=TIMESTAMP}, 
-      #{lastUser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{tenantId,jdbcType=VARCHAR}
-      )
+      #{url,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{presentActiviti,jdbcType=VARCHAR}, 
+      #{arriveData,jdbcType=TIMESTAMP}, #{lastUser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{tenantId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.slp.common.dao.mapper.bo.SysWaitjobs" >
+  <insert id="insertSelective" parameterType="com.ai.platform.common.dao.mapper.bo.SysWaitjobs" >
     insert into sys_waitjobs
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -119,6 +120,9 @@
       </if>
       <if test="title != null" >
         title,
+      </if>
+      <if test="url != null" >
+        url,
       </if>
       <if test="userId != null" >
         user_id,
@@ -149,6 +153,9 @@
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
       <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
       </if>
@@ -169,7 +176,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.slp.common.dao.mapper.bo.SysWaitjobsCriteria" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.ai.platform.common.dao.mapper.bo.SysWaitjobsCriteria" resultType="java.lang.Integer" >
     select count(*) from sys_waitjobs
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -186,6 +193,9 @@
       </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=VARCHAR},
@@ -215,6 +225,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       system_id = #{record.systemId,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR},
       present_activiti = #{record.presentActiviti,jdbcType=VARCHAR},
       arrive_data = #{record.arriveData,jdbcType=TIMESTAMP},

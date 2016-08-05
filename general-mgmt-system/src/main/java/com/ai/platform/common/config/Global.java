@@ -123,6 +123,18 @@ public class Global {
 		String dm = getConfig("activiti.isSynActivitiIndetity");
 		return "true".equals(dm) || "1".equals(dm);
 	}
+	
+	/**
+
+	* 获取当前租户信息
+
+	*/
+
+	public static String getTenantID() {
+
+		return getConfig("web.tenant.id");
+
+	}
     
 	/**
 	 * 页面获取常量

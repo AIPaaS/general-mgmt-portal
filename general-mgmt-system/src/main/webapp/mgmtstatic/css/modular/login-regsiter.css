@@ -1,0 +1,38 @@
+/**登录**/
+.login-bj{width:100%;background:url(../../images/login-bj.png) no-repeat;height:650px;background-size:100% 100%;}
+.login-nav{margin:0 auto;height:80px;padding:0 5%;}
+.login-logo{float:left;margin-top:36px;}
+.login-right{float:right;margin-top:40px;}
+.login-right a{ color:#333;font-size: 14px;}
+.login-right .blue{color:#1c9aec;}
+.login-frame{background:#fff;height:400px;}
+#login-box {max-width:500px;min-width:280px;margin:80px auto 20px;overflow: hidden;border-radius: 3px 3px 0 0;background-clip: padding-box;
+-webkit-box-shadow:0 0 5px #d1d1d1;  
+-moz-box-shadow:0 0 5px #d1d1d1;  
+box-shadow:0 0 5px #d1d1d1
+}
+
+.login-frame ul{ width:340px; margin:0 auto; position:relative;}
+.login-frame ul .login-note{ position:absolute; top:60px; left:0px; font-size:12px; background:none; color:#d32222; max-width:400px;}
+.login-frame ul li{width:100%;float:left; margin-top:25px;}
+.login-frame ul li p{float:left}
+.login-frame ul li .yzn-t{margin-left:6px;}
+.login-frame ul .user{ border:1px solid #e4e4e4; width:340px; float:left;height:38px;}
+.login-frame ul .user i{border-right:1px solid #666; color:#666; width:43px; float:left; text-align:center; font-size:20px; margin-top:8px;}
+.login-frame ul .password{ width:340px; float:left; border:1px solid #e4e4e4; height:38px;}
+.login-frame ul .yzm{ width:192px; float:left; border:1px solid #e4e4e4; height:40px;}
+.login-frame ul .user:hover,.login-frame ul .password:hover,.login-frame ul .yzm:hover{ border:1px solid #0697ef;}
+.login-frame ul .password i{ width:43px; border-right:1px solid #666; float:left; text-align:center; color:#666; font-size:20px; margin-top:8px;}
+.login-frame ul .int-height{height:35px;border:none;}
+.login-frame ul .login-title{width:100%;color:#333; font-size:20px;text-align: center; margin-top:25px; margin-bottom:8px;}
+.login-frame ul label{ font-size:12px; color:#666; height:20px; float:left;}
+.login-frame ul .Remb-password{ font-size:12px;margin-top:20px;}
+.login-frame ul .Remb-password span{ margin-right:4px;}
+/**登录按钮**/
+.login-frame ul .login-btn{ width:340px; float:left; height:40px; background:#0697ef; font-size:20px; color:#fff; margin-top:6px;}
+.login-frame ul .login-btn:hover{ background:#10a2fb}
+.login-frame ul .Forget-password { width:100%;}
+.login-frame ul .Forget-password a{ float:left; color:#10a2fb}
+.login-frame ul .Forget-password .right{ float:right; display:block;}
+
+.login-bottom{width:100%;float:left;text-align:center;margin-top:190px;font-size:14px;}

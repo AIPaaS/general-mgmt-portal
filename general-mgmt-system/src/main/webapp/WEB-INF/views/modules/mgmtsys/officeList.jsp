@@ -4,8 +4,11 @@
 <head>
 	<title>机构管理</title>
 	<meta name="decorator" content="mgmt"/>
-	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
+	<script src="${ctxStatic}/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
+   <script src="${ctxStatic}/bootstrap/2.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+   <link href="${ctxStatic}/common/jeesite.css" type="text/css" rel="stylesheet" />
 	<script src="${mgmtStatic}/bootbox/bootbox.js"></script>
+	
 	<script type="text/javascript">
 		function page(n,s){
 				$("#pageNo").val(n);
@@ -20,10 +23,6 @@
 	</script>
 </head>
 <body>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/office/list?id=${office.id}&parentIds=${office.parentIds}">机构列表</a></li>
-		<shiro:hasPermission name="sys:office:edit"><li><a href="${ctx}/sys/office/form?parent.id=${office.id}">机构添加</a></li></shiro:hasPermission>
-	</ul>
 	<sys:message content="${message}"/>
 	<!-- ceshi -->
 	<input type="hidden" name="searchName" id="searchName" value="${requestScope.searchName}"/>
@@ -40,7 +39,7 @@
 	                    		 <div class="form-label form-group">
 					            <ul>
 					                 <li class="col-md-6">
-					                    <p class="word">机构编码</p>
+					                    <p class="word">机构名称</p>
 					                  <p>
 					                  <input type="text" id="officetName" class="int-text int-medium" readonly onclick="showTree()"></p>
 					                  <input type="hidden" id="id" name="id"/>
@@ -70,7 +69,16 @@
                             <header class="main-box-header clearfix">
                             <h2 class="pull-left">查询结果</h2>
                             </header>
-                        <!--标题结束-->  
+                        <!--标题结束-->
+                          	<div class="row"><!--删格化-->
+		                         <p class="right pr-30">
+		                         <shiro:hasPermission name="sys:office:edit">
+			                         <a href="${ctx}/sys/office/add?parent.id=${office.id}">
+			                         	<input type="button" class="biu-btn  btn-primary btn-blue btn-auto  ml-5" value="新  增">
+			                         </a>
+		                         </shiro:hasPermission>
+		                         </p>
+                        	</div>  
                             <div class="main-box-body clearfix">
                             	<!--table表格-->
                                 <div class="table-responsive clearfix">
@@ -87,7 +95,7 @@
                                         </thead>
                                   <c:forEach items="${page.list}" var="office">
 									<tr>
-										<td>${office.name}</td>
+										<td><a href="${ctx}/sys/office/add?id={{office.id}}">${office.name}</a></td>
 										<td>${office.area.name}</td>
 										<td>${office.code}</td>
 										<td>${office.type}</td>
@@ -108,9 +116,8 @@
                         </div>
                     </div>
                 </div>
-            
             </div>
-    </div>
+    	</div>
 	<script>
 	
 	/* function showTree(){
@@ -128,7 +135,6 @@
     				callback:function () {
     					 var officeName = $("#selectOfficeName").val();
 	                     $("#officetName").val(officeName);
-	                    // $.cookie('selectName', officeName);
 	                     var officeId = $("#selectOfficeId").val();
 	                     $("#id").val(officeId);
                     },

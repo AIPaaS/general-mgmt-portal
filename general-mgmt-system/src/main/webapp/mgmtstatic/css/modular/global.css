@@ -125,6 +125,8 @@ h3{margin:20px 0;}
 .pr-10{padding-right:10px}/**右填充10像素**/
 .pr-15{padding-right:15px}/**右填充15像素**/
 .pr-20{padding-right:20px}/**右填充20像素**/
+.pr-25{padding-right:25px}/**右填充20像素**/
+.pr-30{padding-right:30px}/**右填充20像素**/
  
 .pd-5{padding:5px}/**填充5像素**/
 .pd-10{padding:10px}/**填充10像素**/
@@ -352,8 +354,8 @@ pre ol.linenums li {
 .stock-btn{padding:0 10px;min-width:100px;height:30px; border:1px solid #10a2fb; color:#fff; line-height:30px;outline:none;font-size:14px;}
 /**按钮尺寸大小**/
 .btn-mini{width:60px;height:30px;}
-.btn-small{width:80px;height:24px;}
-.btn-medium{width:100px;height:26px;}
+.btn-small{width:80px;height:34px;}
+.btn-medium{width:100px;height:35px;}
 .btn-large{width:120px;height:40px;}
 .btn-xlarge{width:140px;height:30px;}
 .btn-xxlarge{width:160px;height:30px;}

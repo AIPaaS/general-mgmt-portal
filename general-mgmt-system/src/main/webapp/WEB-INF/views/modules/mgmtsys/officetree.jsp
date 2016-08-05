@@ -10,6 +10,7 @@
 <input type="hidden" id="selectOfficeId" value=""/>
 <input type="hidden" id="selectOfficeCode" value=""/>
 <input type="hidden" id="selectOfficeName" value=""/>
+<input type="hidden" id="selectOfficePid" value=""/>
 <script>
     
     var setting = {data:{simpleData:{enable:true,idKey:"id",pIdKey:"pId",rootPId:'0'}},
@@ -18,6 +19,7 @@
                     $("#selectOfficeId").val(treeNode.id);
                     $("#selectOfficeCode").val(treeNode.code);
                     $("#selectOfficeName").val(treeNode.name);
+                    $("#selectOfficePid").val(treeNode.pId);
                 }
             },
     };

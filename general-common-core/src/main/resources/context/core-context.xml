@@ -98,6 +98,6 @@
         </tx:attributes>
     </tx:advice>
 
-    <context:component-scan base-package="com.ai.slp.common"/>
+    <context:component-scan base-package="com.ai.platform.common"/>
 
 </beans>
