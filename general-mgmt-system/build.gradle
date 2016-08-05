@@ -151,7 +151,16 @@ exclude(module: 'commons-logging')
     //runtime group: 'com.oracle', name: 'ojdbc14', version:'10.2.0.4.0'
     runtime group: 'net.sourceforge.jtds', name: 'jtds', version:'1.3.1'
 
-
+	compile 'com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT'
+	compile 'com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT'
+	compile ('com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT'){
+		exclude group: 'org.springframework'
+		exclude group: 'org.quartz-scheduler'
+	}
+	compile ('com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'){
+		exclude group: 'org.springframework'
+		exclude group: 'org.quartz-scheduler'
+	}
 }
  
 processResources {
