@@ -155,8 +155,8 @@ public class IConfigCenterClientTest {
      public void readUrlConfig() throws ConfigException{
     	 System.out.println("url config ... read start");
     	 String indexUrl = "";
-    	 if (client.exists(Constants.URLConstant.CITIC_INDEX_URL_KEY)) {
-    		 indexUrl=client.get(Constants.URLConstant.CITIC_INDEX_URL_KEY);
+    	 if (client.exists(Constants.URLConstant.DEFAULT_INDEX_URL_KEY)) {
+    		 indexUrl=client.get(Constants.URLConstant.DEFAULT_INDEX_URL_KEY);
          } 
 
     	 System.out.println("indexUrl="+indexUrl);

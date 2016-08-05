@@ -23,7 +23,7 @@ public class LoginJumpPageController {
 		//获取配置中心配置的登录页面
 		String service_url="";
 		try {
-			service_url = CCSClientFactory.getDefaultConfigClient().get(Constants.URLConstant.CITIC_INDEX_URL_KEY);
+			service_url = CCSClientFactory.getDefaultConfigClient().get(Constants.URLConstant.DEFAULT_INDEX_URL_KEY);
 		} catch (ConfigException e) {
 			LOG.error("从配置中心获取默认跳转页面失败，将跳向单点登录服务器默认页面");
 		}

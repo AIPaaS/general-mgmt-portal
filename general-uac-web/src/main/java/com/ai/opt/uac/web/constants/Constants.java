@@ -40,11 +40,11 @@ public final class Constants {
 		public static final String DEFAULT_INDEX_URL_KEY = "/default_index_url";
 		
 		/**中信首页*/
-		public static final String CITIC_INDEX_URL_KEY = "/citic_index_url";
+		//public static final String CITIC_INDEX_URL_KEY = "/citic_index_url";
 		/**中信云店*/
-		public static final String CITIC_YUN_MALL_INDEX_URL_KEY = "/citic_yun_mall_index_url";
+		//public static final String CITIC_YUN_MALL_INDEX_URL_KEY = "/citic_yun_mall_index_url";
 		/**中信帮助*/
-		public static final String CITIC_HELP_INDEX_URL_KEY = "/citic_help_index_url";
+		//public static final String CITIC_HELP_INDEX_URL_KEY = "/citic_help_index_url";
 	}
 	
 	public static final class RetakePassword{
