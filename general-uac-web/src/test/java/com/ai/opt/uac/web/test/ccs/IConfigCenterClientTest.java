@@ -142,7 +142,7 @@ public class IConfigCenterClientTest {
      @Test
      public void addUrlConfig() throws ConfigException{
     	 System.out.println("url config ... start");
-    	 String default_index_url = "http://localhost:8080/uac";
+    	 String default_index_url = "http://10.1.245.8:14125/uac";
     	 if (!client.exists(Constants.URLConstant.DEFAULT_INDEX_URL_KEY)) {
              client.add(Constants.URLConstant.DEFAULT_INDEX_URL_KEY, default_index_url);
          } else {
