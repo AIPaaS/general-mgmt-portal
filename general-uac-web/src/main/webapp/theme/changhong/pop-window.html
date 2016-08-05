@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>弹出框</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/bootstrap/font-awesome.css"/>
+<link rel="stylesheet" type="text/css" href="css/modular/frame.css"/>
+<link rel="stylesheet" type="text/css" href="css/modular/global.css"/>
+
+
+
+</head>
+<body>
+<!--提示弹出框 操作-->	
+	<div class="popup" id="popup">
+		<div class="prompt-samll">
+		<div class="prompt-samll-title">
+			<p>删除操作确认</p>
+			<p class="img" id="xclose"><i class="fa fa-times"></i></p>
+		</div>
+		<!--确认删除-->
+		<div class="prompt-samll-confirm">
+			<ul>
+			<li class="word">确定要删除已选联系人吗？</li>
+			<li>
+				<input type="button"  class="biu-btn  btn-primary btn-blue btn-small ml-15 mt-20 radius" value="确认">
+				<input type="button"  class="biu-btn  btn-primary btn-blue btn-small ml-15 mt-20 radius" id="closebtn" value="取消"></li>		
+			</ul>
+		</div>
+		</div>	
+	<div class="mask"></div>
+	</div>
+<!--/提示弹出框操作结束-->
+
+<!--提示弹出框-->	
+	<div class="popup" id="choice">
+		<div class="prompt-samll">
+		<div class="prompt-samll-title">
+			<p>提示</p>
+			<p class="img" id="xclose-a"><i class="fa fa-times"></i></p>
+		</div>
+		<!--确认删除-->
+		<div class="prompt-samll-confirm">
+			<ul>
+			<li><img src="images/warning.png"></li>
+			<li class="word">至少选择一个部门进行操作！</li>
+			<li>
+				<input type="button"  class="biu-btn btn-primary btn-small ml-15 mt-20 radius" value="确认">
+			</ul>
+		</div>
+		</div>	
+	<div class="mask"></div>
+	</div>
+<!--/提示弹出框结束-->
+
+<!--树状弹出框-->	
+	<div class="popup " id="tree">
+		<div class="prompt-samll tree">
+		<div class="prompt-samll-title">
+			<p>部门</p>
+			<p class="img" id="tree-close"><i class="fa fa-times"></i></p>
+		</div>
+		<!--确认删除-->
+		<div class="prompt-samll-confirm">
+			<ul>
+			<li><img src="images/tree.png"></li>
+			<li>
+				<input type="button"  class="biu-btn btn-primary btn-small ml-15 mt-20 radius" value="确认">
+			</ul>
+		</div>
+		</div>	
+	<div class="mask"></div>
+	</div>
+<!--/提示弹出框结束-->
+		
+<input  type="button" value="提示弹出框－操作" id="operation"/>
+<input  type="button" value="提示弹出框" id="choice-btn"/>
+<input  type="button" value="树状弹出" id="tree-btn"/>
+
+<script src="scripts/modular/frame.js"></script>  
+</body>
+</html>

@@ -10,6 +10,7 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.36'
     compile 'org.springframework:spring-tx:4.1.7.RELEASE'
     compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+    compile 'org.dom4j:dom4j:2.0.0'
 
     compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
 
