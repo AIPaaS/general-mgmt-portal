@@ -76,14 +76,7 @@
     <servlet-name>springServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <filter>
-    <filter-name>JSONPFilter</filter-name>
-    <filter-class>com.ai.platform.modules.act.rest.servlet.JsonpCallbackFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>JSONPFilter</filter-name>
-    <url-pattern>/act/service/*</url-pattern>
-  </filter-mapping>
+
   <servlet>
     <servlet-name>DruidStatView</servlet-name>
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
