@@ -169,10 +169,10 @@ processResources {
     //    include '**/*'
     //}
     
-    from project(":general-common-api").jar
-	from project(":general-common-core").jar
-    from project(":general-common-core").configurations.runtime
-    destinationDir file("$buildDir/resources/main")
+    //from project(":general-common-api").jar
+	//from project(":general-common-core").jar
+    //from project(":general-common-core").configurations.runtime
+    //destinationDir file("$buildDir/resources/main")
 }
 
 war {
