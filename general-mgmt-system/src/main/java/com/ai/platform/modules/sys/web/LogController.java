@@ -39,7 +39,7 @@ public class LogController extends BaseController {
 	
 	
 	@RequiresPermissions("sys:log:view")
-	@RequestMapping(value = {"page",""})
+	@RequestMapping(value = {"page"})
 	public String page(Log log, HttpServletRequest request, HttpServletResponse response, Model model) {
         Page<Log> page = logService.findPage(new Page<Log>(request, response,5), log); 
         model.addAttribute("page", page);

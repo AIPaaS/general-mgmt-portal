@@ -59,7 +59,7 @@
 		ar.name AS "area.name"
 	</sql>
 	<sql id="officeJoins">
-		<!--  LEFT JOIN sys_office p ON p.id = a.parent_id-->
+		LEFT JOIN sys_office p ON p.id = a.parent_id
 		LEFT JOIN sys_area ar ON ar.id = a.area_id
 		LEFT JOIN SYS_USER pp ON pp.id = a.primary_person
 		LEFT JOIN SYS_USER dp ON dp.id = a.deputy_person
@@ -75,19 +75,19 @@
 	
 	<select id="findList" resultType="Office">
 		SELECT
-			<include refid="officePageColumns"/>
+			<include refid="officeColumns"/>
 		FROM sys_office a
 		  <include refid="officeJoins"/> 
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-		<if test="code != null and code != ''">
+		<!-- <if test="code != null and code != ''">
 				AND a.code=#{code}
 		</if>
 		<if test="id != null and id != ''">
 				AND a.id=#{id}
-		</if>
+		</if> -->
 		<!-- 数据范围过滤 -->
-		   ${sqlMap.dsf} 
-		<!--   OR a.id = #{currentUser.office.id}-->
+		${sqlMap.dsf} 
+		OR a.id = #{currentUser.office.id}
 		ORDER BY a.code
 	</select>
 			
