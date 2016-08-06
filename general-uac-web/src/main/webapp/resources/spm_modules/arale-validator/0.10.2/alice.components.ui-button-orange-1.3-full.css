@@ -1,0 +1,144 @@
+/** begin ---ui-btn-base.css---*/
+/**
+ * @name:       按钮（通用）ui-button
+ * @author:     展新（zhanxin.lin@alipay.com）
+ * @example:
+ * 外层可以是 div, p, a, span 标签
+ * 里层可以是 a, input, button
+ * div > a
+ * <div class="ui-button ui-button-sorange">
+ *    <a class="ui-button-text">确定</a>
+ * </div>
+ *
+ * div > input
+ * <div class="ui-button ui-button-sorange">
+ *    <input type="button" class="ui-button-text" value="确定" />
+ * </div>
+ *
+ * a > input
+ * <a class="ui-button ui-button-sorange">
+ *    <span class="ui-button-text">确定</span>
+ * </a>
+ */
+.ui-button * {
+    margin:0;
+    padding:0;
+}
+.ui-button {
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    text-decoration: none !important;
+    vertical-align: middle;
+    overflow: visible;
+    cursor: pointer;
+    font-family: verdana, Hiragino Sans GB;
+}
+
+div.ui-button, p.ui-button, span.ui-button {
+    *display: inline;/* for ie */
+}
+
+.ui-button-text {
+    display: inline-block;
+    *display: inline;/* for ie */
+    *zoom: 1;
+    cursor: pointer;
+    border: 0;
+    text-decoration: none;
+    overflow: visible;
+    font-size: 14px;
+    font-weight: 700;
+}
+.ui-button a.ui-button-text:hover {
+    text-decoration: none;
+}
+input.ui-button-text, button.ui-button-text {
+    *vertical-align: top; /* for a ie7 bug */
+    font-family: Hiragino Sans GB;
+}
+
+/** end ---ui-btn-base.css---*/
+/**Last Changed Author: xingmin.zhu--Last Changed Date: Mon Aug 20 15:19:38 CST 2012**/
+/**alice.components.ui-button-base-1.2**/
+/** CurrentDeveloper: afc163**/
+/** DeployDate: Tue Aug 21 11:08:34 CST 2012**/
+
+/** begin ---ui-btn.css---*/
+/**
+ * @name:       按钮（通用）ui-button
+ * @author:     展新（zhanxin.lin@alipay.com）
+ * @example:
+ * 外层可以是 div, p, a, span 标签
+ * 里层可以是 a, input, button
+ * div > a
+ * <div class="ui-button ui-button-sorange">
+ *    <a class="ui-button-text">确定</a>
+ * </div>
+ *
+ * div > input
+ * <div class="ui-button ui-button-sorange">
+ *    <input type="button" class="ui-button-text" value="确定" />
+ * </div>
+ *
+ * a > input
+ * <a class="ui-button ui-button-sorange">
+ *    <span class="ui-button-text">确定</span>
+ * </a>
+ */
+.ui-button-lorange, .ui-button-lorange:hover,
+.ui-button-morange, .ui-button-morange:hover,
+.ui-button-sorange, .ui-button-sorange:hover,
+.ui-button-lorange .ui-button-text,
+.ui-button-morange .ui-button-text,
+.ui-button-sorange .ui-button-text {
+    background: transparent url(https://i.alipayobjects.com/e/201208/3IgyctwEjp.png) no-repeat;
+    color: #fff;
+}
+
+/* large-size */
+.ui-button-lorange { background-position: 0 0; }
+.ui-button-lorange .ui-button-text {
+    padding: 0 20px;
+    background-position: right -177px;
+    line-height:35px;
+    height:35px;
+}
+.ui-button-lorange:hover { background-position: 0 -45px; }
+.ui-button-lorange:hover .ui-button-text {
+    background-position: right -222px;
+}
+
+/* middle-size */
+.ui-button-morange { background-position: 0 -355px; }
+.ui-button-morange .ui-button-text {
+    padding: 0 22px;
+    background-position: right -503px;
+    line-height: 31px;
+    height: 31px;
+}
+.ui-button-morange:hover { background-position: 0 -392px; }
+.ui-button-morange:hover .ui-button-text {
+    background-position: right -540px;
+}
+/* small-size */
+.ui-button-sorange { background-position: 0 -651px; }
+.ui-button-sorange .ui-button-text {
+    padding: 0 12px;
+    font-size: 12px;
+    background-position: right -771px;
+    line-height:25px;
+    height:25px;
+}
+.ui-button-sorange:hover { background-position: 0 -681px; }
+.ui-button-sorange:hover .ui-button-text {
+    background-position: right -801px;
+}
+
+
+/** end ---ui-btn.css---*/
+/**Last Changed Author: xingmin.zhu--Last Changed Date: Mon Aug 20 17:27:42 CST 2012**/
+/**alice.components.ui-button-orange-1.3**/
+/** CurrentDeveloper: afc163**/
+/** DeployDate: Tue Aug 21 11:09:55 CST 2012**/

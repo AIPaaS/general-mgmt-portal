@@ -1,0 +1,51 @@
+#tab-demo-1 {
+    font: 14px/1.5 'Xin Gothic', 'PT Sans', 'Hiragino Sans GB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    position: relative;
+    width: 750px;
+    padding-top: 29px;
+}
+
+#tab-demo-1 .ui-switchable-nav {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    margin: 0;
+    padding: 0;
+    z-index: 99;
+    list-style: none;
+}
+
+#tab-demo-1 .ui-switchable-nav li {
+    float: left;
+    width: 130px;
+    height: 27px;
+    line-height: 21px;
+    text-align: center;
+    background: url(assets/tabs-sprite.gif) no-repeat 0 6px;
+    margin-right: 3px;
+    padding-top: 8px;
+    cursor: pointer;
+    list-style: none;
+}
+
+#tab-demo-1 .ui-switchable-nav .ui-switchable-active {
+    background-position: 0 -40px;
+    cursor: default;
+}
+
+#tab-demo-1 .ui-switchable-content {
+    position: relative;
+    height: 250px;
+    padding: 20px;
+    border: 1px solid #AEC7E5;
+}
+
+.tab-demo, .slide-demo {
+    margin: 20px 0;
+    padding: 0;
+}
+.hidden {
+    display: none;
+}
+
+

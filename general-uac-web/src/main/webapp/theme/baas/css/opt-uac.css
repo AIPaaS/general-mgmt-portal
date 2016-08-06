@@ -1,0 +1,36 @@
+/** 发送按钮样式 **/
+.send-button{ width:100px; float:left; height:40px; background:#1c9aec; margin-left:10px; color:#fff; text-align:center; line-height:40px;}
+.send-button:hover{ color:#fff; background:#10a2fb;}
+.send-button:disabled{ color:#fff; background:#c0c0c0;}
+
+
+
+/** 获取验证码按钮样式 **/
+.yzm .button{  background:#1c9aec; width:100px; height:35px; float:left; text-align:center; line-height:35px; color:#fff;}
+.yzm .button:hover{ background:#10a2fb;}
+.yzm .button:disabled{ color:#fff; background:#c0c0c0;}
+
+/**设置密码强度样式**/
+.regsiter-set-password{width:210px; float:left; margin-left:170px; height:30px;display: inline-block; }
+.regsiter-set-password .low{ width:70px; float:left; text-align:center; font-size:12px; color:#666;line-height:20px;}
+.regsiter-set-password .low .f00{ width:100%; height:6px; overflow: hidden; background:#d7103c; float:left;}
+.regsiter-set-password .in{ width:70px; float:left; text-align:center; font-size:12px; color:#666;line-height:20px;}
+.regsiter-set-password .in .eb6100{ width:100%; height:6px; overflow: hidden; background:#eb6100; float:left;}
+.regsiter-set-password .gao{ width:70px; float:left; text-align:center; font-size:12px; color:#666;line-height:20px;}
+.regsiter-set-password .gao .green{ width:100%; height:6px; overflow: hidden; background:#22ac38; float:left;}
+
+/**设置图形验证码间距**/
+.Retrieve-cnt ul .user p img{ float:left; margin: 0 10px 0  10px;}
+
+/**基本信息左右布局调整**/
+.information-right{ float:left; margin-left:180px;}
+
+/**按钮宽度对齐**/
+.user-cnt{ width:300px; float:left; position:relative;}
+
+/**基本信息错误提示**/
+.information-cnt ul li .regsiter-note{position:absolute; top:44px; left:120px; line-height:18px;  color:#d32222; font-size:12px; min-width:210px;}
+
+/**注册邮箱错误提示样式 **/
+.regsiter-email-cnt ul .user label{ font-size:12px;  color:red; position:absolute; left:145px; top:40px; }
+

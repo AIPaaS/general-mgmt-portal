@@ -1,0 +1,368 @@
+
+@import url(format.css);
+    /* 全局样式格式化 */
+html{height: 100%;}
+body {
+    background:#f6f6f6;
+    font-family:"微软雅黑";
+    height:100%;
+}
+.area {
+    min-width:1000px;
+    max-width:1200px;
+    margin:0px auto;
+}
+/*登陆页*/
+/*头部导航*/
+
+.top {
+    height:72px;
+    overflow:hidden;
+    background:url(../images/login-top.jpg) repeat-x;
+}
+.nav-login-left {
+    float:left;
+    width:300px;
+}
+.logo {
+    float:left;
+    padding:15px 0 0 18px;
+    font:bold 16px/1em '微软雅黑';
+}
+.logo img {
+    float:left;
+    vertical-align:middle;
+    width: 282px;
+    height: 41px;
+}
+.nav {
+    width:600px;
+    float:right;
+    font-size:14px;
+    padding:28px 0 0 0;
+    display:inline-block;
+}
+.nav-login-right {
+    float:right;
+}
+.nav-login-right li {
+    float:left;
+    font:bold 16px/1em '微软雅黑';
+    margin:26px 20px;
+}
+.nav-login-right a{
+   color: #000;
+}
+.nav-login-right a:hover{
+   color:#ff6d6d;
+}
+
+/*底部*/
+.loginCon {
+    overflow:hidden;
+    width:100%;
+    height: 76%;
+    background-color:#F4F4F4;
+}
+.loginadv {
+    width:60%;
+    height:500px;
+    float:left;
+    padding-top:40px;
+}
+.loginForm {
+    float:left;
+    width:300px;
+    background-color:#fff;
+    color:#C1C1C1;
+    font-size:14px;
+    height:400px;
+    margin-top:60px;
+    padding:14px 40px;
+}
+.loginForm .loginTitle {
+    display:inline-block;
+    vertical-align:top;
+    font:bold 22px/1.5em '微软雅黑';
+    color:#000;
+    float:left;
+    padding:20px 14px 20px 0;
+}
+.loginForm #loginErr {
+    background-color:#ffefef;
+    padding:6px 14px 6px 14px;
+    border:1px solid #ea4444;
+    font-size:12px;
+    color:#666;
+    float:left;   
+}
+.loginForm #loginErr span {  
+    font-size:12px;
+    color:#666; 
+    margin-right: 5px;
+}
+.errors{
+    display:inherit;
+}
+.NameEmpty {
+    display:none
+}
+.PassEmpty {
+    display:none
+}
+#errclose {
+    margin:10px 0 0 10px;
+    width:10px;
+    height:10px;
+    background:url(../images/login-icon.png) 0 6px no-repeat;
+}
+.loginForm .loginErr a {
+    color:red;
+}
+.loginForm .loginErr:before {
+    content:"!";
+    color:red;
+    margin-right:10px;
+}
+.input-text {
+    border-radius:4px;
+    -webkit-box-shadow:0 1px 1px 0 rgba(0,0,0,0.1) inset;
+    box-shadow:0 1px 1px 0 rgba(0,0,0,0.1) inset;
+    border:1px solid #d5d5d5;
+    height:32px;
+    color:#666;
+    background-color:#fff;
+    padding:2px 8px;
+    margin:14px 0;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    outline:0;
+    vertical-align:middle;
+}
+.loginBtn {
+    margin-top:43px;
+    background-color:#BC0000;
+    border:1px solid #BC0000;
+    border-radius:3px;
+    color:#fff;
+    font-size:18px!important;
+    cursor:default;
+    width:100%;
+}
+.loginBtn span {
+    vertical-align:middle;
+    text-align:center;
+    font-size:large;
+    height:35px;
+    margin:0 auto;
+    display:block;
+    line-height:35px;
+}
+.loginBtn input {
+    vertical-align:middle;
+    text-align:center;
+    font-size:large;
+    height:35px;
+    width:100%;
+    margin:0 auto;
+    display:block;
+    line-height:35px;
+    background-color:#BC0000;
+    color:#fff;
+    font-family:"微软雅黑";
+}
+/*底部*/
+.footer{background: #313131;
+    color: #fff;
+    border-top: 2px solid red;}
+.copyright {
+    background:#313131;
+    height:80px;
+    padding-top:6px;
+    text-align: center;
+}
+.footarea {
+    min-width:1000px;
+    max-width:1140px;
+    margin:0px auto;
+}
+.copyright h4 {
+    font-size:16px;
+    line-height:20px;
+    display:inline-block;
+    color:#fff;
+    line-height:20px;
+    margin:3px 2px 3px 2px;
+}
+.copyright li {
+    font-size:14px;
+    line-height:16px;
+    display:inline-block;
+    color:#fff;
+    padding:3px 2px;
+}
+.copyright p {
+    display:inline-block;
+    color:#fff;
+    padding: 5px 6px;
+}
+
+.copyright li{font-size: 14px;line-height: 16px;display: inline-block;margin-top: 4px;color: #fff;padding: 4px 6px;}
+.copyright img{display: inline-block;    vertical-align: text-bottom;}
+.copyright a,.copyright a:link,.copyright a:visited{color: #fff;}
+.copyright a:hover{color: #ccc;}
+
+/*登录成功*/
+.loginSuc {
+    text-align:center;
+    width:100%;
+    height:75%;
+    background:#fff;
+}
+.loginSuc .loginSucCon {
+    width:100%;
+    padding-top:40px;
+    margin:0 auto;
+}
+.loginSuc .loginSucCon img{
+    padding-top: 6px;
+}
+.loginSuc .loginSucTitle {
+    font:bold 16px/3em '微软雅黑';
+    display:inline-block;
+    vertical-align:top;
+    margin:0 30px;
+}
+.loginSuc .loginSucTxt {
+    width:300px;
+    height:100px;
+    background:#ffffcc;
+    border:1px solid #f4e2b7;
+    margin:20px auto 36px;
+    padding:50px 60px;
+    text-align:left;
+    font:normal 14px/2em '微软雅黑';
+}
+.loginSuc .loginSucCon a{color: #fff;}
+.loginSuc .loginSucCon a:hover{color: #eee;}
+.loginSuc .loginSucCon .loginCheckMailTxt {
+    width:300px;
+    height:200px;
+    background:#ffffcc;
+    border:1px solid #f4e2b7;
+    margin:20px auto 36px;
+    padding:25px 60px;
+    text-align:left;
+    font:normal 14px/2em '微软雅黑';
+}
+.loginSuc .loginSucTxt span,.loginSuc .loginSucCon .loginCheckMailTxt span {
+    color:#FF8000
+}
+.fixkey {
+    margin:60px 10px;
+    background-color:#BC0000;
+    border:1px solid #BC0000;
+    border-radius:3px;
+    color:#fff;
+    font-size:16px;
+    width:100%;
+    padding:6px 12px;
+}
+
+.backhome {
+    margin:60px 10px;
+    background-color:#BC0000;
+    border:1px solid #BC0000;
+    border-radius:3px;
+    color:#fff;
+    font-size:16px;
+    width:100%;
+    padding:6px 12px;
+}
+/*修改密码*/
+.fixpassword {
+    text-align:center;
+    width:40%;
+    background:url(../images/loginbg.png) center center no-repeat;
+    margin:40px auto;
+    padding:40px 30px 30px 30px;
+    height: 54%;
+}
+.fixpassword ul li span {
+    color:red
+}
+.fixpassword ul {
+    margin-top:40px
+}
+.fixpassword ul li {
+    text-align:left;
+    margin-left:80px;
+    height:60px;
+}
+.fixpassword .fixTitle {
+    font:bold 22px/3em '微软雅黑';
+    display:inline-block;
+    vertical-align:top;
+    margin:0 30px;
+    float:left;
+}
+.fixpasswordBtn {
+    display: inline-block;
+    background-color:#BC0000;
+    border:1px solid #BC0000;
+    border-radius:3px;
+    color:#fff;
+    font-size:18px;
+    width:20%;
+    margin:20px auto 0;
+    padding: 6px 12px;
+}
+
+/*首次修改密码*/
+.fixpasswordfirst {
+    text-align:center;
+    width:40%;
+    background:url(../images/loginbg.png) center center no-repeat;
+    margin:40px auto;
+    padding:40px 30px 30px 30px;
+    height: 54%;
+}
+.fixpasswordfirst ul li span {
+    color:red
+}
+.fixpasswordfirst ul {
+    margin-top:40px
+}
+.fixpasswordfirst ul li {
+    text-align:left;
+    margin-left:80px;
+    height:78px;
+}
+.fixpasswordfirst .fixTitle {
+    font:bold 22px/3em '微软雅黑';
+    display:inline-block;
+    vertical-align:top;
+    margin:0 30px;
+    float:left;
+}
+.fixpasswordfirst .fixpasswordBtn {
+    margin-top:43px;
+    background-color:#BC0000;
+    border:1px solid #BC0000;
+    border-radius:3px;
+    color:#fff;
+    font-size:18px;
+    cursor:default;
+    width:20%;
+    margin:20px auto 0;
+}
+.fixpasswordfirst .fixpasswordBtn span {
+    vertical-align:middle;
+    text-align:center;
+    font-size:large;
+    height:35px;
+    margin:0 auto;
+    display:block;
+    line-height:35px;
+}

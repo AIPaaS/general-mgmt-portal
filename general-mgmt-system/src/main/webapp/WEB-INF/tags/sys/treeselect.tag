@@ -78,6 +78,8 @@
 					${id}TreeselectCallBack(v, h, f);
 				}
 			}, loaded:function(h){
+				$("*", top.document).css("box-sizing","");
+				
 				$(".jbox-content", top.document).css("overflow-y","hidden");
 			}
 		});

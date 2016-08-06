@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>${fns:getConfig('productName')}</title>
+
 	<meta name="decorator" content="mgmt"/>
     <%-- <c:if test="${tabmode eq '1'}"><link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
     <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script></c:if>
@@ -144,9 +145,20 @@
 			return false;
 		}// </c:if>
 	</script> -->
+<script type="text/javascript" language="javascript">   
+function iFrameHeight() {   
+var ifm= document.getElementById("mainFrame");   
+var subWeb = document.frames ? document.frames["mainFrame"].document : ifm.contentDocument;   
+if(ifm != null && subWeb != null) {
+   ifm.height = subWeb.body.scrollHeight;
+   ifm.width = subWeb.body.scrollWidth;
+}   
+}   
+</script>	
+	
 </head>
 <body>
-<div id="theme-wrapper">
+<div id="theme-wrapper" class="xyindex">
     <header class="navbar" id="header-navbar">
         <div class="container">
             <a href="index.html" id="logo" class="navbar-brand"><img  src="${mgmtStatic}/img/logo.png" alt="" class="normal-logo logo-white"/></a>
@@ -165,7 +177,7 @@
         <!--/隐藏菜单icon结束-->
          <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs Configuration" id="showconf">
          	<a class="cnt-title" id="acolor">管理配置台<i class="fa fa-caret-down"></i></a>
-         	<!--隐藏区-->
+         	<!-- 隐藏区 -->
          	<div class="peizh" id="hidconf">
          	<div class="big-list" >
 	         	<ul>
@@ -308,7 +320,7 @@
 	         	</ul>	
          	</div>
          	</div>
-         </div>
+         </div> 
         <!--右侧导航-->
             <div class="nav-no-collapse pull-right" id="header-nav">
             <ul class="nav navbar-nav pull-right">
@@ -355,8 +367,8 @@
                 <span class="hidden-xs">您好, ${fns:getUser().name}</span> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-user"></i>个人中心</a></li>
-                    <li><a href="#"><i class="fa fa-key"></i>修改密码</a></li>
+                    <li><a href="${ctx}/sys/user/info" target="mainFrame"><i class="fa fa-user"></i>个人中心</a></li>
+                    <li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame"><i class="fa fa-key"></i>修改密码</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li>
                 </ul>
             </li>
@@ -389,7 +401,7 @@
 									<c:if test="${empty menu.href}">
 										<input type="hidden" id="menuId" value="${menu.id}"/>
 										<a class="dropdown-toggle" href="javascript:void(0);" id="fisrtmenu"
-										data-href="#" data-id="${menu.id}" target="mainFrame1">										
+										data-href="#" data-id="${menu.id}" target="mainFrame">										
 										 <i class="fa fa-sitemap"></i><span>${menu.name}</span>
 					                     <i class="fa fa-chevron-circle-right drop-icon"></i>
 										</a>
@@ -397,7 +409,7 @@
 										<ul class="submenu" id="secondmenu">
 										<c:set var="rootMenuId" value="${menu.id}"/>
 										<c:forEach items="${fns:getChildsMenu(rootMenuId)}" var="menuNode" varStatus="idxStatus">
-										<li><a href="${fn:indexOf(menuNode.href, '://') eq -1 ? ctx : ''}${menuNode.href}" data-id="${menuNode.id}" target="mainFrame1">${menuNode.name}</a></li>
+										<li><a href="${fn:indexOf(menuNode.href, '://') eq -1 ? ctx : ''}${menuNode.href}" data-id="${menuNode.id}" target="mainFrame">${menuNode.name}</a></li>
 										</c:forEach>
 										</ul>
 									</c:if>
@@ -432,10 +444,16 @@
 	                    			<p class="gongg"><A href="#">［公告］:</A></p>
            						 <div  id="elem">
 						            <ul id="elem1">
-						                <li><A href="#">公告位置！比如说系统维护，哪些功能在什么时间段可能不可用之类的，针对后台</A></li>
-						                <li><A href="#">公告位置！比如说系统维护，哪些功能在什么时间段可能不可用之类的，针对后台</A></li>
-						                <li><A href="#">公告位置！比如说系统维护，哪些功能在什么时间段可能不可用之类的，针对后台</A></li>
-						                <li><A href="#">公告位置！比如说系统维护，哪些功能在什么时间段可能不可用之类的，针对后台</A></li>
+		            				<c:forEach items="${fns:getOaNotifyByUser()}" var="oaNotify" >
+							            <c:set var="oaNotifytype" value="${oaNotify.type}"/>
+							            
+							            <li><A href="#">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
+							            <c:if test="${not empty oaNotify.unReadNum}">
+							            <img src="${mgmtStatic}/images/news.gif">
+							            </c:if>
+							            </li>
+							            
+						            </c:forEach>
 						            </ul>
 						            <ul id="elem2">
 						            </ul>
@@ -447,7 +465,7 @@
               </div>
          </div>
      </div>	
-     <!--框架标签结束--><iframe id="mainFrame" name="mainFrame1" src="" style="overflow:visible;" scrolling="yes" frameborder="no" width="100%" height="650"></iframe>
+     <!--框架标签结束--><iframe id="mainFrame" name="mainFrame" src="" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0" onLoad="iFrameHeight()"></iframe>
 	
 	    <!--底部-->
     <footer id="footer-bar" class="row">

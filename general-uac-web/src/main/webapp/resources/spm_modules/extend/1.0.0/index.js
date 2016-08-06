@@ -1,0 +1,1 @@
+define("extend/1.0.0/index",[],function(r,e,n){n.exports=function(r){for(var e,n=Array.prototype.slice.call(arguments,1),t=0;e=n[t];t++)if(e)for(var i in e)r[i]=e[i];return r}});

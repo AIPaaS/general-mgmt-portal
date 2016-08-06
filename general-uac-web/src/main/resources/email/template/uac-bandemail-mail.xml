@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-body>
+	<html>
+		<head>
+
+		</head>
+
+		<body link="blue" vlink="purple"
+			style="tab-interval:21.0pt;text-justify-trim:
+punctuation">
+
+			<div style='layout-grid:21.15pt'>
+
+				<p>
+					<span
+						style='font-family:宋体;mso-ascii-font-family:Cambria;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:宋体;mso-fareast-theme-font:
+minor-fareast;mso-hansi-font-family:Cambria;mso-hansi-theme-font:minor-latin'>亲爱的{0}，您好！</span>
+				</p>
+
+				<p>
+					<span>
+						<span style='mso-tab-count:1'>
+
+						</span>
+					</span>
+					<span
+						style='font-family:宋体;mso-ascii-font-family:Cambria;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:宋体;mso-fareast-theme-font:
+minor-fareast;mso-hansi-font-family:Cambria;mso-hansi-theme-font:minor-latin'>您正在绑定安全邮箱，验证码：{1}，请在{2}分钟内完成输入。</span>
+				</p>
+				<p>
+					<span>
+						<span style='mso-tab-count:1'>
+						</span>
+					</span>
+					<span
+						style='font-family:宋体;mso-ascii-font-family:Cambria;mso-ascii-theme-font:minor-latin;
+mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast;mso-hansi-font-family:
+Cambria;mso-hansi-theme-font:minor-latin'>为了您的信息安全，切勿将验证码透露于他人。</span>
+					
+				</p>
+
+				<p>
+					<span>
+						<span style='mso-tab-count:1'>
+						</span>
+					</span>
+					<span
+						style='font-family:宋体;mso-ascii-font-family:Cambria;mso-ascii-theme-font:minor-latin;
+mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast;mso-hansi-font-family:
+Cambria;mso-hansi-theme-font:minor-latin'>注意：如非本人操作，请及时登录并修改密码以保证账户安全。</span>
+				</p>
+
+
+			</div>
+
+		</body>
+
+	</html>
+
+
+</xml-body>

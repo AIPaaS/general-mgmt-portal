@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>用户管理</title>
+	<title>员工管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -12,7 +12,7 @@
 					loginName: {remote: "${ctx}/sys/user/checkLoginName?oldLoginName=" + encodeURIComponent('${user.loginName}')}
 				},
 				messages: {
-					loginName: {remote: "用户登录名已存在"},
+					loginName: {remote: "员工登录名已存在"},
 					confirmNewPassword: {equalTo: "输入与上面相同的密码"}
 				},
 				submitHandler: function(form){
@@ -34,8 +34,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/user/list">用户列表</a></li>
-		<li class="active"><a href="${ctx}/sys/user/form?id=${user.id}">用户<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/sys/user/list">员工列表</a></li>
+		<li class="active"><a href="${ctx}/sys/user/form?id=${user.id}">员工<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -126,7 +126,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">用户类型:</label>
+			<label class="control-label">员工类型:</label>
 			<div class="controls">
 				<form:select path="userType" class="input-xlarge">
 					<form:option value="" label="请选择"/>
@@ -135,7 +135,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">用户角色:</label>
+			<label class="control-label">员工角色:</label>
 			<div class="controls">
 				<form:checkboxes path="roleIdList" items="${allRoles}" itemLabel="name" itemValue="id" htmlEscape="false" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>

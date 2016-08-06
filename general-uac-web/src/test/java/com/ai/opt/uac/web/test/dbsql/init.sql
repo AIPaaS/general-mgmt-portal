@@ -1,0 +1,9 @@
+INSERT INTO `sys_user` (`id`, `company_id`, `office_id`, `login_name`, `password`, `no`, `name`, `email`, `phone`, `mobile`, `user_type`, `photo`, `login_ip`, `login_date`, `login_flag`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `del_flag`, `tenant_id`, `category`, `address`, `effective_date`, `expiry_date`, `theme`) 
+			    VALUES ('aiopt-aiplatform-id-1', '1', '6', 'user001', 'E10ADC3949BA59ABBE56E057F20F883E', '0006', '张三', 'user001@asiainfo.com', '010-82166666', '13100000000', NULL, NULL, NULL, NULL, '1', '1', '2013-5-27 08:00:00', '1', '2013-5-27 08:00:00', NULL, '0', 'changhong', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_user` (`id`, `company_id`, `office_id`, `login_name`, `password`, `no`, `name`, `email`, `phone`, `mobile`, `user_type`, `photo`, `login_ip`, `login_date`, `login_flag`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `del_flag`, `tenant_id`, `category`, `address`, `effective_date`, `expiry_date`, `theme`) 
+			    VALUES ('aiopt-aiplatform-id-2', '1', '6', 'user002', 'E10ADC3949BA59ABBE56E057F20F883E', '0006', '李四', 'user002@asiainfo.com', '010-82166666', '13200000000', NULL, NULL, NULL, NULL, '1', '1', '2013-5-27 08:00:00', '1', '2013-5-27 08:00:00', NULL, '0', 'changhong', NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO `sys_user` (`id`, `company_id`, `office_id`, `login_name`, `password`, `no`, `name`, `email`, `phone`, `mobile`, `user_type`, `photo`, `login_ip`, `login_date`, `login_flag`, `create_by`, `create_date`, `update_by`, `update_date`, `remarks`, `del_flag`, `tenant_id`, `category`, `address`, `effective_date`, `expiry_date`, `theme`) 
+			    VALUES ('aiopt-aiplatform-id-3', '1', '6', 'user003', 'E10ADC3949BA59ABBE56E057F20F883E', '0006', '王五', 'user003@asiainfo.com', '010-82166666', '13300000000', NULL, NULL, NULL, NULL, '1', '1', '2013-5-27 08:00:00', '1', '2013-5-27 08:00:00', NULL, '0', 'changhong', NULL, NULL, NULL, NULL, NULL);
+
+commit;

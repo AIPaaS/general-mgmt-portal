@@ -38,8 +38,8 @@ public class Role extends DataEntity<Role> {
 	
 	//	update20160728-扩充字段
 	
-	private Date effectiveDate;//生效时间
-	private Date expiryDate;//失效时间
+//	private Date effectiveDate;//生效时间
+//	private Date expiryDate;//失效时间
 	//update20160728-扩充结束
 	
 //	private List<User> userList = Lists.newArrayList(); // 拥有用户列表
@@ -117,7 +117,7 @@ public class Role extends DataEntity<Role> {
 		return roleType;
 	}
 	
-	@ExcelField(title="生效时间", type=0, align=1, sort=90)
+	/*@ExcelField(title="生效时间", type=0, align=1, sort=90)
 	public Date getEffectiveDate() {
 		return effectiveDate;
 	}
@@ -133,7 +133,7 @@ public class Role extends DataEntity<Role> {
 
 	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
-	}
+	}*/
 	public void setRoleType(String roleType) {
 		this.roleType = roleType;
 	}
