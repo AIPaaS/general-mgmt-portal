@@ -8,6 +8,7 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
+import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.IdGen;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.utils.UserUtils;
@@ -59,6 +60,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		}
 		this.updateDate = new Date();
 		this.createDate = this.updateDate;
+		this.tenantId = Global.getTenantID();
 	}
 	
 	/**

@@ -187,6 +187,12 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>
 		</if>
+		<if test="email != null and email != ''">
+			AND a.email like  
+					<if test="dbName == 'oracle'">'%'||#{email}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{email}+'%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%', #{email}, '%')</if>
+		</if>
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
 		<choose>

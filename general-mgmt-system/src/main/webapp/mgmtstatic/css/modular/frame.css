@@ -6959,3 +6959,24 @@ box-sizing:border-box;
 height:45px;
 
 }
+
+.jbox-title-panel{
+	box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+height:50px;
+background:#fff none repeat scroll 0 0
+}
+div.jbox{
+	box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+height:45px;	
+}
+div.jbox .jbox-container{
+	border:0px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	height:45px;
+}

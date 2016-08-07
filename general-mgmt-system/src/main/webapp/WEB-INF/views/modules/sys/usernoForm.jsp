@@ -34,8 +34,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/user/listno">操作员列表</a></li>
-		<li class="active"><a href="${ctx}/sys/user/form?id=${user.id}">操作员<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/sys/user/listno">账号列表</a></li>
+		<li class="active"><a href="${ctx}/sys/user/form?id=${user.id}">账号<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -126,7 +126,7 @@
 			</div>
 		</div>
 <%-- 		<div class="control-group">
-			<label class="control-label">操作员类型:</label>
+			<label class="control-label">账号类型:</label>
 			<div class="controls">
 				<form:select path="userType" class="input-xlarge">
 					<form:option value="" label="请选择"/>
@@ -135,7 +135,7 @@
 			</div>
 		</div> --%>
 		<div class="control-group">
-			<label class="control-label">操作员角色:</label>
+			<label class="control-label">账号角色:</label>
 			<div class="controls">
 				<form:checkboxes path="roleIdList" items="${allRoles}" itemLabel="name" itemValue="id" htmlEscape="false" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
@@ -147,19 +147,20 @@
 				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="200" class="input-xlarge"/>
 			</div>
 		</div> --%>
-		<c:if test="${not empty user.id}">
 			<div class="control-group">
 				<label class="control-label">生效时间:</label>
 				<div class="controls">
-					<label class="lbl"><fmt:formatDate value="${user.effectiveDate}" type="both" dateStyle="full"/></label>
+					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="20" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">失效时间:</label>
 				<div class="controls">
-					<label class="lbl"><fmt:formatDate value="${user.expiryDate}" type="both" dateStyle="full"/></label>
+					<label class="lbl"><input id="expiryDate" name="expiryDate" type="text" readonly="readonly" maxlength="20" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
 				</div>
-			</div>			
+			</div>
+		<c:if test="${not empty user.id}">
+			
 			<div class="control-group">
 				<label class="control-label">最后登陆:</label>
 				<div class="controls">
