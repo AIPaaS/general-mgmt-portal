@@ -27,7 +27,7 @@ import com.ai.platform.modules.sys.service.SystemService;
  * @author jiaxs
  */
 @Controller
-@RequestMapping(value = "${adminPath}/sys/rolemenu")
+@RequestMapping(value = "${adminPath}/sysmgmt/rolemenu")
 public class RoleMenuController extends BaseController {
 
 	@Autowired

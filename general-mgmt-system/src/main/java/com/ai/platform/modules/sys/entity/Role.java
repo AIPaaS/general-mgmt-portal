@@ -3,7 +3,6 @@
  */
 package com.ai.platform.modules.sys.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +10,6 @@ import org.hibernate.validator.constraints.Length;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.DataEntity;
-import com.ai.platform.common.utils.excel.annotation.ExcelField;
 import com.google.common.collect.Lists;
 
 /**
@@ -37,12 +35,11 @@ public class Role extends DataEntity<Role> {
 
 	
 	//	update20160728-扩充字段
-	
 //	private Date effectiveDate;//生效时间
 //	private Date expiryDate;//失效时间
 	//update20160728-扩充结束
 	
-//	private List<User> userList = Lists.newArrayList(); // 拥有用户列表
+	//	private List<User> userList = Lists.newArrayList(); // 拥有用户列表
 	private List<Menu> menuList = Lists.newArrayList(); // 拥有菜单列表
 	private List<Office> officeList = Lists.newArrayList(); // 按明细设置数据范围
 
