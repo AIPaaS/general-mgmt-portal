@@ -175,152 +175,7 @@ if(ifm != null && subWeb != null) {
                 </ul>   
             </div>
         <!--/隐藏菜单icon结束-->
-         <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs Configuration" id="showconf">
-         	<a class="cnt-title" id="acolor">管理配置台<i class="fa fa-caret-down"></i></a>
-         	<!-- 隐藏区 -->
-         	<div class="peizh" id="hidconf">
-         	<div class="big-list" >
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>	
-         	</div>
-         	<div class="big-list">
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-         	</div>
-         	<div class="big-list">
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>	
-         	</div>
-         	<div class="big-list" >
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>	
-         	</div>
-         	<div class="big-list">
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-         	</div>
-         	<div class="big-list">
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>
-	         	<ul>
-	         		<li class="peiz-title">弹性计算</li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         		<li><a href="#"><i class="fa fa-cloud left ml-10"></i>新建路由<i class="fa fa-angle-down right"></i></a></li>
-	         	</ul>	
-         	</div>
-         	</div>
-         </div> 
+ 
         <!--右侧导航-->
             <div class="nav-no-collapse pull-right" id="header-nav">
             <ul class="nav navbar-nav pull-right">
@@ -353,9 +208,45 @@ if(ifm != null && subWeb != null) {
             </li>
          <!--/待办事项-->
          <!--颜色设置-->     
-      	 <li class="dropdown notifications-list">
+      	 <li class="dropdown hidden-xs notifications-list">
                  <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
-
+ <ul class="dropdown-menu color-pifu" id="skin-colors" >
+               	 	<li>
+		            <a class="skin-changer" data-skin="theme-whbl" data-toggle="tooltip" title="蓝色" style="background-color: #3498db;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		            <li>
+		            <a class="skin-changer" data-skin="theme-white" data-toggle="tooltip" title="绿色" style="background-color: #2ecc71;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		             <li>
+		            <a class="skin-changer" data-skin="theme-amethyst" data-toggle="tooltip" title="紫色" style="background-color: #9b59b6;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		            <!--
+		             <li>
+		            <a class="skin-changer" data-skin="" data-toggle="tooltip" title="black" style="background-color: #34495e;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		            <li>
+		            <a class="skin-changer blue-gradient" data-skin="theme-blue-gradient" data-toggle="tooltip" title="Gradient"  style="background:#3498db;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		            <li>
+		            <a class="skin-changer" data-skin="theme-turquoise" data-toggle="tooltip" title="Green Sea" style="background-color: #1abc9c;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		           
+		            <li>
+		            <a class="skin-changer" data-skin="theme-blue" data-toggle="tooltip" title="Blue" style="background-color: #2980b9;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		            <li>
+		            <a class="skin-changer" data-skin="theme-red" data-toggle="tooltip" title="Red" style="background-color: #e74c3c;height:20px;width:10px;padding:0 10px;float:left">
+		            </a>
+		            </li>
+		            -->
+                </ul>
       	 </li>
          <!--/颜色设置结束-->      
 
