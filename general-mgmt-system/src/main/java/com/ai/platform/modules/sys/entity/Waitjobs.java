@@ -14,14 +14,6 @@ import com.ai.platform.common.persistence.DataEntity;
  */
 public class Waitjobs extends DataEntity<Waitjobs> {
 	
-	public Waitjobs() {
-		super();
-	}
-	
-	public Waitjobs(String id){
-		super(id);
-	}
-	
 	private static final long serialVersionUID = 1L;
 
 	private String systemId;
@@ -39,6 +31,16 @@ public class Waitjobs extends DataEntity<Waitjobs> {
     private Date arriveData;
     
     private String status;
+    
+    private User user;
+    
+    public Waitjobs() {
+		super();
+	}
+	
+	public Waitjobs(String id){
+		super(id);
+	}
 
     public String getSystemId() {
 		return systemId;
@@ -110,5 +112,13 @@ public class Waitjobs extends DataEntity<Waitjobs> {
 
 	public void setTenantId(String tenantId) {
 		this.tenantId = tenantId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
