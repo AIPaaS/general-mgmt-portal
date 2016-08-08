@@ -160,7 +160,7 @@
 				<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">数据范围:</label>
 			<div class="controls">
 				<form:select path="dataScope" class="input-medium">
@@ -168,7 +168,7 @@
 				</form:select>
 				<span class="help-inline">特殊情况下，设置为“按明细设置”，可进行跨机构授权</span>
 			</div>
-		</div>
+		</div> --%>
 		<%-- <div class="control-group">
 			<label class="control-label">角色授权:</label>
 			<div class="controls">

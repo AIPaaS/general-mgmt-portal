@@ -56,6 +56,11 @@ public class Role extends DataEntity<Role> {
 		super();
 		this.dataScope = DATA_SCOPE_SELF;
 		this.useable=Global.YES;
+		
+		/**
+		 * 去掉数据权限 默认全部
+		 */
+		this.dataScope = DATA_SCOPE_ALL;
 	}
 	
 	public Role(String id){
