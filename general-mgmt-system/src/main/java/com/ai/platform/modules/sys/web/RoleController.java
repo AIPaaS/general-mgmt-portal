@@ -39,7 +39,7 @@ import com.google.common.collect.Maps;
  * @version 2013-12-05
  */
 @Controller
-@RequestMapping(value = "${adminPath}/sys/role")
+@RequestMapping(value = "${adminPath}/sysmgmt/role")
 public class RoleController extends BaseController {
 
 	@Autowired

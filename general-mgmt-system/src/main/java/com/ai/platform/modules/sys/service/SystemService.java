@@ -3,8 +3,6 @@
  */
 package com.ai.platform.modules.sys.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -29,10 +27,12 @@ import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.Servlets;
 import com.ai.platform.modules.sys.dao.MenuDao;
 import com.ai.platform.modules.sys.dao.RoleDao;
+import com.ai.platform.modules.sys.dao.RoleMenuDao;
 import com.ai.platform.modules.sys.dao.UserDao;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
+import com.ai.platform.modules.sys.entity.RoleMenu;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
 import com.ai.platform.modules.sys.utils.LogUtils;
@@ -57,6 +57,8 @@ public class SystemService extends BaseService implements InitializingBean {
 	private RoleDao roleDao;
 	@Autowired
 	private MenuDao menuDao;
+	@Autowired
+	private RoleMenuDao roleMenuDao;
 	@Autowired
 	private SessionDAO sessionDao;
 	@Autowired
@@ -303,6 +305,14 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.removeCache(UserUtils.CACHE_ROLE_LIST);
 //		// 清除权限缓存
 //		systemRealm.clearAllCachedAuthorizationInfo();
+	}
+	
+	@Transactional(readOnly = false)
+	public void saveRoleMenu(RoleMenu roleMenu){
+		roleMenuDao.deleteRoleMenu(roleMenu);
+		if (roleMenu.getMenuList().size() > 0){
+			roleMenuDao.insertRoleMenu(roleMenu);
+		}
 	}
 
 	@Transactional(readOnly = false)

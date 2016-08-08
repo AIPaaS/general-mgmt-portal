@@ -193,7 +193,6 @@
 			del_flag,
 			is_sys,
 			tenant_id,
-
 			useable
 		) VALUES (
 			#{id}, 
@@ -209,9 +208,7 @@
 			#{remarks}, 
 			#{delFlag},
 			#{sysData},
-			#{tenant_id},
-
-			#{expiryDate},
+			#{tenantId},
 			#{useable}
 		)
 	</insert>
