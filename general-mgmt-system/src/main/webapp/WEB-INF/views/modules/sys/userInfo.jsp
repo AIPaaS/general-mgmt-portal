@@ -4,6 +4,9 @@
 <head>
 	<title>个人信息</title>
 	<meta name="decorator" content="default"/>
+	<script src="${ctxStatic}/fileinput/fileinput.min.js" type="text/javascript"></script>
+	<script src="${ctxStatic}/fileinput/locales/zh.js" type="text/javascript"></script>
+	<link href="${ctxStatic}/fileinput/fileinput.min.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#inputForm").validate({

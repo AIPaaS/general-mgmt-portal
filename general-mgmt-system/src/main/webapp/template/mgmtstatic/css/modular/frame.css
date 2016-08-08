@@ -21,7 +21,7 @@ html, body {
 }
 body {
 	color: #344644;
-	background: url("../../img/whitey.jpg") repeat scroll 0 0 #fff;
+	
 	background-size: 220px 220px;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -2525,14 +2525,7 @@ input[type="radio"] {
 #login-page-full {
 	background-color: #e7ebee;
 }
-#login-box {
-	max-width: 350px;
-	min-width: 280px;
-	margin: 60px auto 20px;
-	overflow: hidden;
-	border-radius: 3px 3px 0 0;
-	background-clip: padding-box;
-}
+
 
 @media only screen and (max-width: 767px) {
 #login-box {
@@ -2617,7 +2610,7 @@ input[type="radio"] {
 	min-width: 50px;
 }
 #login-box .input-group .input-group-addon i {
-	color: #efefef;
+	color: #999;
 }
 #login-box #login-forget-link {
 	display: block;
@@ -4343,6 +4336,7 @@ input[type="radio"] {
 	height: 46px;
 	font-size: 16px;
 }
+.input-group p{float:left}
 #search-form .input-group-btn button>i {
 	margin-right: 3px;
 }
@@ -6568,7 +6562,7 @@ svg {
 	color: #fff;
 }
 .theme-whbl .btn-primary {
-	background-color: #3498db;
+	background-color: #1c9aec;
 	border-color: #2980b9;
 }
 .theme-whbl .btn-primary:hover, .theme-whbl .btn-primary:focus, .theme-whbl .btn-primary:active, .theme-whbl .btn-primary.active, .theme-whbl .open .dropdown-toggle.btn-primary {
@@ -6935,12 +6929,72 @@ svg {
 .form-label ul{width:100%;float:left;margin-bottom:0;}
 .form-label ul li{height:auto;font-size:14px;float:left;line-height:30px;margin-top: 10px; }
 .form-label ul li p{float:left;margin-right:10px;position:relative;margin-bottom:0;}
-.form-label ul li p i{position:absolute;right:-10px;top:7px}
+.form-label ul li p i{position:absolute;right:10px;top:7px;color:#3498db}
 .form-label ul li .ccc{ color:#666;}
 .form-label ul li .checkbox-small{ width:18px; height:18px; margin-top:8px; float:left; color:#666;}
 .form-label ul .word{width:120px;text-align:right;}
 .form-label .word2{ width:160px; text-align:right; font-size:14px;}
 .form-label .word1{ width:85px; text-align:right;}
 .colorhid{width:200px;height:200px;background:#fff;position:absolute;top:50px;left:0;display:none; z-index: 999;}
+.form-label  span{color:#f00;}
 .color-pifu {padding:0 0 0 10px;}
 .color-pifu li{float:left;padding:5px  16px;}
+.big-form-label ul li{margin-top:20px}
+
+/**弹出框**/
+.popup{display:none;z-index:999;position:absolute;}
+.prompt-samll{ width:320px;min-height:180px; background:#fff; position:fixed;padding:20px 24px;top:50%;left:50%;margin-top:-200px;margin-left:-160px;z-index:999;border-radius:5px;}
+.tree{ width:400px;min-height:180px; background:#fff; position:fixed;padding:20px 24px;top:50%;left:50%;margin-top:-200px;margin-left:-160px;z-index:99;border-radius:5px;}
+.prompt-samll-title{ width:100%; float:left;}
+.prompt-samll-title p{ float:left; color:#333; font-size: 16px;}
+.prompt-samll-title p a{width:16px; float:left;height:16px;background: url(../images/close-a.png) no-repeat;}
+.prompt-samll-title p a:hover{background: url(../images/close-b.png) no-repeat;}
+.prompt-samll-title .img{float:right;}
+.theme-whbl .time i{color:#000;cursor:pointer}
+.theme-white .prompt-samll-title  i{color:#000;cursor:pointer}
+.prompt-samll-confirm{ width:100%;float:left; margin-top:20px;}
+.prompt-samll-confirm ul{ width:100%;float:left; }
+.prompt-samll-confirm ul li{ text-align:center;margin-bottom: 10px;}
+.prompt-samll-confirm ul .word{ font-size: 16px; color:#333;}
+.mask{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;opacity:0.4;filter:alpha(opacity=40);z-index:18;}
+/**tree**/
+.trees{width:100%;float:left}
+.trees p{width:100%;float:left;text-align: center;}
+
+
+.jbox-state{
+box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+
+float:left;
+}
+.jbox-title-panel{
+box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+height:45px;
+
+}
+
+.jbox-title-panel{
+	box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+height:50px;
+background:#fff none repeat scroll 0 0
+}
+div.jbox{
+	box-sizing:border-box;
+-moz-box-sizing:border-box; /* Firefox */
+-webkit-box-sizing:border-box; /* Safari */
+height:45px;	
+}
+div.jbox .jbox-container{
+	border:0px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	height:45px;
+}
+.jbox-close{top:114px;}

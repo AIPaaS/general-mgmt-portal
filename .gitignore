@@ -15,3 +15,5 @@ gradle-app.setting
 .settings/
 bin/
 opt-sdk.iml
+/general-mgmt-system/src/main/webapp/WEB-INF/web.xml
+/general-mgmt-system/build.gradle

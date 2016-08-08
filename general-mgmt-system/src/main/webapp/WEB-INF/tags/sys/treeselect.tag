@@ -77,10 +77,10 @@
 				if(typeof ${id}TreeselectCallBack == 'function'){
 					${id}TreeselectCallBack(v, h, f);
 				}
-			}, loaded:function(h){
-				$("*", top.document).css("box-sizing","");
-				
-				$(".jbox-content", top.document).css("overflow-y","hidden");
+			}, loaded:function(h){			
+			
+				$(".jbox-content", top.document).removeClass("overflow-y","hidden");
+				$(".jbox-close", top.document).css("top","2px");
 			}
 		});
 	});
