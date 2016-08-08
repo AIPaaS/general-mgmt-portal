@@ -33,7 +33,27 @@ public class IConfigCenterClientTest {
         System.out.println("aaaaaa");
     }
     /**
-     * DBS配置
+     * ipaas平台模式下，配置ipaas服务和密码的映射关系
+     * @throws ConfigException
+     * @author gucl
+     */
+    @Test
+    public void addServiceIdPwdMap() throws ConfigException {
+        String cachesnsConfig = "{\"MCS009\":\"" + "123456\""
+                + ",\"DSS003\":\"" + "123456"
+                + "\"}";
+        
+        // paas serviceid password 映射配置
+        if (!client.exists(SDKConstants.PAAS_SERVICE_PWD_MAPPED_PATH))
+            client.add(SDKConstants.PAAS_SERVICE_PWD_MAPPED_PATH,
+                    cachesnsConfig);
+        else {
+            client.modify(SDKConstants.PAAS_SERVICE_PWD_MAPPED_PATH,
+                    cachesnsConfig);
+        }
+    }
+    /**
+     * DB配置
      * @throws ConfigException 
      */
     //@Ignore
@@ -71,26 +91,13 @@ public class IConfigCenterClientTest {
     	 String s=client.get(SDKConstants.DB_CONF_PATH);
     	 System.out.println("dbinfo:"+s);
      }
-    @Test
-    public void addServiceIdPwdMap() throws ConfigException {
-        String cachesnsConfig = "{\"MCS005\":\"" + "123456"     
-                + "\"}";
-        
-        // paas serviceid password 映射配置
-        if (!client.exists(SDKConstants.PAAS_SERVICE_PWD_MAPPED_PATH))
-            client.add(SDKConstants.PAAS_SERVICE_PWD_MAPPED_PATH,
-                    cachesnsConfig);
-        else {
-            client.modify(SDKConstants.PAAS_SERVICE_PWD_MAPPED_PATH,
-                    cachesnsConfig);
-        }
-    }
+ 
 
     //@Ignore
     @Test
     public void addMcsConfig() throws ConfigException {
         // 缓存服务主机
-        String uacRedisHost = "MCS005";
+        String uacRedisHost = "MCS009";
         // 缓存空间
         String cachesnsConfig = "{\"com.ai.opt.uac.sso.unicache\":\"" + uacRedisHost
                 + "\",\"com.ai.opt.uac.register.cache\":\"" + uacRedisHost
@@ -100,11 +107,14 @@ public class IConfigCenterClientTest {
                 + "\",\""+Constants.UpdatePassword.CACHE_NAMESPACE+"\":\"" + uacRedisHost
                 + "\",\""+Constants.LoginConstant.CACHE_NAMESPACE+"\":\"" + uacRedisHost
                 + "\",\""+Constants.BandEmail.CACHE_NAMESPACE+"\":\"" + uacRedisHost
-                + "\",\"com.ai.opt.uni.session.sessionclient.uacweb\":\"" + uacRedisHost + "\"}";
+                + "\",\"com.ai.opt.uni.session.sessionclient.uacweb\":\"" + uacRedisHost 
+                + "\",\"com.ai.opt.uni.session.sessionclient.mgmtweb\":\"" + uacRedisHost 
+                
+                + "\"}";
         
         StringBuilder bu=new StringBuilder();
         bu.append("{								");
-        bu.append("  \"MCS005\":                     ");
+        bu.append("  \"MCS009\":                     ");
         bu.append("  {                                      ");
         bu.append("		  \"mcs.host\":\"10.1.130.84:16379\",     ");
         bu.append("	  	  \"mcs.maxtotal\":\"200\",            ");
@@ -225,5 +235,30 @@ public class IConfigCenterClientTest {
          }
     	 System.out.println("addSendVerifyTimesConfig ... end");
      }
+     
+     @Test
+     public void addDssConfig() throws ConfigException {
+         // 缓存服务主机
+         String dssId = "DSS003";
+         // 缓存空间
+         String dssnsConfig = "{\"aiopt-aiplatform-dss\":\"" + dssId
+//                 + "\",\"baas-amc-dss\":\"" + dssId
+//                 + "\",\"baas-omc-dss\":\"" + dssId
+//                 + "\",\"baas-smc-dss\":\"" + dssId 
+                 + "\"}";
+         
+         
+
+         // 缓存空间配置
+         if (!client.exists(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH))
+             client.add(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH,
+                     dssnsConfig);
+         else {
+             client.modify(SDKConstants.PAAS_DSSNS_DSS_MAPPED_PATH,
+                     dssnsConfig);
+         }
+     }
+     
+     
     
 }
