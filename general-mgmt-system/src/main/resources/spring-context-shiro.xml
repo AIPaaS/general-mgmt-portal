@@ -17,45 +17,42 @@
 				/static/** = anon
 				/mgmtstatic/** = anon
 				/userfiles/** = anon
-				${adminPath}/cas = cas
 				${adminPath}/login = authc
 				${adminPath}/logout = logout
-				${adminPath}/** = user
 				/act/editor/** = user
 				/ReportServer/** = user
+				${adminPath}/** = user
 			</value>
 		</constructor-arg>
 	</bean>
 	
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" /><!-- 
-		<property name="loginUrl" value="${cas.server.url}?service=${cas.project.url}${adminPath}/cas" /> -->
+		<property name="securityManager" ref="securityManager" />
+		<!--<property name="loginUrl" value="${cas.server.url}?service=${cas.project.url}${adminPath}/cas" 
+			/> -->
 		<property name="loginUrl" value="${adminPath}/login" />
-		<property name="successUrl" value="${adminPath}?login" />
+		<property name="successUrl" value="${adminPath}/" />
 		<property name="filters">
-            <map>
-                <entry key="cas" value-ref="casFilter"/>
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
-            </map>
-        </property>
+			<map>
+				<entry key="authc" value-ref="customFormAuthenticationFilter" />
+			</map>
+		</property>
 		<property name="filterChainDefinitions">
 			<ref bean="shiroFilterChainDefinitions"/>
 		</property>
 	</bean>
-	
-	<!-- CAS认证过滤器 -->  
-	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
-		<property name="failureUrl" value="${adminPath}/login"/>
-	</bean>
-	
+
+
+	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory" />
 	<!-- 定义Shiro安全管理配置 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="systemAuthorizingRealm" />
 		<property name="sessionManager" ref="sessionManager" />
 		<property name="cacheManager" ref="shiroCacheManager" />
 	</bean>
-	
+
+
 	<!-- 自定义会话管理配置 -->
 	<bean id="sessionManager" class="com.ai.platform.common.security.shiro.session.SessionManager"> 
 		<property name="sessionDAO" ref="sessionDAO"/>
@@ -71,11 +68,10 @@
 		<property name="sessionIdCookie" ref="sessionIdCookie"/>
 		<property name="sessionIdCookieEnabled" value="true"/>
 	</bean>
-	
-	<!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
+	<!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID, 
 		当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
 	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-	    <constructor-arg name="name" value="jeesite.session.id"/>
+		<constructor-arg name="name" value="jeesite.session.id" />
 	</bean>
 
 	<!-- 自定义Session存储容器 -->
@@ -107,5 +103,4 @@
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
     	<property name="securityManager" ref="securityManager"/>
 	</bean>
-	
 </beans>

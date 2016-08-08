@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.WebUtils;
+import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import com.ai.platform.common.utils.IdGen;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Waitjobs;
+import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.security.FormAuthenticationFilter;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.service.SystemService;
@@ -47,13 +49,14 @@ public class LoginController extends BaseController{
 	private SessionDAO sessionDAO;
 	
 	@Autowired
-	private SystemService SystemService;
+	private SystemService systemService;
 	/**
 	 * 管理登录
 	 */
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Principal principal = UserUtils.getPrincipal();
+
 
 //		// 默认页签模式
 //		String tabmode = CookieUtils.getCookie(request, "tabmode");
@@ -72,7 +75,7 @@ public class LoginController extends BaseController{
 		
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null && !principal.isMobileLogin()){
-			return "redirect:" + adminPath;
+			return "modules/sys/sysIndex_mgmt";
 		}
 //		String view;
 //		view = "/WEB-INF/views/modules/sys/sysLogin.jsp";
@@ -188,7 +191,7 @@ public class LoginController extends BaseController{
 //		System.out.println("==========================b");
 		
 		String id = principal.getId();
-		List<Waitjobs> waitjobsList = SystemService.getWaitjobs(id);
+		List<Waitjobs> waitjobsList = systemService.getWaitjobs(id);
 		if(waitjobsList != null && waitjobsList.size()>0){
 			int size = waitjobsList.size();
 			if(size>4){
@@ -212,7 +215,7 @@ public class LoginController extends BaseController{
 	public String getThemeInCookie(@PathVariable String theme, HttpServletRequest request, HttpServletResponse response){
 		if (StringUtils.isNotBlank(theme)){
 			
-			SystemService.updateTheme(theme);
+			systemService.updateTheme(theme);
 //			CookieUtils.setCookie(response, "theme", theme);
 			CacheUtils.put("userCache", UserUtils.USER_CACHE_Theme, theme);
 		}else{
