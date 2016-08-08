@@ -61,6 +61,11 @@ public class Role extends DataEntity<Role> {
 		 * 去掉数据权限 默认全部
 		 */
 		this.dataScope = DATA_SCOPE_ALL;
+		
+		/**
+		 * 去掉是否系统数据  默认否
+		 */
+		this.sysData = Global.NO;
 	}
 	
 	public Role(String id){
