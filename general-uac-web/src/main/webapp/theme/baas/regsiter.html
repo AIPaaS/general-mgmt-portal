@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/login-regsiter.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript" src="js/bootstrap.js" ></script>
+<script type="text/javascript" src="js/comp.js" ></script>
+</head>
+
+<body>
+<!--服务条款弹出框-->
+ <div class="pop-fuwu" style="display:none;">
+  <div class="fuwu-bg"></div>
+  <div class="fuwu-cnt">
+  <div class="fuwu-close"><img src="images/close.png"></div>
+   <div class="fwcnt-title">
+    <p>运营家·Billing 服务条款</p>
+    <span>(修订时间：2016-04-07)</span>
+   </div>
+   <div class="tkcnt">
+    <h3>1. 合约定义</h3>
+    <p>1. 本合约是运营家•Billing 用户（包括使用的个人和其代表的企业）与运营家•Billing云计费运营企业亚信科技（中国）有限公司之间的法律契约，用户注册运营家•Billing服务即代表接受本条款的约束，并自注册成功之时即成为本合约一方、受该使用条款约束。</p>
+    <p>2. 下文中的“运营家•Billing”指亚信云计费平台“运营家•Billing”或其运营企业亚信科技（中国）有限公司。</p>
+    <h3>2. 合法使用</h3>
+    <p>1. 运营家•Billing服务仅限于提供给用户用作正常和合法的业务。</p>
+    <p>1）用户不得利用运营家•Billing服务制作、上传、发布、传播如下法律、法规和政策禁止的内容：</p>
+    <p>•反对宪法所确定的基本原则的；</p>
+    <p>•危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；</p>
+    <p>•损害国家荣誉和利益的；</p>
+    <p>•煽动民族仇恨、民族歧视，破坏民族团结的；</p>
+    <p>•破坏国家宗教政策，宣扬邪教和封建迷信的；</p>
+    <p>•散布谣言，扰乱社会秩序，破坏社会稳定的；</p>
+    <p>•散布淫秽、色情、赌博、暴力、凶杀、恐怖或者教唆犯罪的；</p>
+    <p>•侮辱或者诽谤他人，侵害他人合法权益的；</p>
+    <p>•含有法律、法规和政策禁止的其他内容的信息；</p>
+    <p>2）用户不得利用运营家•Billing服务进行如下行为：</p>
+    <p>•	含有任何性或性暗示或其他低俗类信息的；</p>
+    <p>•	发送骚扰、垃圾广告或信息的；</p>
+    <p>•	涉及他人隐私、个人信息或资料的；</p>
+    <p>•	侵害他人名誉权、肖像权、知识产权、商业秘密等合法权利的；</p>
+    <p>•	含有其他干扰运营家•Billing正常运营和侵犯其他用户或其他第三方合法权益内容的信息；</p>
+    <p>•	利用运营家•Billing账户从事任何违法犯罪活动的；</p>
+    <p>•	对运营家•Billing产品进行了任何形式的对其他第三方的再授权使用、销售或转让；</p>
+    <p>•	为设计开发竞争产品对运营家•Billing产品进行任何形式的反向工程，或抄袭模仿运营家•Billing的设计；</p>
+    <p>•	其他违反法律法规规定、侵犯其他用户合法权益、干扰运营家•Billing产品正常运营或运营家•Billing公司未明示授权的行为；</p>
+    <p>3）如果用户使用运营家•Billing产品从事上述1.1条及1.2条的行为，运营家•Billing有权随时停止服务、并要求用户赔偿由此造成的损失。</p>
+    <p>2. 运营家•Billing使用用户所拥有的电子邮件地址、手机号码等作为用户权证的唯一识别信息。当免费试用期过后，未付费的用户将不再享有运营家•Billing的服务，运营家•Billing有权随时删除该用户的所有用户数据。</p>
+    <h3>3. 数据归属权</h3>
+    <p>1. 用户在运营家•Billing平台创建的独创性数据归属用户所有，用户有权对其所创建的数据进行任何形式的处置，包括从平台中复制、导出和删除。</p>
+    <p>2. 运营家•Billing的源代码、LOGO、界面设计、开发文档、应用程序编程接口（API）所关联的所有知识产权均归属亚信科技（中国）有限公司。</p>
+    <p>3. 依照明确的服务约定，运营家•Billing在用户未继续付费且未继续使用达到6个月后，运营家•Billing有权将用户数据从平台上删除，而无需向用户承担任何赔偿责任。该数据包括但不限于用户账户信息、用户使用过程中创建的独创性使用数据。删除的数据将无法从平台上导出或恢复。</p>
+    <h3>4. 用户数据安全性</h3>
+    <p>1. 运营家•Billing应当从组织结构和技术角度尽最大努力保护用户数据安全，只根据用户在网站上或APP移动端的行为指示来分发用户的信息。未经用户同意，运营家•Billing不会将用户产生的具体数据提供任何无关第三方，但法律法规另有规定的除外。</p>
+    <p>2. 运营家•Billing保留使用汇总统计性信息的权利，这些信息应当是匿名，且不是针对特定用户的。</p>
+    <p>3. 用户如果需要运营家•Billing全面删除其在运营家•Billing上创建的用户数据，需要书面向运营家•Billing提出申请，并在申请书中加盖公司公章。</p>
+    <h3>5. 服务连续性</h3>
+    <p>1. 运营家•Billing将尽最大努力保障软件平台的连续可靠运行。对于付费用户，运营家•Billing承诺98%以上的正常在线率，对于未付费用户，运营家•Billing不提供任何保证或承担任何形式的赔偿责任。</p>
+    <p>2. 运营家•Billing将尽最大努力保障用户数据的安全备份。对于付费用户，运营家•Billing承诺在有任何用户数据因服务器存储设备损坏时以最快的速度从最近的备份中恢复数据，但无法承诺100%的数据恢复，对因数据丢失带来的其他连带或间接损失不承担任何责任；对于未付费用户，运营家•Billing不提供恢复服务。</p>
+    <p>3. 在发生需要从备份文件中恢复数据的情形时，运营家•Billing通常需要4至48小时完成，在此时间范围内的数据恢复视作服务是连续的。</p>
+    <p>4. 因重大自然灾害、战争等其他不可抗力导致的运营家•Billing服务中断和长时间终止，运营家•Billing不承担赔偿责任。</p>
+    <h3>6. 条款变更</h3>
+    <p>1. 运营家•Billing有权随时对本合约的条款进行修订，并在修订后更新在运营家•Billing网站上。若用户继续使用运营家•Billing服务，则意味着同意并自愿遵守修改后的使用条款。</p>
+    <p>2. 修订的条款始终在运营家•Billing官方网站公示。</p>
+    <h3>7. 其他条款</h3>
+    <p>本合约条款无论因何种原因部分无效或不可执行，其余条款仍有效，对双方具有约束力。本合约的成立、生效、履行、解释及纠纷解决，都适用于中华人民共和国的法律。本合约的签订地为北京。</p>
+    <p>如果就本协议的解释或执行发生争议，双方应首先力争通过友好协商解决该争议。如果在一方向其他方送达要求开始协商的书面通知后六十天内未能通过协商解决争议，那么任何一方均可将争议提交至北京仲裁委员会，按照其届时有效的规则进行仲裁。仲裁裁决是终局的，对各方均有约束力，不可上诉。仲裁费用由败诉方承担，除非仲裁裁决另有规定。当任何争议发生时以及在对任何争议进行仲裁时，除争议事项外，各方应继续行使各自在本协议项下的其他权利，履行各自在本协议项下的其他义务。</p>
+   </div>
+   <div class="fuwu-btn"><a href="#">同意并继续</a></div>
+  </div>
+ </div>
+<!--服务条款弹出框结束-->
+  <div class="login-header"><!--登录头部-->
+     <div class="login-header-cnt">
+       <div class="login-header-cnt-logo"><img src="images/about.png"></div>
+       <div class="login-header-cnt-mail">账户注册</div>
+       <div class="login-header-cnt-right">已有云计费账号？ <a href="#">立即登录>></a></div>
+       </div>
+     
+     </div>
+  
+   <div class="regsiter-wrapper">
+    <div class="regsiter-box">
+        <div class="regsiter-wrapper-cnt">
+         <ul>
+         <li class="regsiter-title">账户注册</li>
+         <li class="user"><input type="text" class="int-xxlarge-user" placeholder="手机号码作为登录账号"><p class="regsiter-po"><span class="regsiter-note">密码必须由字母和数字/符号组成，不能低于6个字符</span></p></li>
+         <li class="password"><input type="password" class="int-xxlarge" placeholder="密码" ><i class="icon-eye-open"></i>
+         <label>密码必须由字母不能低于6个字符</label></li>
+         <li class="identifying"><input type="text" class="int-xlarge-identifying" placeholder="验证码" ><span><A href="#"><img src="images/yzm.png"></A></span><span><A href="#">看不清？换一个</A></span></li>
+         <li class="SMSidentifying"><input type="text" class="int-xlarge-SMSidentifying" placeholder="短信验证码" ><span class="yzm"><A href="#">获取验证码</A></span><p class="regsiter-po"><span class="regsiter-note">密码必须由字母和</span></p></li>
+         <li><input type="button" class="regsiter-btn" value="注 册" onclick="location.href='login.html';"></li>
+         <li class="zuns">* 注册表示您同意遵守<A href="#" class="fuwu">《云计费服务条款》</A></li>
+
+         </ul>
+        
+        </div>
+       
+    </div>
+     
+    </div>
+
+   <div class="footer-index">©2016 版权所有 亚信集团股份有限公司 京ICP备11005544号-15 京公网安备110108007119号</div>
+   
+  
+
+</body>
+</html>

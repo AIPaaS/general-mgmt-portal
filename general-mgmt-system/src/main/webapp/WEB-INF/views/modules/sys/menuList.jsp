@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>菜单管理</title>
-	<meta name="decorator" content="default"/>
+	<meta name="decorator" content="blank"/>
 	<%@include file="/WEB-INF/views/include/treetable.jsp" %>
 	<script type="text/javascript">
 		$(document).ready(function() {

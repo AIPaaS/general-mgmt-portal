@@ -31,7 +31,7 @@ import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 /**
  * 用户工具类
  * 
- * @author ThinkGem
+ * @author ThinkGem  
  * @version 2013-12-05
  */
 public class UserUtils {
@@ -302,24 +302,18 @@ public class UserUtils {
 	/**
 	 * 获取当前登录者对象
 	 */
-	public static Principal getPrincipal() {
-		try {
+	public static Principal getPrincipal(){
+		try{
 			Subject subject = SecurityUtils.getSubject();
-
-			// Principal principal = (Principal)subject.getPrincipal();
-			String loginName = (String) subject.getPrincipal();
-			if (!"".equals(loginName) && loginName != null) {
-				User user = getByLoginName(loginName);
-				Principal principal = new Principal(user, false);
-				if (principal != null) {
-					return principal;
-				}
+			Principal principal = (Principal)subject.getPrincipal();
+			if (principal != null){
+				return principal;
 			}
-			// subject.logout();
-		} catch (UnavailableSecurityManagerException e) {
-
-		} catch (InvalidSessionException e) {
-
+//			subject.logout();
+		}catch (UnavailableSecurityManagerException e) {
+			
+		}catch (InvalidSessionException e){
+			
 		}
 		return null;
 	}

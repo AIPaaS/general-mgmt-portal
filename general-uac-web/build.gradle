@@ -1,0 +1,104 @@
+apply plugin: 'war'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+
+ext {
+	profile=project.hasProperty('profile')? (project['profile']==""?"aic-dev":project['profile']) : "aic-dev"
+}
+sourceSets {
+	main {
+		java {srcDirs = ['src/main/java']}
+		resources {srcDirs = ['src/main/resources']	}
+	}
+	
+	test {
+        java { srcDirs = ['src/test/java' ] }
+        resources { srcDirs = ['src/test/resources']}
+    }
+	
+}
+sourceCompatibility = 1.7
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+	//mavenLocal()
+	//mavenCentral()
+	//maven{ url "http://223.202.119.155:18081/nexus/content/groups/public/"}
+	maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
+}
+ext {
+	ipaasVersion="1.0-SNAPSHOT"
+	versionSuffix="0.1.ibss-SNAPSHOT"
+}
+configurations.all {
+	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+	
+
+dependencies {
+	compile fileTree(dir: "lib", include: '*.jar')
+	
+	//compile 'org.jasig.cas:cas-server-core:4.0.1'
+	//compile 'org.jasig.cas:cas-server-webapp-support:4.0.1'
+	//compile 'org.jasig.cas:cas-server-security-filter:2.0.0'
+	
+	//servlet
+	compile "javax.servlet:javax.servlet-api:3.1.0"
+	compile "javax.servlet.jsp:javax.servlet.jsp-api:2.3.1"
+	
+	//json
+	compile 'org.json:json:20140107'
+	//md5
+	compile 'commons-codec:commons-codec:1.5'
+	//jstl
+	compile 'jstl:jstl:1.2'
+	//cache
+	compile 'com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT'
+	
+	
+	
+	compile 'org.javassist:javassist:3.19.0-GA'
+	
+	
+	
+	compile 'com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT'
+	compile 'com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT'
+	compile ('com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT'){
+		exclude group: 'org.springframework'
+		exclude group: 'org.quartz-scheduler'
+	}
+	compile ('com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'){
+		exclude group: 'org.springframework'
+		exclude group: 'org.quartz-scheduler'
+	}
+	
+	compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    
+	testCompile(
+		"org.springframework:spring-test:3.2.6.RELEASE",
+		"junit:junit:4.11"
+	)
+}
+
+eclipse {
+	wtp {
+	  facet {
+		facet name: 'java', version: '1.7'
+		facet name: 'jst.web', version: '3.0'
+		facet name: 'wst.jsdt.web', version: '1.0'
+		  }
+	  }
+  }
+  
+processResources {
+    from('profile/'+profile) {
+        include '**/*'
+    }
+}
+
+war{
+	baseName  "uac"
+}

@@ -1,0 +1,94 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec { raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/nimojs/Documents/code/paging',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/nimojs/.npm/paging/0.0.1/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/nimojs/.npm/paging/0.0.1/package.tgz',
+9 verbose tar pack   '/Users/nimojs/Documents/code/paging' ]
+10 verbose tarball /Users/nimojs/.npm/paging/0.0.1/package.tgz
+11 verbose folder /Users/nimojs/Documents/code/paging
+12 info prepublish paging@0.0.1
+13 verbose addLocalTarball adding from inside cache /Users/nimojs/.npm/paging/0.0.1/package.tgz
+14 silly cache afterAdd paging@0.0.1
+15 verbose afterAdd /Users/nimojs/.npm/paging/0.0.1/package/package.json not in flight; writing
+16 verbose afterAdd /Users/nimojs/.npm/paging/0.0.1/package/package.json written
+17 silly publish { name: 'paging',
+17 silly publish   version: '0.0.1',
+17 silly publish   description: '简单自由的分页生成器',
+17 silly publish   main: 'paging.js',
+17 silly publish   homepage: 'http://spmjs.io/docs/paging/latest/',
+17 silly publish   author: { name: 'nimojs', email: 'nimo.jser@gmail.com' },
+17 silly publish   repository: { type: 'git', url: 'https://github.com/nimojs/paging' },
+17 silly publish   keywords: [ 'paging', 'page', 'navigation', 'pagenav' ],
+17 silly publish   licenses: 'MIT',
+17 silly publish   spm:
+17 silly publish    { main: 'paging.js',
+17 silly publish      dependencies: { mustache: '~2.0.0' },
+17 silly publish      build: { umd: 'Paging' },
+17 silly publish      devDependencies: { 'expect.js': '0.3.1' } },
+17 silly publish   devDependencies: { spm: '3' },
+17 silly publish   scripts: { test: 'spm test', build: 'spm build paging.js' },
+17 silly publish   dependencies: { mustache: '^2.0.0' },
+17 silly publish   readme: '# Paging [![spm version](http://spmjs.io/badge/paging)](http://spmjs.io/package/paging)\n\n---\n\n<div id="online-tip">\n<strong>\n  请访问 <a href="http://spmjs.io/docs/paging/0.0.1/">在线文档: v0.0.1</a>\n  或 <a href="http://spmjs.io/docs/paging/latest/">最新版本</a>\n</strong>\n<br><br>\n<img src="https://cloud.githubusercontent.com/assets/3949015/7386863/150a781c-ee8b-11e4-91a3-ec686b565e50.gif" style="width:500px;" />\n</div>\n\n<script>\nif (/spmjs/.test(location.hostname)) {\n    document.getElementById(\'online-tip\').style.display = \'none\'\n}\n</script>\n\n简单自由的分页生成器\n\n## 浏览器中使用 [UMD](https://github.com/nimojs/blog/issues/21)\n\n````iframe:40\n<link rel="stylesheet" href="http://spmjs.io/docs/alice-paging/1.1.0/index.css">\n<script src="http://static.nimojs.com/umd/paging/0.0.1/paging.js"></script>\n\n<div id="view"></div>\n\n<script>\nvar html = Paging.render({\n    // 当前页\n    currentPage: 2,\n    // 总页数\n    pageCount: 10,\n    // 链接前缀\n    link: \'?id=\'\n})\ndocument.getElementById(\'view\').innerHTML = html\n</script>\n````\n\n## seajs\n\n[http://cmd.nimojs.com/cmd/paging/0.0.1/index.js](http://cmd.nimojs.com/cmd/paging/0.0.1/index.js)\n\n````iframe:40\n<link rel="stylesheet" href="http://spmjs.io/docs/alice-paging/1.1.0/index.css">\n<script src="http://cmd.nimojs.com/examples/js/sea-v3.0.0.js" id="seajsnode" ></script>\n\n<div id="view"></div>\n\n<script>\nseajs.config({\n    // 配置 base 路径（必须）\n    base: \'http://cmd.nimojs.com/cmd/\'\n})\n\nseajs.use([\'paging/0.0.1/index\'] ,function (Paging) {\n    var html = Paging.render({\n        // 当前页\n        currentPage: 1,\n        // 总页数\n        pageCount: 10,\n        // 链接前缀\n        link: \'?id=\'\n    })\n    document.getElementById(\'view\').innerHTML = html\n})\n</script>\n````\n## 基于 node/spm 开发\n\n### 命令行安装\n\n```\n$ spm install paging --save\n// 或者\n$ npm install paging --save\n```\n\n### 使用\n\n```js\nvar Paging = require(\'paging\');\n// use paging\n```\n\n\n## 显示总页数为 10 的分页\n\n\n````iframe:205\n<link rel="stylesheet" href="http://spmjs.io/docs/alice-paging/1.1.0/index.css">\n<script src="http://static.nimojs.com/umd/paging/0.0.1/paging.js"></script>\n<div id="view1"></div><hr>\n<div id="view2"></div><hr>\n<div id="view3"></div><hr>\n<div id="view4"></div><hr>\n<div id="view5"></div><hr>\n<div id="view6"></div><hr>\n<div id="view7"></div><hr>\n<div id="view8"></div><hr>\n<div id="view9"></div><hr>\n<div id="view10"></div>\n\n<script>\nfor (var i = 1;i < 11; i++) {\n    document.getElementById(\'view\' + i).innerHTML = Paging.render({\n        currentPage: i,\n        pageCount: 10,\n        beforePageCount: 10,\n        afterPageCount: 10,\n        link: \'#view\'\n    })    \n}\n</script>\n````\n\n## 更多示例\n\n1. [自定义界面](examples/index.md)\n2. [AJAX无刷新分页](examples/ajax.md)\n3. [控制前后几页显示数量](examples/beforePageCount.md)\n4. [bootstrap 分页](examples/bootstrap.md)\n5. [handlebars & createData](handlebars.md)',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   bugs: { url: 'https://github.com/nimojs/paging/issues' },
+17 silly publish   _id: 'paging@0.0.1',
+17 silly publish   _shasum: 'a92b0f53c4cfe16ed75077ea878f73df1b17b86f',
+17 silly publish   _from: '.' }
+18 silly mapToRegistry name paging
+19 silly mapToRegistry using default registry
+20 silly mapToRegistry registry https://registry.npmjs.org/
+21 silly mapToRegistry uri https://registry.npmjs.org/paging
+22 verbose publish registryBase https://registry.npmjs.org/
+23 silly publish uploading /Users/nimojs/.npm/paging/0.0.1/package.tgz
+24 verbose request uri https://registry.npmjs.org/paging
+25 verbose request sending authorization for write operation
+26 info attempt registry request try #1 at 22:31:43
+27 verbose request id 6c59263ff1993e7d
+28 http request PUT https://registry.npmjs.org/paging
+29 http 403 https://registry.npmjs.org/paging
+30 verbose headers { 'content-type': 'application/json',
+30 verbose headers   'cache-control': 'max-age=60',
+30 verbose headers   'content-length': '95',
+30 verbose headers   'accept-ranges': 'bytes',
+30 verbose headers   date: 'Fri, 01 May 2015 14:31:45 GMT',
+30 verbose headers   via: '1.1 varnish',
+30 verbose headers   connection: 'keep-alive',
+30 verbose headers   'x-served-by': 'cache-nrt6130-NRT',
+30 verbose headers   'x-cache': 'MISS',
+30 verbose headers   'x-cache-hits': '0',
+30 verbose headers   'x-timer': 'S1430490703.657046,VS0,VE1800' }
+31 verbose request invalidating /Users/nimojs/.npm/registry.npmjs.org/paging on PUT
+32 error publish Failed PUT 403
+33 verbose stack Error: "You cannot publish over the previously published version 0.0.1." : paging
+33 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:247:14)
+33 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
+33 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:344:22)
+33 verbose stack     at Request.emit (events.js:110:17)
+33 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1239:14)
+33 verbose stack     at Request.emit (events.js:129:20)
+33 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1187:12)
+33 verbose stack     at IncomingMessage.emit (events.js:129:20)
+33 verbose stack     at _stream_readable.js:908:16
+33 verbose stack     at process._tickCallback (node.js:355:11)
+34 verbose statusCode 403
+35 verbose pkgid paging
+36 verbose cwd /Users/nimojs/Documents/code/paging
+37 error Darwin 14.0.0
+38 error argv "node" "/usr/local/bin/npm" "publish"
+39 error node v0.12.2
+40 error npm  v2.7.4
+41 error code E403
+42 error "You cannot publish over the previously published version 0.0.1." : paging
+43 error If you need help, you may report this error at:
+43 error     <https://github.com/npm/npm/issues>
+44 verbose exit [ 1, true ]

@@ -72,7 +72,13 @@ public class UserController extends BaseController {
         model.addAttribute("page", page);
 		return "modules/sys/userList";
 	}
-	
+	@RequiresPermissions("sys:user:view")
+	@RequestMapping(value = {"listno"})
+	public String listno(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
+        model.addAttribute("page", page);
+		return "modules/sys/usernoList";
+	}	
 	@ResponseBody
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = {"listData"})
@@ -94,7 +100,19 @@ public class UserController extends BaseController {
 		model.addAttribute("allRoles", systemService.findAllRole());
 		return "modules/sys/userForm";
 	}
-
+	@RequiresPermissions("sys:user:view")
+	@RequestMapping(value = "formno")
+	public String formno(User user, Model model) {
+		if (user.getCompany()==null || user.getCompany().getId()==null){
+			user.setCompany(UserUtils.getUser().getCompany());
+		}
+		if (user.getOffice()==null || user.getOffice().getId()==null){
+			user.setOffice(UserUtils.getUser().getOffice());
+		}
+		model.addAttribute("user", user);
+		model.addAttribute("allRoles", systemService.findAllRole());
+		return "modules/sys/usernoForm";
+	}
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "save")
 	public String save(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {

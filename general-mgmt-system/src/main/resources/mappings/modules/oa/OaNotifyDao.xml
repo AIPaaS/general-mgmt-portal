@@ -76,7 +76,21 @@
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL} 
 		ORDER BY a.update_date DESC
 	</select>
-	
+	<select id="findListLimit" resultType="OaNotify">
+	SELECT 
+			<include refid="oaNotifyColumns"/>
+			<if test="isSelf">,
+				r.read_flag
+			</if>
+		FROM oa_notify a
+		<include refid="oaNotifyJoins"/>
+		<!-- 我的通知 -->
+			JOIN oa_notify_record r ON r.oa_notify_id = a.id AND r.user_id = #{currentUser.id}
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+			
+			AND a.STATUS = '1'
+		ORDER BY a.update_date DESC
+	</select>	
 	<select id="findCount" resultType="Long">
 		SELECT 
 			count(1)

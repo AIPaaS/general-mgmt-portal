@@ -156,6 +156,15 @@
     <function-signature>java.lang.String getDictListJson(java.lang.String)</function-signature>
     <example>${fns:getDictListJson(type)}</example>  
   </function>
+ 
+   <function>
+    <description>获取当前用户的最新公告前三条</description>
+    <name>getOaNotifyByUser</name>
+    <function-class>com.ai.platform.modules.oa.utils.OaNotifyUtils</function-class>
+    <function-signature>java.util.List getOaNotifyByUser()</function-signature>
+    <example>${fns:getOaNotifyByUser()}</example>  
+  </function>
+ 
   
   <!-- Encodes -->
   <function>

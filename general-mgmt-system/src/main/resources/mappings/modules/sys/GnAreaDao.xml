@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.platform.modules.sys.dao.GnAreaDao">
+    
+	<sql id="gnAreaColumns">
+		a.area_code AS "areaCode",
+		a.area_name AS "areaName",
+		a.province_code AS "provinceCode.code",
+		a.city_code AS "cityCode.code",
+		a.area_level AS "areaLevel",
+		a.parent_area_code AS "parent.code",
+		a.sort_id AS "sortId",
+		a.state AS "state",
+		a.remark AS "remark",
+		a.tenant_id AS "tenantId",
+		a.id AS "id"
+	</sql>
+	
+	<sql id="gnAreaJoins">
+	</sql>
+    
+	<select id="get" resultType="GnArea">
+		SELECT 
+			<include refid="gnAreaColumns"/>
+		FROM gn_area a
+		<include refid="gnAreaJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GnArea">
+		SELECT 
+			<include refid="gnAreaColumns"/>
+		FROM gn_area a
+		<include refid="gnAreaJoins"/>
+		<where>
+			
+		</where>
+	</select>
+	
+	<select id="findAllList" resultType="GnArea">
+		SELECT 
+			<include refid="gnAreaColumns"/>
+		FROM gn_area a
+		<include refid="gnAreaJoins"/>
+		<where>
+			
+		</where>
+	</select>
+	
+	<select id="findByParentIdsLike" resultType="GnArea">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id",
+			a.parent_ids
+		FROM gn_area a
+		<include refid="gnAreaJoins"/>
+		<where>
+			
+			AND a.parent_ids LIKE #{parentIds}
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gn_area(
+			area_code,
+			area_name,
+			parent_ids, 
+			province_code,
+			city_code,
+			area_level,
+			parent_area_code,
+			sort_id,
+			state,
+			remark,
+			tenant_id,
+			id
+		) VALUES (
+			#{areaCode},
+			#{areaName},
+			#{parentIds},
+			#{provinceCode.code},
+			#{cityCode.code},
+			#{areaLevel},
+			#{parent.code},
+			#{sortId},
+			#{state},
+			#{remark},
+			#{tenantId},
+			#{id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gn_area SET 	
+			area_code = #{areaCode},
+			parent_ids = #{parentIds}, 
+			area_name = #{areaName},
+			province_code = #{provinceCode.code},
+			city_code = #{cityCode.code},
+			area_level = #{areaLevel},
+			parent_area_code = #{parent.code},
+			sort_id = #{sortId},
+			state = #{state},
+			remark = #{remark},
+			tenant_id = #{tenantId}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateParentIds">
+		UPDATE gn_area SET 
+			parent_id = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gn_area SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id} OR parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+					<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+					<if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>		
+		
+	</update>
+	
+</mapper>

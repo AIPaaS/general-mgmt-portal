@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface TreeDao<T extends TreeEntity<T>> extends CrudDao<T> {
 
-	/**
+	/**  
 	 * 找到所有子节点
 	 * @param entity
 	 * @return

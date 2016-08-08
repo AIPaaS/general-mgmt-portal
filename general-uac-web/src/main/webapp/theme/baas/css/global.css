@@ -1,0 +1,14 @@
+/*初始化*/
+*{webkit-box-sizing: border-box;  -moz-box-sizing: border-box;  box-sizing: border-box; border:0; padding:0; margin:0;}
+body{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53"; font-size:14px; background:#f3f3f3;}
+li{ list-style:none;}
+a{text-decoration:none;}
+a:link{ text-decoration:none;}
+a:active{ text-decoration:none;}
+var,em {font-style:normal;}
+table{border-collapse:collapse;}
+.left{ float:left}
+.right{ float:right;}
+input{outline:none;}
+button{outline:none; cursor:pointer;}
+html,body {height: 100%;}

@@ -1,0 +1,40 @@
+{
+  "name": "twbs-pagination",
+  "version": "1.2.5",
+  "homepage": "https://github.com/esimakin/twbs-pagination",
+  "authors": [
+    "Eugene Simakin <eugenesimakin@mail.ru>"
+  ],
+  "description": "jQuery simple pagination plugin for bootstrap-style webpages",
+  "main": "jquery.twbsPagination.js",
+  "moduleType": [
+    "globals"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0"
+  },
+  "keywords": [
+    "pagination",
+    "jQuery",
+    "jQuery-plugin",
+    "bootstrap"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1.2.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.5",
+    "commit": "baa9082109b5834b78c010716c16e1c36d9926f8"
+  },
+  "_source": "https://github.com/esimakin/twbs-pagination.git",
+  "_target": "~1.2.5",
+  "_originalSource": "twbs-pagination",
+  "_direct": true
+}

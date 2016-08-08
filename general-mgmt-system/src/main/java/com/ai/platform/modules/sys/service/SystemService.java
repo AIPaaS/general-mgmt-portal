@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.opt.sdk.util.Md5Encoder;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.security.shiro.session.SessionDAO;
@@ -559,22 +560,24 @@ public class SystemService extends BaseService implements InitializingBean {
 	 * 生成安全的MD5密码
 	 */
 	public static String entryptPassword(String plainPassword) {
-		String s = plainPassword;
-		if (s == null) {
-			return "";
-		}
-		String value = null;
-		MessageDigest md5 = null;
-		try {
-			md5 = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException ex) {
-		}
-		sun.misc.BASE64Encoder baseEncoder = new sun.misc.BASE64Encoder();
-		try {
-			value = baseEncoder.encode(md5.digest(s.getBytes("utf-8")));
-		} catch (Exception ex) {
-		}
-		return value;
+		 return Md5Encoder.encodePassword(plainPassword);
+//		String s = plainPassword;
+//		if (s == null) {
+//			return "";
+//		}
+//		String value = null;
+//		MessageDigest md5 = null;
+//		try {
+//			md5 = MessageDigest.getInstance("MD5");
+//		} catch (NoSuchAlgorithmException ex) {
+//		}
+//		sun.misc.BASE64Encoder baseEncoder = new sun.misc.BASE64Encoder();
+//		try {
+//			value = baseEncoder.encode(md5.digest(s.getBytes("utf-8")));
+//		} catch (Exception ex) {
+//		}
+//		return value;
+		
 	}
 
 	
