@@ -2,23 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ai.platform.modules.sys.dao.WaitjobsDao">
 	<sql id="waitjobsColumns">
-    	id,
-    	system_id as systemId,
-    	title,
-    	url,
-    	user_id as userId,
-    	present_activiti as presentActiviti,
-    	last_user as lastUser,
-    	arrive_data as arriveData,
-    	tenant_id as tenantId,
-    	status
+    	w.id,
+    	w.system_id as systemId,
+    	w.title,
+    	w.url,
+    	w.user_id as userId,
+    	w.present_activiti as presentActiviti,
+    	w.last_user as lastUser,
+    	w.arrive_data as arriveData,
+    	w.tenant_id as tenantId,
+    	w.status,
+    	u.id as "user.id",
+    	u.name as "user.name"
     </sql>
     
 	
 	<select id="selectWaitjobs" resultType="Waitjobs">
 		SELECT
 			<include refid="waitjobsColumns"/>
-		FROM sys_waitjobs
+		FROM sys_waitjobs w
+		JOIN sys_user u ON w.user_id = u.id
 		WHERE status = '0' and user_id = #{userId}
 	</select>
 </mapper>
