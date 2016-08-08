@@ -35,8 +35,6 @@ public class Role extends DataEntity<Role> {
 
 	
 	//	update20160728-扩充字段
-	private String tenantId;
-	
 //	private Date effectiveDate;//生效时间
 //	private Date expiryDate;//失效时间
 	//update20160728-扩充结束
@@ -274,15 +272,6 @@ public class Role extends DataEntity<Role> {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-	
-	@Length(max=64)
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
 	}
 
 //	public boolean isAdmin(){

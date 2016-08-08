@@ -29,11 +29,13 @@ import com.ai.platform.modules.sys.dao.MenuDao;
 import com.ai.platform.modules.sys.dao.RoleDao;
 import com.ai.platform.modules.sys.dao.RoleMenuDao;
 import com.ai.platform.modules.sys.dao.UserDao;
+import com.ai.platform.modules.sys.dao.WaitjobsDao;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.RoleMenu;
 import com.ai.platform.modules.sys.entity.User;
+import com.ai.platform.modules.sys.entity.Waitjobs;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
 import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
@@ -61,6 +63,8 @@ public class SystemService extends BaseService implements InitializingBean {
 	private RoleMenuDao roleMenuDao;
 	@Autowired
 	private SessionDAO sessionDao;
+	@Autowired
+	private WaitjobsDao waitjobsDao;
 	@Autowired
 	private SystemAuthorizingRealm systemRealm;
 	
@@ -620,6 +624,18 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.setTheme(UserUtils.USER_DEFAULT_THEME);	
 		}
 		userDao.updateThemeById(user);
+	}
+	
+	/**
+	 * 查询用户代办事物
+	 * @param userId
+	 * @return
+	 * @author jiaxs
+	 */
+	public List<Waitjobs> getWaitjobs(String userId){
+		Waitjobs roleMenu=new Waitjobs();
+		roleMenu.setUserId(userId);
+		return waitjobsDao.selectWaitjobs(roleMenu);
 	}
 
 

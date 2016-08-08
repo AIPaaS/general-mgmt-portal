@@ -72,11 +72,11 @@ public class MgmtRoleMenuController extends BaseController {
 	public String save(RoleMenu roleMenu, Model model, RedirectAttributes redirectAttributes) {
 		if(!UserUtils.getUser().isAdmin()){
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
-			return "redirect:" + adminPath + "/sys/rolemenu/form?repage";
+			return "redirect:" + adminPath + "/sys/rolemenu/form?id="+roleMenu.getId();
 		}
 		if(Global.isDemoMode()){
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/rolemenu/form?repage";
+			return "redirect:" + adminPath + "/sys/rolemenu/form?id="+roleMenu.getId();
 		}
 		systemService.saveRoleMenu(roleMenu);
 		addMessage(redirectAttributes, "权限赋值成功");

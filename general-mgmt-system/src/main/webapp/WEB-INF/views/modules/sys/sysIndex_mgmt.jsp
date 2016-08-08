@@ -336,20 +336,24 @@ if(ifm != null && subWeb != null) {
          <!--/搜索结束-->
          <!--待办事项-->
             <li class="dropdown hidden-xs">
-                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="count">8</span></a>
-         <!--待办事项隐藏区-->   
-                <ul class="dropdown-menu notifications-list">
-                    <li class="pointer">
-                        <div class="pointer-inner">
-                        <div class="arrow"></div>
-                        </div>
-                    </li>
-                    <li class="item-header">代办提醒</li>
-                    <li class="item"><a href="#"><i class="fa fa-circle"></i><span class="content">待办提醒事务1</span></a></li>
-                    <li class="item"><a href="#"><i class="fa fa-circle"></i><span class="content">待办提醒事务1</span></a></li>
-                    <li class="item"><a href="#"><i class="fa fa-circle"></i><span class="content">待办提醒事务1</span></a></li>
-                    <li class="item"><a href="#"><i class="fa fa-circle"></i><span class="content">待办提醒事务1</span></a></li>
-                </ul>
+                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="count">${waitjobsCount}</span></a>
+         <!--待办事项隐藏区--> 
+         		<c:if test="${waitjobsCount gt 0}">  
+	                <ul class="dropdown-menu notifications-list">
+	                    <li class="pointer">
+	                        <div class="pointer-inner">
+	                        <div class="arrow"></div>
+	                        </div>
+	                    </li>
+	                    <li class="item-header">代办提醒</li>
+	                    <c:forEach items="${waitjobsList}" var="waitjobs">
+	                    	<li class="item"><a href="${waitjobs.url}"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
+	                	</c:forEach>
+	                	<c:if test="${waitjobsCount gt 4}">
+	                		<li class="item"><a href=""><span class="content">更多</span></a></li>
+	                	</c:if>
+	                </ul>
+                </c:if>
             </li>
          <!--/待办事项-->
          <!--颜色设置-->     

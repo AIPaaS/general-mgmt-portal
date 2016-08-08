@@ -70,14 +70,6 @@
 	</div>
 	<form:form id="inputForm" modelAttribute="role" action="${ctx}/sys/rolemenu/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
-		<form:hidden path="office.id"/>
-		<form:hidden path="name"/>
-		<form:hidden path="enname"/>
-		<form:hidden path="roleType"/>
-		<form:hidden path="sysData"/>
-		<form:hidden path="useable"/>
-		<form:hidden path="dataScope"/>
-		<form:hidden path="remarks"/>
 		<sys:message content="${message}"/>
 		<div class="control-group">
 			<label class="control-label">角色授权:</label>

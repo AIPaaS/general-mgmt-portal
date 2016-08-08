@@ -3,6 +3,8 @@
  */
 package com.ai.platform.modules.sys.web;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ import com.ai.platform.common.utils.CookieUtils;
 import com.ai.platform.common.utils.IdGen;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
+import com.ai.platform.modules.sys.entity.Waitjobs;
 import com.ai.platform.modules.sys.security.FormAuthenticationFilter;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.service.SystemService;
@@ -134,7 +137,7 @@ public class LoginController extends BaseController{
 	 */
 	@RequiresPermissions("user")
 	@RequestMapping(value = "${adminPath}")
-	public String index(HttpServletRequest request, HttpServletResponse response) {
+	public String index(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Principal principal = UserUtils.getPrincipal();
 
 		// 登录成功后，验证码计算器清零
@@ -183,6 +186,22 @@ public class LoginController extends BaseController{
 ////			request.getSession().setAttribute("aaa", "aa");
 ////		}
 //		System.out.println("==========================b");
+		
+		String id = principal.getId();
+		List<Waitjobs> waitjobsList = SystemService.getWaitjobs(id);
+		if(waitjobsList != null && waitjobsList.size()>0){
+			int size = waitjobsList.size();
+			if(size>4){
+				List<Waitjobs> showWaitjobsList = new ArrayList<Waitjobs>();
+				for(int i=0;i<4;i++){
+					showWaitjobsList.add(waitjobsList.get(i));
+				}
+				model.addAttribute("waitjobsList", showWaitjobsList);
+			}else{
+				model.addAttribute("waitjobsList", waitjobsList);
+			}
+			model.addAttribute("waitjobsCount", size);
+		}
 		return "modules/sys/sysIndex_mgmt";
 	}
 	
