@@ -192,9 +192,7 @@ if(ifm != null && subWeb != null) {
          <!--待办事项-->
             <li class="dropdown hidden-xs">
                 <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
-                 <c:if test="${waitjobsCount gt 0}"> 
-                <span class="count">${waitjobsCount}</span>
-                </c:if>
+                	<span class="count">${waitjobsCount}</span>
                 </a>
          <!--待办事项隐藏区--> 
          		<c:if test="${waitjobsCount gt 0}">  
@@ -206,10 +204,10 @@ if(ifm != null && subWeb != null) {
 	                    </li>
 	                    <li class="item-header">代办提醒</li>
 	                    <c:forEach items="${waitjobsList}" var="waitjobs">
-	                    	<li class="item"><a href="${waitjobs.url}"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
+	                    	<li class="item"><a href="${waitjobs.url}" target="mainFrame"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
 	                	</c:forEach>
 	                	<c:if test="${waitjobsCount gt 4}">
-	                		<li class="item"><a href="${ctx}/sys/waitjobs/list"><span class="content">更多</span></a></li>
+	                		<li class="item"><a href="${ctx}/sys/waitjobs/list" target="mainFrame"><span class="content">更多</span></a></li>
 	                	</c:if>
 	                </ul>
                 </c:if>

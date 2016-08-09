@@ -6,7 +6,7 @@ import com.ai.platform.common.dao.mapper.bo.SysOffice;
 
 public interface ISysOfficeAtomService {
 	
-	SysOffice selectSysOfficeInfo(String id);
+	SysOffice selectSysOfficeInfo(String id, String tenantId);
 	
 	/**
 	 * 查询当前租户所有机构数据

@@ -106,20 +106,48 @@ public class SystemValidateUtil {
 		if (waijobsVo==null) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "插入对象不能为空");
 		}
-		if (StringUtils.isEmpty(waijobsVo.getSystemId())) {
+		String systemId = waijobsVo.getSystemId();
+		if (StringUtils.isEmpty(systemId)) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "systemId不能为空");
 		}
-		if (StringUtils.isEmpty(waijobsVo.getTenantId())) {
+		if (systemId.length()>32){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "systemId长度大于32");
+		}
+		String tenantId = waijobsVo.getTenantId();
+		if (StringUtils.isEmpty(tenantId)) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "tenantId不能为空");
 		}
-		if (StringUtils.isEmpty(waijobsVo.getTitle())) {
+		if (tenantId.length()>64){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "tenantId长度大于64");
+		}
+		String title = waijobsVo.getTitle();
+		if (StringUtils.isEmpty(title)) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "title不能为空");
 		}
-		if (StringUtils.isEmpty(waijobsVo.getUserId())) {
+		if (title.length()>128){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "title长度大于128");
+		}
+		String userId = waijobsVo.getUserId();
+		if (StringUtils.isEmpty(userId)) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "userId不能为空");
 		}
-		if (StringUtils.isEmpty(waijobsVo.getLastUser())) {
+		if (userId.length()>64){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "userId长度大于64");
+		}
+		String lastUser = waijobsVo.getLastUser();
+		if (StringUtils.isEmpty(lastUser)) {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "lastUser不能为空");
+		}
+		if (lastUser.length()>64){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "lastUser长度大于64");
+		}
+		String presentActiviti = waijobsVo.getPresentActiviti();
+		if (presentActiviti != null && presentActiviti.length() > 64){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "presentActiviti长度大于64");
+		}
+		String url = waijobsVo.getUrl();
+		if (url != null && url.length() > 128){
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_TYPE_NOT_RIGHT, "url长度大于128");
 		}
 	}
 	

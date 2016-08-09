@@ -17,11 +17,12 @@ import com.ai.platform.common.service.atom.office.ISysOfficeAtomService;
 public class SysOfficeAtomService implements ISysOfficeAtomService{
 
 	@Override
-	public SysOffice selectSysOfficeInfo(String id) {
+	public SysOffice selectSysOfficeInfo(String id, String tenantId) {
 		//return MapperFactory.getSysOfficeMapper().selectByPrimaryKey(id);
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
 		officeCriteria.andIdEqualTo(id);
+		officeCriteria.andTenantIdEqualTo(tenantId);
 		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
 		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		List<SysOffice> sysOfficeList = MapperFactory.getSysOfficeMapper().selectByExample(example);
