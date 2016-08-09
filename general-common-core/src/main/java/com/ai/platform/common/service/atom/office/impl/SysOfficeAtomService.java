@@ -26,7 +26,7 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
 		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		List<SysOffice> sysOfficeList = MapperFactory.getSysOfficeMapper().selectByExample(example);
-		if(sysOfficeList != null){
+		if(sysOfficeList != null && sysOfficeList.size()>0){
 			return sysOfficeList.get(0);
 		}else{
 			return null;
