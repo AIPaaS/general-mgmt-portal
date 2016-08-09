@@ -191,7 +191,11 @@ if(ifm != null && subWeb != null) {
          <!--/搜索结束-->
          <!--待办事项-->
             <li class="dropdown hidden-xs">
-                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="count">${waitjobsCount}</span></a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
+                 <c:if test="${waitjobsCount gt 0}"> 
+                <span class="count">${waitjobsCount}</span>
+                </c:if>
+                </a>
          <!--待办事项隐藏区--> 
          		<c:if test="${waitjobsCount gt 0}">  
 	                <ul class="dropdown-menu notifications-list">
@@ -258,7 +262,7 @@ if(ifm != null && subWeb != null) {
          <!--用户信息-->
             <li class="dropdown profile-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="${mgmtStatic}/img/robert-300.jpg" alt=""/>
+                <img src="${fns:getUser().photo}" alt=""/>
                 <span class="hidden-xs">您好, ${fns:getUser().name}</span> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
