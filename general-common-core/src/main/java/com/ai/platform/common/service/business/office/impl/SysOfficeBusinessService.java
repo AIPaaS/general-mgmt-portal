@@ -37,7 +37,7 @@ public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 	
 	@Override
 	public OfficeDetailQueryResponse queryOfficeDetail(OfficeDetailQueryRequest queryRequest) {
-		SysOffice sysOfficeInfo = ISysOfficeAtomService.selectSysOfficeInfo(queryRequest.getId());
+		SysOffice sysOfficeInfo = ISysOfficeAtomService.selectSysOfficeInfo(queryRequest.getId(), queryRequest.getTenantId());
 		OfficeDetailQueryResponse queryResponse = new OfficeDetailQueryResponse();
 		if(sysOfficeInfo != null){
 			OfficeVO officeVo = new OfficeVO();
@@ -54,7 +54,7 @@ public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 
 	@Override
 	public OfficeParentListQueryResponse queryParentOfficeList(OfficeParentListQueryRequest queryRequest) {
-		SysOffice sysOfficeInfo = ISysOfficeAtomService.selectSysOfficeInfo(queryRequest.getId());
+		SysOffice sysOfficeInfo = ISysOfficeAtomService.selectSysOfficeInfo(queryRequest.getId(), queryRequest.getTenantId());
 		OfficeParentListQueryResponse queryResponse = new OfficeParentListQueryResponse();
 		if(sysOfficeInfo != null){
 			List<OfficeVO> officeList = new LinkedList<OfficeVO>();

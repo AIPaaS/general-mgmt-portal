@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.WebUtils;
-import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +29,6 @@ import com.ai.platform.common.utils.IdGen;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Waitjobs;
-import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.security.FormAuthenticationFilter;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.service.SystemService;
@@ -75,6 +73,7 @@ public class LoginController extends BaseController{
 		
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null && !principal.isMobileLogin()){
+			initLoginInfo(model, principal);
 			return "modules/sys/sysIndex_mgmt";
 		}
 //		String view;
@@ -190,6 +189,20 @@ public class LoginController extends BaseController{
 ////		}
 //		System.out.println("==========================b");
 		
+		initLoginInfo(model, principal);
+		return "modules/sys/sysIndex_mgmt";
+	}
+
+	/**
+	 * 初始化登录后信息
+	 * @param model
+	 * @param principal
+	 * @author jiaxs
+	 * @ApiDocMethod
+	 * @ApiCode
+	 * @RestRelativeURL
+	 */
+	private void initLoginInfo(Model model, Principal principal) {
 		String id = principal.getId();
 		List<Waitjobs> waitjobsList = systemService.getWaitjobs(id);
 		if(waitjobsList != null && waitjobsList.size()>0){
@@ -205,7 +218,6 @@ public class LoginController extends BaseController{
 			}
 			model.addAttribute("waitjobsCount", size);
 		}
-		return "modules/sys/sysIndex_mgmt";
 	}
 	
 	/**
