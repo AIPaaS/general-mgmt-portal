@@ -37,7 +37,7 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 			criteria.andNoEqualTo(user.getNo());
 		}
 		if (!StringUtil.isBlank(user.getLoginName())) {
-			criteria.andNoEqualTo(user.getLoginName());
+			criteria.andLoginNameEqualTo(user.getLoginName());
 		}
 		criteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		 Date crruntDate = DateUtil.getDate();
