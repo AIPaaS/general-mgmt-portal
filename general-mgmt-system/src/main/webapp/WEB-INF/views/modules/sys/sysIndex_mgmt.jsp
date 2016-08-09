@@ -341,9 +341,9 @@ if(ifm != null && subWeb != null) {
 						            <ul id="elem1">
 		            				<c:forEach items="${fns:getOaNotifyByUser()}" var="oaNotify" >
 							            <c:set var="oaNotifytype" value="${oaNotify.type}"/>
-							            
+							          
 							            <li><A href="#">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
-							            <c:if test="${not empty oaNotify.unReadNum}">
+							            <c:if test="${oaNotify.readFlag eq '0'}">
 							            <img src="${mgmtStatic}/images/news.gif">
 							            </c:if>
 							            </li>
