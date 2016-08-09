@@ -32,14 +32,15 @@ public class LogController extends BaseController {
 	@RequiresPermissions("sys:log:view")
 	@RequestMapping(value = {"list",""})
 	public String list(Log log, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Page<Log> page = logService.findPage(new Page<Log>(request, response), log); 
+		log.setTitle("系统登录");
+		Page<Log> page = logService.findPage(new Page<Log>(request, response), log); 
         model.addAttribute("page", page);
 		return "modules/sys/logList";
 	}
 	
 	
 	@RequiresPermissions("sys:log:view")
-	@RequestMapping(value = {"page",""})
+	@RequestMapping(value = {"page"})
 	public String page(Log log, HttpServletRequest request, HttpServletResponse response, Model model) {
         Page<Log> page = logService.findPage(new Page<Log>(request, response,5), log); 
         model.addAttribute("page", page);
