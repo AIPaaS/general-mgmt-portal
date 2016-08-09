@@ -10,7 +10,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.jasig.cas.client.authentication.AttributePrincipal;
@@ -37,8 +36,6 @@ public class CustomFormAuthenticationFilter extends AuthenticatingFilter {
 	public static final String DEFAULT_MOBILE_PARAM = "mobileLogin";
 	public static final String DEFAULT_MESSAGE_PARAM = "message";
 
-	private String captchaParam = DEFAULT_CAPTCHA_PARAM;
-	private String mobileLoginParam = DEFAULT_MOBILE_PARAM;
 	private String messageParam = DEFAULT_MESSAGE_PARAM;
 
     private String failureKeyAttribute = DEFAULT_ERROR_KEY_ATTRIBUTE_NAME;
@@ -84,10 +81,11 @@ public class CustomFormAuthenticationFilter extends AuthenticatingFilter {
             Map<String, Object> attrs = principal.getAttributes();
             
     		String username = attrs.get("loginName").toString();
-    		String password = Md5Encoder.encodePassword("123456");
-    		if (password==null){
-    			password = "";
-    		}
+//    		String password = Md5Encoder.encodePassword("123456");
+//    		if (password==null){
+//    			password = "";
+//    		}
+    		String password="";
     		boolean rememberMe = false;
     		String host = StringUtils.getRemoteAddr((HttpServletRequest)request);
     		String captcha ="";
