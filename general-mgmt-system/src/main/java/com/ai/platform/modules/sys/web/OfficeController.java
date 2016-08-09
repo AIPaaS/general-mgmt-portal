@@ -69,8 +69,10 @@ public class OfficeController extends BaseController {
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {"list"})
 	public String list(Office office, Model model) {
+		List<Office> o = officeService.findList(office);
+		System.out.println("============"+o);
         model.addAttribute("list", officeService.findList(office));
-		return "modules/mgmtsys/officeList";
+		return "modules/sys/officeList";
 	}
 	
 	@RequiresPermissions("sys:office:view")

@@ -75,7 +75,7 @@
 	
 	<select id="findList" resultType="Office">
 		SELECT
-			<include refid="officePageColumns"/>
+			<include refid="officeColumns"/>
 		FROM sys_office a
 		  <include refid="officeJoins"/> 
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
@@ -87,7 +87,7 @@
 		</if>
 		<!-- 数据范围过滤 -->
 		   ${sqlMap.dsf} 
-		<!--   OR a.id = #{currentUser.office.id}-->
+		   OR a.id = #{currentUser.office.id}
 		ORDER BY a.code
 	</select>
 			

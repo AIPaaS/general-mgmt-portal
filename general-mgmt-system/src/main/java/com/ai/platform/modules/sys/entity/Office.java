@@ -22,14 +22,14 @@ public class Office extends TreeEntity<Office> {
 	//private Office parent;	// 父级编号
 //	private String parentIds; // 所有父级编号
 	private Area area;		// 归属区域
-	private String parentId;//父级编号
-	public String getParentId() {
+	//private String parentId;//父级编号
+	/*public String getParentId() {
 		return parentId;
 	}
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
-	}
+	}*/
 
 	private String code; 	// 机构编码
 //	private String name; 	// 机构名称
