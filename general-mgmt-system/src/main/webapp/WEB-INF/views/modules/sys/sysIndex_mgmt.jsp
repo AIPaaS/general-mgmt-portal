@@ -205,7 +205,7 @@ if(ifm != null && subWeb != null) {
 	                    	<li class="item"><a href="${waitjobs.url}"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
 	                	</c:forEach>
 	                	<c:if test="${waitjobsCount gt 4}">
-	                		<li class="item"><a href="${ctx}/sys/waitjobs/list" target="mainFrame"><span class="content">更多</span></a></li>
+	                		<li class="item"><a href="${ctx}/sys/waitjobs/list"><span class="content">更多</span></a></li>
 	                	</c:if>
 	                </ul>
                 </c:if>
@@ -341,9 +341,9 @@ if(ifm != null && subWeb != null) {
 						            <ul id="elem1">
 		            				<c:forEach items="${fns:getOaNotifyByUser()}" var="oaNotify" >
 							            <c:set var="oaNotifytype" value="${oaNotify.type}"/>
-							            
+							          
 							            <li><A href="#">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
-							            <c:if test="${not empty oaNotify.unReadNum}">
+							            <c:if test="${oaNotify.readFlag eq '0'}">
 							            <img src="${mgmtStatic}/images/news.gif">
 							            </c:if>
 							            </li>
