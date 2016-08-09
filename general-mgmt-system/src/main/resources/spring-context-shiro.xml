@@ -8,7 +8,7 @@
 	<description>Shiro Configuration</description>
 
     <!-- 加载配置属性文件 -->
-	<context:property-placeholder ignore-unresolvable="true" location="classpath:mgmt.properties" />
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:mgmt.properties,classpath:sso.properties" />
 	
 	<!-- Shiro权限过滤过滤器定义 -->
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
@@ -36,13 +36,17 @@
 		<property name="filters">
 			<map>
 				<entry key="authc" value-ref="customFormAuthenticationFilter" />
+				<entry key="logout" value-ref="logout" />  
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
 			<ref bean="shiroFilterChainDefinitions"/>
 		</property>
 	</bean>
-
+	
+	<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">  
+          <property name="redirectUrl" value="${logOutServerUrl_Inner}?returnUrl=${logOutBackUrl_Inner}"/>  
+	</bean>  
 
 	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory" />
 	<!-- 定义Shiro安全管理配置 -->
