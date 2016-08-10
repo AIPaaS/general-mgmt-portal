@@ -1,0 +1,77 @@
+/**类目属性**/
+.table-special .table-border{ border:none;}
+.table-special .table-border td{ border:none;}
+.table-special .tbody{border-top:none;}
+.table-special .bj td{border-bottom:none;text-align:left; padding-left:10px;border-bottom: none;}
+.table-special table .bj{background:#;}
+.table-special .click td{ text-align:left;;}
+.table-special .click .ahref{ text-align:right;border:none;}
+.table-special .click .ctr{ text-align:center;border:none;}
+.table-special .click .ctr1{ text-align:right;border:none;}
+.table-special .table-border-list{border:none; background:#f4f9fd;}
+.table-special .table-border-list tr:hover{ background:#f4f9fd}
+.table-special .table-border-list tr .right-text{ text-align: center;}
+.table-special .click .i-close,{cursor:pointer;font-size:16px;}
+.table-special .click .i-close:hover,{color:#1598f5;}
+.table-special .zhank .right-text .i-close1{cursor:pointer;font-size:16px;margin-left:10px;}
+.table-special .zhank .right-text .i-close1:hover{color:#1598f5;}
+.table-special table tr .radio-sp{margin:0 6px 0 6px;}
+.table-special .zhank .border-bot-none{ border: none;}
+.table-special .zhank .border-bot-none td{ border: none;}
+.table-special .table-border-list tr .right-text{ text-align: center;}
+.table-special .click .i-close,{cursor:pointer;font-size:16px;}
+.table-special .click .i-close:hover,{color:#1598f5;}
+.table-special .zhank .right-text .i-close1{cursor:pointer;font-size:14px;margin-left:10px;}
+.table-special .zhank .right-text .i-close1:hover{color:#1598f5;}
+.relation-special .table-special tr .left-none{border-left:none}
+.relation-special .table-special tr .right-none{border-right:none}
+
+.relation-title{width:100%;margin-top:30px;color:#777;margin-top:0px;}
+.relation-title a{color:#10a2fb;margin-left:10px;}
+
+.relation-table-div{width:100%;float:left}
+.relation-table-div ul{width:100%;float:left;}
+.relation-table-div ul li{float:left; text-align:left; padding-left:2rem;}
+.relation-table-div ul li .m-left{float:left;margin-right:10px}
+.relation-table-div ul li  p{float:left;margin-right:10px}
+
+/**选项卡**/
+.order-list-table{ width:100%;display:inline-block;border-bottom:1px solid #e4e4e4;padding-bottom:px;margin-top:25px;}
+.order-list-table ul{ width:100%; float:left;}
+.order-list-table ul li{ float:left;border-right:1px solid #ccc;padding:0 10px 0 10px;}
+.order-list-table ul li a{ font-size:14px; color:#333;padding:0 10px 0 10px;}
+.order-list-table ul li a:hover,.order-list-table ul p a:hover{ color:#1598f5;}
+.order-list-table ul li .current{color:#1598f5;border-bottom:2px solid #1598f5;padding-bottom:11px;}
+.order-list-table ul li .current a{ }
+
+/**table td三行样式**/
+.table  tr .new-td{ border:none;border-bottom: 1px solid #ddd;height:40px;margin:0;padding: 0;}
+.table  tr .bot-none{border-bottom: none;}
+
+
+/**查询区域加分割线**/
+.bd-bottom{float:left;border-bottom:1px  solid #efefef;margin-bottom: 10px;}
+.bc-ang{width: 100%;text-align: center;}
+.table .bj-f3{width:100%;background:#f3f3f3;height:55px;border-right:1px solid #e7e7e7;border-left:1px solid #e7e7e7;}
+.table  tr .tl div{width:100%;float:left;margin-top:0px;height: 20px;}
+.table  tr .tl div p{float:left;margin-right:20px; padding-left:20px;line-height:25px;}
+.table  tr .tl div p span{margin-right:2px;}
+.table tr .sp table tr td{border:none;}
+.table tr .sp table tr .word{text-align:left;}
+
+
+/**步骤样式**/
+.steps{margin-top:20px;padding-bottom:20px;text-align: center;}
+.steps ul{width:100%;}
+.steps ul li{padding:0 20px;height:40px;display:inline-block;line-height:40px;position:relative;margin-right:15px;}
+.steps ul li i{font-size:44px;position:absolute;right:-17px; top:-2px;}
+/**步骤样式结束***/
+
+.nav-tplist-title{ width:100%; float:left; margin-top:10px;}
+.nav-tplist-title ul li{ float:left; font-size:16px;}
+.nav-tplist-title ul .small-word{font-size:14px;color:#777;}
+.nav-tplist-title p{display: inline-block;}
+.title-right{ float:right; margin:0 0 5px 10px;}
+.title-right p{ float:left; margin-bottom:0;line-height:30px;margin-left: 10px;}
+.title-right .plus-word a{ padding:0  12px; height:30px; float:left;  text-align:center; line-height:30px; font-size:14px; color:#fff;}
+.title-right .plus-word a:hover{ background:#0887e1; }
