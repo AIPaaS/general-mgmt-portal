@@ -35,9 +35,9 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/sys/user/listno">账号列表</a></li>
-		<li class="active"><a href="${ctx}/sys/user/form?id=${user.id}">账号<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/sys/user/formno?id=${user.id}">账号<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/saveno" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>
 <%-- 		<div class="control-group">
@@ -47,20 +47,22 @@
 				<sys:ckfinder input="nameImage" type="images" uploadPath="/photo" selectMultiple="false" maxWidth="100" maxHeight="100"/>
 			</div>
 		</div> --%>
-		<div class="control-group">
+	<%-- 	<div class="control-group">
 			<label class="control-label">归属公司:</label>
 			<div class="controls">
-			<form:input path="company.name" htmlEscape="false" readonly="true" maxlength="50" class="required"/>
+			<form:hidden path="company.id" htmlEscape="false" readonly="true" maxlength="50" class="required"/>
                
 			</div>
-		</div>
-		<div class="control-group">
+		</div> --%>
+<%-- 		<div class="control-group">
 			<label class="control-label">归属部门:</label>
 			<div class="controls">
-			<form:input path="office.name" htmlEscape="false" readonly="true" maxlength="50" class="required"/>
+			<form:hidden path="office.id" htmlEscape="false" readonly="true" maxlength="50" class="required"/>
               
 			</div>
-		</div>
+		</div> --%>
+		<form:hidden path="company.id"/>
+		<form:hidden path="office.id"/>
 		<div class="control-group">
 			<label class="control-label">工号:</label>
 			<div class="controls">

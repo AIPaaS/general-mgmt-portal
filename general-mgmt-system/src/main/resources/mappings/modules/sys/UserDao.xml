@@ -343,6 +343,16 @@
 		WHERE id = #{id}
 	</update>
 	
+	
+		<!-- 冻结（不允许登录）用户信息  -->
+	<update id="updateLoginFalg">
+		UPDATE sys_user SET 
+			update_by = #{updateBy.id}, 
+			update_date = #{updateDate}, 
+			login_flag = #{loginFlag}
+		WHERE id = #{id}
+	</update>
+	
 	<!-- 更新用户密码 -->
 	<update id="updateThemeById">
 		UPDATE sys_user SET 

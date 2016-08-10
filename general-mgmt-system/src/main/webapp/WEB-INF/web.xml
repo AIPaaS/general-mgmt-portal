@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>general-mgmt-portal</display-name>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath*:/spring-context*.xml classpath*:/dubbo/provider/dubbo-provider.xml </param-value>
-  </context-param>
-  <listener>
-    <listener-class>com.ai.platform.modules.sys.listener.WebContextListener</listener-class>
-  </listener>
-  <listener>
-    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-  </listener>
-  	<listener>
-		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
-	</listener>
+ 
+  <filter>
+	  <filter-name>xss-firewall</filter-name>
+	  <filter-class>com.ai.net.xss.filter.XSSFilter</filter-class>
+  </filter>	
+  <filter-mapping>
+	  <filter-name>xss-firewall</filter-name>
+	  <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -30,14 +26,41 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-	<filter>
-		<filter-name>singleSignOutFilter</filter-name>
-		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>singleSignOutFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+  <filter>
+    <filter-name>sessionFilter</filter-name>
+    <filter-class>com.ai.opt.uni.session.filter.CacheSessionFilter</filter-class>
+    <init-param>
+      <param-name>ignore_suffix</param-name>
+      <param-value>.png,.jpg,.jpeg,.gif,.css,.js,.html,.htm</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>sessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>ssoProxyFilter</filter-name>
+  	<filter-class>com.ai.opt.sso.client.filter.FilterChainProxy</filter-class>
+  	<init-param>
+			<param-name>ignore_resources</param-name>
+			<param-value>.png,.jpg,.jpeg,.gif,.css,.js,.html,.htm</param-value>
+	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>ssoProxyFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:/spring-context*.xml </param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.ai.platform.modules.sys.listener.WebContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  </listener>
 
   <filter>
     <filter-name>shiroFilter</filter-name>
@@ -76,7 +99,14 @@
     <servlet-name>springServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+  <!--  <filter>
+    <filter-name>JSONPFilter</filter-name>
+    <filter-class>com.ai.platform.modules.act.rest.servlet.JsonpCallbackFilter</filter-class>
+  </filter> 
+  <filter-mapping>
+    <filter-name>JSONPFilter</filter-name>
+    <url-pattern>/act/service/*</url-pattern>
+  </filter-mapping>-->
   <servlet>
     <servlet-name>DruidStatView</servlet-name>
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>

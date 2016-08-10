@@ -73,5 +73,11 @@ public interface UserDao extends CrudDao<User> {
 	 * @return
 	 */
 	public int updateUserInfo(User user);
+	/**
+	 * 冻结用户
+	 * @param user
+	 * @return
+	 */
+	public void updateLoginFalg(User user);
 
 }

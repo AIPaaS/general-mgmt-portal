@@ -79,9 +79,8 @@
 	<select id="findListLimit" resultType="OaNotify">
 	SELECT 
 			<include refid="oaNotifyColumns"/>
-			<if test="isSelf">,
-				r.read_flag
-			</if>
+			
+		,r.read_flag
 		FROM oa_notify a
 		<include refid="oaNotifyJoins"/>
 		<!-- 我的通知 -->

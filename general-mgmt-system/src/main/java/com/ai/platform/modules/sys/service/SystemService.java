@@ -18,11 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.sdk.util.Md5Encoder;
 import com.ai.platform.common.config.Global;
+import com.ai.platform.common.mail.MailMessageFactory;
+import com.ai.platform.common.mail.SendMailType;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.security.shiro.session.SessionDAO;
 import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.service.ServiceException;
 import com.ai.platform.common.utils.CacheUtils;
+import com.ai.platform.common.utils.RandomUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.Servlets;
 import com.ai.platform.modules.sys.dao.MenuDao;
@@ -592,11 +595,25 @@ public class SystemService extends BaseService implements InitializingBean {
 //		}
 //		return value;
 		
+	}	
+	@Transactional
+	public void resetPassword(User user){
+		String resetPass = RandomUtils.generateString(8);
+		user.setPassword(entryptPassword(resetPass));
+		userDao.updatePasswordById(user);
+		sendMail(user,resetPass);
 	}
-
 	
-	
+	public void sendMail(User user,String resetPass){
 
+		MailMessageFactory mms = new MailMessageFactory(SendMailType.HTML);  
+		mms.setTo(user.getEmail());
+        mms.setSubject("运营管理平台密码重置通知")  
+        .setText("<html><head><meta http-equiv='content-type' content='text/html; charset=GBK'>" +  
+                "</head><body><h1>您的密码初始化完成，新密码为"+resetPass+"</h1></body></html>").send(); 
+	
+	}
+	
 	/**
 	 * 验证密码
 	 * 
@@ -615,7 +632,6 @@ public class SystemService extends BaseService implements InitializingBean {
 	
 	@Transactional(readOnly = false)
 	public void updateTheme(String theme) {
-		// TODO Auto-generated method stub
 		User user = (User)UserUtils.getUser();
 		if(StringUtils.isNotBlank(theme)){
 			user.setTheme(theme);
@@ -636,6 +652,19 @@ public class SystemService extends BaseService implements InitializingBean {
 		Waitjobs roleMenu=new Waitjobs();
 		roleMenu.setUserId(userId);
 		return waitjobsDao.selectWaitjobs(roleMenu);
+	}
+
+	/**
+	 * 冻结账号-不允许登录
+	 * @param user
+	 */
+	@Transactional(readOnly = false)
+	public void updateLoginFalg(User user) {
+		// TODO Auto-generated method stub
+		user.preUpdate();
+		userDao.updateLoginFalg(user);
+		// 清除用户缓存
+		UserUtils.clearCache(user);
 	}
 
 
