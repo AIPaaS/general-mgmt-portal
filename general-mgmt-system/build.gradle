@@ -193,7 +193,7 @@ processResources {
 }
 
 war {
-    baseName = "general-mgmt-system"  
+    baseName = "portal"  
 }
 
 jar {
