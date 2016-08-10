@@ -23,9 +23,9 @@ public class SysUserQueryTest {
 	@Test
 	public void queryUserInfo(){
 		SysUserQueryRequest queryRequest=new SysUserQueryRequest();
-		queryRequest.setTenantId("    ");
-		queryRequest.setNo("0010");
-		//queryRequest.setPhone("456");
+		queryRequest.setTenantId("changhong   ");
+		queryRequest.setNo("   0010");
+		//queryRequest.setPhone(" 456 ");
 		queryRequest.setLoginName("jn_jsb");
 		SysUserQueryResponse response = sv.queryUserInfo(queryRequest);
 		System.out.println(JSonUtil.toJSon(response));

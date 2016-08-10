@@ -31,10 +31,10 @@ public class SysUserBusiSVImpl implements ISysUserBusiSV {
 	ISysUserAtomSV iSysUserAtomSV;
 	@Override
 	public SysUserQueryResponse queryUser(SysUserQueryRequest request) {
-		SysUser userRequest = new SysUser();
+		//SysUser userRequest = new SysUser();
 		SysUserQueryResponse  response;
-		BeanUtils.copyProperties(userRequest, request);
-		SysUser user=iSysUserAtomSV.queryUser(userRequest);
+	    //BeanUtils.copyProperties(userRequest, request);
+		SysUser user=iSysUserAtomSV.queryUser(request.getTenantId(),request.getPhone() ,request.getNo(),request.getLoginName(),request.getEmail());
 		if(user!=null){
 			response =new SysUserQueryResponse();
 			BeanUtils.copyProperties(response, user);

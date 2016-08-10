@@ -21,23 +21,23 @@ import com.ai.platform.common.service.atom.sysuser.ISysUserAtomSV;
 public class SysUserAtomSVImpl implements ISysUserAtomSV {
 
 	@Override
-	public SysUser queryUser(SysUser user) {
+	public SysUser queryUser(String tenantId,String phone,String no,String loginName,String email) {
 		SysUserCriteria example = new SysUserCriteria();
 		SysUserCriteria.Criteria criteria = example.createCriteria();
-		if (!StringUtil.isBlank(user.getTenantId())) {
-			criteria.andTenantIdEqualTo(user.getTenantId());
+		if (!StringUtil.isBlank(tenantId)) {
+			criteria.andTenantIdEqualTo(tenantId);
 		}
-		if (!StringUtil.isBlank(user.getEmail())) {
-			criteria.andEmailEqualTo(user.getEmail());
+		if (!StringUtil.isBlank(email)) {
+			criteria.andEmailEqualTo(email);
 		}
-		if (!StringUtil.isBlank(user.getPhone())) {
-			criteria.andPhoneEqualTo(user.getPhone());
+		if (!StringUtil.isBlank(phone)) {
+			criteria.andPhoneEqualTo(phone);
 		}
-		if (!StringUtil.isBlank(user.getNo())) {
-			criteria.andNoEqualTo(user.getNo());
+		if (!StringUtil.isBlank(no)) {
+			criteria.andNoEqualTo(no);
 		}
-		if (!StringUtil.isBlank(user.getLoginName())) {
-			criteria.andLoginNameEqualTo(user.getLoginName());
+		if (!StringUtil.isBlank(loginName)) {
+			criteria.andLoginNameEqualTo(loginName);
 		}
 		criteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		 Date crruntDate = DateUtil.getDate();
