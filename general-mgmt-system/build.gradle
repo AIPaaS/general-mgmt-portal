@@ -3,6 +3,11 @@ apply plugin: 'eclipse'
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'maven-publish'
+apply plugin: "APIJarProcess"
+configurations {
+    optUedTemplate
+}
+
 compileJava.dependsOn clean
 group = 'com.ai.platform'
 version = '1.2.7'
@@ -10,7 +15,14 @@ project.webAppDirName = "src/main/webapp"
 sourceCompatibility = 1.7   // 设置 JDK 版本
 //扩展属性放在ext的内部类中
 ext{
-  mybatis_version="3.2.8"
+  	mybatis_version="3.2.8"
+  	moduleName="general-mgmt-system";
+	moduleVersion="0.1-SNAPSHOT"
+	publishUserName = "xiaohu"
+	publishUserPassword = "zhouxh7@asiainfo.com"
+	publishURL="http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+	builtBy="gradle 2.1"
+	mavenPublicURL = "http://10.1.228.199:18081/nexus/content/groups/public/"
   
 }
 configurations.all {
@@ -22,10 +34,17 @@ configurations.all {
 
 repositories {
         
-     maven { url "http://10.1.228.199:18081/nexus/content/groups/public" }
+     maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
 
 }
-
+buildscript {
+    repositories {
+       maven { url "http://10.1.228.199:18081/nexus/content/groups/public/" }
+    }
+    dependencies {
+        classpath group: 'com.ai.runner.plugin', name: 'apijarprocessplugin', version: '1.0'
+    }
+}
 sourceSets {
     main {
         java { srcDirs = ['src/main/java']}
@@ -38,18 +57,12 @@ sourceSets {
 
 }
 
-ext {
-	moduleName="general-mgmt-system";
-	moduleVersion="0.1-SNAPSHOT"
-	publishUserName = "xiaohu"
-	publishUserPassword = "zhouxh7@asiainfo.com"
-	publishURL="http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
-	builtBy="gradle 2.1"
-} 
+
 
 group = 'com.ai'
 
 dependencies {
+	optUedTemplate 'com.ai.opt.uniframe:opt-ued-template:1.0-SNAPSHOT'
 	compile 'com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT'
   
     compile(group: 'org.springframework', name: 'spring-core', version:'4.1.9.RELEASE') {
@@ -163,7 +176,10 @@ exclude(module: 'commons-logging')
 		exclude group: 'org.quartz-scheduler'
 	}
 }
- 
+ def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
+	jarPaths=configurations.optUedTemplate.files.asType(List)
+    destinationDir file("src/main/webapp/template/mgmtstatic") //这里面的路径建议保持默认
+}
 processResources {
     
     //from('profile/'+profile) {
