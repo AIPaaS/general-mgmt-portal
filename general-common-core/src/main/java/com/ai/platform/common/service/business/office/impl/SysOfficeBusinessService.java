@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.opt.base.vo.BaseInfo;
 import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.paas.ipaas.util.JSonUtil;
 import com.ai.platform.common.api.office.param.OfficeAllQueryResponse;
 import com.ai.platform.common.api.office.param.OfficeChildrenListQueryRequest;
@@ -94,7 +95,7 @@ public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 			OfficeChildrenListQueryRequest queryRequest) {
 		List<SysOffice> sysOfficeList = ISysOfficeAtomService.selectChildrenOfficeList(queryRequest.getId(),queryRequest.getTenantId());
 		OfficeChildrenListQueryResponse queryResponse = new OfficeChildrenListQueryResponse();
-		if(sysOfficeList != null){
+		if(!CollectionUtil.isEmpty(sysOfficeList)){
 			String officeListJson = JSonUtil.toJSon(sysOfficeList);
 			Gson gson = new Gson();
 			List<OfficeVO> childrenOffices = gson.fromJson(officeListJson, new TypeToken<List<OfficeVO>>(){}.getType());
@@ -116,7 +117,7 @@ public class SysOfficeBusinessService implements ISysOfficeBusinessService{
 		// 获取叶子节点
 		List<SysOffice> allOfficeList = ISysOfficeAtomService
 				.selectSysOfficeAll(queryRequest.getTenantId());
-		if (allOfficeList != null) {
+		if (!CollectionUtil.isEmpty(allOfficeList)) {
 			String allOfficeListJson = JSonUtil.toJSon(allOfficeList);
 			Gson gson = new Gson();
 			List<OfficeVO> allOffice = gson.fromJson(allOfficeListJson,

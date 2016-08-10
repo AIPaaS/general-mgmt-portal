@@ -35,7 +35,7 @@ public class OfficeQueryTest {
 	public void queryChildrenOfficeList(){
 		OfficeChildrenListQueryRequest queryRequest=new OfficeChildrenListQueryRequest();
 		queryRequest.setId("0");
-		queryRequest.setTenantId("SLP");
+		queryRequest.setTenantId("SLPsa");
 		OfficeChildrenListQueryResponse queryChildrenOfficeList = sv.queryChildrenOfficeList(queryRequest);
 		System.out.println(JSonUtil.toJSon(queryChildrenOfficeList));
 		System.out.println(queryChildrenOfficeList.getOfficeList().size());
