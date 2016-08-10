@@ -192,9 +192,11 @@ if(ifm != null && subWeb != null) {
          <!--待办事项-->
             <li class="dropdown hidden-xs">
                 <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
-                	<span class="count">${waitjobsCount}</span>
-                </a>
-         <!--待办事项隐藏区--> 
+                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
+                 <c:if test="${waitjobsCount gt 0}"> 
+                <span class="count">${waitjobsCount}</span>
+                </c:if>
+                </a>         <!--待办事项隐藏区--> 
          		<c:if test="${waitjobsCount gt 0}">  
 	                <ul class="dropdown-menu notifications-list">
 	                    <li class="pointer">
@@ -204,9 +206,11 @@ if(ifm != null && subWeb != null) {
 	                    </li>
 	                    <li class="item-header">代办提醒</li>
 	                    <c:forEach items="${waitjobsList}" var="waitjobs">
+	                    	
 	                    	<li class="item"><a href="${waitjobs.url}" target="mainFrame"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
 	                	</c:forEach>
 	                	<c:if test="${waitjobsCount gt 4}">
+	                		
 	                		<li class="item"><a href="${ctx}/sys/waitjobs/list" target="mainFrame"><span class="content">更多</span></a></li>
 	                	</c:if>
 	                </ul>
@@ -218,11 +222,12 @@ if(ifm != null && subWeb != null) {
                  <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
  <ul class="dropdown-menu color-pifu" id="skin-colors" >
                	 	<li>
-		            <a class="skin-changer" data-skin="theme-whbl" data-toggle="tooltip" title="蓝色" style="background-color: #3498db;height:20px;width:10px;padding:0 10px;float:left">
+		            
+		            <a class="skin-changer" data-skin="theme-whbl" data-toggle="tooltip" title="蓝色" style="background-color: #3498db;height:20px;width:10px;padding:0 10px;float:left" onclick="location='${pageContext.request.contextPath}/theme/united?url='+location.href">
 		            </a>
 		            </li>
 		            <li>
-		            <a class="skin-changer" data-skin="theme-white" data-toggle="tooltip" title="绿色" style="background-color: #2ecc71;height:20px;width:10px;padding:0 10px;float:left">
+		           
 		            </a>
 		            </li>
 		             <li>
@@ -260,6 +265,7 @@ if(ifm != null && subWeb != null) {
          <!--用户信息-->
             <li class="dropdown profile-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                
                 <img src="${fns:getUser().photo}" alt=""/>
                 <span class="hidden-xs">您好, ${fns:getUser().name}</span> <b class="caret"></b>
                 </a>
@@ -345,6 +351,7 @@ if(ifm != null && subWeb != null) {
 							            <c:set var="oaNotifytype" value="${oaNotify.type}"/>
 							          
 							            <li><A href="#">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
+							            
 							            <c:if test="${oaNotify.readFlag eq '0'}">
 							            <img src="${mgmtStatic}/images/news.gif">
 							            </c:if>
@@ -362,6 +369,7 @@ if(ifm != null && subWeb != null) {
               </div>
          </div>
      </div>	
+     
      <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0" ></iframe>
 	
 	    <!--底部-->

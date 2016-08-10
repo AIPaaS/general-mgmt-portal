@@ -34,6 +34,7 @@ import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.DictUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -134,6 +135,40 @@ public class UserController extends BaseController {
 			addMessage(model, "保存用户'" + user.getLoginName() + "'失败，登录名已存在");
 			return form(user, model);
 		}
+		
+		savemethod(user);
+		addMessage(redirectAttributes, "保存用户'" + user.getLoginName() + "'成功");
+		return "redirect:" + adminPath + "/sys/user/list?repage";
+	}
+
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "saveno")
+	public String saveno(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+		if(Global.isDemoMode()){
+			addMessage(redirectAttributes, "演示模式，不允许操作！");
+			return "redirect:" + adminPath + "/sys/user/listno?repage";
+		}
+		// 修正引用赋值问题，不知道为何，Company和Office引用的一个实例地址，修改了一个，另外一个跟着修改。
+		user.setCompany(new Office(request.getParameter("company.id")));
+		user.setOffice(new Office(request.getParameter("office.id")));
+		// 如果新密码为空，则不更换密码
+		if (StringUtils.isNotBlank(user.getNewPassword())) {
+			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
+		}
+		if (!beanValidator(model, user)){
+			return form(user, model);
+		}
+		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))){
+			addMessage(model, "保存账号'" + user.getLoginName() + "'失败，登录名已存在");
+			return form(user, model);
+		}
+		
+		savemethod(user);
+		addMessage(redirectAttributes, "保存账号'" + user.getLoginName() + "'成功");
+		return "redirect:" + adminPath + "/sys/user/listno?repage";
+	}
+	
+	public void savemethod(User user){
 		// 角色数据有效性验证，过滤不在授权内的角色
 		List<Role> roleList = Lists.newArrayList();
 		List<String> roleIdList = user.getRoleIdList();
@@ -155,8 +190,7 @@ public class UserController extends BaseController {
 			UserUtils.clearCache();
 			//UserUtils.getCacheMap().clear();
 		}
-		addMessage(redirectAttributes, "保存用户'" + user.getLoginName() + "'成功");
-		return "redirect:" + adminPath + "/sys/user/list?repage";
+		
 	}
 	
 	@RequiresPermissions("sys:user:edit")
@@ -177,6 +211,24 @@ public class UserController extends BaseController {
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
 	
+	
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "deleteno")
+	public String deleteno(User user, RedirectAttributes redirectAttributes) {
+		if(Global.isDemoMode()){
+			addMessage(redirectAttributes, "演示模式，不允许操作！");
+			return "redirect:" + adminPath + "/sys/user/listno?repage";
+		}
+		if (UserUtils.getUser().getId().equals(user.getId())){
+			addMessage(redirectAttributes, "删除账号失败, 不允许删除当前账号");
+		}else if (User.isAdmin(user.getId())){
+			addMessage(redirectAttributes, "删除账号失败, 不允许删除超级管理员账号");
+		}else{
+			systemService.deleteUser(user);
+			addMessage(redirectAttributes, "删除账号成功");
+		}
+		return "redirect:" + adminPath + "/sys/user/listno?repage";
+	}
 	/**
 	 * 导出用户数据
 	 * @param user
@@ -325,6 +377,38 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "infoData")
 	public User infoData() {
 		return UserUtils.getUser();
+	}
+	/**
+	 * 冻结账号--不允许登录
+	 * 
+	 * 
+	 */
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "prohibit")
+	public String prohibitLogin(User user, RedirectAttributes redirectAttributes ){
+		user.setLoginFlag("0");
+		systemService.updateLoginFalg(user);
+		addMessage(redirectAttributes, "冻结改账号成功");
+		return "redirect:" + adminPath + "/sys/user/listno?repage";
+	}
+	
+	
+	/**
+	 * 重置密码并发送邮件
+	 * 
+	 */
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "resetPWD")
+	public String resetPWD(User user, RedirectAttributes redirectAttributes ){
+		if(StringUtils.isBlank(user.getEmail())){
+			addMessage(redirectAttributes, "重置密码失败，该账号没有维护邮箱");
+			return "redirect:" + adminPath + "/sys/user/listno?repage";
+		}
+		
+		systemService.resetPassword(user);
+		
+		addMessage(redirectAttributes, "重置密码成功");
+		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 	
 	/**
