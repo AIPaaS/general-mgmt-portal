@@ -49,6 +49,12 @@ public class LoginSVImpl implements ILoginSV {
 			response.setEmail(sysUser.getEmail());
 			response.setMobile(sysUser.getMobile());
 			response.setLoginPassword(sysUser.getPassword());
+			//add by zhouxh
+			response.setLoginFlag(sysUser.getLoginFlag());
+			response.setDelFlag(sysUser.getDelFlag());
+			response.setEffectiveDate(sysUser.getEffectiveDate());
+			response.setEffectiveDate(sysUser.getEffectiveDate());
+			
             ResponseHeader responseHeaders = new ResponseHeader(true, ResultCode.SUCCESS_CODE,
                     "成功");
             response.setResponseHeader(responseHeaders);

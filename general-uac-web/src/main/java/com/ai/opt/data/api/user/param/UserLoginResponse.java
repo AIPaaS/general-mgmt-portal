@@ -1,5 +1,7 @@
 package com.ai.opt.data.api.user.param;
 
+import java.sql.Timestamp;
+
 import com.ai.opt.base.vo.BaseResponse;
 
 /**
@@ -10,7 +12,9 @@ import com.ai.opt.base.vo.BaseResponse;
  * @author zhanglh
  */
 public class UserLoginResponse extends BaseResponse {
-    private static final long serialVersionUID = 1L;
+
+
+	private static final long serialVersionUID = 1L;
 
     /**
 	 * 账号ID 对应中信sys_user表的主键id
@@ -37,6 +41,14 @@ public class UserLoginResponse extends BaseResponse {
      * 邮箱
      */
     private String email;
+    
+    
+    //add by zhouxh
+    private String loginFlag;//是否允许登录
+    private String delFlag;//是否已标记删除
+    private Timestamp effectiveDate;//生效时间
+    private Timestamp expiryDate;//失效时间
+    
 
 	public String getUserId() {
 		return userId;
@@ -77,6 +89,38 @@ public class UserLoginResponse extends BaseResponse {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLoginFlag() {
+		return loginFlag;
+	}
+
+	public void setLoginFlag(String loginFlag) {
+		this.loginFlag = loginFlag;
+	}
+
+	public String getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(String delFlag) {
+		this.delFlag = delFlag;
+	}
+
+	public Timestamp getEffectiveDate() {
+		return effectiveDate;
+	}
+
+	public void setEffectiveDate(Timestamp effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+
+	public Timestamp getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Timestamp expiryDate) {
+		this.expiryDate = expiryDate;
 	}
 
 

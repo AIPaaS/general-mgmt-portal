@@ -1,6 +1,7 @@
 package com.ai.opt.sso.handler;
 
 import java.security.GeneralSecurityException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -26,7 +27,9 @@ import com.ai.opt.base.exception.RPCSystemException;
 import com.ai.opt.data.api.user.param.UserLoginResponse;
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
 import com.ai.opt.sdk.util.Md5Encoder;
+import com.ai.opt.sso.constants.SSOConstants;
 import com.ai.opt.sso.exception.AccountNameNotExistException;
+import com.ai.opt.sso.exception.AccountNotAllowLoginException;
 import com.ai.opt.sso.exception.CaptchaErrorException;
 import com.ai.opt.sso.exception.CaptchaIsNullException;
 import com.ai.opt.sso.exception.CaptchaOutTimeException;
@@ -132,6 +135,17 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 					throw new AccountNameNotExistException();
 				}
 			}
+			if(SSOConstants.ACCOUNT_LOGIN_FLAG.equals(user.getLoginFlag())){
+				//账号不允许登录
+				logger.error("账号不允许登录");
+				throw new AccountNotAllowLoginException();
+			}
+			if(SSOConstants.ACCOUNT_DEL_FLAG.equals(user.getDelFlag())){
+				//账号已删除
+				logger.error("账号已删除");
+				throw new AccountNameNotExistException();
+			}
+			
 			String dbPwd=user.getLoginPassword();
 			logger.info("【dbPwd】="+dbPwd);
 			logger.info("【pwdFromPage】="+pwdFromPage);
@@ -141,19 +155,19 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 				logger.error("密码错误！");
 				throw new PasswordErrorException();
 			}
-			/*if(!SSOConstants.ACCOUNT_ACITVE_STATE.equals(user.getState())){
-				//密码不对
-				throw new CredentialException("账号状态异常");
-			}
+//			if(!SSOConstants.ACCOUNT_ACITVE_STATE.equals(user.getState())){
+//				//密码不对
+//				throw new CredentialException("账号状态异常");
+//			}
 			Date currentDate=new Date();
-			Date acitveDate=user.getActiveTime();
-			Date inactiveDate=user.getInactiveTime();
+			Date acitveDate=user.getEffectiveDate();
+			Date inactiveDate=user.getExpiryDate();
 			if(acitveDate!=null&&currentDate.before(acitveDate)){
 				throw new CredentialException("账号未生效");
 			}
 			if(inactiveDate!=null&&inactiveDate.before(currentDate)){
 				throw new CredentialException("账号已失效");
-			}*/
+			}
 			
 			//BeanUtils.copyProperties(bssCredentials, user);
 			bssCredentials.setUserId(user.getUserId());
