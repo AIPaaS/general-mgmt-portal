@@ -145,16 +145,7 @@
 			return false;
 		}// </c:if>
 	</script> -->
-<script type="text/javascript" language="javascript">   
-function iFrameHeight() {   
-var ifm= document.getElementById("mainFrame");   
-var subWeb = document.frames ? document.frames["mainFrame"].document : ifm.contentDocument;   
-if(ifm != null && subWeb != null) {
-   ifm.height = subWeb.body.scrollHeight;
-   ifm.width = subWeb.body.scrollWidth;
-}   
-}   
-</script>	
+
 	
 </head>
 <body>
@@ -191,12 +182,9 @@ if(ifm != null && subWeb != null) {
          <!--/搜索结束-->
          <!--待办事项-->
             <li class="dropdown hidden-xs">
+              
                 <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
-                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
-                 <c:if test="${waitjobsCount gt 0}"> 
-                <span class="count">${waitjobsCount}</span>
-                </c:if>
-                </a>         <!--待办事项隐藏区--> 
+                      <!--待办事项隐藏区--> 
          		<c:if test="${waitjobsCount gt 0}">  
 	                <ul class="dropdown-menu notifications-list">
 	                    <li class="pointer">
