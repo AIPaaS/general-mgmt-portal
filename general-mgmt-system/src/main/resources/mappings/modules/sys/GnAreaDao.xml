@@ -8,7 +8,7 @@
 		a.province_code AS "provinceCode.code",
 		a.city_code AS "cityCode.code",
 		a.area_level AS "areaLevel",
-		a.parent_area_code AS "parent.code",
+		a.parent_area_code AS "parent.id",
 		a.sort_id AS "sortId",
 		a.state AS "state",
 		a.remark AS "remark",
@@ -32,9 +32,8 @@
 			<include refid="gnAreaColumns"/>
 		FROM gn_area a
 		<include refid="gnAreaJoins"/>
-		<where>
-			
-		</where>
+		WHERE a.state='1' order by a.AREA_CODE;
+
 	</select>
 	
 	<select id="findAllList" resultType="GnArea">
