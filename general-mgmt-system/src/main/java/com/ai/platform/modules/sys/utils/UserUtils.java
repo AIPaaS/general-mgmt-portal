@@ -17,11 +17,13 @@ import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.AreaDao;
+import com.ai.platform.modules.sys.dao.GnAreaDao;
 import com.ai.platform.modules.sys.dao.MenuDao;
 import com.ai.platform.modules.sys.dao.OfficeDao;
 import com.ai.platform.modules.sys.dao.RoleDao;
 import com.ai.platform.modules.sys.dao.UserDao;
 import com.ai.platform.modules.sys.entity.Area;
+import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
@@ -40,6 +42,7 @@ public class UserUtils {
 	private static RoleDao roleDao = SpringContextHolder.getBean(RoleDao.class);
 	private static MenuDao menuDao = SpringContextHolder.getBean(MenuDao.class);
 	private static AreaDao areaDao = SpringContextHolder.getBean(AreaDao.class);
+	private static GnAreaDao gnAreaDao = SpringContextHolder.getBean(GnAreaDao.class);
 	private static OfficeDao officeDao = SpringContextHolder.getBean(OfficeDao.class);
 
 	public static final String USER_CACHE = "userCache";
@@ -251,6 +254,22 @@ public class UserUtils {
 		List<Area> areaList = (List<Area>) getCache(CACHE_AREA_LIST);
 		if (areaList == null) {
 			areaList = areaDao.findAllList(new Area());
+			putCache(CACHE_AREA_LIST, areaList);
+		}
+		return areaList;
+	}
+	
+	
+	/**
+	 * 获取当前用户授权的新区域
+	 * 
+	 * @return
+	 */
+	public static List<GnArea> getGnAreaList() {
+		@SuppressWarnings("unchecked")
+		List<GnArea> areaList = (List<GnArea>) getCache(CACHE_AREA_LIST);
+		if (areaList == null) {
+			areaList = gnAreaDao.findAllList(new GnArea());
 			putCache(CACHE_AREA_LIST, areaList);
 		}
 		return areaList;

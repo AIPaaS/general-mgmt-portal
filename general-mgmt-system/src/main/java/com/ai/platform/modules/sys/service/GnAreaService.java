@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.platform.common.service.TreeService;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.entity.GnArea;
+import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ai.platform.modules.sys.dao.GnAreaDao;
 
 /**
@@ -27,10 +28,7 @@ public class GnAreaService extends TreeService<GnAreaDao, GnArea> {
 	}
 	
 	public List<GnArea> findList(GnArea gnArea) {
-		if (StringUtils.isNotBlank(gnArea.getParentIds())){
-			gnArea.setParentIds(","+gnArea.getParentIds()+",");
-		}
-		return super.findList(gnArea);
+		return UserUtils.getGnAreaList();
 	}
 	
 	@Transactional(readOnly = false)
