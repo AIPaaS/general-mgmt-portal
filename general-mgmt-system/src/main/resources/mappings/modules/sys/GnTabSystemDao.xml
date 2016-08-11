@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.platform.modules.sys.dao.GnTabSystemDao">
+    
+	<sql id="gnTabSystemColumns">
+		a.id AS "id",
+		a.tenant_id AS "tenantId",
+		a.system_id AS "systemId",
+		a.system_name AS "systemName",
+		a.remarks AS "remarks",
+		a.system_url_context AS "systemUrlContext",
+		a.del_flag AS "delFlag",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate"
+	</sql>
+	
+	<sql id="gnTabSystemJoins">
+	</sql>
+    
+	<select id="get" resultType="GnTabSystem">
+		SELECT 
+			<include refid="gnTabSystemColumns"/>
+		FROM gn_tab_system a
+		<include refid="gnTabSystemJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GnTabSystem">
+		SELECT 
+			<include refid="gnTabSystemColumns"/>
+		FROM gn_tab_system a
+		<include refid="gnTabSystemJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="systemId != null and systemId != ''">
+				AND a.system_id = #{systemId}
+			</if>
+			<if test="systemName != null and systemName != ''">
+				AND a.system_name = #{systemName}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GnTabSystem">
+		SELECT 
+			<include refid="gnTabSystemColumns"/>
+		FROM gn_tab_system a
+		<include refid="gnTabSystemJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gn_tab_system(
+			id,
+			tenant_id,
+			system_id,
+			system_name,
+			remarks,
+			system_url_context,
+			del_flag,
+			create_by,
+			create_date,
+			update_by,
+			update_date
+		) VALUES (
+			#{id},
+			#{tenantId},
+			#{systemId},
+			#{systemName},
+			#{remarks},
+			#{systemUrlContext},
+			#{delFlag},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gn_tab_system SET 	
+			system_id = #{systemId},
+			system_name = #{systemName},
+			remarks = #{remarks},
+			system_url_context = #{systemUrlContext},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE gn_tab_system SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
