@@ -33,6 +33,20 @@ public class Menu extends DataEntity<Menu> {
 	
 	private String userId;
 	
+	
+	/**
+	 * 增加所属应用 by:mengbo creat 20160811
+	 */
+	private GnTabSystem gnTabSystem;
+	
+	public GnTabSystem getGnTabSystem() {
+		return gnTabSystem;
+	}
+
+	public void setGnTabSystem(GnTabSystem gnTabSystem) {
+		this.gnTabSystem = gnTabSystem;
+	}
+
 	public Menu(){
 		super();
 		this.sort = 30;

@@ -38,7 +38,7 @@
 		<li class="active"><a href="${ctx}/sys/user/formno?id=${user.id}">账号<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/saveno" method="post" class="form-horizontal">
-		<form:hidden path="id"/>
+		
 		<sys:message content="${message}"/>
 <%-- 		<div class="control-group">
 			<label class="control-label">头像:</label>
@@ -61,19 +61,21 @@
               
 			</div>
 		</div> --%>
-		<form:hidden path="company.id"/>
-		<form:hidden path="office.id"/>
-		<div class="control-group">
+	
+<%-- 		<div class="control-group">
 			<label class="control-label">工号:</label>
 			<div class="controls">
 				<form:input path="no" htmlEscape="false" readonly="true" maxlength="50" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
-			<label class="control-label">姓名:</label>
+			<label class="control-label">选择员工:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" readonly="true" maxlength="50" class="required"/>
+				<form:select path="id" class="required input-xlarge">
+					<form:option value="" label="${productName}"/>
+					<form:options items="${userList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

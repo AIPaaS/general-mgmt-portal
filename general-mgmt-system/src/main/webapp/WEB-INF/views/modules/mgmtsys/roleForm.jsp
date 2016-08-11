@@ -169,7 +169,7 @@
 				<span class="help-inline">特殊情况下，设置为“按明细设置”，可进行跨机构授权</span>
 			</div>
 		</div> --%>
-		<%-- <div class="control-group">
+		 <div class="control-group">
 			<label class="control-label">角色授权:</label>
 			<div class="controls">
 				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;"></div>
@@ -177,7 +177,7 @@
 				<div id="officeTree" class="ztree" style="margin-left:100px;margin-top:3px;float:left;"></div>
 				<form:hidden path="officeIds"/>
 			</div>
-		</div> --%>
+		</div>
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
