@@ -233,7 +233,6 @@ public class UserUtils {
 		Menu menuParent = new Menu();
 		menuParent.setId(id);
 		menu.setParent(menuParent);
-
 		List<Menu> menuList = menuDao.findMenuChilds(menu);
 
 		// putCache(CACHE_MENU_CHILDLIST+menu.getId(), menuList);

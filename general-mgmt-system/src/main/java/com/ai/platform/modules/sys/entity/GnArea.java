@@ -22,7 +22,15 @@ public class GnArea extends TreeEntity<GnArea> {
 	private GnArea provinceCode;		// 所属省
 	private GnArea cityCode;		// 所属市
 	private String areaLevel;		// 行政级别
-	
+	private String parentAreaCode;  //上级编码
+	public String getParentAreaCode() {
+		return parentAreaCode;
+	}
+
+	public void setParentAreaCode(String parentAreaCode) {
+		this.parentAreaCode = parentAreaCode;
+	}
+
 	private String sortId;		// 排序
 	private String state;		// state
 	private String remark;		// 备注

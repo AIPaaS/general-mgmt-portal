@@ -28,8 +28,7 @@
 		a.useable AS useable,
 		a.primary_person AS "primaryPerson.id",
 		a.deputy_person AS "deputyPerson.id",
-		ar.name AS "area.name",
-		ar.parent_ids AS "area.parentIds",
+		ar.area_name AS "area.name",
 		pp.name AS "primaryPerson.name",
 		dp.name AS "deputyPerson.name"
 	</sql>
@@ -56,11 +55,11 @@
 		a.update_date,
 		a.del_flag,
 		a.tenant_id AS "tenantId",
-		ar.name AS "area.name"
+		ar.area_name AS "area.name"
 	</sql>
 	<sql id="officeJoins">
 		<!--  LEFT JOIN sys_office p ON p.id = a.parent_id-->
-		LEFT JOIN sys_area ar ON ar.id = a.area_id
+		LEFT JOIN gn_area ar ON ar.id = a.area_id
 		LEFT JOIN SYS_USER pp ON pp.id = a.primary_person
 		LEFT JOIN SYS_USER dp ON dp.id = a.deputy_person
     </sql>

@@ -44,7 +44,7 @@
 			<label class="control-label">归属区域:</label>
 			<div class="controls">
                 <sys:treeselect id="area" name="area.id" value="${office.area.id}" labelName="area.name" labelValue="${office.area.name}"
-					title="区域" url="/sys/area/treeData" cssClass="required"/>
+					title="区域" url="/sys/gnArea/treeData" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">

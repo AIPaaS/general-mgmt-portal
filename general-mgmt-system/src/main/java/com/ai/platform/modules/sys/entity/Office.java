@@ -22,6 +22,7 @@ public class Office extends TreeEntity<Office> {
 	//private Office parent;	// 父级编号
 //	private String parentIds; // 所有父级编号
 	private Area area;		// 归属区域
+	private GnArea gnArea;		// 归属区域
 	//private String parentId;//父级编号
 	/*public String getParentId() {
 		return parentId;
@@ -116,6 +117,8 @@ public class Office extends TreeEntity<Office> {
 	public void setArea(Area area) {
 		this.area = area;
 	}
+	
+	
 //
 //	@Length(min=1, max=100)
 //	public String getName() {
@@ -134,6 +137,14 @@ public class Office extends TreeEntity<Office> {
 //		this.sort = sort;
 //	}
 	
+	public GnArea getGnArea() {
+		return gnArea;
+	}
+
+	public void setGnArea(GnArea gnArea) {
+		this.gnArea = gnArea;
+	}
+
 	@Length(min=1, max=1)
 	public String getType() {
 		return type;

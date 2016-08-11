@@ -300,7 +300,7 @@
 										<ul class="submenu" id="secondmenu">
 										<c:set var="rootMenuId" value="${menu.id}"/>
 										<c:forEach items="${fns:getChildsMenu(rootMenuId)}" var="menuNode" varStatus="idxStatus">
-										<li><a href="${fn:indexOf(menuNode.href, '://') eq -1 ? ctx : ''}${menuNode.href}" data-id="${menuNode.id}" target="mainFrame">${menuNode.name}</a></li>
+										<li><a href="${empty menuNode.gnTabSystem.systemUrlContext ? ctx : menuNode.gnTabSystem.systemUrlContext}${menuNode.href}" data-id="${menuNode.id}" target="mainFrame">${menuNode.name}</a></li>
 										</c:forEach>
 										</ul>
 									</c:if>
