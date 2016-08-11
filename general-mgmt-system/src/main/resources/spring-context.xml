@@ -116,7 +116,7 @@
 	
 	<bean id="emailthreadPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
 	  <!-- 核心线程数  -->  
-	  <property name="corePoolSize" value="10" />  
+	  <property name="corePoolSize" value="2" />  
 	  <!-- 最大线程数 -->  
 	  <property name="maxPoolSize" value="50" />  
 	  <!-- 队列最大长度 >=mainExecutor.maxSize -->  
