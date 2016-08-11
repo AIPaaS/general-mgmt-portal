@@ -26,8 +26,8 @@ public class OfficeQueryTest {
 	@Test
 	public void queryOfficeDetail(){
 		OfficeDetailQueryRequest queryRequest=new OfficeDetailQueryRequest();
-		queryRequest.setId("25");
-		queryRequest.setTenantId("SLP");
+		queryRequest.setId("  25");
+		queryRequest.setTenantId(" changhong  ");
 		OfficeDetailQueryResponse queryOfficeDetail = sv.queryOfficeDetail(queryRequest);
 		System.out.println(JSonUtil.toJSon(queryOfficeDetail));
 	}

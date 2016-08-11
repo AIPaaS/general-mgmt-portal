@@ -23,7 +23,7 @@ public class SysUserQueryTest {
 	@Test
 	public void queryUserInfo(){
 		SysUserQueryRequest queryRequest=new SysUserQueryRequest();
-		queryRequest.setTenantId("changhong   ");
+		queryRequest.setTenantId("   chan  ghong   ");
 		queryRequest.setNo("   0010");
 		//queryRequest.setPhone(" 456 ");
 		queryRequest.setLoginName("jn_jsb");
@@ -33,15 +33,15 @@ public class SysUserQueryTest {
 	@Test
 	public void queryUserTheme(){
 		SysUserThemeRequest queryRequest=new SysUserThemeRequest();
-		queryRequest.setTenantId("SLP");
-		queryRequest.setId("10");
+		queryRequest.setTenantId("  changhong  ");
+		queryRequest.setId("10   ");
 		SysUserThemeResponse response = sv.queryUserTheme(queryRequest);
 		System.out.println(JSonUtil.toJSon(response));
 	}
 	@Test
 	public void queryUserList(){
 		SysUserListQueryRequest queryRequest=new SysUserListQueryRequest();
-		queryRequest.setTenantId("SLP");
+		queryRequest.setTenantId("  changhong  ");
 		queryRequest.setOfficeId("11");
 		SysUserListQueryResponse response = sv.queryUserByOfficeId(queryRequest);
 		System.out.println(JSonUtil.toJSon(response.getSysUserList().size()));

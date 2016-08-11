@@ -5,7 +5,7 @@ import java.util.List;
 import com.ai.platform.common.dao.mapper.bo.SysUser;
 
 public interface ISysUserAtomSV {
-	SysUser queryUser(String tenantId,String phone,String no,String loginName,String email);
+	SysUser queryUser(SysUser user);
 
 	String queryUserTheme(String id,String tenantId);
 	

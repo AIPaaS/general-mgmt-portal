@@ -21,8 +21,8 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 		//return MapperFactory.getSysOfficeMapper().selectByPrimaryKey(id);
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
-		officeCriteria.andIdEqualTo(id);
-		officeCriteria.andTenantIdEqualTo(tenantId);
+		officeCriteria.andIdEqualTo(id.trim());
+		officeCriteria.andTenantIdEqualTo(tenantId.trim());
 		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
 		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		List<SysOffice> sysOfficeList = MapperFactory.getSysOfficeMapper().selectByExample(example);
@@ -47,7 +47,7 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 	public List<SysOffice> selectSysOfficeAll(String tenantId) {
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
-		officeCriteria.andTenantIdEqualTo(tenantId);
+		officeCriteria.andTenantIdEqualTo(tenantId.trim());
 		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
 		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		return MapperFactory.getSysOfficeMapper().selectByExample(example);
@@ -63,10 +63,10 @@ public class SysOfficeAtomService implements ISysOfficeAtomService{
 	private void getChildrenOffices(String id,String tenantId,List<SysOffice> OfficeList){
 		SysOfficeCriteria example = new SysOfficeCriteria();
 		Criteria officeCriteria = example.createCriteria();
-		officeCriteria.andTenantIdEqualTo(tenantId);
+		officeCriteria.andTenantIdEqualTo(tenantId.trim());
 		officeCriteria.andUseableEqualTo(UseableFlagConstant.YES);
 		officeCriteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
-		officeCriteria.andParentIdEqualTo(id);
+		officeCriteria.andParentIdEqualTo(id.trim());
 		List<SysOffice> selectByExample = MapperFactory.getSysOfficeMapper().selectByExample(example);
 		if(selectByExample != null){
 			OfficeList.addAll(selectByExample);
