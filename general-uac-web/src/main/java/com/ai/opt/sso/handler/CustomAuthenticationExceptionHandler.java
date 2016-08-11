@@ -53,6 +53,9 @@ public class CustomAuthenticationExceptionHandler{
         DEFAULT_ERROR_LIST.add(com.ai.opt.sso.exception.CaptchaIsNullException.class);
         
         
+        DEFAULT_ERROR_LIST.add(com.ai.opt.sso.exception.AccountNotAllowLoginException.class);
+
+        
     }
 
     public void setErrors(final List<Class<? extends Exception>> errors) {
