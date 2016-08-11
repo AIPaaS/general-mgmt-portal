@@ -232,6 +232,47 @@
 		FROM sys_user a
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
 	</select>
+	<insert id="saveUserNoUser">
+		INSERT INTO sys_user(
+			id, 
+			company_id, 
+			office_id,
+			no,
+			name, 
+			phone, 
+			mobile,
+			user_type,
+			create_by, 
+			create_date, 
+			update_by, 
+			update_date, 
+			remarks,
+			photo,
+			tenant_id,
+			del_flag,
+			category
+		) VALUES (
+			#{id}, 
+			#{company.id}, 
+			#{office.id},
+			#{no},
+			#{name},
+			#{phone}, 
+			#{mobile},
+			#{userType}, 
+			#{createBy.id}, 
+			#{createDate}, 
+			#{updateBy.id}, 
+			#{updateDate},
+			#{remarks}, 
+			#{photo},
+			#{tenantId},
+			#{delFlag},
+			#{category}																						
+		)
+	</insert>
+	
+	
 	
 	<!-- 插入用户 -->
 	<insert id="insert">
@@ -287,7 +328,7 @@
 			#{expiryDate}
 		)
 	</insert>
-	
+
 	<!-- 更新用户 -->
 	<update id="update">
 		UPDATE sys_user SET 
@@ -342,7 +383,24 @@
 			photo = #{photo}
 		WHERE id = #{id}
 	</update>
-	
+		
+	<!-- 更新用户信息 不包含用户名和密码 -->
+	<update id="updateUserNoUser">
+		UPDATE sys_user SET 
+			company_id = #{company.id}, 
+			office_id = #{office.id},
+			no = #{no}, 
+			name = #{name}, 
+			phone = #{phone}, 
+			mobile = #{mobile}, 
+			user_type = #{userType}, 
+			update_by = #{updateBy.id}, 
+			update_date = #{updateDate}, 
+			remarks = #{remarks},
+			photo = #{photo},
+			category = #{category}
+		WHERE id = #{id}
+	</update>	
 	
 		<!-- 冻结（不允许登录）用户信息  -->
 	<update id="updateLoginFalg">

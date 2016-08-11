@@ -666,11 +666,29 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户缓存
 		UserUtils.clearCache(user);
 	}
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = true)
 	public List<User> findAllUser() {
 		// TODO Auto-generated method stub
 		
 		return userDao.findList(new User());
+	}
+	/**
+	 * 保存用户信息，不包括用户名、密码等
+	 * @param user
+	 */
+	@Transactional(readOnly = false)
+	public void saveUserNoUser(User user) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isBlank(user.getId())){
+			user.preInsert();
+			userDao.saveUserNoUser(user);	
+		}else{
+			user.preUpdate();
+			userDao.updateUserNoUser(user);
+		}
+
+		// 清除用户缓存
+		UserUtils.clearCache(user);
 	}
 
 

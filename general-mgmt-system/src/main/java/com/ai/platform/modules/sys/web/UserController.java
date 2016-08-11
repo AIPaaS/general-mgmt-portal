@@ -142,6 +142,35 @@ public class UserController extends BaseController {
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
 
+	
+	
+	@RequiresPermissions("user")
+	@RequestMapping(value = "savenouser")
+	public String savenouser(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+		if(Global.isDemoMode()){
+			addMessage(redirectAttributes, "演示模式，不允许操作！");
+			return "redirect:" + adminPath + "/sys/user/list?repage";
+		}
+		// 修正引用赋值问题，不知道为何，Company和Office引用的一个实例地址，修改了一个，另外一个跟着修改。
+		user.setCompany(new Office(request.getParameter("company.id")));
+		user.setOffice(new Office(request.getParameter("office.id")));
+		// 如果新密码为空，则不更换密码
+		if (StringUtils.isNotBlank(user.getNewPassword())) {
+			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
+		}
+
+		//插入用户时给予用户默认主题
+		if (StringUtils.isNotBlank(user.getTheme())){
+			user.setTheme(Global.getDefTheme());
+		}
+		
+		// 保存用户信息
+		systemService.saveUserNoUser(user);
+	
+		addMessage(redirectAttributes, "保存用户'" + user.getName() + "'成功");
+		return "redirect:" + adminPath + "/sys/user/list?repage";
+	}
+	
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "saveno")
 	public String saveno(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {

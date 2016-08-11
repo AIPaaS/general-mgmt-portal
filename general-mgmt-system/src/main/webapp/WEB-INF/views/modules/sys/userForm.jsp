@@ -37,7 +37,7 @@
 		<li><a href="${ctx}/sys/user/list">员工列表</a></li>
 		<li class="active"><a href="${ctx}/sys/user/form?id=${user.id}">员工<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
-	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/save" method="post" class="form-horizontal">
+	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/savenouser" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>
 		<div class="control-group">
@@ -75,7 +75,7 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+		<%-- <div class="control-group">
 			<label class="control-label">登录名:</label>
 			<div class="controls">
 				<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
@@ -103,7 +103,7 @@
 			<div class="controls">
 				<form:input path="email" htmlEscape="false" maxlength="100" class="email"/>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">电话:</label>
 			<div class="controls">
@@ -116,7 +116,7 @@
 				<form:input path="mobile" htmlEscape="false" maxlength="100"/>
 			</div>
 		</div>
-		<div class="control-group">
+<%-- 		<div class="control-group">
 			<label class="control-label">是否允许登录:</label>
 			<div class="controls">
 				<form:select path="loginFlag">
@@ -124,7 +124,7 @@
 				</form:select>
 				<span class="help-inline"><font color="red">*</font> “是”代表此账号允许登录，“否”则表示此账号不允许登录</span>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">员工类型:</label>
 			<div class="controls">
@@ -134,13 +134,13 @@
 				</form:select>
 			</div>
 		</div>
-		<div class="control-group">
+<%-- 		<div class="control-group">
 			<label class="control-label">员工角色:</label>
 			<div class="controls">
 				<form:checkboxes path="roleIdList" items="${allRoles}" itemLabel="name" itemValue="id" htmlEscape="false" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">

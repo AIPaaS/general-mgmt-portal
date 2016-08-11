@@ -80,4 +80,8 @@ public interface UserDao extends CrudDao<User> {
 	 */
 	public void updateLoginFalg(User user);
 
+	public void saveUserNoUser(User user);
+
+	public void updateUserNoUser(User user);
+
 }

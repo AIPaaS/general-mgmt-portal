@@ -52,7 +52,7 @@
 			<div class="controls">
 				<form:select path="gnTabSystem.id" class="required input-xlarge">
 				<c:set var="productName" value="${fns:getConfig('productName')}"/>
-					<form:option value="" label="${productName}"/>
+					<form:option value="--" label="${productName}"/>
 					<form:options items="${tableList}" itemLabel="systemName" itemValue="id" htmlEscape="false"/>
 				</form:select>
 				<span class="help-inline">生成的数据表，一对多情况下请选择主表。</span>
