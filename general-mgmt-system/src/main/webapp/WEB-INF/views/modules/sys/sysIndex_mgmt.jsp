@@ -338,7 +338,7 @@
 		            				<c:forEach items="${fns:getOaNotifyByUser()}" var="oaNotify" >
 							            <c:set var="oaNotifytype" value="${oaNotify.type}"/>
 							          
-							            <li><A href="#">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
+							            <li><A target="mainFrame" href="${ctx}/oa/oaNotify/view?id=${oaNotify.id}">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
 							            
 							            <c:if test="${oaNotify.readFlag eq '0'}">
 							            <img src="${mgmtStatic}/images/news.gif">
