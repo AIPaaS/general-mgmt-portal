@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>
-<c:set var="iotStatic" value="${pageContext.request.contextPath}/template/mgmtstatic"/>
+<c:set var="iotStatic" value="${pageContext.request.contextPath}/template/mgmtstatic/default"/>
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
 <!DOCTYPE html>
 <html style="overflow-x:auto;overflow-y:auto;">

@@ -23,7 +23,9 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
+import com.ai.platform.modules.gen.service.GenTableService;
 import com.ai.platform.modules.sys.entity.Menu;
+import com.ai.platform.modules.sys.service.GnTabSystemService;
 //import com.ai.platform.modules.sys.entity.MgmtMenu;
 //import com.ai.platform.modules.sys.service.MgmtMenuService;
 import com.ai.platform.modules.sys.service.SystemService;
@@ -44,7 +46,8 @@ public class MenuController extends BaseController {
 	private SystemService systemService;
 //	@Autowired
 //	private MgmtMenuService mgmtMenuService;
-	
+	@Autowired
+	private GnTabSystemService gnTabSystemService;
 	
 	@ModelAttribute("menu")
 	public Menu get(@RequestParam(required=false) String id) {
@@ -88,6 +91,8 @@ public class MenuController extends BaseController {
 				menu.setSort(list.get(list.size()-1).getSort() + 30);
 			}
 		}
+		
+		model.addAttribute("tableList", gnTabSystemService.findAll());
 		model.addAttribute("menu", menu);
 		return "modules/sys/menuForm";
 	}
