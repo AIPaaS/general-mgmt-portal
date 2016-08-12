@@ -228,10 +228,20 @@ public class LoginController extends BaseController{
 		if (StringUtils.isNotBlank(theme)){
 			
 			systemService.updateTheme(theme);
-//			CookieUtils.setCookie(response, "theme", theme);
+			CookieUtils.setCookie(response, "theme", theme);
+			if(StringUtils.equals(theme, "cerulean") || StringUtils.equals(theme, "default")){
+				CookieUtils.setCookie(response, "theme_index", "theme-whbl");
+			}else if(StringUtils.equals(theme, "green")){
+				CookieUtils.setCookie(response, "theme_index", "theme-white");
+				CacheUtils.put("userCache", UserUtils.USER_CACHE_ThemeInd, "theme-white");
+			}else{
+				CookieUtils.setCookie(response, "theme_index", "theme-whbl");
+				CacheUtils.put("userCache", UserUtils.USER_CACHE_ThemeInd, "theme-whbl");
+			}
 			CacheUtils.put("userCache", UserUtils.USER_CACHE_Theme, theme);
+			
 		}else{
-//			theme = CookieUtils.getCookie(request, "theme");
+			theme = CookieUtils.getCookie(request, "theme");
 			theme = (String) CacheUtils.get("userCache", UserUtils.USER_CACHE_Theme);
 		}
 		return "redirect:"+request.getParameter("url");
