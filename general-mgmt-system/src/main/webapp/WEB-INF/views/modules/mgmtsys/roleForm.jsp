@@ -124,33 +124,9 @@
 			<div class="controls">
 				<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">
 				<form:input path="enname" htmlEscape="false" maxlength="50" class="required"/>
-				<span class="help-inline"><font color="red">*</font> 工作流用户组标识</span>
+				<span class="help-inline"><font color="red">*</font></span>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">角色类型:</label>
-			<div class="controls"><%--
-				<form:input path="roleType" htmlEscape="false" maxlength="50" class="required"/>
-				<span class="help-inline" title="activiti有3种预定义的组类型：security-role、assignment、user 如果使用Activiti Explorer，需要security-role才能看到manage页签，需要assignment才能claim任务">
-					工作流组用户组类型（security-role：管理员、assignment：可进行任务分配、user：普通用户）</span> --%>
-				<form:select path="roleType" class="input-medium">
-					<form:option value="assignment">任务分配</form:option>
-					<form:option value="security-role">管理角色</form:option>
-					<form:option value="user">普通角色</form:option>
-				</form:select>
-				<span class="help-inline" title="activiti有3种预定义的组类型：security-role、assignment、user 如果使用Activiti Explorer，需要security-role才能看到manage页签，需要assignment才能claim任务">
-					工作流组用户组类型（任务分配：assignment、管理角色：security-role、普通角色：user）</span>
-			</div>
-		</div>
-		<%-- <div class="control-group">
-			<label class="control-label">是否系统数据:</label>
-			<div class="controls">
-				<form:select path="sysData">
-					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-				<span class="help-inline">“是”代表此数据只有超级管理员能进行修改，“否”则表示拥有角色修改人员的权限都能进行修改</span>
-			</div>
-		</div> --%>
 		<div class="control-group">
 			<label class="control-label">是否可用</label>
 			<div class="controls">
@@ -158,24 +134,6 @@
 					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 				<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>
-			</div>
-		</div>
-		<%-- <div class="control-group">
-			<label class="control-label">数据范围:</label>
-			<div class="controls">
-				<form:select path="dataScope" class="input-medium">
-					<form:options items="${fns:getDictList('sys_data_scope')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-				<span class="help-inline">特殊情况下，设置为“按明细设置”，可进行跨机构授权</span>
-			</div>
-		</div> --%>
-		 <div class="control-group">
-			<label class="control-label">角色授权:</label>
-			<div class="controls">
-				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;"></div>
-				<form:hidden path="menuIds"/>
-				<div id="officeTree" class="ztree" style="margin-left:100px;margin-top:3px;float:left;"></div>
-				<form:hidden path="officeIds"/>
 			</div>
 		</div>
 		<div class="control-group">

@@ -6,6 +6,7 @@ package com.ai.platform.modules.sys.web;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -58,9 +59,14 @@ public class MgmtRoleController extends BaseController {
 	
 	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = {"list", ""})
-	public String list(Role role, Model model) {
-		List<Role> list = systemService.findAllRole();
-		model.addAttribute("list", list);
+	public String list(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
+//		List<Role> list = systemService.findAllRole();
+//		model.addAttribute("list", list);
+		Page<Role> page = new Page<Role>(request, response, 5);
+		role.setPage(page);
+		List<Role> list = systemService.findRoleList(role);
+		page.setList(list);
+		model.addAttribute("page", page);
 		return "modules/mgmtsys/roleList";
 	}
 
