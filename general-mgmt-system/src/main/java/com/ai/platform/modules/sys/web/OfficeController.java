@@ -69,8 +69,6 @@ public class OfficeController extends BaseController {
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {"list"})
 	public String list(Office office, Model model) {
-		List<Office> o = officeService.findList(office);
-		System.out.println("============"+o);
         model.addAttribute("list", officeService.findList(office));
 		return "modules/sys/officeList";
 	}
@@ -78,16 +76,19 @@ public class OfficeController extends BaseController {
 	@RequiresPermissions("sys:office:view")
 	@RequestMapping(value = {"page"})
 	public String page(Office office, HttpServletRequest request, HttpServletResponse response,Model model) {
-		 request.setAttribute("searchName", office.getName());
+		 if(office!=null && office.getParent()!=null){
+			 request.setAttribute("upName", office.getParent().getName());
+		 }
+		
 		//翻译机构类别
-		Page<Office> pge = officeService.findPage(new Page<Office>(request, response,5), office);
+		Page<Office> pge = officeService.findPage(new Page<Office>(request, response), office);
 		List<Office> list = pge.getList();
 		for(Office o : list){
 			String a = DictUtils.getDictLabel(o.getType(), "sys_office_type", "未知");
 			o.setType(a);
 		}
 		model.addAttribute("page", pge);
-		return "modules/mgmtsys/officeList";
+		return "modules/mgmtsys/iotofficeList";
 	}
 	/**
 	 * 新增机构
@@ -128,8 +129,10 @@ public class OfficeController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(Office office, Model model) {
 		User user = UserUtils.getUser();
-		if (office.getParent()==null || office.getParent().getId()==null){
-			office.setParent(user.getOffice());
+		if(user!=null){
+			if (office.getParent()==null || office.getParent().getId()==null){
+				office.setParent(user.getOffice());
+			}
 		}
 		office.setParent(officeService.get(office.getParent().getId()));
 		if (office.getArea()==null){

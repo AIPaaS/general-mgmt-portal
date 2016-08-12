@@ -22,25 +22,6 @@
 		a.del_flag,
 		p.name AS "parent.name"
 	</sql>
-	<sql id="menuListColumns">
-		a.id,
-		a.parent_id AS "parent.id",
-		a.parent_ids,
-		a.name,
-		a.href,
-		a.target,
-		a.icon,
-		a.sort,
-		a.is_show,
-		a.permission,
-		a.remarks,
-		a.create_by AS "createBy.id",
-		a.create_date,
-		a.tenant_id AS "tenantId",
-		a.update_by AS "updateBy.id",
-		a.update_date,
-		a.del_flag
-	</sql>
 	<sql id="menuJoins">
 		LEFT JOIN sys_menu p ON p.id = a.parent_id
     </sql>
@@ -52,55 +33,19 @@
 		<include refid="menuJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
-	<select id="findAllList" resultType="Menu">
-		SELECT
-			<include refid="menuColumns"/>
-		FROM sys_menu a
-		<include refid="menuJoins"/>
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-		ORDER BY a.sort
-	</select>
 	<select id="findList" resultType="Menu">
-		SELECT
-		<include refid="menuListColumns"/>
-		FROM sys_menu a
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-		<if test="name != null and name != ''">
-			AND a.name LIKE #{name}
-		</if>
-		ORDER BY a.sort
-	</select>
-	<select id="findByParentIdsLike" resultType="Menu">
-		SELECT
-			a.id,
-			a.parent_id AS "parent.id",
-			a.parent_ids
-		FROM sys_menu a
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE #{parentIds}
-		ORDER BY a.sort
-	</select>
-	<select id="findMenuChilds"  resultType="Menu">
-		SELECT
+		SELECT 
 			<include refid="menuColumns"/>
 		FROM sys_menu a
 		<include refid="menuJoins"/>
-		WHERE a.del_flag = '0'  and a.is_show = '1' AND a.parent_id = #{parent.id}
-		ORDER BY a.sort
-	</select>	
-	<select id="findByUserId" resultType="Menu">
-		SELECT DISTINCT
-			<include refid="menuColumns"/>
-		FROM sys_menu a
-		LEFT JOIN sys_menu p ON p.id = a.parent_id
-		JOIN sys_role_menu rm ON rm.menu_id = a.id
-		JOIN sys_role r ON r.id = rm.role_id AND r.useable='1'
-		JOIN sys_user_role ur ON ur.role_id = r.id
-		JOIN sys_user u ON u.id = ur.user_id AND u.id = #{userId}
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND r.del_flag = #{DEL_FLAG_NORMAL} AND u.del_flag = #{DEL_FLAG_NORMAL} 
-		ORDER BY a.sort
+				WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
 	</select>
-	
 	<insert id="insert">
 		INSERT INTO sys_menu(
 			id, 

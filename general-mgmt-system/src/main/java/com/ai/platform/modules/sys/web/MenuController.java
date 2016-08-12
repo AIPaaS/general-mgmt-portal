@@ -23,7 +23,6 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
-import com.ai.platform.modules.gen.service.GenTableService;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.MgmtMenu;
 import com.ai.platform.modules.sys.service.GnTabSystemService;
@@ -72,7 +71,8 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:log:view")
 	@RequestMapping(value = {"page"})
 	public String page(MgmtMenu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Page<MgmtMenu> page = mgmtMenuService.findPage(new Page<MgmtMenu>(request, response), menu); 
+		 request.setAttribute("searchName", menu.getName());
+		Page<MgmtMenu> page = mgmtMenuService.findPage(new Page<MgmtMenu>(request, response), menu); 
         model.addAttribute("page", page);
 		return "modules/mgmtsys/iotmenuList";
 	}
@@ -115,7 +115,7 @@ public class MenuController extends BaseController {
 		}
 		systemService.saveMenu(menu);
 		addMessage(redirectAttributes, "保存菜单'" + menu.getName() + "'成功");
-		return "redirect:" + adminPath + "/sys/menu/";
+		return "redirect:" + adminPath + "/sys/menu/page";
 	}
 	
 	@RequiresPermissions("sys:menu:edit")

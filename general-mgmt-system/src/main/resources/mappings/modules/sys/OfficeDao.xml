@@ -28,9 +28,9 @@
 		a.useable AS useable,
 		a.primary_person AS "primaryPerson.id",
 		a.deputy_person AS "deputyPerson.id",
-		ar.area_name AS "area.name",
-		pp.name AS "primaryPerson.name",
-		dp.name AS "deputyPerson.name"
+		ar.area_name AS "area.name"
+		<!-- pp.name AS "primaryPerson.name",
+		dp.name AS "deputyPerson.name" -->
 	</sql>
 		<sql id="officePageColumns">
 		a.id,
@@ -60,8 +60,8 @@
 	<sql id="officeJoins">
 		<!--  LEFT JOIN sys_office p ON p.id = a.parent_id-->
 		LEFT JOIN gn_area ar ON ar.id = a.area_id
-		LEFT JOIN SYS_USER pp ON pp.id = a.primary_person
-		LEFT JOIN SYS_USER dp ON dp.id = a.deputy_person
+		<!-- LEFT JOIN SYS_USER pp ON pp.id = a.primary_person
+		LEFT JOIN SYS_USER dp ON dp.id = a.deputy_person -->
     </sql>
 	
 	<select id="get" resultType="Office">
@@ -83,6 +83,15 @@
 		</if>
 		<if test="id != null and id != ''">
 				AND a.id=#{id}
+		</if>
+		<if test="parent != null and parent.id != null and parent.id != ''">
+				AND a.parent_id = #{parent.id}
+		</if>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 		</if>
 		<!-- 数据范围过滤 -->
 		   ${sqlMap.dsf} 

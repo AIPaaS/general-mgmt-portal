@@ -1,39 +1,45 @@
 package com.ai.platform.modules.sys.entity;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.ai.platform.common.persistence.TreeEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ai.platform.common.persistence.DataEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-public class MgmtMenu extends TreeEntity<MgmtMenu>{
+public class MgmtMenu  extends DataEntity<MgmtMenu>{
 	private static final long serialVersionUID = 1L;
-	private Menu parent;	// 父级菜单
-	private String parentIds; // 所有父级编号
-	private String name; 	// 名称
-	private String href; 	// 链接
-	private String target; 	// 目标（ mainFrame、_blank、_self、_parent、_top）
-	private String icon; 	// 图标
-	private Integer sort; 	// 排序
-	private String isShow; 	// 是否在菜单中显示（1：显示；0：不显示）
-	private String permission; // 权限标识
+	private MgmtMenu parent;		// 上级菜单
+	private String parentIds;		// 所有父级编号
+	private String name;		// 名称
+	private String sort;		// 排序
+	private String href;		// 链接
+	private String target;		// 目标
+	private String icon;		// 图标
+	private String isShow;		// 可见
+	private String permission;		// 权限标识
+	private String tenantId;		// tenant_id
+	private String systemId;		// 系统标识
 	
-	private String userId;
-	
-	public MgmtMenu(){
+	public MgmtMenu() {
 		super();
-		this.sort = 30;
-		this.isShow = "1";
 	}
-	
+
 	public MgmtMenu(String id){
 		super(id);
 	}
+
+	@JsonBackReference
+	@NotNull(message="上级菜单不能为空")
+	public MgmtMenu getParent() {
+		return parent;
+	}
+
+	public void setParent(MgmtMenu parent) {
+		this.parent = parent;
+	}
 	
-	@Length(min=1, max=2000)
+	@Length(min=1, max=2000, message="所有父级编号长度必须介于 1 和 2000 之间")
 	public String getParentIds() {
 		return parentIds;
 	}
@@ -42,7 +48,7 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 		this.parentIds = parentIds;
 	}
 	
-	@Length(min=1, max=100)
+	@Length(min=1, max=100, message="名称长度必须介于 1 和 100 之间")
 	public String getName() {
 		return name;
 	}
@@ -50,8 +56,16 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getSort() {
+		return sort;
+	}
 
-	@Length(min=0, max=2000)
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	
+	@Length(min=0, max=2000, message="链接长度必须介于 0 和 2000 之间")
 	public String getHref() {
 		return href;
 	}
@@ -59,8 +73,8 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 	public void setHref(String href) {
 		this.href = href;
 	}
-
-	@Length(min=0, max=20)
+	
+	@Length(min=0, max=20, message="目标长度必须介于 0 和 20 之间")
 	public String getTarget() {
 		return target;
 	}
@@ -69,7 +83,7 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 		this.target = target;
 	}
 	
-	@Length(min=0, max=100)
+	@Length(min=0, max=100, message="图标长度必须介于 0 和 100 之间")
 	public String getIcon() {
 		return icon;
 	}
@@ -78,16 +92,7 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 		this.icon = icon;
 	}
 	
-	@NotNull
-	public Integer getSort() {
-		return sort;
-	}
-	
-	public void setSort(Integer sort) {
-		this.sort = sort;
-	}
-	
-	@Length(min=1, max=1)
+	@Length(min=1, max=1, message="可见长度必须介于 1 和 1 之间")
 	public String getIsShow() {
 		return isShow;
 	}
@@ -95,8 +100,8 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 	public void setIsShow(String isShow) {
 		this.isShow = isShow;
 	}
-
-	@Length(min=0, max=200)
+	
+	@Length(min=0, max=200, message="权限标识长度必须介于 0 和 200 之间")
 	public String getPermission() {
 		return permission;
 	}
@@ -104,57 +109,23 @@ public class MgmtMenu extends TreeEntity<MgmtMenu>{
 	public void setPermission(String permission) {
 		this.permission = permission;
 	}
-
-	public String getParentId() {
-		return parent != null && parent.getId() != null ? parent.getId() : "0";
+	
+	@Length(min=0, max=64, message="tenant_id长度必须介于 0 和 64 之间")
+	public String getTenantId() {
+		return tenantId;
 	}
 
-	@JsonIgnore
-	public static void sortList(List<Menu> list, List<Menu> sourcelist, String parentId, boolean cascade){
-		for (int i=0; i<sourcelist.size(); i++){
-			Menu e = sourcelist.get(i);
-			if (e.getParent()!=null && e.getParent().getId()!=null
-					&& e.getParent().getId().equals(parentId)){
-				list.add(e);
-				if (cascade){
-					// 判断是否还有子节点, 有则继续获取子节点
-					for (int j=0; j<sourcelist.size(); j++){
-						Menu child = sourcelist.get(j);
-						if (child.getParent()!=null && child.getParent().getId()!=null
-								&& child.getParent().getId().equals(e.getId())){
-							sortList(list, sourcelist, e.getId(), true);
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@JsonIgnore
-	public static String getRootId(){
-		return "1";
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
 	}
 	
-	public String getUserId() {
-		return userId;
+	@Length(min=0, max=64, message="系统标识长度必须介于 0 和 64 之间")
+	public String getSystemId() {
+		return systemId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	@Override
-	public String toString() {
-		return name;
-	}
-	@Override
-	public MgmtMenu getParent() {
-		return null;
-	}
-
-	@Override
-	public void setParent(MgmtMenu parent) {
+	public void setSystemId(String systemId) {
+		this.systemId = systemId;
 	}
 
 }
