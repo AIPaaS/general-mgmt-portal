@@ -14,6 +14,7 @@ import org.apache.shiro.subject.Subject;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.utils.CacheUtils;
+import com.ai.platform.common.utils.CookieUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.AreaDao;
@@ -50,6 +51,7 @@ public class UserUtils {
 	public static final String USER_CACHE_LOGIN_NAME_ = "ln";
 	public static final String USER_CACHE_LIST_BY_OFFICE_ID_ = "oid_";
 	public static final String USER_CACHE_Theme = "theme";
+	public static final String USER_CACHE_ThemeInd = "theme_index";
 	public static final String CACHE_ROLE_LIST = "roleList";
 	public static final String CACHE_MENU_LIST = "menuList";
 	public static final String CACHE_MENU_CHILDLIST = "menuChildList";
@@ -96,7 +98,31 @@ public class UserUtils {
 		}
 		return theme;
 	}
-
+	/**
+	 * 获取当前用户主题
+	 * 
+	 * @param id
+	 * @return 取不到返回null
+	 */
+	public static String getThemeIndex() {
+		String theme = "";
+		String theme_index="";
+		User user = (User) getUser();
+		theme = user.getTheme();
+		
+		
+		if(StringUtils.equals(theme, "cerulean") || StringUtils.equals(theme, "default")){
+			
+			theme_index="theme-whbl";
+		}else if(StringUtils.equals(theme, "green")){
+			theme_index="theme-white";
+		}else{
+			theme_index="theme-whbl";
+		}
+		
+	
+		return theme_index;
+	}
 	/**
 	 * 根据登录名获取用户
 	 * 

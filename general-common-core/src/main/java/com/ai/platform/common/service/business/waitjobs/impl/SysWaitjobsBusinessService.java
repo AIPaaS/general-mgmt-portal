@@ -45,7 +45,7 @@ public class SysWaitjobsBusinessService implements ISysWaitjobsBusinessService{
 	@Override
 	public BaseResponse completeWaitjobs(WaitjobsCompleteRequset completeRequest) {
 		BaseResponse response = new BaseResponse();
-		int updateCount = iSysWaitjobsAtomService.completeWaitjobs(completeRequest.getId());
+		int updateCount = iSysWaitjobsAtomService.completeWaitjobs(completeRequest.getId(),completeRequest.getTenantId());
 		if(updateCount>0){
 			ResponseHeader responseHeader=new ResponseHeader(true,ResultCodeConstants.SUCCESS_CODE,"更改成功");
 			response.setResponseHeader(responseHeader);

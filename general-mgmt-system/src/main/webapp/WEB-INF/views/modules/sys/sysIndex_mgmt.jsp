@@ -8,7 +8,7 @@
 	<meta name="decorator" content="mgmt"/>
   </head>
 <body>
-<div id="theme-wrapper" class="xyindex">
+<div id="${fns:getTheme()}" class="xyindex">
     <header class="navbar" id="header-navbar">
         <div class="container">
             <a href="index.html" id="logo" class="navbar-brand"><img  src="${iotStatic}/img/logo.png" alt="" class="normal-logo logo-white"/></a>
@@ -42,7 +42,7 @@
          <!--待办事项-->
             <li class="dropdown hidden-xs">
               
-                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
+                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></a>
                       <!--待办事项隐藏区--> 
          		<c:if test="${waitjobsCount gt 0}">  
 	                <ul class="dropdown-menu notifications-list">
@@ -51,10 +51,10 @@
 	                        <div class="arrow"></div>
 	                        </div>
 	                    </li>
-	                    <li class="item-header">代办提醒</li>
+	                    <li class="item-header">待办提醒</li>
 	                    <c:forEach items="${waitjobsList}" var="waitjobs">
 	                    	
-	                    	<li class="item"><a href="${waitjobs.url}" target="mainFrame"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
+	                    	<li class="item"><a href="${empty waitjobs.url?'_':waitjobs.url}" target="mainFrame"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
 	                	</c:forEach>
 	                	<c:if test="${waitjobsCount gt 4}">
 	                		

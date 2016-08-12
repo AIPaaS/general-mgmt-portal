@@ -39,8 +39,8 @@ public class WaitjobsMangeTest {
 	@Test
 	public void testCompleteWaitjobs(){
 		WaitjobsCompleteRequset completeRequest = new WaitjobsCompleteRequset();
-		completeRequest.setId("0");
-		completeRequest.setTenantId("SLP");
+		completeRequest.setId(" 0");
+		completeRequest.setTenantId(" changhong");
 		BaseResponse completeWaitjobs = iSysWaitjobsMangeSV.completeWaitjobs(completeRequest );
 		System.out.println(JSonUtil.toJSon(completeWaitjobs));
 	}
