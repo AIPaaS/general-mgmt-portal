@@ -42,7 +42,7 @@
          <!--待办事项-->
             <li class="dropdown hidden-xs">
               
-                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
+                <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></a>
                       <!--待办事项隐藏区--> 
          		<c:if test="${waitjobsCount gt 0}">  
 	                <ul class="dropdown-menu notifications-list">
