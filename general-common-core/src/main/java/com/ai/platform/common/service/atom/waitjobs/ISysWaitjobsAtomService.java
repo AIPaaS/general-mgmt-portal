@@ -6,5 +6,5 @@ public interface ISysWaitjobsAtomService {
 	
 	public String insertWaitjobs(SysWaitjobs waitjobs);
 	
-	public int completeWaitjobs(String id);
+	public int completeWaitjobs(String id, String tenantId);
 }

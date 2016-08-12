@@ -39,10 +39,11 @@ public class SysWaitjobsAtomService implements ISysWaitjobsAtomService{
 	}
 
 	@Override
-	public int completeWaitjobs(String id) {
+	public int completeWaitjobs(String id, String tenantId) {
 		SysWaitjobsCriteria example = new SysWaitjobsCriteria();
 		Criteria criteria = example.createCriteria();
-		criteria.andIdEqualTo(id);
+		criteria.andIdEqualTo(id.trim());
+		criteria.andTenantIdEqualTo(tenantId.trim());
 		SysWaitjobs record = new SysWaitjobs();
 		record.setStatus(WaitjobsStatusConstant.END);
 		return MapperFactory.getSysWaitjobsMapper().updateByExampleSelective(record , example);
