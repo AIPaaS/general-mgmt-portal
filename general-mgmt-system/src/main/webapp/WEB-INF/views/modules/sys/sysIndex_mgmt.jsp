@@ -51,7 +51,7 @@
 	                        <div class="arrow"></div>
 	                        </div>
 	                    </li>
-	                    <li class="item-header">代办提醒</li>
+	                    <li class="item-header">待办提醒</li>
 	                    <c:forEach items="${waitjobsList}" var="waitjobs">
 	                    	
 	                    	<li class="item"><a href="${waitjobs.url}" target="mainFrame"><i class="fa fa-circle"></i><span class="content">${waitjobs.title}</span></a></li>
