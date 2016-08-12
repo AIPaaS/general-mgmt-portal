@@ -25,7 +25,9 @@ import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.gen.service.GenTableService;
 import com.ai.platform.modules.sys.entity.Menu;
+import com.ai.platform.modules.sys.entity.MgmtMenu;
 import com.ai.platform.modules.sys.service.GnTabSystemService;
+import com.ai.platform.modules.sys.service.MgmtMenuService;
 //import com.ai.platform.modules.sys.entity.MgmtMenu;
 //import com.ai.platform.modules.sys.service.MgmtMenuService;
 import com.ai.platform.modules.sys.service.SystemService;
@@ -44,8 +46,8 @@ public class MenuController extends BaseController {
 
 	@Autowired
 	private SystemService systemService;
-//	@Autowired
-//	private MgmtMenuService mgmtMenuService;
+	@Autowired
+	private MgmtMenuService mgmtMenuService;
 	@Autowired
 	private GnTabSystemService gnTabSystemService;
 	
@@ -67,14 +69,14 @@ public class MenuController extends BaseController {
         model.addAttribute("list", list);
 		return "modules/sys/menuList";
 	}
-//	@RequiresPermissions("sys:log:view")
-//	@RequestMapping(value = {"page"})
-//	public String page(MgmtMenu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
-//        Page<MgmtMenu> page = mgmtMenuService.findPage(new Page<MgmtMenu>(request, response,5), menu); 
-//        model.addAttribute("page", page);
-//		return "modules/mgmtsys/menuList";
-//	}
-//	
+	@RequiresPermissions("sys:log:view")
+	@RequestMapping(value = {"page"})
+	public String page(MgmtMenu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
+        Page<MgmtMenu> page = mgmtMenuService.findPage(new Page<MgmtMenu>(request, response), menu); 
+        model.addAttribute("page", page);
+		return "modules/mgmtsys/iotmenuList";
+	}
+	
 	@RequiresPermissions("sys:menu:view")
 	@RequestMapping(value = "form")
 	public String form(Menu menu, Model model) {
