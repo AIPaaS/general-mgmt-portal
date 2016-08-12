@@ -131,7 +131,7 @@ public class MenuController extends BaseController {
 			systemService.deleteMenu(menu);
 			addMessage(redirectAttributes, "删除菜单成功");
 //		}
-		return "redirect:" + adminPath + "/sys/menu/";
+		return "redirect:" + adminPath + "/sys/menu/page";
 	}
 
 	@RequiresPermissions("user")
