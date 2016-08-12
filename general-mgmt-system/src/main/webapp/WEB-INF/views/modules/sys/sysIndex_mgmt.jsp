@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<c:set var="iotStatic" value="${pageContext.request.contextPath}/template/mgmtstatic/default"/>
 <html>
 <head>
 	<title>${fns:getConfig('productName')}</title>
@@ -10,7 +11,7 @@
 <div id="theme-wrapper" class="xyindex">
     <header class="navbar" id="header-navbar">
         <div class="container">
-            <a href="index.html" id="logo" class="navbar-brand"><img  src="${mgmtStatic}/img/logo.png" alt="" class="normal-logo logo-white"/></a>
+            <a href="index.html" id="logo" class="navbar-brand"><img  src="${iotStatic}/img/logo.png" alt="" class="normal-logo logo-white"/></a>
         <div class="clearfix">
         <!--操作菜单-->
             <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
@@ -69,11 +70,11 @@
  <ul class="dropdown-menu color-pifu" id="skin-colors" >
                	 	<li>
 		            
-		            <a class="skin-changer" data-skin="theme-whbl" data-toggle="tooltip" title="蓝色" style="background-color: #3498db;height:20px;width:10px;padding:0 10px;float:left" onclick="location='${pageContext.request.contextPath}/theme/united?url='+location.href">
+		            <a class="skin-changer" data-skin="theme-whbl" data-toggle="tooltip" title="蓝色" style="background-color: #3498db;height:20px;width:10px;padding:0 10px;float:left" onclick="location='${pageContext.request.contextPath}/theme/cerulean?url='+location.href">
 		            </a>
 		            </li>
 		            <li>
-		            <a class="skin-changer" data-skin="theme-white" data-toggle="tooltip" title="绿色" style="background-color: #2ecc71;height:20px;width:10px;padding:0 10px;float:left">
+		            <a class="skin-changer" data-skin="theme-white" data-toggle="tooltip" title="绿色" style="background-color: #2ecc71;height:20px;width:10px;padding:0 10px;float:left" onclick="location='${pageContext.request.contextPath}/theme/green?url='+location.href">
 		            </a>
 		            </li>
 		             <li>
