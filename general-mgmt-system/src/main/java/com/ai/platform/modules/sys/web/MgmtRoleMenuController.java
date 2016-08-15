@@ -56,7 +56,7 @@ public class MgmtRoleMenuController extends BaseController {
 	public String list(Role role, HttpServletRequest request, HttpServletResponse response,Model model) {
 //		List<Role> list = systemService.findAllRole();
 //		model.addAttribute("list", list);
-		Page<Role> page = new Page<Role>(request, response, 5);
+		Page<Role> page = new Page<Role>(request, response);
 		role.setPage(page);
 		List<Role> list = systemService.findRoleList(role);
 		page.setList(list);
