@@ -68,7 +68,7 @@ public class MenuController extends BaseController {
         model.addAttribute("list", list);
 		return "modules/sys/menuList";
 	}
-	@RequiresPermissions("sys:log:view")
+	@RequiresPermissions("sys:menu:view")
 	@RequestMapping(value = {"page"})
 	public String page(MgmtMenu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
 		 request.setAttribute("searchName", menu.getName());
