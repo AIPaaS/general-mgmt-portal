@@ -23,6 +23,8 @@ public class Office extends TreeEntity<Office> {
 //	private String parentIds; // 所有父级编号
 	private Area area;		// 归属区域
 	private GnArea gnArea;		// 归属区域
+	private String oldName; 	// 原名称
+	private String oldCode;	// 原编码
 	//private String parentId;//父级编号
 	/*public String getParentId() {
 		return parentId;
@@ -31,6 +33,22 @@ public class Office extends TreeEntity<Office> {
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
 	}*/
+
+	public String getOldName() {
+		return oldName;
+	}
+
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
+
+	public String getOldCode() {
+		return oldCode;
+	}
+
+	public void setOldCode(String oldCode) {
+		this.oldCode = oldCode;
+	}
 
 	private String code; 	// 机构编码
 	private String name; 	// 机构名称

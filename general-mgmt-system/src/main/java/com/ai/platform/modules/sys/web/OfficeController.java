@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
@@ -165,6 +166,14 @@ public class OfficeController extends BaseController {
 		if (!beanValidator(model, office)){
 			return form(office, model);
 		}
+		if (!"true".equals(checkName(office.getOldName(),office.getName()))){
+			addMessage(model, "保存部门'" + office.getName() + "'失败, 部门名称已存在");
+			return form(office, model);
+		}
+		if (!"true".equals(checkCode(office.getOldCode(),office.getCode()))){
+			addMessage(model, "保存部门'" + office.getCode() + "'失败, 部门编码已存在");
+			return form(office, model);
+		}
 		officeService.save(office);
 		
 		if(office.getChildDeptList()!=null){
@@ -203,7 +212,46 @@ public class OfficeController extends BaseController {
 		//return "redirect:" + adminPath + "/sys/office/list?id="+office.getParentId()+"&parentIds="+office.getParentIds();
 			return "redirect:" + adminPath + "/sys/office/page";
 	}
-
+	/**
+	 * 验证部门名称是否有效
+	 * @param oldName
+	 * @param name
+	 * @return
+	 */
+	@RequiresPermissions("sys:office:edit")
+	@ResponseBody
+	@RequestMapping(value = "checkName")
+	public String checkName(String oldName,String name) {
+		Office o = new Office();
+		o.setName(name);
+		List<Office> list = officeService.find(o);
+		if (name!=null && name.equals(oldName)) {
+			return "true";
+		} else if (name!=null &&  CollectionUtil.isEmpty(list)) {
+			return "true";
+		}
+		return "false";
+	}
+	/**
+	 * 验证部门代码是否有效
+	 * @param oldName
+	 * @param name
+	 * @return
+	 */
+	@RequiresPermissions("sys:office:edit")
+	@ResponseBody
+	@RequestMapping(value = "checkCode")
+	public String checkCode( String oldCode,String code) {
+		Office o = new Office();
+		o.setCode(code);
+		List<Office> list = officeService.find(o);
+		if (code!=null && code.equals(oldCode)) {
+			return "true";
+		} else if (code!=null &&  CollectionUtil.isEmpty(list)) {
+			return "true";
+		}
+		return "false";
+	}
 	/**
 	 * 获取机构JSON数据。
 	 * @param extId 排除的ID

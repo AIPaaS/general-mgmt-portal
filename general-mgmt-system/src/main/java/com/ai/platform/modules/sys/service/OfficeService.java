@@ -34,7 +34,12 @@ public class OfficeService extends TreeService<OfficeDao, Office> {
 			return UserUtils.getOfficeList();
 		}
 	}
-	
+	public List<Office> find(Office office){
+		if(office != null){
+			return dao.find(office);
+		}
+		return  new ArrayList<Office>();
+	}
 	@Transactional(readOnly = true)
 	public List<Office> findList(Office office){
 		if(office != null){

@@ -7,7 +7,16 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#name").focus();
+			//$("#code").focus();
 			$("#inputForm").validate({
+				rules: {
+					name: {remote: "${ctx}/sys/office/checkName?oldName=" + encodeURIComponent("${office.name}")},
+					code: {remote: "${ctx}/sys/office/checkCode?oldCode=" + encodeURIComponent("${office.code}")}
+				},
+				messages: {
+					name: {remote: "部门名称已存在"},
+					code: {remote: "部门编码已存在"}
+				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
 					form.submit();
@@ -51,6 +60,7 @@
 		<div class="control-group">
 			<label class="control-label">部门名称:</label>
 			<div class="controls">
+			    <input id="oldName" name="oldName" type="hidden" value="${office.name}">
 				<form:input path="name" htmlEscape="false" maxlength="50" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -58,7 +68,9 @@
 		<div class="control-group">
 			<label class="control-label">部门编码:</label>
 			<div class="controls">
-				<form:input path="code" htmlEscape="false" maxlength="50"/>
+			<input id="oldCode" name="oldCode" type="hidden" value="${office.code}">
+				<form:input path="code" htmlEscape="false" maxlength="50" class="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
