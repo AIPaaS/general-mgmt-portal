@@ -45,6 +45,7 @@
 			<div class="controls">
                 <sys:treeselect id="area" name="area.id" value="${office.area.id}" labelName="area.name" labelValue="${office.area.name}"
 					title="区域" url="/sys/gnArea/treeData" cssClass="required"/>
+					<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -76,7 +77,7 @@
 				</form:select>
 			</div>
 		</div>
-		<div class="control-group">
+		<!--  <div class="control-group">
 			<label class="control-label">是否可用:</label>
 			<div class="controls">
 				<form:select path="useable">
@@ -98,7 +99,7 @@
 				 <sys:treeselect id="deputyPerson" name="deputyPerson.id" value="${office.deputyPerson.id}" labelName="office.deputyPerson.name" labelValue="${office.deputyPerson.name}"
 					title="用户" url="/sys/office/treeData?type=3" allowClear="true" notAllowSelectParent="true"/>
 			</div>
-		</div>
+		</div>-->
 		<div class="control-group">
 			<label class="control-label">联系地址:</label>
 			<div class="controls">
@@ -112,7 +113,7 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">负责人:</label>
+			<label class="control-label">联系人:</label>
 			<div class="controls">
 				<form:input path="master" htmlEscape="false" maxlength="50"/>
 			</div>
@@ -123,12 +124,12 @@
 				<form:input path="phone" htmlEscape="false" maxlength="50"/>
 			</div>
 		</div>
-		<div class="control-group">
+		<!--  <div class="control-group">
 			<label class="control-label">传真:</label>
 			<div class="controls">
 				<form:input path="fax" htmlEscape="false" maxlength="50"/>
 			</div>
-		</div>
+		</div>-->
 		<div class="control-group">
 			<label class="control-label">邮箱:</label>
 			<div class="controls">
@@ -141,14 +142,14 @@
 				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="200" class="input-xlarge"/>
 			</div>
 		</div>
-		<c:if test="${empty office.id}">
+		<!--<c:if test="${empty office.id}">
 			<div class="control-group">
 				<label class="control-label">快速添加下级部门:</label>
 				<div class="controls">
 					<form:checkboxes path="childDeptList" items="${fns:getDictList('sys_office_common')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</div>
 			</div>
-		</c:if>
+		</c:if>-->
 		<div class="form-actions">
 			<shiro:hasPermission name="sys:office:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>

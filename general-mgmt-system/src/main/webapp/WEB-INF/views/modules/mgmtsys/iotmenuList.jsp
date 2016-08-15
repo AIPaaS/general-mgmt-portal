@@ -38,7 +38,7 @@
 	       </form:form>
 	   	<!--查询结束-->      
               <table class="table table-hover table-border table-bordered">
-                 <thead><tr><th>菜单ID</th><th>菜单名称</th><th>菜单URL</th><th>操作</th></tr></thead>
+                 <thead><tr><th>菜单ID</th><th>名称</th><th>链接</th><th>操作</th></tr></thead>
                   <tbody>
 		              <c:forEach items="${page.list}" var="menu">
 						<tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
