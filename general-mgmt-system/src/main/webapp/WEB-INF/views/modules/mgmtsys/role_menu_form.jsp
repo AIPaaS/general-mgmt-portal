@@ -65,7 +65,7 @@
 			</div>
 			<div class="row-fluid span12">
 				<span class="span5">归属机构: ${role.office.name}</span>
-				<span class="span5">角色类型: ${role.roleType}</span>
+				<%-- <span class="span5">角色类型: ${role.roleType}</span> --%>
 			</div>
 	</div>
 	<form:form id="inputForm" modelAttribute="role" action="${ctx}/sys/rolemenu/save" method="post" class="form-horizontal">
