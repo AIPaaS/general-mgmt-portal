@@ -130,7 +130,7 @@
 		<div class="control-group">
 			<label class="control-label">邮政编码:</label>
 			<div class="controls">
-				<form:input path="zipCode" htmlEscape="false" maxlength="50" type="myZipCode"/>
+				<form:input path="zipCode" htmlEscape="false" maxlength="50" class="myZipCode"/>
 			</div>
 		</div>
 		<div class="control-group">
