@@ -17,7 +17,7 @@
 	</script>
 </head>
 <body>
-	<form:form id="searchForm" modelAttribute="role" action="${ctx}/sys/role/" method="post" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="role" action="${ctx}/sys/rolemenu/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">

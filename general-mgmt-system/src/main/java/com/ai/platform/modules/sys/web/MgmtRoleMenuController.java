@@ -23,12 +23,12 @@ import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.RoleMenu;
-import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
 /**
  * 角色Controller
+ * 
  * @author ThinkGem
  * @version 2013-12-05
  */
@@ -38,24 +38,24 @@ public class MgmtRoleMenuController extends BaseController {
 
 	@Autowired
 	private SystemService systemService;
-	
-	@Autowired
-	private OfficeService officeService;
-	
+
+	// @Autowired
+	// private OfficeService officeService;
+
 	@ModelAttribute("role")
-	public Role get(@RequestParam(required=false) String id) {
-		if (StringUtils.isNotBlank(id)){
+	public Role get(@RequestParam(required = false) String id) {
+		if (StringUtils.isNotBlank(id)) {
 			return systemService.getRole(id);
-		}else{
+		} else {
 			return new Role();
 		}
 	}
-	
+
 	@RequiresPermissions("sys:role:view")
-	@RequestMapping(value = {"list", ""})
-	public String list(Role role, HttpServletRequest request, HttpServletResponse response,Model model) {
-//		List<Role> list = systemService.findAllRole();
-//		model.addAttribute("list", list);
+	@RequestMapping(value = { "list", "" })
+	public String list(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
+		// List<Role> list = systemService.findAllRole();
+		// model.addAttribute("list", list);
 		Page<Role> page = new Page<Role>(request, response);
 		role.setPage(page);
 		List<Role> list = systemService.findRoleList(role);
@@ -67,28 +67,28 @@ public class MgmtRoleMenuController extends BaseController {
 	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
-		if (role.getOffice()==null){
+		if (role.getOffice() == null) {
 			role.setOffice(UserUtils.getUser().getOffice());
 		}
 		model.addAttribute("role", role);
-		//model.addAttribute("menuList", systemService.findAllMenu());
-		model.addAttribute("officeList", officeService.findAll());
+		model.addAttribute("menuList", systemService.findAllMenu());
+		// model.addAttribute("officeList", officeService.findAll());
 		return "modules/mgmtsys/role_menu_form";
 	}
-	
+
 	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "save")
 	public String save(RoleMenu roleMenu, Model model, RedirectAttributes redirectAttributes) {
-		if(!UserUtils.getUser().isAdmin()){
+		if (!UserUtils.getUser().isAdmin()) {
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
-			return "redirect:" + adminPath + "/sys/rolemenu/form?id="+roleMenu.getId();
+			return "redirect:" + adminPath + "/sys/rolemenu/form?id=" + roleMenu.getId();
 		}
-		if(Global.isDemoMode()){
+		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/rolemenu/form?id="+roleMenu.getId();
+			return "redirect:" + adminPath + "/sys/rolemenu/form?id=" + roleMenu.getId();
 		}
 		systemService.saveRoleMenu(roleMenu);
 		addMessage(redirectAttributes, "权限赋值成功");
-		return "redirect:" + adminPath + "/sys/rolemenu/form?id="+roleMenu.getId();
+		return "redirect:" + adminPath + "/sys/rolemenu/form?id=" + roleMenu.getId();
 	}
 }
