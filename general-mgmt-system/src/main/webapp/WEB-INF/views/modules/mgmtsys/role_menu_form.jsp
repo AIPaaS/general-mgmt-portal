@@ -65,7 +65,7 @@
 			</div>
 			<div class="row-fluid span12">
 				<span class="span5">归属机构: ${role.office.name}</span>
-				<span class="span5">角色类型: ${role.roleType}</span>
+				<%-- <span class="span5">角色类型: ${role.roleType}</span> --%>
 			</div>
 	</div>
 	<form:form id="inputForm" modelAttribute="role" action="${ctx}/sys/rolemenu/save" method="post" class="form-horizontal">
@@ -73,8 +73,8 @@
 		<sys:message content="${message}"/>
 		<div class="control-group">
 			<label class="control-label">角色授权:</label>
-			<div class="controls">
-				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;"></div>
+			<div class="controls" style="overflow-y: auto;">
+				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;max-height:1000px;"></div>
 				<form:hidden path="menuIds"/>
 				<div id="officeTree" class="ztree" style="margin-left:100px;margin-top:3px;float:left;"></div>
 				<form:hidden path="officeIds"/>

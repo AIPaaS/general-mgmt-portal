@@ -32,6 +32,15 @@
 				}
 			});
 		});
+		jQuery.validator.addMethod("myPhone", function(value, element) {
+			var tel = /(^0[1-9]{1}\d{9,10}$)|(^1\d{10}$)/g;     
+			return this.optional(element) || (tel.test(value));     
+		}, "格式为:固话为区号(3-4位)号码(7-9位),手机为:11位数字");
+		// 邮政编码验证
+		jQuery.validator.addMethod("myZipCode", function(value, element) {
+		    var tel = /^[0-9]{6}$/;
+		    return this.optional(element) || (tel.test(value));
+		}, "请正确填写您的邮政编码");
 	</script>
 </head>
 <body>
@@ -53,7 +62,7 @@
 			<label class="control-label">归属区域:</label>
 			<div class="controls">
                 <sys:treeselect id="area" name="area.id" value="${office.area.id}" labelName="area.name" labelValue="${office.area.name}"
-					title="区域" url="/sys/gnArea/treeData" cssClass="required"/>
+					title="区域" url="/sys/gnArea/treeData" dataMsgRequired="必填信息" cssClass="required"/>
 					<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -121,7 +130,7 @@
 		<div class="control-group">
 			<label class="control-label">邮政编码:</label>
 			<div class="controls">
-				<form:input path="zipCode" htmlEscape="false" maxlength="50"/>
+				<form:input path="zipCode" htmlEscape="false" maxlength="50" class="myZipCode"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -133,7 +142,7 @@
 		<div class="control-group">
 			<label class="control-label">电话:</label>
 			<div class="controls">
-				<form:input path="phone" htmlEscape="false" maxlength="50"/>
+				<form:input path="phone" htmlEscape="false" maxlength="50" class="myPhone"/>
 			</div>
 		</div>
 		<!--  <div class="control-group">
@@ -145,7 +154,7 @@
 		<div class="control-group">
 			<label class="control-label">邮箱:</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="50"/>
+				<form:input path="email" htmlEscape="false" maxlength="50" type="email"/>
 			</div>
 		</div>
 		<div class="control-group">
