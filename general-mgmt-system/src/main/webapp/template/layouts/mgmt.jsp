@@ -19,6 +19,7 @@
 <script src="${iotStatic}/scripts/plugin/jquery.nanoscroller.min.js"></script>
 <script src="${iotStatic}/scripts/modular/skin.js"></script>  
 <script src="${iotStatic}/scripts/modular/frame.js"></script>  
+<script src="${iotStatic}/scripts/modular/eject.js"></script>  
 <script src="${iotStatic}/scripts/modular/scripts.js"></script>
 
 

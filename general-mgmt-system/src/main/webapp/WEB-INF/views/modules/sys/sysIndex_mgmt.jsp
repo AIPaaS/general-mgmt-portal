@@ -159,7 +159,22 @@
 										<ul class="submenu" id="secondmenu">
 										<c:set var="rootMenuId" value="${menu.id}"/>
 										<c:forEach items="${fns:getChildsMenu(rootMenuId)}" var="menuNode" varStatus="idxStatus">
-										<li><a href="${empty menuNode.gnTabSystem.systemUrlContext ? ctx : menuNode.gnTabSystem.systemUrlContext}${menuNode.href}" data-id="${menuNode.id}" target="mainFrame">${menuNode.name}</a></li>
+										<c:if test="${empty menuNode.href}">
+											<li><a href="${empty menuNode.gnTabSystem.systemUrlContext ? ctx : menuNode.gnTabSystem.systemUrlContext}${menuNode.href}" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
+											<!--三级菜单-->
+					                        <ul class="submenu three-list">
+						                        <c:forEach items="${fns:getChildsMenu(menuNode.id)}" var="menuNodethree" varStatus="idxStatus">
+						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
+						                        <li><a href="${empty menuNodethree.gnTabSystem.systemUrlContext ? ctx : menuNodethree.gnTabSystem.systemUrlContext}${menuNodethree.href}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        
+						                        </c:forEach>
+					                 	   	</ul>
+							     		</c:if>
+							     		<c:if test="${not empty menuNode.href}">
+							     			<li><a href="${empty menuNode.gnTabSystem.systemUrlContext ? ctx : menuNode.gnTabSystem.systemUrlContext}${menuNode.href}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
+							     		</c:if>
+	
+										</li>
 										</c:forEach>
 										</ul>
 									</c:if>

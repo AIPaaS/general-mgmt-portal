@@ -150,7 +150,7 @@ th.visible-xxs, td.visible-xxs {
 	margin-top: 0;
 	margin-bottom: 0;
 	position: relative;
-	min-height: 1200px;
+	min-height:1000px;
 	padding: 15px 15px 35px 15px;
 	margin-left: 220px;
 }
@@ -863,7 +863,7 @@ color:#344644;
 	padding-left: 85px;
 }
 #sidebar-nav .nav>.open>.submenu>li>.submenu a:before, #sidebar-nav .nav>.active>.submenu>li>.submenu a:before {
-	content: "\f111";
+	/*content: "\f111";*/
 	display: inline;
 	font-family: FontAwesome;
 	font-size: 4px;
@@ -6494,6 +6494,26 @@ svg {
 .theme-whbl #sidebar-nav .nav li .submenu {
 	background-color: #203a52;
 }
+/**左侧三级菜单**/
+.theme-whbl #sidebar-nav .nav li .submenu li .three-list{}
+.theme-whbl #sidebar-nav .nav li .submenu li .three-list li a{color:#000}
+.theme-whbl #sidebar-nav .nav li .submenu li .three-list li a:hover{color:#fff}
+.theme-whbl #sidebar-nav .nav li .submenu .list-active{background:#3187dc;}
+.theme-whbl #sidebar-nav .nav li .submenu .three-list .three-list-active{background:#3187dc;}
+.theme-whbl #sidebar-nav .nav li .submenu .three-list .three-list-active a{color:#fff}
+
+/**绿色**/
+.theme-white  #sidebar-nav .nav li .submenu .list-active{background:#dbdee5;}
+.theme-white  #sidebar-nav .nav li .submenu .list-active a{color:#000}
+.theme-white  #sidebar-nav .nav li .submenu .three-list .three-list-active{background:#dbdee5;}
+.theme-white  #sidebar-nav .nav li .submenu .three-list .three-list-active a{color:#000}
+.theme-white  #sidebar-nav .nav li .submenu .three-list .three-list-active a:hover{}
+/**紫色**/
+.theme-amethyst  #sidebar-nav .nav li .submenu .list-active{background:#2a3139;}
+.theme-amethyst  #sidebar-nav .nav li .submenu .list-active a{color:#fff}
+.theme-amethyst  #sidebar-nav .nav li .submenu .three-list .three-list-active{background:#2a3139;}
+.theme-amethyst  #sidebar-nav .nav li .submenu .three-list .three-list-active a{color:#fff}
+.theme-amethyst  #sidebar-nav .nav li .submenu .three-list .three-list-active a:hover{background:#2a3139;color:#fff}
 .theme-whbl #sidebar-nav .nav li .submenu > li > a {
 	color: #fff;
 }
@@ -6959,6 +6979,15 @@ svg {
 .theme-white .order-list-table ul li .current{color:#27ae60;border-bottom:2px solid #27ae60;padding-bottom:11px;}
 .theme-amethyst .order-list-table ul li .current{color:#8e44ad;border-bottom:2px solid #8e44ad;padding-bottom:11px;}
 
+/**商品编辑 文字颜色**/
+.theme-whbl .cit-width p a{color:#10a2fb}
+.theme-white .cit-width p a{color:#27ae60}
+.theme-amethyst .cit-width p a{color:#8e44ad}
+
+
+.theme-whbl .mouse-open ul li,.theme-whbl .mouse-open ul .newly-build-onclick a,.theme-whbl .mouse-open ul .newly-build a{color:#10a2fb}
+.theme-white .mouse-open ul li,.theme-white .mouse-open ul .newly-build-onclick a,.theme-white .mouse-open ul .newly-build a{color:#27ae60}
+.theme-amethyst .mouse-open ul li,.theme-amethyst .mouse-open ul .newly-build-onclick a,.theme-amethyst .mouse-open ul .newly-build a{color:#8e44ad}
 /**步骤条**/
 .theme-whbl .steps ul li{background:#e1e1e1;color:#333}
 .theme-whbl .steps ul li i{color:#e1e1e1;}
@@ -6998,6 +7027,7 @@ svg {
 .form-label ul .word{width:120px;text-align:right;}
 .form-label .word2{ width:160px; text-align:right; font-size:14px;}
 .form-label .word1{ width:85px; text-align:right;}
+.form-label .word3{ width:200px; text-align:right;}
 .colorhid{width:200px;height:200px;background:#fff;position:absolute;top:50px;left:0;display:none; z-index: 999;}
 .form-label  span{color:#f00;}
 .color-pifu {padding:0 0 0 10px;}
@@ -7006,6 +7036,10 @@ svg {
 .form-label ul li .fa-caret-down{ font-size:14px; position:absolute; top:7px; right:-10px;color:#666}
 .form-label ul li .sos{ float:left; margin-left:10px;}
 .form-label ul li .sos a{ color:#666}
+.form-label ul .width-xlag{width:100%;}
+.form-label ul li .img{position:relative;border:1px solid #e7e7e7;}
+.form-label ul li .img .fa-times{position:absolute;right:0px; top:6px; cursor: pointer;color:#1295f2;color:#1b2936}
+.form-label ul li .width-img{width:550px;float:left;display: block;}
 /**新建运费模版**/
 .form-label .add-city{width: 100%;display:inline-block;margin-left:130px;cursor: pointer;margin-top: 10px;}
 .form-label .add-freight{width:100%;padding-left:140px;display: none;}
