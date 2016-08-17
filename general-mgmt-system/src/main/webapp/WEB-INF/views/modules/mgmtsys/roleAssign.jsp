@@ -31,7 +31,7 @@
 		<input id="assignButton" class="btn btn-primary" type="submit" value="分配角色"/>
 		<script type="text/javascript">
 			$("#assignButton").click(function(){
-				top.$.jBox.open("iframe:${ctx}/sys/role/usertorole?id=${role.id}", "分配角色",810,$(top.document).height()-240,{
+				top.$.jBox.open("iframe:${ctx}/sys/role/usertorole?id=${role.id}", "分配角色",document.body.clientWidth-200,document.body.clientHeight,{
 					buttons:{"确定分配":"ok", "清除已选":"clear", "关闭":true}, bottomText:"通过选择部门，然后为列出的人员分配角色。",submit:function(v, h, f){
 						var pre_ids = h.find("iframe")[0].contentWindow.pre_ids;
 						var ids = h.find("iframe")[0].contentWindow.ids;

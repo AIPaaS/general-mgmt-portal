@@ -125,7 +125,7 @@ public class MgmtRoleController extends BaseController {
 ////		}else if (UserUtils.getUser().getRoleIdList().contains(id)){
 ////			addMessage(redirectAttributes, "删除角色失败, 不能删除当前用户所在角色");
 //		}else{
-			//systemService.deleteRole(role);
+			systemService.deleteRole(role);
 			addMessage(redirectAttributes, "删除角色成功");
 //		}
 		return "redirect:" + adminPath + "/sys/role/?repage";
