@@ -32,6 +32,7 @@ import com.ai.platform.modules.sys.entity.Waitjobs;
 import com.ai.platform.modules.sys.security.FormAuthenticationFilter;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Maps;
 
@@ -73,6 +74,7 @@ public class LoginController extends BaseController{
 		
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null && !principal.isMobileLogin()){
+			LogUtils.saveLog(request, "系统登录");
 			initLoginInfo(model, principal);
 			return "modules/sys/sysIndex_mgmt";
 		}
