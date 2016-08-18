@@ -3,7 +3,10 @@
  */
 package com.ai.platform.modules.sys.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
@@ -293,8 +296,9 @@ public class UserUtils {
 	public static List<GnArea> getGnAreaList() {
 		@SuppressWarnings("unchecked")
 		List<GnArea> areaList = (List<GnArea>) getCache(CACHE_AREA_LIST);
-		if (areaList == null) {
-			areaList = gnAreaDao.findAllList(new GnArea());
+		
+		if (areaList == null || areaList.isEmpty() ) {
+			areaList = gnAreaDao.findList(new GnArea());
 			putCache(CACHE_AREA_LIST, areaList);
 		}
 		return areaList;
@@ -386,27 +390,27 @@ public class UserUtils {
 	}
 
 	public static Object getCache(String key, Object defaultValue) {
-		// Object obj = getCacheMap().get(key);
-		Object obj = getSession().getAttribute(key);
+		 Object obj = getCacheMap().get(key);
+		//Object obj = getSession().getAttribute(key);
 		return obj == null ? defaultValue : obj;
 	}
 
 	public static void putCache(String key, Object value) {
-		// getCacheMap().put(key, value);
-		getSession().setAttribute(key, value);
+		 getCacheMap().put(key, value);
+		 //getSession().setAttribute(key, value);
 	}
 
 	public static void removeCache(String key) {
-		// getCacheMap().remove(key);
-		getSession().removeAttribute(key);
+		 getCacheMap().remove(key);
+		 //getSession().removeAttribute(key);
 	}
 
-	// public static Map<String, Object> getCacheMap(){
-	// Principal principal = getPrincipal();
-	// if(principal!=null){
-	// return principal.getCacheMap();
-	// }
-	// return new HashMap<String, Object>();
-	// }
+	 public static Map<String, Object> getCacheMap(){
+	 Principal principal = getPrincipal();
+	 if(principal!=null){
+	 return principal.getCacheMap();
+	 }
+	 return new HashMap<String, Object>();
+	 }
 
 }

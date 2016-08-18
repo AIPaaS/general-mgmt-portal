@@ -5,10 +5,10 @@
 	<sql id="gnAreaColumns">
 		a.area_code AS "areaCode",
 		a.area_name AS "areaName",
-		a.province_code AS "provinceCode.code",
-		a.city_code AS "cityCode.code",
+		a.province_code AS "provinceCode.areaCode",
+		a.city_code AS "cityCode.areaCode",
 		a.area_level AS "areaLevel",
-		a.parent_area_code AS "parent.id",
+		a.parent_area_code AS "parentAreaCode.areaCode",
 		a.sort_id AS "sortId",
 		a.state AS "state",
 		a.remark AS "remark",
@@ -24,7 +24,12 @@
 			<include refid="gnAreaColumns"/>
 		FROM gn_area a
 		<include refid="gnAreaJoins"/>
-		WHERE a.id = #{id}
+
+		<where>
+			
+				AND a.id = #{id}
+		
+		</where>
 	</select>
 	
 	<select id="findList" resultType="GnArea">
@@ -32,8 +37,25 @@
 			<include refid="gnAreaColumns"/>
 		FROM gn_area a
 		<include refid="gnAreaJoins"/>
-		WHERE a.state='1' order by a.AREA_CODE;
-
+		<where>
+			AND a.state = 1
+			<if test="areaCode != null and areaCode != ''">
+				AND a.area_code = #{areaCode}
+			</if>
+			<if test="areaName != null and areaName != ''">
+				AND a.area_name = #{areaName}
+			</if>
+			<if test="id != null and id != ''">
+				AND a.id = #{id}
+			</if>			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="findAllList" resultType="GnArea">
@@ -43,13 +65,20 @@
 		<include refid="gnAreaJoins"/>
 		<where>
 			
-		</where>
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="findByParentIdsLike" resultType="GnArea">
 		SELECT
 			a.id,
-			a.parent_id AS "parent.id",
+			a.parent_id AS "parentAreaCode.id",
 			a.parent_ids
 		FROM gn_area a
 		<include refid="gnAreaJoins"/>
@@ -58,12 +87,10 @@
 			AND a.parent_ids LIKE #{parentIds}
 		</where>
 	</select>
-	
 	<insert id="insert">
 		INSERT INTO gn_area(
 			area_code,
 			area_name,
-			parent_ids, 
 			province_code,
 			city_code,
 			area_level,
@@ -76,28 +103,26 @@
 		) VALUES (
 			#{areaCode},
 			#{areaName},
-			#{parentIds},
-			#{provinceCode.code},
-			#{cityCode.code},
+			#{provinceCode.areaCode},
+			#{cityCode.areaCode},
 			#{areaLevel},
-			#{parent.code},
+			#{parentAreaCode.areaCode},
 			#{sortId},
 			#{state},
 			#{remark},
 			#{tenantId},
-			#{id}
+			#{areaCode}
 		)
 	</insert>
 	
 	<update id="update">
 		UPDATE gn_area SET 	
 			area_code = #{areaCode},
-			parent_ids = #{parentIds}, 
 			area_name = #{areaName},
-			province_code = #{provinceCode.code},
-			city_code = #{cityCode.code},
+			province_code = #{provinceCode.areaCode},
+			city_code = #{cityCode.areaCode},
 			area_level = #{areaLevel},
-			parent_area_code = #{parent.code},
+			parent_area_code = #{parentAreaCode.areaCode},
 			sort_id = #{sortId},
 			state = #{state},
 			remark = #{remark},
@@ -107,18 +132,15 @@
 	
 	<update id="updateParentIds">
 		UPDATE gn_area SET 
-			parent_id = #{parent.id}, 
+			parent_id = #{parentAreaCode.id}, 
 			parent_ids = #{parentIds}
 		WHERE id = #{id}
 	</update>
 	
 	<update id="delete">
 		UPDATE gn_area SET 
-			del_flag = #{DEL_FLAG_DELETE}
-		WHERE id = #{id} OR parent_ids LIKE 
-					<if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
-					<if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
-					<if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>		
+			state = #{state}
+		WHERE area_code = #{areaCode} 	
 		
 	</update>
 	

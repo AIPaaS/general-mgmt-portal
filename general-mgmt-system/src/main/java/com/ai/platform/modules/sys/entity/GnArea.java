@@ -7,31 +7,24 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.validation.constraints.NotNull;
 
-import com.ai.platform.common.persistence.TreeEntity;
+import com.ai.platform.common.persistence.DataEntity;
 
 /**
  * Common工程统一区域代码Entity
  * @author MengBo
- * @version 2016-08-06
+ * @version 2016-08-17
  */
-public class GnArea extends TreeEntity<GnArea> {
-	
+public class GnArea extends DataEntity<GnArea> {
+
+
 	private static final long serialVersionUID = 1L;
 	private String areaCode;		// 区域编码
 	private String areaName;		// 区域名称
 	private GnArea provinceCode;		// 所属省
 	private GnArea cityCode;		// 所属市
 	private String areaLevel;		// 行政级别
-	private String parentAreaCode;  //上级编码
-	public String getParentAreaCode() {
-		return parentAreaCode;
-	}
-
-	public void setParentAreaCode(String parentAreaCode) {
-		this.parentAreaCode = parentAreaCode;
-	}
-
-	private String sortId;		// 排序
+	private GnArea parentAreaCode;		// 所属区域
+	private Integer sortId;		// 排序
 	private String state;		// state
 	private String remark;		// 备注
 	
@@ -41,6 +34,10 @@ public class GnArea extends TreeEntity<GnArea> {
 
 	public GnArea(String id){
 		super(id);
+	}
+	public GnArea(String id,String areaCode){
+		this();
+		this.areaCode = areaCode;
 	}
 
 	@Length(min=1, max=32, message="区域编码长度必须介于 1 和 32 之间")
@@ -90,21 +87,21 @@ public class GnArea extends TreeEntity<GnArea> {
 		this.areaLevel = areaLevel;
 	}
 	
-	@Length(min=0, max=32, message="所属区域长度必须介于 0 和 32 之间")
-	public GnArea getParent() {
-		return parent;
+	@JsonBackReference
+	public GnArea getParentAreaCode() {
+		return parentAreaCode;
 	}
 
-	public void setParent(GnArea parent) {
-		this.parent = parent;
+	public void setParentAreaCode(GnArea parentAreaCode) {
+		this.parentAreaCode = parentAreaCode;
 	}
 	
-	@Length(min=1, max=10, message="排序长度必须介于 1 和 10 之间")
-	public String getSortId() {
+	
+	public Integer getSortId() {
 		return sortId;
 	}
 
-	public void setSortId(String sortId) {
+	public void setSortId(Integer sortId) {
 		this.sortId = sortId;
 	}
 	
@@ -126,7 +123,4 @@ public class GnArea extends TreeEntity<GnArea> {
 		this.remark = remark;
 	}
 
-
-
-	
 }

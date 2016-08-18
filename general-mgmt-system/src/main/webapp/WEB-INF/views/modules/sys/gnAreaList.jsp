@@ -4,39 +4,16 @@
 <head>
 	<title>地区信息管理</title>
 	<meta name="decorator" content="default"/>
-	<%@include file="/WEB-INF/views/include/treetable.jsp" %>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
-			var data = ${fns:toJson(list)}, ids = [], rootIds = [];
-			for (var i=0; i<data.length; i++){
-				ids.push(data[i].id);
-			}
-			ids = ',' + ids.join(',') + ',';
-			for (var i=0; i<data.length; i++){
-				if (ids.indexOf(','+data[i].parentId+',') == -1){
-					if ((','+rootIds.join(',')+',').indexOf(','+data[i].parentId+',') == -1){
-						rootIds.push(data[i].parentId);
-					}
-				}
-			}
-			for (var i=0; i<rootIds.length; i++){
-				addRow("#treeTableList", tpl, data, rootIds[i], true);
-			}
-			$("#treeTable").treeTable({expandLevel : 5});
+			
 		});
-		function addRow(list, tpl, data, pid, root){
-			for (var i=0; i<data.length; i++){
-				var row = data[i];
-				if ((${fns:jsGetVal('row.parentId')}) == pid){
-					$(list).append(Mustache.render(tpl, {
-						dict: {
-						blank123:0}, pid: (root?0:pid), row: row
-					}));
-					addRow(list, tpl, data, row.id);
-				}
-			}
-		}
+		function page(n,s){
+			$("#pageNo").val(n);
+			$("#pageSize").val(s);
+			$("#searchForm").submit();
+        	return false;
+        }
 	</script>
 </head>
 <body>
@@ -45,28 +22,52 @@
 		<shiro:hasPermission name="sys:gnArea:edit"><li><a href="${ctx}/sys/gnArea/form">地区信息添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gnArea" action="${ctx}/sys/gnArea/" method="post" class="breadcrumb form-search">
+		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
+		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<ul class="ul-form">
+			<li><label>区域编码：</label>
+				<form:input path="areaCode" htmlEscape="false" maxlength="32" class="input-medium"/>
+			</li>
+			<li><label>区域名称：</label>
+				<form:input path="areaName" htmlEscape="false" maxlength="500" class="input-medium"/>
+			</li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="treeTable" class="table table-striped table-bordered table-condensed">
+	<table id="contentTable" class="table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
+				<th>区域编码</th>
+				<th>区域名称</th>
+				<th>所属区域</th>
 				<shiro:hasPermission name="sys:gnArea:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>
-		<tbody id="treeTableList"></tbody>
+		<tbody>
+		<c:forEach items="${page.list}" var="gnArea">
+			<tr>
+				<td><a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">
+					${gnArea.areaCode}
+				</a></td>
+				<td>
+					${gnArea.areaName}
+				</td>
+				<td>
+					${gnArea.parentAreaCode.areaCode}
+				</td>
+				<shiro:hasPermission name="sys:gnArea:edit"><td>
+				<c:if test="${gnArea.areaLevel ne '0'}">		
+    				<a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">修改</a>
+    			
+					<a href="${ctx}/sys/gnArea/delete?areaCode=${gnArea.areaCode}" onclick="return confirmx('确认要删除该地区信息吗？', this.href)">删除</a>
+				</c:if>		
+				</td></shiro:hasPermission>
+			</tr>
+		</c:forEach>
+		</tbody>
 	</table>
-	<script type="text/template" id="treeTableTpl">
-		<tr id="{{row.id}}" pId="{{pid}}">
-			<shiro:hasPermission name="sys:genarea:gnArea:edit"><td>
-   				<a href="${ctx}/sys/gnArea/form?id={{row.id}}">修改</a>
-				<a href="${ctx}/sys/gnArea/delete?id={{row.id}}" onclick="return confirmx('确认要删除该地区信息及所有子地区信息吗？', this.href)">删除</a>
-				<a href="${ctx}/sys/gnArea/form?parent.id={{row.id}}">添加下级地区信息</a> 
-			</td></shiro:hasPermission>
-		</tr>
-	</script>
+	<div class="pagination">${page}</div>
 </body>
 </html>

@@ -80,7 +80,10 @@
 			}, loaded:function(h){			
 			
 				$(".jbox-content", top.document).removeClass("overflow-y","hidden");
+				
+				$(".jbox-content", top.document).css("overflow-y","hidden");
 				$(".jbox-close", top.document).css("top","2px");
+				
 			}
 		});
 	});
