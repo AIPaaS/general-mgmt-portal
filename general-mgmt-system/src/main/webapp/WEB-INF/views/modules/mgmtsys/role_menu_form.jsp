@@ -59,14 +59,11 @@
 		<li class="active"><a href="${ctx}/sys/rolemenu/form?id=${role.id}"><shiro:hasPermission name="sys:role:edit">权限分配</shiro:hasPermission><shiro:lacksPermission name="sys:role:edit">查看权限</shiro:lacksPermission></a></li>
 	</ul>
 	<div class="container-fluid breadcrumb">
-			<div class="row-fluid span12">
-				<span class="span5">角色名称: <b>${role.name}</b></span>
-				<span class="span5">英文名称: ${role.enname}</span>
-			</div>
-			<div class="row-fluid span12">
-				<span class="span5">归属机构: ${role.office.name}</span>
-				<%-- <span class="span5">角色类型: ${role.roleType}</span> --%>
-			</div>
+		<div class="row-fluid span12">
+			<span class="span4">角色名称: <b>${role.name}</b></span>
+			<span class="span4">英文名称: ${role.enname}</span>
+			<%-- <span class="span4">归属机构: ${role.office.name}</span> --%>
+		</div>
 	</div>
 	<form:form id="inputForm" modelAttribute="role" action="${ctx}/sys/rolemenu/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>

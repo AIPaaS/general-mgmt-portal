@@ -73,10 +73,6 @@ public class MgmtRoleController extends BaseController {
 	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
-		if (role.getOffice()==null){
-			role.setOffice(UserUtils.getUser().getOffice());
-		}
-		model.addAttribute("role", role);
 		//model.addAttribute("menuList", systemService.findAllMenu());
 		model.addAttribute("officeList", officeService.findAll());
 		return "modules/mgmtsys/roleForm";
@@ -116,18 +112,8 @@ public class MgmtRoleController extends BaseController {
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
 			return "redirect:" + adminPath + "/sys/role/?repage";
 		}
-		if(Global.isDemoMode()){
-			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/role/?repage";
-		}
-//		if (Role.isAdmin(id)){
-//			addMessage(redirectAttributes, "删除角色失败, 不允许内置角色或编号空");
-////		}else if (UserUtils.getUser().getRoleIdList().contains(id)){
-////			addMessage(redirectAttributes, "删除角色失败, 不能删除当前用户所在角色");
-//		}else{
-			systemService.deleteRole(role);
-			addMessage(redirectAttributes, "删除角色成功");
-//		}
+		systemService.deleteRole(role);
+		addMessage(redirectAttributes, "删除角色成功");
 		return "redirect:" + adminPath + "/sys/role/?repage";
 	}
 	

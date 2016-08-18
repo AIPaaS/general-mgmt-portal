@@ -67,10 +67,6 @@ public class MgmtRoleMenuController extends BaseController {
 	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
-		if (role.getOffice() == null) {
-			role.setOffice(UserUtils.getUser().getOffice());
-		}
-		model.addAttribute("role", role);
 		model.addAttribute("menuList", systemService.findAllMenu());
 		// model.addAttribute("officeList", officeService.findAll());
 		return "modules/mgmtsys/role_menu_form";

@@ -10,7 +10,10 @@
 		<result property="dataScope" column="dataScope" />
 		<result property="remarks" column="remarks" />
 		<result property="useable" column="useable" />
-		<result property="sysData" column="sysData" /><!-- 
+		<result property="sysData" column="sysData" />
+		<result property="office.id" column="office.id" />
+		<result property="office.name" column="office.name" />
+		<!-- 
 		<collection property="userList" ofType="User">
 			<id property="id" column="userList.id" />
 			<id property="loginName" column="userList.loginName" />
@@ -24,9 +27,9 @@
 		<collection property="menuList" ofType="Menu">
 			<id property="id" column="menuList.id" />
 		</collection>
-		<collection property="officeList" ofType="Office">
+		<!-- <collection property="officeList" ofType="Office">
 			<id property="id" column="officeList.id" />
-		</collection>
+		</collection> -->
 	</resultMap>
 	
     <sql id="roleColumns">
@@ -59,17 +62,17 @@
 			u.phone AS "userList.phone",
 			u.mobile AS "userList.mobile",
 			uc.name AS "userList.company.name",
-			uo.name AS "userList.office.name", -->
-			rm.menu_id AS "menuList.id",
-			ro.office_id AS "officeList.id"
+			uo.name AS "userList.office.name",
+			ro.office_id AS "officeList.id", -->
+			rm.menu_id AS "menuList.id"
 		FROM sys_role a
 		JOIN sys_office o ON o.id = a.office_id<!-- 
 		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
 		LEFT JOIN sys_user u ON u.id = ur.user_id
 		LEFT JOIN sys_office uc ON uc.id = u.company_id
-		LEFT JOIN sys_office uo ON uo.id = u.office_id -->
+		LEFT JOIN sys_office uo ON uo.id = u.office_id 
+		LEFT JOIN sys_role_office ro ON ro.role_id = a.id-->
 		LEFT JOIN sys_role_menu rm ON rm.role_id = a.id
-		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
 		WHERE a.id = #{id}
 	</select>
 	
