@@ -76,8 +76,6 @@
 			<div class="controls" style="overflow-y: auto;">
 				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;max-height:950px;"></div>
 				<form:hidden path="menuIds"/>
-				<div id="officeTree" class="ztree" style="margin-left:100px;margin-top:3px;float:left;"></div>
-				<form:hidden path="officeIds"/>
 			</div>
 		</div>
 		<div class="form-actions">
