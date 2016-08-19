@@ -182,9 +182,9 @@
 	</script>
 </head>
 <body>
-	<div style="position:absolute;right:8px;top:5px;cursor:pointer;" onclick="search();">
+	<!-- <div style="position:absolute;right:8px;top:5px;cursor:pointer;" onclick="search();">
 		<i class="icon-search"></i><label id="txt">搜索</label>
-	</div>
+	</div> -->
 	<div id="search" class="form-search hide" style="padding:10px 0 0 13px;">
 		<label for="key" class="control-label" style="padding:5px 5px 3px 0;">关键字：</label>
 		<input type="text" class="empty" id="key" name="key" maxlength="50" style="width:110px;">

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>机构管理</title>
+	<title>部门管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		function page(n,s){
@@ -50,7 +50,7 @@
                   <th>归属地区</th>
                   <th>部门编码</th>
                   <th>部门类型</th>
-                  <th>备注</th>
+                   <th>部门级别</th>
                   <th>操作</th>
               </tr>
           </thead>
@@ -60,7 +60,7 @@
 				<td>${office.area.name}</td>
 				<td>${office.code}</td>
 				<td>${office.type}</td>
-				<td>${office.remarks}</td>
+				<td>${office.grade}</td>
 				<shiro:hasPermission name="sys:office:edit"><td>
 					<a href="${ctx}/sys/office/form?id=${office.id}">修改</a>
 					<a href="${ctx}/sys/office/delete?id=${office.id}" onclick="return confirmx('要删除该机构及所有子机构项吗？', this.href)">删除</a>

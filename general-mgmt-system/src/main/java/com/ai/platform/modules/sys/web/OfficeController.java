@@ -81,12 +81,14 @@ public class OfficeController extends BaseController {
 			 request.setAttribute("upName", office.getParent().getName());
 		 }
 		
-		//翻译机构类别
+		//翻译机构类别、等级
 		Page<Office> pge = officeService.findPage(new Page<Office>(request, response), office);
 		List<Office> list = pge.getList();
 		for(Office o : list){
-			String a = DictUtils.getDictLabel(o.getType(), "sys_office_type", "未知");
-			o.setType(a);
+			String type = DictUtils.getDictLabel(o.getType(), "sys_office_type", "未知");
+			String grade = DictUtils.getDictLabel(o.getGrade(), "sys_office_grade", "未知");
+			o.setGrade(grade);
+			o.setType(type);
 		}
 		model.addAttribute("page", pge);
 		return "modules/mgmtsys/iotofficeList";
