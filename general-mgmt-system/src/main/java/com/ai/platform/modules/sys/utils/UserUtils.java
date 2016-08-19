@@ -408,7 +408,7 @@ public class UserUtils {
 	 public static Map<String, Object> getCacheMap(){
 	 Principal principal = getPrincipal();
 	 if(principal!=null){
-	 return principal.getCacheMap();
+		 return principal.getCacheMap();
 	 }
 	 return new HashMap<String, Object>();
 	 }

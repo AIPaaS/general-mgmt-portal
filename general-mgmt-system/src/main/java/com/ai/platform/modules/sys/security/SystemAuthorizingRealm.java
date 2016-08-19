@@ -5,7 +5,9 @@ package com.ai.platform.modules.sys.security;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -29,14 +31,13 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.servlet.ValidateCodeServlet;
 import com.ai.platform.common.utils.Encodes;
 import com.ai.platform.common.utils.SpringContextHolder;
-import com.ai.platform.common.web.Servlets;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.SystemService;
-import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ai.platform.modules.sys.web.LoginController;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 系统安全认证实现类
@@ -229,7 +230,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		private String name; // 姓名
 		private boolean mobileLogin; // 是否手机登录
 		
-//		private Map<String, Object> cacheMap;
+		private Map<String, Object> cacheMap;
 
 		public Principal(User user, boolean mobileLogin) {
 			this.id = user.getId();
@@ -254,13 +255,13 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			return mobileLogin;
 		}
 
-//		@JsonIgnore
-//		public Map<String, Object> getCacheMap() {
-//			if (cacheMap==null){
-//				cacheMap = new HashMap<String, Object>();
-//			}
-//			return cacheMap;
-//		}
+		@JsonIgnore
+		public Map<String, Object> getCacheMap() {
+			if (cacheMap==null){
+				cacheMap = new HashMap<String, Object>();
+			}
+			return cacheMap;
+		}
 
 		/**
 		 * 获取SESSIONID
