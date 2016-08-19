@@ -14,7 +14,6 @@
 		<div class="row-fluid span12">
 			<span class="span4">角色名称: <b>${role.name}</b></span>
 			<span class="span4">英文名称: ${role.enname}</span>
-			<span class="span4">归属机构: ${role.office.name}</span>
 		</div>
 	</div>
 	<sys:message content="${message}"/>

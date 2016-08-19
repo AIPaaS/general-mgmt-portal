@@ -41,7 +41,7 @@
 		<c:forEach items="${page.list}" var="role">
 			<tr>
 				<td><a href="form?id=${role.id}">${role.name}</a></td>
-				<td><a href="form?id=${role.id}">${role.enname}</a></td>
+				<td>${role.enname}</td>
 				<%-- <td>${role.office.name}</td> --%>
 				<shiro:hasPermission name="sys:role:edit"><td>
 					<a href="${ctx}/sys/role/assign?id=${role.id}">分配</a>
