@@ -12,7 +12,10 @@
 			$("#provinceDIV").hide();
 			$("#cityDIV").hide();
 		}
-
+		if(level ==2){
+			
+			$("#cityDIV").hide();
+		}
 		
 	}
 	

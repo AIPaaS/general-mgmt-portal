@@ -106,18 +106,26 @@ public class GnAreaController extends BaseController {
 		if (!beanValidator(model, gnArea)){
 			return form(gnArea, model);
 		}
+		GnArea gncityCode = new GnArea();
+		gncityCode.setAreaCode("000");
+		GnArea gnproCode = new GnArea();
+		gnproCode.setAreaCode("00");
+		//如果是省级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("1".equals(gnArea.getAreaLevel())){
-			GnArea gncityCode = new GnArea();
-			gncityCode.setAreaCode("000");
+			
 			gnArea.setCityCode(gncityCode);
 			gnArea.setProvinceCode(new GnArea(gnArea.getId(),gnArea.getAreaCode()));
 		}
+		//如果是国家级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("0".equals(gnArea.getAreaLevel()) ){
-			GnArea gnproCode = new GnArea();
-			gnproCode.setAreaCode("00");
+			gnArea.setCityCode(gncityCode);
 			gnArea.setProvinceCode(gnproCode);
+			
 		}
-	
+		//如果是地市级所属市为当前区域的编码
+		if("2".equals(gnArea.getAreaLevel()) ){
+			gnArea.setCityCode(new GnArea(gnArea.getId(),gnArea.getAreaCode()));
+		}
 		gnAreaService.save(gnArea);
 		CacheUtils.remove("areaList");
 		addMessage(redirectAttributes, "保存地区信息成功");
