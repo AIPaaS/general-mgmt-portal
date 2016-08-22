@@ -222,10 +222,15 @@ public class MgmtRoleController extends BaseController {
 		StringBuilder msg = new StringBuilder();
 		int newNum = 0;
 		for (int i = 0; i < idsArr.length; i++) {
-			User user = systemService.assignUserToRole(role, systemService.getUser(idsArr[i]));
-			if (null != user) {
-				msg.append("<br/>新增用户【" + user.getName() + "】到角色【" + role.getName() + "】！");
-				newNum++;
+			User user = systemService.getUser(idsArr[i]);
+			if(user != null){
+				User adduser = systemService.assignUserToRole(role,user);
+				if (null != adduser) {
+					msg.append("<br/>新增用户【" + user.getName() + "】到角色【" + role.getName() + "】！");
+					newNum++;
+				}else{
+					msg.append("<br/>"+"角色【" + role.getName() + "】已存在用户【" + user.getName() + "】！");
+				}
 			}
 		}
 		addMessage(redirectAttributes, "已成功分配 "+newNum+" 个用户"+msg);
