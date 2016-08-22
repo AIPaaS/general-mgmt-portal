@@ -26,8 +26,8 @@ public class SystemValidateUtil {
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "租户ID不能为空");
 		}
 		if (StringUtil.isBlank(condition.getNo()) && StringUtil.isBlank(condition.getPhone())
-				&& StringUtil.isBlank(condition.getLoginName()) && StringUtil.isBlank(condition.getEmail())) {
-			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "手机号、邮箱、工号、登录名至少有一个不可以为空");
+				&& StringUtil.isBlank(condition.getLoginName()) && StringUtil.isBlank(condition.getEmail())&& StringUtil.isBlank(condition.getId())) {
+			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "id、手机号、邮箱、工号、登录名至少有一个不可以为空");
 		}
 	}
 	public static void validateQueryUserByOfficeId(SysUserListQueryRequest condition) {

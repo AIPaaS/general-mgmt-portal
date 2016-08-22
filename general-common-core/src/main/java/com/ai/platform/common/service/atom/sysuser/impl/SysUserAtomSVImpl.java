@@ -39,6 +39,9 @@ public class SysUserAtomSVImpl implements ISysUserAtomSV {
 		if (!StringUtil.isBlank(user.getLoginName())) {
 			criteria.andLoginNameEqualTo(user.getLoginName());
 		}
+		if (!StringUtil.isBlank(user.getId())) {
+			criteria.andIdEqualTo(user.getId());
+		}
 		criteria.andDelFlagEqualTo(DeleteFlagConstant.NO);
 		 Date crruntDate = DateUtil.getDate();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

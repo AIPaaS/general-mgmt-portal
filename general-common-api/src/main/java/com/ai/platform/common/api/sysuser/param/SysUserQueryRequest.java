@@ -4,6 +4,11 @@ import com.ai.opt.base.vo.BaseInfo;
 
 public class SysUserQueryRequest extends BaseInfo {
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 员工id
+	 */
+	private String id;
 	/**
 	 * 工号
 	 */
@@ -52,5 +57,13 @@ public class SysUserQueryRequest extends BaseInfo {
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
