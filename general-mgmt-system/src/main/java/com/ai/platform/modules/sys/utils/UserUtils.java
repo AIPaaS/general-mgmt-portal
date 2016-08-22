@@ -63,6 +63,9 @@ public class UserUtils {
 	public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
 
 	public static final String USER_DEFAULT_THEME = Global.getDefTheme();
+	
+	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
+
 
 	/**
 	 * 根据ID获取用户

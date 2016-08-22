@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>地区信息管理</title>
+	<title>区域信息管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,8 +18,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/gnArea/">地区信息列表</a></li>
-		<shiro:hasPermission name="sys:gnArea:edit"><li><a href="${ctx}/sys/gnArea/form">地区信息添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/sys/gnArea/">区域信息列表</a></li>
+		<shiro:hasPermission name="sys:gnArea:edit"><li><a href="${ctx}/sys/gnArea/form">区域信息添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="gnArea" action="${ctx}/sys/gnArea/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -61,7 +61,7 @@
 				<c:if test="${gnArea.areaLevel ne '0'}">		
     				<a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">修改</a>
     			
-					<a href="${ctx}/sys/gnArea/delete?areaCode=${gnArea.areaCode}" onclick="return confirmx('确认要删除该地区信息吗？', this.href)">删除</a>
+					<a href="${ctx}/sys/gnArea/delete?areaCode=${gnArea.areaCode}" onclick="return confirmx('确认要删除该区域信息吗？', this.href)">删除</a>
 				</c:if>		
 				</td></shiro:hasPermission>
 			</tr>
