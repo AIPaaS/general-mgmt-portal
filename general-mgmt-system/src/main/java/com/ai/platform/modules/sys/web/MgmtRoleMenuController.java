@@ -51,7 +51,7 @@ public class MgmtRoleMenuController extends BaseController {
 		}
 	}
 
-	@RequiresPermissions("sys:role:view")
+	@RequiresPermissions("sys:rolemenu:view")
 	@RequestMapping(value = { "list", "" })
 	public String list(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
 		// List<Role> list = systemService.findAllRole();
@@ -64,7 +64,7 @@ public class MgmtRoleMenuController extends BaseController {
 		return "modules/mgmtsys/role_menu_list";
 	}
 
-	@RequiresPermissions("sys:role:view")
+	@RequiresPermissions("sys:rolemenu:view")
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
 		model.addAttribute("menuList", systemService.findAllMenu());
@@ -72,7 +72,7 @@ public class MgmtRoleMenuController extends BaseController {
 		return "modules/mgmtsys/role_menu_form";
 	}
 
-	@RequiresPermissions("sys:role:edit")
+	@RequiresPermissions("sys:rolemenu:edit")
 	@RequestMapping(value = "save")
 	public String save(RoleMenu roleMenu, Model model, RedirectAttributes redirectAttributes) {
 		if (!UserUtils.getUser().isAdmin()) {
