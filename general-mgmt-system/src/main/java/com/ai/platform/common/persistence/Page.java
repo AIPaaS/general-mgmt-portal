@@ -83,7 +83,9 @@ public class Page<T> {
 		}
 		// 设置页面大小参数（传递repage参数，来记住页码大小）
 		String size = request.getParameter("pageSize");
-		if (StringUtils.isNumeric(size)){
+		if(defaultPageSize != -2){
+			this.pageSize = defaultPageSize;
+		}else if (StringUtils.isNumeric(size)){
 			CookieUtils.setCookie(response, "pageSize", size);
 			this.setPageSize(Integer.parseInt(size));
 		}else if (request.getParameter("repage")!=null){
@@ -91,8 +93,6 @@ public class Page<T> {
 			if (StringUtils.isNumeric(size)){
 				this.setPageSize(Integer.parseInt(size));
 			}
-		}else if (defaultPageSize != -2){
-			this.pageSize = defaultPageSize;
 		}
 		// 设置页面分页函数
         String funcName = request.getParameter("funcName");
