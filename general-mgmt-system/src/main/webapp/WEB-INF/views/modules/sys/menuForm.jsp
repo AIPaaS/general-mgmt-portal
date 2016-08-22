@@ -84,21 +84,21 @@
 				<form:input path="sort" htmlEscape="false" maxlength="50" class="required digits input-small"/>
 				<span class="help-inline">排列顺序，升序。</span>
 			</div>
-		</div>
+		</div>-->
 		<div class="control-group">
 			<label class="control-label">可见:</label>
 			<div class="controls">
 				<form:radiobuttons path="isShow" items="${fns:getDictList('show_hide')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
 				<span class="help-inline">该菜单或操作是否显示到系统菜单中</span>
 			</div>
-		</div> -->
-		<!--  <div class="control-group">
+		</div> 
+		 <div class="control-group">
 			<label class="control-label">权限标识:</label>
 			<div class="controls">
 				<form:input path="permission" htmlEscape="false" maxlength="100" class="input-xxlarge"/>
 				<span class="help-inline">控制器中定义的权限标识，如：@RequiresPermissions("权限标识")</span>
 			</div>
-		</div>-->
+		</div>
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
