@@ -56,7 +56,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/sys/rolemenu/list">角色列表</a></li>
-		<li class="active"><a href="${ctx}/sys/rolemenu/form?id=${role.id}"><shiro:hasPermission name="sys:role:edit">权限分配</shiro:hasPermission><shiro:lacksPermission name="sys:role:edit">查看权限</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/sys/rolemenu/form?id=${role.id}"><shiro:hasPermission name="sys:rolemenu:edit">权限分配</shiro:hasPermission><shiro:lacksPermission name="sys:rolemenu:edit">查看权限</shiro:lacksPermission></a></li>
 	</ul>
 	<div class="container-fluid breadcrumb">
 		<div class="row-fluid span12">
@@ -77,7 +77,7 @@
 		</div>
 		<div class="form-actions">
 			<c:if test="${(role.sysData eq fns:getDictValue('是', 'yes_no', '1') && fns:getUser().admin)||!(role.sysData eq fns:getDictValue('是', 'yes_no', '1'))}">
-				<shiro:hasPermission name="sys:role:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+				<shiro:hasPermission name="sys:rolemenu:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			</c:if>
 			<a href="${ctx}/sys/rolemenu/list"><input id="btnCancel" class="btn" type="button" value="返 回" /></a>
 		</div>
