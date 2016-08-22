@@ -88,6 +88,7 @@ public class GnArea extends DataEntity<GnArea> {
 	}
 	
 	@JsonBackReference
+	@NotNull(message="所属区域不能为空")
 	public GnArea getParentAreaCode() {
 		return parentAreaCode;
 	}

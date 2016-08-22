@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>地区信息管理</title>
+	<title>区域信息管理</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 	
@@ -41,8 +41,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/gnArea/">地区信息列表</a></li>
-		<li class="active"><a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">地区信息<shiro:hasPermission name="sys:gnArea:edit">${not empty gnArea.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gnArea:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/sys/gnArea/">区域信息列表</a></li>
+		<li class="active"><a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">区域信息<shiro:hasPermission name="sys:gnArea:edit">${not empty gnArea.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gnArea:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gnArea" action="${ctx}/sys/gnArea/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -72,10 +72,10 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">所属区域：</label>
+			<label class="control-label" for="parentAreaCode">所属区域：</label>
 			<div class="controls">
 			 <sys:treeselect id="parentAreaCode" name="parentAreaCode.areaCode" value="${gnArea.parentAreaCode.areaCode}" labelName="parentAreaCode.areaName" labelValue="${gnArea.parentAreaCode.areaName}"
-		title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
+		title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" dataMsgRequired="必填信息"/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>		
