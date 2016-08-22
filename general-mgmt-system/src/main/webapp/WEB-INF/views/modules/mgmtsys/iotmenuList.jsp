@@ -38,12 +38,12 @@
 	       </form:form>
 	   	<!--查询结束-->      
               <table class="table table-hover table-border table-bordered">
-                 <thead><tr><th>菜单ID</th><th>名称</th><th>链接</th><th>操作</th></tr></thead>
+                 <thead><tr><th>所属应用</th><th>名称</th><th>链接</th><th>操作</th></tr></thead>
                   <tbody>
 		              <c:forEach items="${page.list}" var="menu">
 						<tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
-						   <td ><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a href="${ctx}/sys/menu/form?id=${menu.id}">${menu.id}</a></td>
-							<td nowrap>${menu.name}</td>
+						   <td >${not empty menu.gnTabSystem.systemName?menu.gnTabSystem.systemName:'统一系统管理平台'}</td>
+							<td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
 							<td title="${menu.href}">${fns:abbr(menu.href,30)}</td>
 							<!--<td style="text-align:center;">
 							<shiro:hasPermission name="sys:menu:edit">

@@ -20,12 +20,17 @@
 		a.update_by AS "updateBy.id",
 		a.update_date,
 		a.del_flag,
-		p.name AS "parent.name"
+		p.name AS "parent.name",
+		g.system_id AS "gnTabSystem.systemId",
+		g.system_name AS "gnTabSystem.systemName"
+		
 	</sql>
 	<sql id="menuJoins">
 		LEFT JOIN sys_menu p ON p.id = a.parent_id
     </sql>
-	
+	<sql id="systemJoins">
+		LEFT JOIN  gn_tab_system g ON g.id = a.system_id
+    </sql>
 	<select id="get" resultType="Menu">
 		SELECT
 			<include refid="menuColumns"/>
@@ -38,6 +43,7 @@
 			<include refid="menuColumns"/>
 		FROM sys_menu a
 		<include refid="menuJoins"/>
+		<include refid="systemJoins"/>
 				WHERE a.del_flag = #{DEL_FLAG_NORMAL}
 			<if test="name != null and name != ''">
 				AND a.name LIKE 

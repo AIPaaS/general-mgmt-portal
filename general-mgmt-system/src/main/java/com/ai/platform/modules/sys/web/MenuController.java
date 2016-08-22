@@ -108,7 +108,7 @@ public class MenuController extends BaseController {
 		}
 		if(Global.isDemoMode()){
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/menu/";
+			return "redirect:" + adminPath + "/sys/menu/page";
 		}
 		if (!beanValidator(model, menu)){
 			return form(menu, model);
