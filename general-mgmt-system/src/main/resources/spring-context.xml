@@ -62,8 +62,11 @@
     <task:executor id="executor" pool-size="10"/> <task:scheduler id="scheduler" pool-size="10"/>
     <task:annotation-driven scheduler="scheduler" executor="executor" proxy-target-class="true"/>
      <!-- 配置数据源 -->
-     <bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource">
+     <bean id="dataSource" class="com.ai.opt.sdk.datasource.OptHikariDataSource" lazy-init="false">
 		 <constructor-arg name="dataSourceName" value="aiplatform-db"/>
+	</bean>
+	<bean id="seqDataSourceLoader" class="com.ai.opt.sdk.components.sequence.datasource.SeqDataSourceLoader" init-method="init" lazy-init="false">
+		<property name="ds" ref="dataSource" />
 	</bean>
 	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
 	<!-- <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"> 

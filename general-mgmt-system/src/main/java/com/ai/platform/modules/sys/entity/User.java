@@ -8,15 +8,18 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
+import com.ai.opt.sdk.components.sequence.util.SeqUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.DataEntity;
 import com.ai.platform.common.supcan.annotation.treelist.cols.SupCol;
 import com.ai.platform.common.utils.Collections3;
 import com.ai.platform.common.utils.excel.annotation.ExcelField;
 import com.ai.platform.common.utils.excel.fieldtype.RoleListType;
+import com.ai.platform.modules.sys.utils.UserUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
@@ -383,5 +386,20 @@ public class User extends DataEntity<User> {
 	@Override
 	public String toString() {
 		return id;
+	}
+	@Override
+	public void preInsert(){
+		// 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
+		if (!this.isNewRecord){
+			setId(SeqUtil.getNewId(UserUtils.SYS_USER_ID).toString());
+		}
+		User user = UserUtils.getUser();
+		if (StringUtils.isNotBlank(user.getId())){
+			this.updateBy = user;
+			this.createBy = user;
+		}
+		this.updateDate = new Date();
+		this.createDate = this.updateDate;
+		this.tenantId = Global.getTenantID();
 	}
 }

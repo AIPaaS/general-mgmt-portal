@@ -52,7 +52,7 @@
 											<input id="rememberMe" name="rememberMe" type="checkbox" >
 										 </li>
 								         <li><input type="button" class="login-btn" value="登 录" accesskey="l" tabindex="4" onclick="javascript:dologin();"> </li> 
-								         <li class="Forget-password"><a href="#">忘记密码？</a><a href="#" class="right">立即注册</a></li>
+								        <!--  <li class="Forget-password"><a href="#">忘记密码？</a><a href="#" class="right">立即注册</a></li> -->
 								         </ul>
 		
 							</div>
