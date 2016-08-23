@@ -210,7 +210,7 @@
 	                 <div class="col-lg-12"><!--删格化-->
 	                    <div class="main-box clearfix"><!--白色背景-->
 	                    		<div class="notice col-lg-12">
-	                    			<p class="gongg"><A href="#">［公告］:</A></p>
+	                    			<p class="gongg"><A href="#">［站内信］:</A></p>
            						 <div  id="elem">
 						            <ul id="elem1">
 		            				<c:forEach items="${fns:getOaNotifyByUser()}" var="oaNotify" >

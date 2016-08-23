@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>通告管理</title>
+	<title>站内信</title>
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -18,8 +18,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/oa/oaNotify/${oaNotify.self?'self':''}">通告列表</a></li>
-		<c:if test="${!oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><li><a href="${ctx}/oa/oaNotify/form">通告添加</a></li></shiro:hasPermission></c:if>
+		<li class="active"><a href="${ctx}/oa/oaNotify/${oaNotify.self?'self':''}">站内信列表</a></li>
+		<c:if test="${!oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><li><a href="${ctx}/oa/oaNotify/form">站内信添加</a></li></shiro:hasPermission></c:if>
 	</ul>
 	<form:form id="searchForm" modelAttribute="oaNotify" action="${ctx}/oa/oaNotify/${oaNotify.self?'self':''}" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -78,7 +78,7 @@
 				</td>
 				<c:if test="${!requestScope.oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><td>
     				<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">修改</a>
-					<a href="${ctx}/oa/oaNotify/delete?id=${oaNotify.id}" onclick="return confirmx('确认要删除该通告吗？', this.href)">删除</a>
+					<a href="${ctx}/oa/oaNotify/delete?id=${oaNotify.id}" onclick="return confirmx('确认要删除该站内信吗？', this.href)">删除</a>
 				</td></shiro:hasPermission></c:if>
 			</tr>
 		</c:forEach>
