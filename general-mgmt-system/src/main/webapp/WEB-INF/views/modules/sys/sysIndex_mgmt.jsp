@@ -29,7 +29,7 @@
         <!--右侧导航-->
             <div class="nav-no-collapse pull-right" id="header-nav">
             <ul class="nav navbar-nav pull-right">
-        <!--搜索-->
+<!--         搜索
             <li class="mobile-search">
             	<a class="btn"><i class="fa fa-search"></i></a>
             <div class="drowdown-search">
@@ -38,7 +38,7 @@
                 </form>
             </div>
             </li>
-         <!--/搜索结束-->
+         /搜索结束 -->
          <!--待办事项-->
             <li class="dropdown hidden-xs">
               
