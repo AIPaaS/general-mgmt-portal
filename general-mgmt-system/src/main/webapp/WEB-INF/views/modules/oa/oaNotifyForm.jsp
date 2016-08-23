@@ -36,7 +36,10 @@
 		<div class="control-group">
 			<label class="control-label">类型：</label>
 			<div class="controls">
-				<form:select path="type" class="input-xlarge required">
+			<c:if test="${not empty oaNotify.id && oaNotify.status eq '1'}">
+				<c:set var="disabled" value="true"/>
+			</c:if>
+				<form:select path="type" class="input-xlarge required" disabled="${disabled}">
 					<form:option value="" label=""/>
 					<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
