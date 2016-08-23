@@ -6,6 +6,7 @@ package com.ai.platform.modules.sys.entity;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -38,6 +39,7 @@ public class Menu extends DataEntity<Menu> {
 	 * 增加所属应用 by:mengbo creat 20160811
 	 */
 	private GnTabSystem gnTabSystem;
+
 	
 	public GnTabSystem getGnTabSystem() {
 		return gnTabSystem;
@@ -76,7 +78,8 @@ public class Menu extends DataEntity<Menu> {
 		this.parentIds = parentIds;
 	}
 	
-	@Length(min=1, max=100)
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$", message = "菜单名称必须是中文或字母或数字组成")
+	@Length(min=1, max=16,message="菜单名称必须介于1到16之间")
 	public String getName() {
 		return name;
 	}

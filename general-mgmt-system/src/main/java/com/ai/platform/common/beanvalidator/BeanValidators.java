@@ -109,7 +109,7 @@ public class BeanValidators {
 			String separator) {
 		List<String> errorMessages = Lists.newArrayList();
 		for (ConstraintViolation violation : constraintViolations) {
-			errorMessages.add(violation.getPropertyPath() + separator + violation.getMessage());
+			errorMessages.add( violation.getMessage());
 		}
 		return errorMessages;
 	}
