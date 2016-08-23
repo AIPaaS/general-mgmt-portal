@@ -156,7 +156,7 @@
 										<input type="hidden" id="menuId" value="${menu.id}"/>
 										<a class="dropdown-toggle" href="javascript:void(0);" id="fisrtmenu"
 										data-href="#" data-id="${menu.id}" target="mainFrame">										
-										 <i class="fa fa-sitemap"></i><span>${menu.name}</span>
+										 <i class="fa fa-inbox"></i><span>${menu.name}</span>
 					                     <i class="fa fa-chevron-circle-right drop-icon"></i>
 										</a>
 										
@@ -219,7 +219,7 @@
 							            <li><A target="mainFrame" href="${ctx}/oa/oaNotify/view?id=${oaNotify.id}">【${fns:getDictLabel(oaNotifytype, 'oa_notify_type', '')}】${oaNotify.title}</A>
 							            
 							            <c:if test="${oaNotify.readFlag eq '0'}">
-							            <img src="${mgmtStatic}/images/news.gif">
+							            <img src="${iotStatic}/images/news.gif">
 							            </c:if>
 							            </li>
 							            
@@ -236,7 +236,7 @@
          </div>
      </div>	
      
-     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0" ></iframe>
+     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="${ctx}/sys/portal" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0" ></iframe>
 	
 	    <!--底部-->
     <footer id="footer-bar" class="row">
