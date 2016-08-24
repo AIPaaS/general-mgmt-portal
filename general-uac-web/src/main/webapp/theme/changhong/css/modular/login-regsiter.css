@@ -1,12 +1,12 @@
 /**登录**/
-.login-bj{width:100%;background:url(../../images/login-bj.png) no-repeat;height:650px;background-size:100% 100%;}
+.login-bj{width:100%;background:url(../../images/login-bj.png) no-repeat;height:500px;background-size:100% 100%;}
 .login-nav{margin:0 auto;height:80px;padding:0 5%;}
 .login-logo{float:left;margin-top:36px;}
 .login-right{float:right;margin-top:40px;}
 .login-right a{ color:#333;font-size: 14px;}
 .login-right .blue{color:#1c9aec;}
 .login-frame{background:#fff;height:400px;}
-#login-box {max-width:500px;min-width:280px;margin:80px auto 20px;overflow: hidden;border-radius: 3px 3px 0 0;background-clip: padding-box;
+#login-box {max-width:500px;min-width:280px;margin:50px auto 20px;overflow: hidden;border-radius: 3px 3px 0 0;background-clip: padding-box;
 -webkit-box-shadow:0 0 5px #d1d1d1;  
 -moz-box-shadow:0 0 5px #d1d1d1;  
 box-shadow:0 0 5px #d1d1d1
@@ -35,4 +35,4 @@ box-shadow:0 0 5px #d1d1d1
 .login-frame ul .Forget-password a{ float:left; color:#10a2fb}
 .login-frame ul .Forget-password .right{ float:right; display:block;}
 
-.login-bottom{width:100%;float:left;text-align:center;margin-top:190px;font-size:14px;}
+.login-bottom{width:100%;float:left;text-align:center;margin-top:60px;font-size:14px;}
