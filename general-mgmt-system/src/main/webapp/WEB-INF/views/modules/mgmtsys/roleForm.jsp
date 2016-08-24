@@ -95,7 +95,7 @@
 			<c:if test="${(role.sysData eq fns:getDictValue('是', 'yes_no', '1') && fns:getUser().admin)||!(role.sysData eq fns:getDictValue('是', 'yes_no', '1'))}">
 				<shiro:hasPermission name="sys:role:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			</c:if>
-			<a href="${ctx}/sys/role/"><input id="btnCancel" class="btn" type="button" value="返 回"/></a>
+			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="javaScript:window.location.href='${ctx}/sys/role/'"/>
 		</div>
 	</form:form>
 </body>
