@@ -54,7 +54,7 @@ public class Role extends DataEntity<Role> {
 	
 	public Role() {
 		super();
-		this.dataScope = DATA_SCOPE_SELF;
+		//this.dataScope = DATA_SCOPE_SELF;
 		this.useable=Global.YES;
 		
 		/**

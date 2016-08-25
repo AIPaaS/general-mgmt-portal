@@ -71,7 +71,7 @@
 		<div class="control-group">
 			<label class="control-label">角色授权:</label>
 			<div class="controls" style="overflow-y: auto;">
-				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;max-height:950px;"></div>
+				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;max-height:420px;"></div>
 				<form:hidden path="menuIds"/>
 			</div>
 		</div>

@@ -11,8 +11,8 @@
 		<result property="remarks" column="remarks" />
 		<result property="useable" column="useable" />
 		<result property="sysData" column="sysData" />
-		<result property="office.id" column="office.id" />
-		<result property="office.name" column="office.name" />
+		<!-- <result property="office.id" column="office.id" />
+		<result property="office.name" column="office.name" /> -->
 		<!-- 
 		<collection property="userList" ofType="User">
 			<id property="id" column="userList.id" />
@@ -46,8 +46,8 @@
 		a.update_date,
 		a.del_flag,
 		a.tenant_id AS "tenantId",
-    	o.name AS "office.name",
-    	o.code,
+    	<!-- o.name AS "office.name",
+    	o.code, -->
     	a.useable AS useable,
     	a.is_sys AS sysData
     </sql>
@@ -66,7 +66,7 @@
 			ro.office_id AS "officeList.id", -->
 			rm.menu_id AS "menuList.id"
 		FROM sys_role a
-		JOIN sys_office o ON o.id = a.office_id<!-- 
+		<!-- JOIN sys_office o ON o.id = a.office_id
 		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
 		LEFT JOIN sys_user u ON u.id = ur.user_id
 		LEFT JOIN sys_office uc ON uc.id = u.company_id
@@ -80,7 +80,7 @@
 		SELECT
 			<include refid="roleColumns"/>
 		FROM sys_role a
-		JOIN sys_office o ON o.id = a.office_id
+		<!-- JOIN sys_office o ON o.id = a.office_id -->
 		WHERE a.name = #{name} AND a.del_flag = #{DEL_FLAG_NORMAL}
 	</select>
 	
@@ -88,7 +88,7 @@
 		SELECT
 			<include refid="roleColumns"/>
 		FROM sys_role a
-		JOIN sys_office o ON o.id = a.office_id
+		<!-- JOIN sys_office o ON o.id = a.office_id -->
 		WHERE a.enname = #{enname} AND a.del_flag = #{DEL_FLAG_NORMAL}
 	</select>
 	
@@ -96,7 +96,7 @@
 		SELECT  DISTINCT
 			<include refid="roleColumns"/>,ro.office_id AS "officeList.id"
 		FROM sys_role a
-		LEFT JOIN sys_office o ON o.id = a.office_id
+		<!-- LEFT JOIN sys_office o ON o.id = a.office_id -->
 		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
 		LEFT JOIN sys_user u ON u.id = ur.user_id
 		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
@@ -117,7 +117,7 @@
 		SELECT  DISTINCT
 			<include refid="roleColumns"/>
 		FROM sys_role a
-		LEFT JOIN sys_office o ON o.id = a.office_id
+	<!-- 	LEFT JOIN sys_office o ON o.id = a.office_id -->
 		LEFT JOIN sys_user_role ur ON ur.role_id = a.id
 		LEFT JOIN sys_user u ON u.id = ur.user_id
 		LEFT JOIN sys_role_office ro ON ro.role_id = a.id
@@ -143,7 +143,7 @@
 		AND a.tenant_id = #{tenantId}
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
-		ORDER BY o.code, a.name
+		ORDER BY a.name
 	</select>
 	
 	<!-- 不权限过滤 -->
@@ -151,7 +151,7 @@
 		SELECT  DISTINCT
 			<include refid="roleColumns"/>
 		FROM sys_role a
-		LEFT JOIN sys_office o ON o.id = a.office_id
+		<!-- LEFT JOIN sys_office o ON o.id = a.office_id -->
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.useable=#{useable}
 		<if test="name != null and name != ''">
 			AND a.name LIKE
@@ -168,16 +168,16 @@
 		AND a.tenant_id = #{tenantId}
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
-		ORDER BY o.code, a.name
+		ORDER BY  a.name
 	</select>
 	
 	<select id="findAllList" resultType="Role">
 		SELECT
 			<include refid="roleColumns"/>
 		FROM sys_role a
-		LEFT JOIN sys_office o ON o.id = a.office_id
+		<!-- LEFT JOIN sys_office o ON o.id = a.office_id -->
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-		ORDER BY o.code, a.name
+		ORDER BY a.name
 	</select>
 	
 	<insert id="insert">
