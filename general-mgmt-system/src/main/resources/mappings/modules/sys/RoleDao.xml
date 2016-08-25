@@ -109,7 +109,7 @@
 		</if>
 		<!-- 数据范围过滤 -->
 		${sqlMap.dsf}
-		ORDER BY o.code, a.name
+		ORDER BY a.name
 	</select>
 	
 	<!-- 权限过滤 -->
