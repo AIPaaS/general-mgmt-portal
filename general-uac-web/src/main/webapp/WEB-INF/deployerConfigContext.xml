@@ -179,6 +179,7 @@
             <property name="evaluationOrder" value="0" />
             <property name="allowedAttributes">
             	<list>
+            		<value>tenantId</value>
             		<value>username</value>
             		<value>userId</value>
             		<value>loginName</value>

@@ -5,7 +5,10 @@ import com.ai.opt.base.vo.BaseResponse;
 public class UserQueryResponse extends BaseResponse {
 
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * 租户id
+	 */
+	private String tenantId;
 	/**
 	 * 账号ID 对应中信sys_user表的主键id
 	 */
@@ -28,6 +31,14 @@ public class UserQueryResponse extends BaseResponse {
     private String email;
 
 
+
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
 
 	public String getUserId() {
 		return userId;

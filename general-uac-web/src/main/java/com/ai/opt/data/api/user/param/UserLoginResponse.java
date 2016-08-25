@@ -16,6 +16,10 @@ public class UserLoginResponse extends BaseResponse {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 租户id
+	 */
+	private String tenantId;
     /**
 	 * 账号ID 对应中信sys_user表的主键id
 	 */
@@ -49,6 +53,14 @@ public class UserLoginResponse extends BaseResponse {
     private Timestamp effectiveDate;//生效时间
     private Timestamp expiryDate;//失效时间
     
+
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
 
 	public String getUserId() {
 		return userId;

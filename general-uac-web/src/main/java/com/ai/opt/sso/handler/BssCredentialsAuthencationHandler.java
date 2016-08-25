@@ -170,6 +170,7 @@ public final class BssCredentialsAuthencationHandler extends AbstractPreAndPostP
 			}
 			
 			//BeanUtils.copyProperties(bssCredentials, user);
+			bssCredentials.setTenantId(user.getTenantId());
 			bssCredentials.setUserId(user.getUserId());
 			bssCredentials.setMobile(user.getMobile());
 			bssCredentials.setEmail(user.getEmail());

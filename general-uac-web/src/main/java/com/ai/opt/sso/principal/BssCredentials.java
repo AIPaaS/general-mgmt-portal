@@ -11,6 +11,8 @@ import org.jasig.cas.authentication.RememberMeUsernamePasswordCredential;
 public class BssCredentials extends RememberMeUsernamePasswordCredential {
     private static final long serialVersionUID = -8147635836938729264L;
 
+    //租户ID
+    private String tenantId;
     //账号ID
     private String userId;
     //账号名称
@@ -28,6 +30,13 @@ public class BssCredentials extends RememberMeUsernamePasswordCredential {
      * sessionId
      */
     private String sessionId;
+    
+	public String getTenantId() {
+		return tenantId;
+	}
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
 	public String getUserId() {
 		return userId;
 	}
