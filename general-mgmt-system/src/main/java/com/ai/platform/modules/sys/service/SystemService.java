@@ -693,6 +693,10 @@ public class SystemService extends BaseService implements InitializingBean {
 	public List<User> findAllNoAccountUser(){
 		return userDao.findAllNoAccountUser();
 	}
+	
+	public User getUserByName(String name) {
+		return userDao.getByName(name);
+	}
 	///////////////// Synchronized to the Activiti end //////////////////
 	
 }

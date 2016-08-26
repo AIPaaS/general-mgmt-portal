@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Log;
+import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.LogService;
+import com.ai.platform.modules.sys.service.SystemService;
 
 /**
  * 日志Controller
@@ -28,11 +30,17 @@ public class LogController extends BaseController {
 
 	@Autowired
 	private LogService logService;
+	@Autowired
+	private SystemService  systemService;
 	
 	@RequiresPermissions("sys:log:view")
 	@RequestMapping(value = {"list",""})
 	public String list(Log log, HttpServletRequest request, HttpServletResponse response, Model model) {
 		log.setTitle("系统登录");
+		if(log !=null && log.getCreateBy() !=null && log.getCreateBy().getName() !=null){
+			User user = systemService.getUserByName(log.getCreateBy().getName());
+			log.setCreateBy(user);
+		}
 		Page<Log> page = logService.findPage(new Page<Log>(request, response), log); 
         model.addAttribute("page", page);
 		return "modules/sys/logList";

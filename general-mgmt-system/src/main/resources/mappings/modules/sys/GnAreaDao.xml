@@ -64,7 +64,7 @@
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="GnArea">
+	<select id="findAllList" resultType="GnArea" useCache="true">
 		SELECT 
 			<include refid="gnAreaColumns"/>
 		FROM gn_area a

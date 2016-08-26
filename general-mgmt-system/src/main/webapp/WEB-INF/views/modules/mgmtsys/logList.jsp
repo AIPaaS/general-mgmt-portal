@@ -37,8 +37,8 @@
 					                    <p><input type="text" class="int-text int-medium" id="title" name="title" value="${log.title}"></p>
 					                </li>
 					                <li  class="col-md-6">
-					                    <p class="word">用户ID：</p>
-					                    <p><input type="text" class="int-text int-medium" id="createBy.id" name="createBy.id" value="${log.createBy.id}"></p>
+					                    <p class="word">姓名：</p>
+					                    <p><input type="text" class="int-text int-medium" id="createBy.name" name="createBy.name" value="${log.createBy.name}"></p>
 					                </li>  
 					            </ul> 
 					            <ul>
@@ -48,7 +48,7 @@
 					                </li>
 					                <li  class="col-md-6">
 					                    <p class="word">开始日期：</p>
-					                    <p><input type="text" class="int-text int-medium" id="beginDate" name="beginDate" readonly="readonly" 
+					                    <p><input type="text" class="int-text int-medium" id="beginDate" name="beginDate" readonly="readonly"  width="300ox；"
 											value="<fmt:formatDate value="${log.beginDate}" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"
 					                    >
 					                </li>  
@@ -109,7 +109,7 @@
                             	<!--table表格-->
                                 <div class="table-responsive clearfix">
                                     <table id="contentTable" class="table table-hover table-border table-bordered">
-                                       <thead><tr><th>操作菜单</th><th>操作用户</th><th>所在公司</th><th>所在部门</th><th>URI</th><th>提交方式</th><th>操作者IP</th><th>操作时间</th></thead>
+                                       <thead><tr><th>操作菜单</th><th>姓名</th><th>归属公司</th><th>归属部门</th><th>URI</th><th>提交方式</th><th>操作者IP</th><th>操作时间</th></thead>
                                     <tbody><%request.setAttribute("strEnter", "\n");request.setAttribute("strTab", "\t");%>
 										<c:forEach items="${page.list}" var="log">
 											<tr>
