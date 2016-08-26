@@ -14,6 +14,9 @@
 		$(document).ready(function(){
 			var a = $("#upName").val();//取出值
 			$("#parentName").val(a);
+			
+			var b = $("#id").val();//取出值
+			$("#parentId").val(b);
 		});
 	</script>
 </head>
@@ -25,6 +28,7 @@
 	<sys:message content="${message}"/>
 	<!-- ceshi -->
 	<input type="hidden" name="upName" id="upName" value="${requestScope.upName}"/>
+	<input type="hidden" name="id" id="id" value="${requestScope.id}"/>
 		  <!--框架标签结束-->
         <!--查询条件-->
     <form:form id="searchForm" modelAttribute="office" action="${ctx}/sys/office/page/" method="post" class="breadcrumb form-search">

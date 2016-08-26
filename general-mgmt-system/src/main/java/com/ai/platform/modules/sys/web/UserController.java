@@ -186,11 +186,11 @@ public class UserController extends BaseController {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
 		}
 		if (!beanValidator(model, user)){
-			return form(user, model);
+			return formno(user, model);
 		}
 		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))){
 			addMessage(model, "保存账号'" + user.getLoginName() + "'失败，登录名已存在");
-			return form(user, model);
+			return formno(user, model);
 		}
 		
 		savemethod(user);

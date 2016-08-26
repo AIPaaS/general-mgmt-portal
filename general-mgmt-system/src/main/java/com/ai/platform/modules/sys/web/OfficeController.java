@@ -79,6 +79,7 @@ public class OfficeController extends BaseController {
 	public String page(Office office, HttpServletRequest request, HttpServletResponse response,Model model) {
 		 if(office!=null && office.getParent()!=null){
 			 request.setAttribute("upName", office.getParent().getName());
+			 request.setAttribute("id", office.getParent().getId());
 		 }
 		
 		//翻译机构类别、等级

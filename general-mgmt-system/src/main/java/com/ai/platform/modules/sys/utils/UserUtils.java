@@ -3,7 +3,6 @@
  */
 package com.ai.platform.modules.sys.utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.apache.shiro.subject.Subject;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.utils.CacheUtils;
-import com.ai.platform.common.utils.CookieUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.AreaDao;
@@ -53,8 +51,8 @@ public class UserUtils {
 	public static final String USER_CACHE_ID_ = "id_";
 	public static final String USER_CACHE_LOGIN_NAME_ = "ln";
 	public static final String USER_CACHE_LIST_BY_OFFICE_ID_ = "oid_";
-	public static final String USER_CACHE_Theme = "theme";
-	public static final String USER_CACHE_ThemeInd = "theme_index";
+	public static final String USER_CACHE_THEME = "theme";
+	public static final String USER_CACHE_THEMEINX = "theme_index";
 	public static final String CACHE_ROLE_LIST = "roleList";
 	public static final String CACHE_MENU_LIST = "menuList";
 	public static final String CACHE_MENU_CHILDLIST = "menuChildList";
@@ -97,9 +95,7 @@ public class UserUtils {
 		String theme = "";
 		User user = (User) getUser();
 		theme = user.getTheme();
-		if (StringUtils.isNotBlank(theme)) {
-			theme = theme;
-		} else {
+		if (!StringUtils.isNotBlank(theme)) {
 			theme = USER_DEFAULT_THEME;
 		}
 		return theme;

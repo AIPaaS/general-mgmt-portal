@@ -230,21 +230,21 @@ public class LoginController extends BaseController{
 		if (StringUtils.isNotBlank(theme)){
 			
 			systemService.updateTheme(theme);
-			CookieUtils.setCookie(response, "theme", theme);
+			CookieUtils.setCookie(response, UserUtils.USER_CACHE_THEME, theme);
 			if(StringUtils.equals(theme, "cerulean") || StringUtils.equals(theme, "default")){
-				CookieUtils.setCookie(response, "theme_index", "theme-whbl");
+				CookieUtils.setCookie(response, UserUtils.USER_CACHE_THEMEINX, "theme-whbl");
 			}else if(StringUtils.equals(theme, "green")){
-				CookieUtils.setCookie(response, "theme_index", "theme-white");
-				CacheUtils.put("userCache", UserUtils.USER_CACHE_ThemeInd, "theme-white");
+				CookieUtils.setCookie(response, UserUtils.USER_CACHE_THEMEINX, "theme-white");
+				CacheUtils.put(UserUtils.USER_CACHE, UserUtils.USER_CACHE_THEMEINX, "theme-white");
 			}else{
-				CookieUtils.setCookie(response, "theme_index", "theme-whbl");
-				CacheUtils.put("userCache", UserUtils.USER_CACHE_ThemeInd, "theme-whbl");
+				CookieUtils.setCookie(response, UserUtils.USER_CACHE_THEMEINX, "theme-whbl");
+				CacheUtils.put(UserUtils.USER_CACHE, UserUtils.USER_CACHE_THEMEINX, "theme-whbl");
 			}
-			CacheUtils.put("userCache", UserUtils.USER_CACHE_Theme, theme);
+			CacheUtils.put(UserUtils.USER_CACHE, UserUtils.USER_CACHE_THEME, theme);
 			
 		}else{
-			theme = CookieUtils.getCookie(request, "theme");
-			theme = (String) CacheUtils.get("userCache", UserUtils.USER_CACHE_Theme);
+			theme = CookieUtils.getCookie(request, UserUtils.USER_CACHE_THEME);
+			theme = (String) CacheUtils.get(UserUtils.USER_CACHE, UserUtils.USER_CACHE_THEME);
 		}
 		return "redirect:"+request.getParameter("url");
 	}
