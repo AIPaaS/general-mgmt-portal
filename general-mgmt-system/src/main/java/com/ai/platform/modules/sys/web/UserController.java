@@ -110,7 +110,7 @@ public class UserController extends BaseController {
 		if (user.getOffice()==null || user.getOffice().getId()==null){
 			user.setOffice(UserUtils.getUser().getOffice());
 		}
-		model.addAttribute("userList", systemService.findAllUser());
+		model.addAttribute("userList", systemService.findAllNoAccountUser());
 		model.addAttribute("user", user);
 		model.addAttribute("allRoles", systemService.findAllRole());
 		return "modules/sys/usernoForm";
