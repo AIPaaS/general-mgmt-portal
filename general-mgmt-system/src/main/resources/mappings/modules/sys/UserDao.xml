@@ -215,6 +215,15 @@
 		ORDER BY a.name
 	</select>
 	
+	<select id="findAllNoAccountUser" resultType="User" useCache="true">
+		SELECT
+			a.id, a.name
+		FROM sys_user a
+		WHERE a.del_flag = 0
+		AND a.login_name is null
+		ORDER BY a.name
+	</select>
+	
 	<!-- 查询全部用户 -->
 	<select id="findAllList" resultType="User">
 		SELECT

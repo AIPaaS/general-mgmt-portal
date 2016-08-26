@@ -40,7 +40,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * 用户Controller
+ * 员工信息Controller
  * @author ThinkGem
  * @version 2013-8-29
  */
@@ -133,12 +133,12 @@ public class UserController extends BaseController {
 			return form(user, model);
 		}
 		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))){
-			addMessage(model, "保存用户'" + user.getLoginName() + "'失败，登录名已存在");
+			addMessage(model, "保存员工信息'" + user.getLoginName() + "'失败，登录名已存在");
 			return form(user, model);
 		}
 		
 		savemethod(user);
-		addMessage(redirectAttributes, "保存用户'" + user.getLoginName() + "'成功");
+		addMessage(redirectAttributes, "保存员工信息'" + user.getLoginName() + "'成功");
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
 
@@ -159,15 +159,15 @@ public class UserController extends BaseController {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
 		}
 
-		//插入用户时给予用户默认主题
+		//插入员工信息时给予员工信息默认主题
 		if (StringUtils.isNotBlank(user.getTheme())){
 			user.setTheme(Global.getDefTheme());
 		}
 		
-		// 保存用户信息
+		// 保存员工信息信息
 		systemService.saveUserNoUser(user);
 	
-		addMessage(redirectAttributes, "保存用户'" + user.getName() + "'成功");
+		addMessage(redirectAttributes, "保存员工信息'" + user.getName() + "'成功");
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
 	
@@ -208,14 +208,14 @@ public class UserController extends BaseController {
 			}
 		}
 		user.setRoleList(roleList);
-		//插入用户时给予用户默认主题
+		//插入员工信息时给予员工信息默认主题
 		if (StringUtils.isNotBlank(user.getTheme())){
 			user.setTheme(Global.getDefTheme());
 		}
 		
-		// 保存用户信息
+		// 保存员工信息信息
 		systemService.saveUser(user);
-		// 清除当前用户缓存
+		// 清除当前员工信息缓存
 		if (user.getLoginName().equals(UserUtils.getUser().getLoginName())){
 			UserUtils.clearCache();
 			//UserUtils.getCacheMap().clear();
@@ -231,12 +231,12 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		if (UserUtils.getUser().getId().equals(user.getId())){
-			addMessage(redirectAttributes, "删除用户失败, 不允许删除当前用户");
+			addMessage(redirectAttributes, "删除员工信息失败, 不允许删除当前员工信息");
 		}else if (User.isAdmin(user.getId())){
-			addMessage(redirectAttributes, "删除用户失败, 不允许删除超级管理员用户");
+			addMessage(redirectAttributes, "删除员工信息失败, 不允许删除超级管理员员工信息");
 		}else{
 			systemService.deleteUser(user);
-			addMessage(redirectAttributes, "删除用户成功");
+			addMessage(redirectAttributes, "删除员工信息成功");
 		}
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
@@ -260,7 +260,7 @@ public class UserController extends BaseController {
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 	/**
-	 * 导出用户数据
+	 * 导出员工信息数据
 	 * @param user
 	 * @param request
 	 * @param response
@@ -271,18 +271,18 @@ public class UserController extends BaseController {
     @RequestMapping(value = "export", method=RequestMethod.POST)
     public String exportFile(User user, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "用户数据"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+            String fileName = "员工信息数据"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
             Page<User> page = systemService.findUser(new Page<User>(request, response, -1), user);
-    		new ExportExcel("用户数据", User.class).setDataList(page.getList()).write(response, fileName).dispose();
+    		new ExportExcel("员工信息数据", User.class).setDataList(page.getList()).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导出用户失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导出员工信息失败！失败信息："+e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/list?repage";
     }
 
 	/**
-	 * 导入用户数据
+	 * 导入员工信息数据
 	 * @param file
 	 * @param redirectAttributes
 	 * @return
@@ -323,17 +323,17 @@ public class UserController extends BaseController {
 				}
 			}
 			if (failureNum>0){
-				failureMsg.insert(0, "，失败 "+failureNum+" 条用户，导入信息如下：");
+				failureMsg.insert(0, "，失败 "+failureNum+" 条员工信息，导入信息如下：");
 			}
-			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条用户"+failureMsg);
+			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条员工信息"+failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入用户失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导入员工信息失败！失败信息："+e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/list?repage";
     }
 	
 	/**
-	 * 下载导入用户数据模板
+	 * 下载导入员工信息数据模板
 	 * @param response
 	 * @param redirectAttributes
 	 * @return
@@ -342,9 +342,9 @@ public class UserController extends BaseController {
     @RequestMapping(value = "import/template")
     public String importFileTemplate(HttpServletResponse response, RedirectAttributes redirectAttributes) {
 		try {
-            String fileName = "用户数据导入模板.xlsx";
+            String fileName = "员工信息数据导入模板.xlsx";
     		List<User> list = Lists.newArrayList(); list.add(UserUtils.getUser());
-    		new ExportExcel("用户数据", User.class, 2).setDataList(list).write(response, fileName).dispose();
+    		new ExportExcel("员工信息数据", User.class, 2).setDataList(list).write(response, fileName).dispose();
     		return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入模板下载失败！失败信息："+e.getMessage());
@@ -371,7 +371,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 用户信息显示及保存
+	 * 员工信息信息显示及保存
 	 * @param user
 	 * @param model
 	 * @return
@@ -391,7 +391,7 @@ public class UserController extends BaseController {
 			currentUser.setRemarks(user.getRemarks());
 			currentUser.setPhoto(user.getPhoto());
 			systemService.updateUserInfo(currentUser);
-			model.addAttribute("message", "保存用户信息成功");
+			model.addAttribute("message", "保存员工信息信息成功");
 		}
 		model.addAttribute("user", currentUser);
 		model.addAttribute("Global", new Global());
@@ -399,7 +399,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 返回用户信息
+	 * 返回员工信息信息
 	 * @return
 	 */
 	@RequiresPermissions("user")
@@ -442,7 +442,7 @@ public class UserController extends BaseController {
 	}
 	
 	/**
-	 * 修改个人用户密码
+	 * 修改个人员工信息密码
 	 * @param oldPassword
 	 * @param newPassword
 	 * @param model

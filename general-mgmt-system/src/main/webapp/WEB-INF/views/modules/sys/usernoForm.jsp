@@ -69,16 +69,33 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div> --%>
-		<div class="control-group">
-			<label class="control-label">选择员工:</label>
-			<div class="controls">
-				<form:select path="id" class="required input-xlarge">
-					<form:option value="" label="${productName}"/>
-					<form:options items="${userList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
-				</form:select>
-				<span class="help-inline"><font color="red">*</font> </span>
+		
+		<c:if test="${empty user.loginName}">
+			<div class="control-group">
+				<label class="control-label">选择员工:</label>
+				<div class="controls">
+					<form:select path="id" class="required input-xlarge">
+						<form:option value="" label="${productName}"/>
+						<form:options items="${userList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					</form:select>
+					<span class="help-inline"><font color="red">*</font> </span>
+				</div>
 			</div>
-		</div>
+		</c:if>
+		<c:if test="${not empty user.loginName}">
+			<div class="control-group">
+				<label class="control-label">选择员工:</label>
+				<div class="controls" style="display: none">
+					<form:select path="id" class="required input-xlarge">
+						<form:option value="" label="${productName}"/>
+						<form:options items="${userList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					</form:select>
+				</div>
+				<div class="controls">
+					<input readonly="readonly"  value="${user.name}">
+				</div>
+			</div>
+		</c:if>
 		<div class="control-group">
 			<label class="control-label">登录名:</label>
 			<div class="controls">
@@ -105,7 +122,7 @@
 		<div class="control-group">
 			<label class="control-label">邮箱:</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="100" class="required email"/>
+				<form:input path="email" htmlEscape="false" maxlength="50" class="required email"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

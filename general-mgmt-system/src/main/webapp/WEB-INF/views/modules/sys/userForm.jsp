@@ -107,13 +107,13 @@
 		<div class="control-group">
 			<label class="control-label">电话:</label>
 			<div class="controls">
-				<form:input path="phone" htmlEscape="false" maxlength="100"/>
+				<form:input path="phone" htmlEscape="false" maxlength="100" class="phone"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">手机:</label>
 			<div class="controls">
-				<form:input path="mobile" htmlEscape="false" maxlength="100"/>
+				<form:input path="mobile" htmlEscape="false" maxlength="100" class="mobile"/>
 			</div>
 		</div>
 <%-- 		<div class="control-group">

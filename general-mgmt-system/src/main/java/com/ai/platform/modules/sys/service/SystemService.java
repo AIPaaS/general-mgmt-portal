@@ -690,7 +690,9 @@ public class SystemService extends BaseService implements InitializingBean {
 	}
 
 
-	
+	public List<User> findAllNoAccountUser(){
+		return userDao.findAllNoAccountUser();
+	}
 	///////////////// Synchronized to the Activiti end //////////////////
 	
 }

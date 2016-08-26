@@ -83,5 +83,11 @@ public interface UserDao extends CrudDao<User> {
 	public void saveUserNoUser(User user);
 
 	public void updateUserNoUser(User user);
+	
+	/**
+	 * 查询所有没有账号信息的员工
+	 * @return
+	 */
+	public List<User> findAllNoAccountUser();
 
 }
