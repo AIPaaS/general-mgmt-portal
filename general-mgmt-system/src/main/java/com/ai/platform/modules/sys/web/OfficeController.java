@@ -33,7 +33,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
- * 机构Controller
+ * 部门Controller
  * @author ThinkGem
  * @version 2013-5-15
  */
@@ -82,7 +82,7 @@ public class OfficeController extends BaseController {
 			 request.setAttribute("id", office.getParent().getId());
 		 }
 		
-		//翻译机构类别、等级
+		//翻译部门类别、等级
 		Page<Office> pge = officeService.findPage(new Page<Office>(request, response), office);
 		List<Office> list = pge.getList();
 		for(Office o : list){
@@ -95,7 +95,7 @@ public class OfficeController extends BaseController {
 		return "modules/mgmtsys/iotofficeList";
 	}
 	/**
-	 * 新增机构
+	 * 新增部门
 	 * @param office
 	 * @param model
 	 * @return
@@ -193,7 +193,7 @@ public class OfficeController extends BaseController {
 			}
 		}
 		
-		addMessage(redirectAttributes, "保存机构'" + office.getName() + "'成功");
+		addMessage(redirectAttributes, "保存部门'" + office.getName() + "'成功");
 		//String id = "0".equals(office.getParentId()) ? "" : office.getParentId();
 		//return "redirect:" + adminPath + "/sys/office/list?id="+id+"&parentIds="+office.getParentIds();
 		return "redirect:" + adminPath + "/sys/office/page";
@@ -207,10 +207,10 @@ public class OfficeController extends BaseController {
 			return "redirect:" + adminPath + "/sys/office/list";
 		}
 //		if (Office.isRoot(id)){
-//			addMessage(redirectAttributes, "删除机构失败, 不允许删除顶级机构或编号空");
+//			addMessage(redirectAttributes, "删除部门失败, 不允许删除顶级部门或编号空");
 //		}else{
 			officeService.delete(office);
-			addMessage(redirectAttributes, "删除机构成功");
+			addMessage(redirectAttributes, "删除部门成功");
 //		}
 		//return "redirect:" + adminPath + "/sys/office/list?id="+office.getParentId()+"&parentIds="+office.getParentIds();
 			return "redirect:" + adminPath + "/sys/office/page";
@@ -256,7 +256,7 @@ public class OfficeController extends BaseController {
 		return "false";
 	}
 	/**
-	 * 获取机构JSON数据。
+	 * 获取部门JSON数据。
 	 * @param extId 排除的ID
 	 * @param type	类型（1：公司；2：部门/小组/其它：3：用户）
 	 * @param grade 显示级别

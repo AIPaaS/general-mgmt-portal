@@ -153,7 +153,7 @@ public class GnAreaController extends BaseController {
 		
 		List<Map<String, Object>> mapList = mapList = Lists.newArrayList();;
 		List<GnArea> list = (List<GnArea>) CacheUtils.get("gnAreaTreeData");
-		if(list ==null || mapList.size() ==0){
+		if(list ==null || list.size() ==0){
 			list = gnAreaService.findList(new GnArea());
 			CacheUtils.put("gnAreaTreeData", list);
 		}
