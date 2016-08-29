@@ -7,6 +7,29 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#no").focus();
+			$("#btnSubmit").click(function(){
+				var beginDate=$("#effectiveDate").val();  
+				 var endDate=$("#expiryDate").val();  
+				 var d1 = new Date(beginDate.replace(/\-/g, "\/"));  
+				 var d2 = new Date(endDate.replace(/\-/g, "\/"));  
+				 if(d1>=d2){
+					 alert("失效时间要大于生效时间");
+					 return false;
+				 }
+				 
+				 var confirmNewPassword=$("#confirmNewPassword").val();  
+				 var newPassword=$("#newPassword").val();  
+				 if(newPassword.indexOf(" ") != -1 || newPassword.indexOf(" ")==''){
+					 alert("密码不能包含空格");
+					 return false;
+				 }
+				 if(confirmNewPassword.indexOf(" ") != -1 || confirmNewPassword.indexOf(" ") ==''){
+					 alert("确认密码不能包含空格");
+					 return false;
+				 }
+				 
+				 
+			});
 			$("#inputForm").validate({
 				rules: {
 					loginName: {remote: "${ctx}/sys/user/checkLoginName?oldLoginName=" + encodeURIComponent('${user.loginName}')}
@@ -30,6 +53,9 @@
 				}
 			});
 		});
+		
+		
+		
 	</script>
 </head>
 <body>
@@ -105,7 +131,7 @@
 		<div class="control-group">
 			<label class="control-label">邮箱:</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="100" minlength="3" class="required email"/>
+				<form:input path="email" htmlEscape="false" maxlength="30" minlength="3" class="required email"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -155,13 +181,13 @@
 			<div class="control-group">
 				<label class="control-label">生效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="20" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
+					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">失效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="expiryDate" name="expiryDate" type="text" readonly="readonly" maxlength="20" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
+					<label class="lbl"><input id="expiryDate" name="expiryDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
 				</div>
 			</div>
 		<c:if test="${not empty user.id}">
