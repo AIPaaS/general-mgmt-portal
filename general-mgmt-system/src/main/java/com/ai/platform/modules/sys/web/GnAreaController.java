@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.h2.mvstore.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ai.paas.ipaas.util.DateTimeUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
-import com.ai.platform.common.web.BaseController;
 import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.EhCacheUtils;
 import com.ai.platform.common.utils.StringUtils;
+import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.service.GnAreaService;
+import com.ai.platform.modules.sys.utils.GnAreaUtils;
+import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -129,7 +129,6 @@ public class GnAreaController extends BaseController {
 		}
 		gnAreaService.save(gnArea);
 		CacheUtils.remove("areaList");
-		CacheUtils.remove("gnAreaTreeData");
 		addMessage(redirectAttributes, "保存地区信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -141,7 +140,6 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.delete(gnArea);
 		CacheUtils.remove("areaList");
-		CacheUtils.remove("gnAreaTreeData");
 		addMessage(redirectAttributes, "删除地区信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -150,14 +148,8 @@ public class GnAreaController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
-		
-		List<Map<String, Object>> mapList = mapList = Lists.newArrayList();;
-		List<GnArea> list = (List<GnArea>) CacheUtils.get("gnAreaTreeData");
-		if(list ==null || list.size() ==0){
-			list = gnAreaService.findList(new GnArea());
-			CacheUtils.put("gnAreaTreeData", list);
-		}
-		
+		List<Map<String, Object>>  mapList = Lists.newArrayList();
+		List<GnArea> list = GnAreaUtils.getGnAreaList();
 		for (int i=0; i<list.size(); i++){
 			GnArea e = list.get(i);
 			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
@@ -168,8 +160,6 @@ public class GnAreaController extends BaseController {
 				mapList.add(map);
 			}
 		}
-		
-	
 		return mapList;
 	}
 }

@@ -3,6 +3,8 @@
  */
 package com.ai.platform.modules.sys.dao;
 
+import java.util.List;
+
 import com.ai.platform.common.persistence.CrudDao;
 import com.ai.platform.common.persistence.annotation.MyBatisDao;
 import com.ai.platform.modules.sys.entity.GnArea;
@@ -14,5 +16,6 @@ import com.ai.platform.modules.sys.entity.GnArea;
  */
 @MyBatisDao
 public interface GnAreaDao extends CrudDao<GnArea> {
+	public List<GnArea> findListByParentAreaCode(String parentAreaCode);
 	
 }

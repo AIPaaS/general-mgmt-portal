@@ -32,6 +32,17 @@
 		</where>
 	</select>
 	
+	<!-- add by zhouxiaohu -->
+	<select id="findListByParentAreaCode" resultType="GnArea">
+		SELECT 
+			<include refid="gnAreaColumns"/>
+		FROM gn_area a
+		<where>
+	    AND a.state = 1
+		AND a.parent_area_code=#{parentAreaCode}
+		</where>
+	</select>
+	
 	<select id="findList" resultType="GnArea">
 		SELECT 
 			<include refid="gnAreaColumns"/>
@@ -149,5 +160,6 @@
 		WHERE area_code = #{areaCode} 	
 		
 	</update>
+	
 	
 </mapper>

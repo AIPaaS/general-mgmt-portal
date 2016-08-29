@@ -99,13 +99,6 @@
     <function-signature>java.util.List getMenuNodesbyId(java.lang.String)</function-signature>
     <example>${fns:getChildsMenu(id)}</example>  
   </function>
-  <function>
-    <description>获取当前用户的区域对象列表</description>
-    <name>getAreaList</name>
-    <function-class>com.ai.platform.modules.sys.utils.UserUtils</function-class>
-    <function-signature>java.util.List getAreaList()</function-signature>
-    <example>${fns:getAreaList()}</example>  
-  </function>
   
   <function>
     <description>获取当前用户的部门对象列表</description>

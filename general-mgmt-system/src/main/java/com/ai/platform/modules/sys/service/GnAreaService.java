@@ -5,6 +5,7 @@ package com.ai.platform.modules.sys.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,8 @@ import com.ai.platform.modules.sys.dao.GnAreaDao;
 @Service
 @Transactional(readOnly = true)
 public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
+	@Autowired
+	private GnAreaDao areaDao;
 
 	public GnArea get(String id,String areaCode) {
 		return super.get(new GnArea(id,areaCode));
@@ -30,7 +33,11 @@ public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
 
 	
 	public List<GnArea> findList(GnArea gnArea) {
-		return UserUtils.getGnAreaList();
+		return areaDao.findList(gnArea);
+	}
+	
+	public List<GnArea> findListByParentAreaCode(String code) {
+		return areaDao.findListByParentAreaCode(code);
 	}
 	
 	public Page<GnArea> findPage(Page<GnArea> page, GnArea gnArea) {
