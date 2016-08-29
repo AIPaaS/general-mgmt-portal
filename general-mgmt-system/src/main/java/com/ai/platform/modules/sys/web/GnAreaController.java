@@ -128,7 +128,7 @@ public class GnAreaController extends BaseController {
 			gnArea.setCityCode(new GnArea(gnArea.getId(),gnArea.getAreaCode()));
 		}
 		gnAreaService.save(gnArea);
-		CacheUtils.remove("areaList");
+		GnAreaUtils.clearCache();
 		addMessage(redirectAttributes, "保存地区信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -139,7 +139,7 @@ public class GnAreaController extends BaseController {
 		gnArea.setState("0");
 		
 		gnAreaService.delete(gnArea);
-		CacheUtils.remove("areaList");
+		GnAreaUtils.clearCache();
 		addMessage(redirectAttributes, "删除地区信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}

@@ -3,8 +3,6 @@
  */
 package com.ai.platform.modules.sys.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +20,6 @@ import com.ai.platform.modules.sys.utils.UserUtils;
 @Transactional(readOnly = true)
 public class AreaService extends TreeService<AreaDao, Area> {
 
-	public List<Area> findAll(){
-		return UserUtils.getAreaList();
-	}
 
 	@Transactional(readOnly = false)
 	public void save(Area area) {

@@ -3,9 +3,7 @@
  */
 package com.ai.platform.common.utils.excel.fieldtype;
 
-import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.entity.Area;
-import com.ai.platform.modules.sys.utils.UserUtils;
 
 /**
  * 字段类型转换
@@ -14,17 +12,6 @@ import com.ai.platform.modules.sys.utils.UserUtils;
  */
 public class AreaType {
 
-	/**
-	 * 获取对象值（导入）
-	 */
-	public static Object getValue(String val) {
-		for (Area e : UserUtils.getAreaList()){
-			if (StringUtils.trimToEmpty(val).equals(e.getName())){
-				return e;
-			}
-		}
-		return null;
-	}
 
 	/**
 	 * 获取对象值（导出）

@@ -23,5 +23,12 @@ public class GnAreaUtils {
 		}
 		return cache_tree_data;
 	}
+	/**
+	 * 清除数据缓存
+	 */
+	public static void clearCache(){
+		cache_tree_data.clear();
+		cache_tree_data=null;
+	}
 
 }
