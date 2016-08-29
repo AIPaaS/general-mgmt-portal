@@ -84,6 +84,8 @@
 		a.category,
 		a.address,
 		a.theme,
+		a.effective_date,
+		a.expiry_date,
     	c.name AS "company.name",
     	c.parent_id AS "company.parent.id",
     	c.parent_ids AS "company.parentIds",
@@ -368,6 +370,7 @@
 			category = #{category},
 			address = #{address},
 			effective_date = #{effectiveDate},
+			expiry_date = #{expiryDate},
 			theme = #{theme},
 			expiry_date = #{expiryDate}
 		WHERE id = #{id}
