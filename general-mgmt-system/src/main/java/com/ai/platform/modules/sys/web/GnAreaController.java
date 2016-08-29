@@ -151,23 +151,24 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
 		
-		
-		List<Map<String, Object>> mapList = (List<Map<String, Object>>) CacheUtils.get("gnAreaTreeData");
-		if(mapList ==null || mapList.size() ==0){
-			mapList = Lists.newArrayList();
-			List<GnArea> list = gnAreaService.findList(new GnArea());
-			for (int i=0; i<list.size(); i++){
-				GnArea e = list.get(i);
-				if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
-					Map<String, Object> map = Maps.newHashMap();
-					map.put("id", e.getId());
-					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode().getAreaCode());
-					map.put("name", e.getAreaName());
-					mapList.add(map);
-				}
-			}
-			CacheUtils.put("gnAreaTreeData", mapList);
+		List<Map<String, Object>> mapList = mapList = Lists.newArrayList();;
+		List<GnArea> list = (List<GnArea>) CacheUtils.get("gnAreaTreeData");
+		if(list ==null || mapList.size() ==0){
+			list = gnAreaService.findList(new GnArea());
+			CacheUtils.put("gnAreaTreeData", list);
 		}
+		
+		for (int i=0; i<list.size(); i++){
+			GnArea e = list.get(i);
+			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("id", e.getId());
+				map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode().getAreaCode());
+				map.put("name", e.getAreaName());
+				mapList.add(map);
+			}
+		}
+		
 	
 		return mapList;
 	}
