@@ -25,6 +25,7 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.common.utils.CacheUtils;
+import com.ai.platform.common.utils.EhCacheUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.service.GnAreaService;
@@ -128,6 +129,7 @@ public class GnAreaController extends BaseController {
 		}
 		gnAreaService.save(gnArea);
 		CacheUtils.remove("areaList");
+		CacheUtils.remove("gnAreaTreeData");
 		addMessage(redirectAttributes, "保存地区信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -139,6 +141,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.delete(gnArea);
 		CacheUtils.remove("areaList");
+		CacheUtils.remove("gnAreaTreeData");
 		addMessage(redirectAttributes, "删除地区信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -148,17 +151,22 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
 		
-		List<Map<String, Object>> mapList = Lists.newArrayList();
-		List<GnArea> list = gnAreaService.findList(new GnArea());
-		for (int i=0; i<list.size(); i++){
-			GnArea e = list.get(i);
-			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
-				Map<String, Object> map = Maps.newHashMap();
-				map.put("id", e.getId());
-				map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode().getAreaCode());
-				map.put("name", e.getAreaName());
-				mapList.add(map);
+		
+		List<Map<String, Object>> mapList = (List<Map<String, Object>>) CacheUtils.get("gnAreaTreeData");
+		if(mapList ==null || mapList.size() ==0){
+			mapList = Lists.newArrayList();
+			List<GnArea> list = gnAreaService.findList(new GnArea());
+			for (int i=0; i<list.size(); i++){
+				GnArea e = list.get(i);
+				if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
+					Map<String, Object> map = Maps.newHashMap();
+					map.put("id", e.getId());
+					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode().getAreaCode());
+					map.put("name", e.getAreaName());
+					mapList.add(map);
+				}
 			}
+			CacheUtils.put("gnAreaTreeData", mapList);
 		}
 	
 		return mapList;
