@@ -8,7 +8,7 @@
 	<meta name="decorator" content="mgmt"/>
   </head>
 <body>
-<div id="${fns:getTheme()}" class="xyindex">
+<div id="${fns:getThemeIndex()}" class="${fns:getThemeIndex()}">
     <header class="navbar" id="header-navbar">
         <div class="container">
             <a href="index.html" id="logo" class="navbar-brand"><img  src="${iotStatic}/img/logo.png" alt="" class="normal-logo logo-white"/></a>
