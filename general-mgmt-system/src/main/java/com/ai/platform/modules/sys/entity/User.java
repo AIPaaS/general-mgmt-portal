@@ -132,7 +132,7 @@ public class User extends DataEntity<User> {
 	}
 
 	@JsonIgnore
-	@Length(min=1, max=1)
+	@Length(min=0, max=1,message="员工类别长度必须介于 0 和 1 之间")
 	@ExcelField(title="员工类别", align=2, sort=75)
 	public String getCategory() {
 		return category;
@@ -145,7 +145,7 @@ public class User extends DataEntity<User> {
 	
 	
 	@JsonIgnore
-	@Length(min=1, max=200, message="联系地址长度必须介于 1 和 200 之间")
+	@Length(min=0, max=100, message="联系地址长度必须介于 0 和 100 之间")
 	@ExcelField(title="联系地址", align=2, sort=76)
 	public String getAddress() {
 		return address;
@@ -214,7 +214,7 @@ public class User extends DataEntity<User> {
 	}
 
 	@Email(message="邮箱格式不正确")
-	@Length(min=0, max=200, message="邮箱长度必须介于 1 和 200 之间")
+	@Length(min=1, max=50, message="邮箱长度必须介于 1 和 50 之间")
 	@ExcelField(title="邮箱", align=1, sort=50)
 	public String getEmail() {
 		return email;
