@@ -67,8 +67,8 @@
 				<td>${office.grade}</td>
 				<shiro:hasPermission name="sys:office:edit"><td>
 					<a href="${ctx}/sys/office/form?id=${office.id}">修改</a>
-					<a href="${ctx}/sys/office/delete?id=${office.id}" onclick="return confirmx('要删除该机构及所有子机构项吗？', this.href)">删除</a>
-					<a href="${ctx}/sys/office/form?parent.id=${office.id}">添加下级机构</a> 
+					<a href="${ctx}/sys/office/delete?id=${office.id}" onclick="return confirmx('要删除该部门及所有子部门项吗？', this.href)">删除</a>
+					<a href="${ctx}/sys/office/form?parent.id=${office.id}">添加下级部门</a> 
 				</td></shiro:hasPermission>
 			</tr>
 	    </c:forEach>
