@@ -20,10 +20,10 @@ public class GnArea extends DataEntity<GnArea> {
 	private static final long serialVersionUID = 1L;
 	private String areaCode;		// 区域编码
 	private String areaName;		// 区域名称
-	private GnArea provinceCode;		// 所属省
-	private GnArea cityCode;		// 所属市
+	private String provinceCode;		// 所属省
+	private String cityCode;		// 所属市
 	private String areaLevel;		// 行政级别
-	private GnArea parentAreaCode;		// 所属区域
+	private String parentAreaCode;		// 所属区域
 	private Integer sortId;		// 排序
 	private String state;		// state
 	private String remark;		// 备注
@@ -59,22 +59,24 @@ public class GnArea extends DataEntity<GnArea> {
 	}
 	
 	@JsonBackReference
+	@Length(min=1, max=32, message="所属省编码长度必须介于 1 和 32 之间")
 	@NotNull(message="所属省不能为空")
-	public GnArea getProvinceCode() {
+	public String getProvinceCode() {
 		return provinceCode;
 	}
 
-	public void setProvinceCode(GnArea provinceCode) {
+	public void setProvinceCode(String provinceCode) {
 		this.provinceCode = provinceCode;
 	}
 	
 	@JsonBackReference
+	@Length(min=1, max=32, message="所属市编码长度必须介于 1 和 32 之间")
 	@NotNull(message="所属市不能为空")
-	public GnArea getCityCode() {
+	public String getCityCode() {
 		return cityCode;
 	}
 
-	public void setCityCode(GnArea cityCode) {
+	public void setCityCode(String cityCode) {
 		this.cityCode = cityCode;
 	}
 	
@@ -88,12 +90,13 @@ public class GnArea extends DataEntity<GnArea> {
 	}
 	
 	@JsonBackReference
+	@Length(min=1, max=32, message="所属区域编码长度必须介于 1 和 32 之间")
 	@NotNull(message="所属区域不能为空")
-	public GnArea getParentAreaCode() {
+	public String getParentAreaCode() {
 		return parentAreaCode;
 	}
 
-	public void setParentAreaCode(GnArea parentAreaCode) {
+	public void setParentAreaCode(String parentAreaCode) {
 		this.parentAreaCode = parentAreaCode;
 	}
 	

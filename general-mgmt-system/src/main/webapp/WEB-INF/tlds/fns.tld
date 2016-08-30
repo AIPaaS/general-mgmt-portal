@@ -158,6 +158,14 @@
   </function>
  
    <function>
+    <description>根据地区编码返回地区名称</description>
+    <name>getAreaName</name>
+    <function-class>com.ai.platform.modules.sys.utils.GnAreaUtils</function-class>
+    <function-signature>java.lang.String getAreaName(java.lang.String)</function-signature>
+    <example>${fns:getAreaName(code)}</example>  
+  </function>
+ 
+   <function>
     <description>获取当前用户的最新公告前三条</description>
     <name>getOaNotifyByUser</name>
     <function-class>com.ai.platform.modules.oa.utils.OaNotifyUtils</function-class>

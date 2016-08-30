@@ -68,12 +68,12 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("sys:gnArea:view")
 	@RequestMapping(value = "form")
 	public String form(GnArea gnArea, Model model) {
-		if (gnArea.getParentAreaCode()!=null && StringUtils.isNotBlank(gnArea.getParentAreaCode().getAreaCode())){
-			gnArea.setParentAreaCode(gnAreaService.get(gnArea.getParentAreaCode().getAreaCode()));
+		if (gnArea.getParentAreaCode()!=null && StringUtils.isNotBlank(gnArea.getParentAreaCode())){
+			gnArea.setParentAreaCode(gnArea.getParentAreaCode());
 			// 获取排序号，最末节点排序号+30
 			if (StringUtils.isBlank(gnArea.getAreaCode())){
 				GnArea gnAreaChild = new GnArea();
-				gnAreaChild.setParentAreaCode(new GnArea(gnArea.getParentAreaCode().getAreaCode()));
+				gnAreaChild.setParentAreaCode(gnArea.getParentAreaCode());
 				List<GnArea> list = gnAreaService.findList(gnArea); 
 				if (list.size() > 0){
 					gnArea.setSortId(list.get(list.size()-1).getSortId());
@@ -89,13 +89,13 @@ public class GnAreaController extends BaseController {
 		}
 
 		//所属省
-		if(gnArea.getProvinceCode()!=null && StringUtils.isNotBlank(gnArea.getProvinceCode().getAreaCode())){
-			gnArea.setProvinceCode(gnAreaService.get(gnArea.getProvinceCode().getAreaCode()));
+		if(gnArea.getProvinceCode()!=null && StringUtils.isNotBlank(gnArea.getProvinceCode())){
+			gnArea.setProvinceCode(gnArea.getProvinceCode());
 		}
 		
 		//所属市
-		if(gnArea.getCityCode()!=null && StringUtils.isNotBlank(gnArea.getCityCode().getAreaCode())){
-			gnArea.setCityCode(gnAreaService.get(gnArea.getCityCode().getAreaCode()));
+		if(gnArea.getCityCode()!=null && StringUtils.isNotBlank(gnArea.getCityCode())){
+			gnArea.setCityCode(gnArea.getCityCode());
 		}		
 		model.addAttribute("gnArea", gnArea);
 		return "modules/sys/gnAreaForm";
@@ -107,25 +107,22 @@ public class GnAreaController extends BaseController {
 		if (!beanValidator(model, gnArea)){
 			return form(gnArea, model);
 		}
-		GnArea gncityCode = new GnArea();
-		gncityCode.setAreaCode("000");
-		GnArea gnproCode = new GnArea();
-		gnproCode.setAreaCode("00");
+
 		//如果是省级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("1".equals(gnArea.getAreaLevel())){
 			
-			gnArea.setCityCode(gncityCode);
-			gnArea.setProvinceCode(new GnArea(gnArea.getId(),gnArea.getAreaCode()));
+			gnArea.setCityCode("000");
+			gnArea.setProvinceCode(gnArea.getAreaCode());
 		}
 		//如果是国家级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("0".equals(gnArea.getAreaLevel()) ){
-			gnArea.setCityCode(gncityCode);
-			gnArea.setProvinceCode(gnproCode);
+			gnArea.setCityCode("000");
+			gnArea.setProvinceCode("00");
 			
 		}
 		//如果是地市级所属市为当前区域的编码
 		if("2".equals(gnArea.getAreaLevel()) ){
-			gnArea.setCityCode(new GnArea(gnArea.getId(),gnArea.getAreaCode()));
+			gnArea.setCityCode(gnArea.getAreaCode());
 		}
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
@@ -155,7 +152,7 @@ public class GnAreaController extends BaseController {
 			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("id", e.getId());
-				map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode().getAreaCode());
+				map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
 				map.put("name", e.getAreaName());
 				mapList.add(map);
 			}

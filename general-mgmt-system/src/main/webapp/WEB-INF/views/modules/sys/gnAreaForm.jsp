@@ -74,7 +74,9 @@
 		<div class="control-group">
 			<label class="control-label" for="parentAreaCode">所属区域：</label>
 			<div class="controls">
-			 <sys:treeselect id="parentAreaCode" name="parentAreaCode.areaCode" value="${gnArea.parentAreaCode.areaCode}" labelName="parentAreaCode.areaName" labelValue="${gnArea.parentAreaCode.areaName}"
+			<c:set var="parentAreaCode" value="${gnArea.parentAreaCode}"/>
+				
+			 <sys:treeselect id="parentAreaCode" name="parentAreaCode" value="${gnArea.parentAreaCode}" labelName="${fns:getAreaName(parentAreaCode)}" labelValue="${fns:getAreaName(parentAreaCode)}"
 		title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" dataMsgRequired="必填信息"/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -82,7 +84,8 @@
 		<div class="control-group" id="provinceDIV">
 			<label class="control-label">所属省：</label>
 			<div class="controls">
-			 <sys:treeselect id="provinceCode" name="provinceCode.areaCode" value="${gnArea.provinceCode.areaCode}" labelName="provinceCode.areaName" labelValue="${gnArea.provinceCode.areaName}"
+			<c:set var="provinceCode" value="${gnArea.provinceCode}"/>
+			 <sys:treeselect id="provinceCode" name="provinceCode" value="${gnArea.provinceCode}" labelName="${fns:getAreaName(provinceCode)}" labelValue="${fns:getAreaName(provinceCode)}"
 					title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
 				
 				<span class="help-inline"><font color="red">*</font> </span>
@@ -95,7 +98,8 @@
 			<div class="control-group" id="cityDIV">
 			<label class="control-label">所属市：</label>
 			<div class="controls">
-			 <sys:treeselect id="cityCode" name="cityCode.areaCode" value="${gnArea.cityCode.areaCode}" labelName="cityCode.areaName" labelValue="${gnArea.cityCode.areaName}"
+			<c:set var="cityCode" value="${gnArea.cityCode}"/>
+			 <sys:treeselect id="cityCode" name="cityCode" value="${gnArea.cityCode}" labelName="${fns:getAreaName(cityCode)}" labelValue="${fns:getAreaName(cityCode)}"
 					title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -129,9 +133,9 @@
 		</div>
 		<div class="form-actions">
 			<shiro:hasPermission name="sys:gnArea:edit">
-			<%-- <c:if test="${gnArea.areaLevel ne '0'}"> --%>
+		<c:if test="${gnArea.areaLevel ne '0'}"> 
 			<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;
-			<%-- </c:if> --%>
+		 </c:if> 
 			</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
