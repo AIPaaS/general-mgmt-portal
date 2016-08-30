@@ -41,7 +41,7 @@
 			<tr>
 				<th>名称</th>
 				<th>归属区域</th>
-				<th>机构编码</th>
+				<th>部门编码</th>
 				<shiro:hasPermission name="sys:iotOffice:edit"><th>操作</th></shiro:hasPermission>
 			</tr>
 		</thead>

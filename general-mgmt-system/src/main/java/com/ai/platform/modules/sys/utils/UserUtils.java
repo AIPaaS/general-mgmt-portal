@@ -319,8 +319,9 @@ public class UserUtils {
 	 * 获取当前登录者对象
 	 */
 	public static Principal getPrincipal(){
+		Subject subject;
 		try{
-			Subject subject = SecurityUtils.getSubject();
+		    subject = SecurityUtils.getSubject();
 			Principal principal = (Principal)subject.getPrincipal();
 			if (principal != null){
 				return principal;
@@ -330,6 +331,9 @@ public class UserUtils {
 			
 		}catch (InvalidSessionException e){
 			
+		}finally{
+			//add by zhouxiaohu 
+			subject =null;
 		}
 		return null;
 	}

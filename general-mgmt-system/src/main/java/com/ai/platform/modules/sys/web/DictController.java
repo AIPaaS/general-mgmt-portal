@@ -63,8 +63,8 @@ public class DictController extends BaseController {
 	@RequiresPermissions("sys:dict:view")
 	@RequestMapping(value = "form")
 	public String form(Dict dict, Model model) {
-		dict.getDescription();
-		dict.setDescription(Encodes.urlDecode(dict.getDescription()));
+		if(dict != null && dict.getDescription() !=null)
+			dict.setDescription(Encodes.urlDecode(dict.getDescription()));
 		model.addAttribute("dict", dict);
 		return "modules/sys/dictForm";
 	}
