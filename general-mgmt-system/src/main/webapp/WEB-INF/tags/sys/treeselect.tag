@@ -12,6 +12,7 @@
 <%@ attribute name="isAll" type="java.lang.Boolean" required="false" description="是否列出全部数据，设置true则不进行数据权限过滤（目前仅对Office有效）"%>
 <%@ attribute name="notAllowSelectRoot" type="java.lang.Boolean" required="false" description="不允许选择根节点"%>
 <%@ attribute name="notAllowSelectParent" type="java.lang.Boolean" required="false" description="不允许选择父节点"%>
+<%@ attribute name="notAllowSelectfourmenu" type="java.lang.Boolean" required="false" description="不允许选择三级菜单"%>
 <%@ attribute name="module" type="java.lang.String" required="false" description="过滤栏目模型（只显示指定模型，仅针对CMS的Category树）"%>
 <%@ attribute name="selectScopeModule" type="java.lang.Boolean" required="false" description="选择范围内的模型（控制不能选择公共模型，不能选择本栏目外的模型）（仅针对CMS的Category树）"%>
 <%@ attribute name="allowClear" type="java.lang.Boolean" required="false" description="是否允许清除"%>
@@ -36,6 +37,7 @@
 		// 正常打开	
 		top.$.jBox.open("iframe:${ctx}/tag/treeselect?url="+encodeURIComponent("${url}")+"&module=${module}&checked=${checked}&extId=${extId}&isAll=${isAll}", "选择${title}", 300, 420, {
 			ajaxData:{selectIds: $("#${id}Id").val()},buttons:{"确定":"ok", ${allowClear?"\"清除\":\"clear\", ":""}"关闭":true}, submit:function(v, h, f){
+				
 				if (v=="ok"){
 					var tree = h.find("iframe")[0].contentWindow.tree;//h.find("iframe").contents();
 					var ids = [], names = [], nodes = [];
@@ -44,12 +46,20 @@
 					}else{
 						nodes = tree.getSelectedNodes();
 					}
+				
 					for(var i=0; i<nodes.length; i++) {//<c:if test="${checked && notAllowSelectParent}">
-						if (nodes[i].isParent){
+						getParentNodes(nodes[i].getParentNode(),nodes[i]['text']);
+						var nodeArrs = curLocation.split(">");
+						alert(nodeArrs.length);
+					if (nodes[i].isParent){
 							continue; // 如果为复选框选择，则过滤掉父节点
 						}//</c:if><c:if test="${notAllowSelectRoot}">
 						if (nodes[i].level == 0){
 							top.$.jBox.tip("不能选择根节点（"+nodes[i].name+"）请重新选择。");
+							return false;
+						}//</c:if><c:if test="${notAllowSelectfourmenu}">
+						if (nodes[i].level >=3){
+							top.$.jBox.tip("不能选择三级及以下菜单（"+nodes[i].name+"）请重新选择。");
 							return false;
 						}//</c:if><c:if test="${notAllowSelectParent}">
 						if (nodes[i].isParent){
@@ -87,4 +97,17 @@
 			}
 		});
 	});
+	
+	
+	function getParentNodes(node,allNode){
+		alert("mmmm");
+		if(node!=null){
+			allNode += ">"+node['text'];
+			curNode = node.getParentNode();
+			getParentNodes(curNode,allNode);
+		}else{
+			//根节点
+			curLocation = allNode;
+		}
+	}
 </script>
