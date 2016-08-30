@@ -62,7 +62,7 @@ public class UserUtils {
 	
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
 
-
+	private static Map<String, Object> CacheMap = new HashMap<String, Object>();
 	/**
 	 * 根据ID获取用户
 	 * 
@@ -378,7 +378,7 @@ public class UserUtils {
 	 if(principal!=null){
 		 return principal.getCacheMap();
 	 }
-	 return new HashMap<String, Object>();
+	 return CacheMap;
 	 }
 
 }
