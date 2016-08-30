@@ -30,17 +30,15 @@ public class LogController extends BaseController {
 
 	@Autowired
 	private LogService logService;
-	@Autowired
-	private SystemService  systemService;
 	
 	@RequiresPermissions("sys:log:view")
 	@RequestMapping(value = {"list",""})
 	public String list(Log log, HttpServletRequest request, HttpServletResponse response, Model model) {
 		log.setTitle("系统登录");
-		if(log !=null && log.getCreateBy() !=null && log.getCreateBy().getName() !=null){
-			User user = systemService.getUserByName(log.getCreateBy().getName());
-			log.setCreateBy(user);
-		}
+//		if(log !=null && log.getCreateBy() !=null && log.getCreateBy().getName() !=null){
+//			User user = systemService.getUserByName(log.getCreateBy().getName());
+//			log.setCreateBy(user);
+//		}
 		Page<Log> page = logService.findPage(new Page<Log>(request, response), log); 
         model.addAttribute("page", page);
 		return "modules/sys/logList";
