@@ -17,14 +17,29 @@
 		//top.$.jBox("iframe:"+url+"&pwMf=1", {title: "文件管理", width: 1000, height: 500, buttons:{'关闭': true}});
 	}
 	function ${input}SelectAction(fileUrl, data, allFiles){
+		
 		var url="", files=ckfinderAPI.getSelectedFiles();
 		for(var i=0; i<files.length; i++){//<c:if test="${type eq 'thumb'}">
 			url += files[i].getThumbnailUrl();//</c:if><c:if test="${type ne 'thumb'}">
 			url += files[i].getUrl();//</c:if>
 			if (i<files.length-1) url+="|";
 		}//<c:if test="${selectMultiple}">
-		$("#${input}").val($("#${input}").val()+($("#${input}").val(url)==""?url:"|"+url));//</c:if><c:if test="${!selectMultiple}">
-		$("#${input}").val(url);//</c:if>
+		
+		
+		if($("#${input}").val().split("|")!=""){
+			var inputvals = $("#${input}").val().split("|");
+			for(var i=0; i<inputvals.length; i++){
+				
+				if(inputvals[i]=url){
+					alertx("您已经选中该文件!");
+					
+					
+				}
+			}
+		}else{
+			$("#${input}").val($("#${input}").val()+($("#${input}").val(url)==""?url:"|"+url));//</c:if><c:if test="${!selectMultiple}">
+			$("#${input}").val(url);//</c:if>
+		}
 		${input}Preview();
 		//top.$.jBox.close();
 	}
@@ -52,6 +67,7 @@
 		${input}Preview();
 	}
 	function ${input}Preview(){
+
 		var li, urls = $("#${input}").val().split("|");
 		$("#${input}Preview").children().remove();
 		for (var i=0; i<urls.length; i++){

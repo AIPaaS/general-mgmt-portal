@@ -80,7 +80,7 @@ public class OaNotifyController extends BaseController {
 			}
 		}
 		oaNotifyService.save(oaNotify);
-		addMessage(redirectAttributes, "保存通知'" + oaNotify.getTitle() + "'成功");
+		addMessage(redirectAttributes, "保存站内信'" + oaNotify.getTitle() + "'成功");
 		return "redirect:" + adminPath + "/oa/oaNotify/?repage";
 	}
 	

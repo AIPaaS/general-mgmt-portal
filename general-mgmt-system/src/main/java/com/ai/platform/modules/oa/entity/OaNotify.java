@@ -80,7 +80,7 @@ public class OaNotify extends DataEntity<OaNotify> {
 	public void setFiles(String files) {
 		this.files = files;
 	}
-
+	@Length(min=0, max=2000, message="内容长度必须介于 0 和 2000 之间")
 	public String getContent() {
 		return content;
 	}
