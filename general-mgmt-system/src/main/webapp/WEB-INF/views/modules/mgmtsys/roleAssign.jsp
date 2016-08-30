@@ -55,6 +55,13 @@
 		                }
 					}, loaded:function(h){
 						$(".jbox-content", top.document).css("overflow-y","hidden");
+						$(".jbox-content", top.document).removeClass("height");
+						$(".jbox-content", top.document).css("height","auto");
+						$(".jbox-content", top.document).css("min-height","350px");
+						$("#jbox-state-state0>div", top.document).css("height","auto");
+						$("#jbox-state-state0>div", top.document).css("min-height","50px");
+						$("#jbox-iframe", top.document).removeClass("height");
+						$("#jbox-iframe", top.document).css("min-height","350px");
 					}
 				});
 			});
