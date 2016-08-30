@@ -48,7 +48,7 @@
 		<div class="control-group">
 			<label class="control-label">类型:</label>
 			<div class="controls">
-				<form:input path="type" htmlEscape="false" maxlength="50" class="required abc"/>
+				<form:input path="type" htmlEscape="false" maxlength="20" class="required abc"/>
 			</div>
 		</div>
 		<div class="control-group">
