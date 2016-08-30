@@ -400,7 +400,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户菜单缓存
 		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
 	}
