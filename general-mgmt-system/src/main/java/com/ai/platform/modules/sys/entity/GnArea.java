@@ -41,8 +41,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this();
 		this.areaCode = areaCode;
 	}
-	@Max(32)
-	@NotNull
+	@Length(min=1, max=32, message="区域编码必须介于 1和32之间")
 	public String getAreaCode() {
 		return areaCode;
 	}
@@ -102,7 +101,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this.parentAreaCode = parentAreaCode;
 	}
 	
-	@Max(10)
+	@Length(min=0, max=10, message="排序长度必须介于 1和10之间")
 	public Integer getSortId() {
 		return sortId;
 	}
