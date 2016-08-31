@@ -31,7 +31,18 @@
 		
 		</where>
 	</select>
-	
+	<select id="getByCode" resultType="GnArea">
+		SELECT 
+			<include refid="gnAreaColumns"/>
+		FROM gn_area a
+		<include refid="gnAreaJoins"/>
+
+		<where>
+			
+				AND a.AREA_CODE = #{areaCode}
+		
+		</where>
+	</select>	
 	<!-- add by zhouxiaohu -->
 	<select id="findListByParentAreaCode" resultType="GnArea">
 		SELECT 

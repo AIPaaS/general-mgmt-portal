@@ -30,7 +30,9 @@ public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
 		return super.get(new GnArea(id,areaCode));
 	}
 	
-
+	public GnArea getByCode(String areaCode) {
+		return areaDao.getByCode(areaCode);
+	}
 	
 	public List<GnArea> findList(GnArea gnArea) {
 		return areaDao.findList(gnArea);

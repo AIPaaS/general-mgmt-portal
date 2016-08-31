@@ -108,6 +108,12 @@ public class GnAreaController extends BaseController {
 			return form(gnArea, model);
 		}
 
+		gnArea.setId(gnArea.getAreaCode());
+		
+		if(gnAreaService.getByCode(gnArea.getAreaCode())!=null){
+			addMessage(model, "保存失败，区域编码已存在");
+			return form(gnArea, model);
+		}
 		//如果是省级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("1".equals(gnArea.getAreaLevel())){
 			
@@ -123,7 +129,22 @@ public class GnAreaController extends BaseController {
 		//如果是地市级所属市为当前区域的编码
 		if("2".equals(gnArea.getAreaLevel()) ){
 			gnArea.setCityCode(gnArea.getAreaCode());
+			gnArea.setProvinceCode(gnArea.getParentAreaCode());
 		}
+		//如果是区县级所属市为当前区域的编码
+		if("3".equals(gnArea.getAreaLevel()) ){
+			gnArea.setCityCode(gnArea.getParentAreaCode());
+			
+			gnArea.setProvinceCode(gnAreaService.getByCode(gnArea.getParentAreaCode()).getParentAreaCode());
+		}
+		//如果是街道级所属市为当前区域的编码
+		if("4".equals(gnArea.getAreaLevel()) ){
+			String  cityCode = gnAreaService.getByCode(gnArea.getParentAreaCode()).getParentAreaCode();
+			String  provinceCode = gnAreaService.getByCode(cityCode).getParentAreaCode();
+			gnArea.setCityCode(cityCode);
+			gnArea.setProvinceCode(provinceCode);
+		}
+		gnArea.setIsNewRecord(true);
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
 		addMessage(redirectAttributes, "保存地区信息成功");
@@ -144,9 +165,12 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId,GnArea gnArea, HttpServletResponse response) {
+		
+		
 		List<Map<String, Object>>  mapList = Lists.newArrayList();
 		List<GnArea> list = GnAreaUtils.getGnAreaList();
+		
 		for (int i=0; i<list.size(); i++){
 			GnArea e = list.get(i);
 			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){

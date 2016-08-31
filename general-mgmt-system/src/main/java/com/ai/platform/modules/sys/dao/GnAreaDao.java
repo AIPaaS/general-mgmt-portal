@@ -20,4 +20,6 @@ public interface GnAreaDao extends CrudDao<GnArea> {
 	@Override
 	public List<GnArea> findList(GnArea gnArea);
 	
+	public GnArea getByCode(String areaCode);
+	
 }
