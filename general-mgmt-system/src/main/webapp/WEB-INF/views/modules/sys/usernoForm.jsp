@@ -109,7 +109,7 @@
 			<label class="control-label">登录名:</label>
 			<div class="controls">
 				<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
-				<form:input path="loginName" htmlEscape="false" maxlength="20" class="required userName"/>
+				<form:input path="loginName" htmlEscape="false" maxlength="20" class="required username"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -187,7 +187,7 @@
 			<div class="control-group">
 				<label class="control-label">失效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="expiryDate" name="expiryDate" noLargeToDate＝"#effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/></label>
+					<label class="lbl"><input id="expiryDate" name="expiryDate"  type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/></label>
 				</div>
 			</div>
 		<c:if test="${not empty user.id}">
