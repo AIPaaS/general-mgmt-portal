@@ -181,13 +181,13 @@
 			<div class="control-group">
 				<label class="control-label">生效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
+					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/></label>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">失效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="expiryDate" name="expiryDate" noLargeToDate＝"#effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
+					<label class="lbl"><input id="expiryDate" name="expiryDate" noLargeToDate＝"#effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/></label>
 				</div>
 			</div>
 		<c:if test="${not empty user.id}">
