@@ -8,7 +8,6 @@
 	
 	function levelchane(){
 		var level = $("#areaLevel").val();
-		alert(level);
 		if(String(level) =="1"){
 			$("#provinceDIV").hide();
 			$("#cityDIV").hide();
@@ -53,14 +52,14 @@
 		<div class="control-group">
 			<label class="control-label">区域编码：</label>
 			<div class="controls">
-				<form:input path="areaCode" htmlEscape="false" maxlength="32" class="input-xlarge required digits"/>
+				<form:input path="areaCode" htmlEscape="false" maxlength="9" class="input-xlarge required digits"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">区域名称：</label>
 			<div class="controls">
-				<form:input path="areaName" htmlEscape="false" maxlength="500" class="input-xlarge required"/>
+				<form:input path="areaName" htmlEscape="false" maxlength="16" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -115,7 +114,7 @@
 		<div class="control-group">
 			<label class="control-label">排序：</label>
 			<div class="controls">
-				<form:input path="sortId" htmlEscape="false" maxlength="10" class="input-xlarge required digits"/>
+				<form:input path="sortId" htmlEscape="false" maxlength="5" class="input-xlarge required digits"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

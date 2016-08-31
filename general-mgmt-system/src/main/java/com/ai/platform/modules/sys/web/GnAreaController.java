@@ -104,9 +104,6 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("sys:gnArea:edit")
 	@RequestMapping(value = "save")
 	public String save(GnArea gnArea, Model model, RedirectAttributes redirectAttributes) {
-		if (!beanValidator(model, gnArea)){
-			return form(gnArea, model);
-		}
 
 		//如果是省级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("1".equals(gnArea.getAreaLevel())){
@@ -124,6 +121,9 @@ public class GnAreaController extends BaseController {
 		if("2".equals(gnArea.getAreaLevel()) ){
 			gnArea.setCityCode(gnArea.getAreaCode());
 		}
+//		if (!beanValidator(model, gnArea)){
+//			return form(gnArea, model);
+//		}
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
 		addMessage(redirectAttributes, "保存地区信息成功");
