@@ -3,6 +3,7 @@
  */
 package com.ai.platform.modules.sys.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -110,7 +111,16 @@ public class UserController extends BaseController {
 		if (user.getOffice()==null || user.getOffice().getId()==null){
 			user.setOffice(UserUtils.getUser().getOffice());
 		}
-		model.addAttribute("userList", systemService.findAllUser());
+		if(user.getId() !=  null){
+			List<User> list = new ArrayList<User>();
+			User childUser = new User();
+			childUser.setId(user.getId());
+			childUser.setName(user.getName());
+			list.add(childUser);
+			model.addAttribute("userList", list);
+		}else{
+			model.addAttribute("userList", systemService.findAllNoAccountUser());
+		}
 		model.addAttribute("user", user);
 		model.addAttribute("allRoles", systemService.findAllRole());
 		return "modules/sys/usernoForm";
