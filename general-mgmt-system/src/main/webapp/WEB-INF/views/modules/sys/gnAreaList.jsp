@@ -55,8 +55,10 @@
 					${gnArea.areaName}
 				</td>
 				<td>
-			${gnArea.parentAreaCode}
+				<c:set var="parentAreaCode" value="${gnArea.parentAreaCode}"/>
 				
+				${fns:getAreaName(parentAreaCode)}
+				<c:set var="parentAreaCode" value=""/>
 				</td>
 				<shiro:hasPermission name="sys:gnArea:edit"><td>
 				<c:if test="${gnArea.areaLevel ne '0'}">		
