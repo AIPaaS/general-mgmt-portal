@@ -123,7 +123,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="${ctx}/sys/user/info" target="mainFrame"><i class="fa fa-user"></i>个人中心</a></li>
                     <li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame"><i class="fa fa-key"></i>修改密码</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li>
+                    <!-- <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li> -->
                 </ul>
             </li>
          <!--/用户信息结束-->

@@ -66,6 +66,7 @@
 				<div class="controls">
 					<form:hidden id="files" path="files" htmlEscape="false" maxlength="255" class="input-xlarge"/>
 					<sys:ckfinder input="files" type="files" uploadPath="/oa/notify" selectMultiple="true"/>
+					<span class="help-inline"> 最多不能超过三个附件。</span>
 				</div>
 			</div>
 			<div class="control-group">

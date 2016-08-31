@@ -19,6 +19,7 @@
 	function ${input}SelectAction(fileUrl, data, allFiles){
 		
 		var url="", files=ckfinderAPI.getSelectedFiles();
+	
 		for(var i=0; i<files.length; i++){//<c:if test="${type eq 'thumb'}">
 			url += files[i].getThumbnailUrl();//</c:if><c:if test="${type ne 'thumb'}">
 			url += files[i].getUrl();//</c:if>
@@ -28,6 +29,11 @@
 		
 		
 			var inputvals = $("#${input}").val().split("|");
+			
+			if(inputvals.length>3){
+				alertx("最大只能上传3个附件!");
+				return;
+			}
 			for(var i=0; i<inputvals.length; i++){
 				if(String(inputvals[i])==String(url)){
 					
@@ -44,6 +50,7 @@
 	}
 	function ${input}ThumbSelectAction(fileUrl, data, allFiles){
 		var url="", files=ckfinderAPI.getSelectedFiles();
+
 		for(var i=0; i<files.length; i++){
 			url += files[i].getThumbnailUrl();
 			if (i<files.length-1) url+="|";
@@ -69,6 +76,7 @@
 
 		var li, urls = $("#${input}").val().split("|");
 		$("#${input}Preview").children().remove();
+	
 		for (var i=0; i<urls.length; i++){
 			if (urls[i]!=""){//<c:if test="${type eq 'thumb' || type eq 'images'}">
 				li = "<li><img src=\""+urls[i]+"\" url=\""+urls[i]+"\" style=\"max-width:${empty maxWidth ? 200 : maxWidth}px;max-height:${empty maxHeight ? 200 : maxHeight}px;_height:${empty maxHeight ? 200 : maxHeight}px;border:0;padding:3px;\">";//</c:if><c:if test="${type ne 'thumb' && type ne 'images'}">
