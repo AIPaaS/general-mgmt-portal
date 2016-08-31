@@ -105,12 +105,13 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "save")
 	public String save(GnArea gnArea, Model model, RedirectAttributes redirectAttributes) {
 
-		gnArea.setId(gnArea.getAreaCode());
+		
 		
 		if(gnAreaService.getByCode(gnArea.getAreaCode())!=null){
 			addMessage(model, "保存失败，区域编码已存在");
 			return form(gnArea, model);
 		}
+		gnArea.setId(gnArea.getAreaCode());
 		//如果是省级 则将所属市编码插入为 000 所属省为当前区域的编码
 		if("1".equals(gnArea.getAreaLevel())){
 			
