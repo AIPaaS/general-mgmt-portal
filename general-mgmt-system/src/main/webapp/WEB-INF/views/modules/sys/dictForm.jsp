@@ -60,7 +60,7 @@
 		<div class="control-group">
 			<label class="control-label">排序:</label>
 			<div class="controls">
-				<form:input path="sort" htmlEscape="false" maxlength="11" class="required digits"/>
+				<form:input path="sort" htmlEscape="false" maxlength="5" class="required digits"/>
 			</div>
 		</div>
 		<div class="control-group">
