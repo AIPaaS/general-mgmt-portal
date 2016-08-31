@@ -78,12 +78,7 @@
 		FROM sys_office a
 		 <include refid="officeJoins"/> 
 		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-		<if test="name != null and name != ''">
-				AND a.name LIKE 
-					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
-		</if>
+		AND a.name =#{name}
 		<if test="code != null and code != ''">
 				AND a.code=#{code}
 		</if>
