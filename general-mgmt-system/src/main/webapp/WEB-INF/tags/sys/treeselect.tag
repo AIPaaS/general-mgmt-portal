@@ -48,9 +48,7 @@
 					}
 				
 					for(var i=0; i<nodes.length; i++) {//<c:if test="${checked && notAllowSelectParent}">
-						getParentNodes(nodes[i].getParentNode(),nodes[i]['text']);
-						var nodeArrs = curLocation.split(">");
-						alert(nodeArrs.length);
+					
 					if (nodes[i].isParent){
 							continue; // 如果为复选框选择，则过滤掉父节点
 						}//</c:if><c:if test="${notAllowSelectRoot}">
@@ -99,15 +97,5 @@
 	});
 	
 	
-	function getParentNodes(node,allNode){
-		alert("mmmm");
-		if(node!=null){
-			allNode += ">"+node['text'];
-			curNode = node.getParentNode();
-			getParentNodes(curNode,allNode);
-		}else{
-			//根节点
-			curLocation = allNode;
-		}
-	}
+
 </script>
