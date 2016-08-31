@@ -108,7 +108,7 @@
 			AND u.login_name = #{user.loginName}
 		</if>
 		<!-- 数据范围过滤 -->
-		${sqlMap.dsf}
+		<!--${sqlMap.dsf}-->
 		ORDER BY a.name
 	</select>
 	
@@ -142,7 +142,7 @@
 		</if>
 		AND a.tenant_id = #{tenantId}
 		<!-- 数据范围过滤 -->
-		${sqlMap.dsf}
+		<!--${sqlMap.dsf}-->
 		ORDER BY a.name
 	</select>
 	
@@ -167,7 +167,7 @@
 		</if>
 		AND a.tenant_id = #{tenantId}
 		<!-- 数据范围过滤 -->
-		${sqlMap.dsf}
+		<!--${sqlMap.dsf}-->
 		ORDER BY  a.name
 	</select>
 	

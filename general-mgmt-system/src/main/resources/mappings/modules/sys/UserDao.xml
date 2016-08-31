@@ -94,6 +94,7 @@
     	ca.parent_id AS "company.area.parent.id",
     	ca.parent_ids AS "company.area.parentIds",
     	o.name AS "office.name",
+    	
     	o.parent_id AS "office.parent.id",
     	o.parent_ids AS "office.parentIds",
     	oa.id AS "office.area.id",
@@ -205,7 +206,7 @@
 					<if test="dbName == 'mysql'">CONCAT('%', #{email}, '%')</if>
 		</if>
 		<!-- 数据范围过滤 -->
-		${sqlMap.dsf}
+		<!--${sqlMap.dsf}-->
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}

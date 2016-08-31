@@ -105,7 +105,7 @@
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 		</if>
 		<!-- 数据范围过滤 -->
-		   ${sqlMap.dsf} 
+		   <!--${sqlMap.dsf}--> 
 		  <!--   OR a.id = #{currentUser.office.id}-->
 		ORDER BY a.code
 	</select>

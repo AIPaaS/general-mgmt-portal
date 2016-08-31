@@ -110,7 +110,7 @@
 			<if test="parent.id != null and parent.id != ''">
 				AND a.parent_id  = #{parent.id}
 			</if>
-			${sqlMap.dsf}
+			<!--${sqlMap.dsf}-->
 		</where>		
 			ORDER BY a.site_id,a.sort ASC
 	</select>
@@ -131,7 +131,7 @@
 			<if test="inMenu != null and inMenu != '' ">
 				AND a.in_menu  = #{inMenu}
 			</if>
-			${sqlMap.dsf}
+			<!--${sqlMap.dsf}-->
 		</where>		
 			ORDER BY a.site_id,a.sort ASC
 	</select>
