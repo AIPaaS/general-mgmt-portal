@@ -45,7 +45,7 @@ public class OaNotify extends DataEntity<OaNotify> {
 		super(id);
 	}
 
-	@Length(min=0, max=200, message="标题长度必须介于 0 和 200 之间")
+	@Length(min=0, max=30, message="标题长度必须介于 0 和 30 之间")
 	public String getTitle() {
 		return title;
 	}
