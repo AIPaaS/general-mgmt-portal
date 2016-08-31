@@ -26,20 +26,19 @@
 		}//<c:if test="${selectMultiple}">
 		
 		
-		if($("#${input}").val().split("|")!=""){
+		
 			var inputvals = $("#${input}").val().split("|");
 			for(var i=0; i<inputvals.length; i++){
-				
-				if(inputvals[i]=url){
-					alertx("您已经选中该文件!");
+				if(String(inputvals[i])==String(url)){
 					
-					
+					alertx("您已经选中d该文件!");
+					return;
 				}
 			}
-		}else{
+
 			$("#${input}").val($("#${input}").val()+($("#${input}").val(url)==""?url:"|"+url));//</c:if><c:if test="${!selectMultiple}">
 			$("#${input}").val(url);//</c:if>
-		}
+		
 		${input}Preview();
 		//top.$.jBox.close();
 	}

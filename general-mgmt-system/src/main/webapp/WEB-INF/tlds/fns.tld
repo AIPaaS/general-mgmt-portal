@@ -75,7 +75,7 @@
     <name>getThemeIndex</name>
     <function-class>com.ai.platform.modules.sys.utils.UserUtils</function-class>
     <function-signature>com.ai.platform.modules.sys.entity.User getThemeIndex()</function-signature>
-    <example>${getThemeIndex()}</example>  
+    <example>${fns:getThemeIndex()}</example>  
   </function>   
   <function>
     <description>获取授权用户信息</description>
