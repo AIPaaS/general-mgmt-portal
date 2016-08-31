@@ -84,7 +84,7 @@
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>		
-		<div class="control-group" id="provinceDIV">
+		<%-- <div class="control-group" id="provinceDIV">
 			<label class="control-label">所属省：</label>
 			<div class="controls">
 			<c:set var="provinceCode" value="${gnArea.provinceCode}"/>
@@ -108,7 +108,7 @@
 			</div>
 			</div>
 			</c:if>	
-
+ --%>
 			
 
 		<div class="control-group">
