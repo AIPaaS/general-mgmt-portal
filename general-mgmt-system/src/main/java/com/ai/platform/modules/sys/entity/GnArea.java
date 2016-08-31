@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.ai.platform.common.persistence.DataEntity;
 
@@ -92,7 +93,7 @@ public class GnArea extends DataEntity<GnArea> {
 	
 	@JsonBackReference
 	@Length(min=1, max=32, message="所属区域编码长度必须介于 1 和 32 之间")
-	@NotNull(message="所属区域不能为空")
+
 	public String getParentAreaCode() {
 		return parentAreaCode;
 	}
@@ -101,7 +102,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this.parentAreaCode = parentAreaCode;
 	}
 	
-	@Length(min=0, max=10, message="排序长度必须介于 1和10之间")
+
 	public Integer getSortId() {
 		return sortId;
 	}
