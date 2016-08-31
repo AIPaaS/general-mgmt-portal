@@ -5,6 +5,8 @@ package com.ai.platform.modules.sys.entity;
 
 import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 import com.ai.platform.common.persistence.DataEntity;
@@ -39,8 +41,8 @@ public class GnArea extends DataEntity<GnArea> {
 		this();
 		this.areaCode = areaCode;
 	}
-
-	@Length(min=1, max=32, message="区域编码长度必须介于 1 和 32 之间")
+	@Max(32)
+	@NotNull
 	public String getAreaCode() {
 		return areaCode;
 	}
@@ -60,7 +62,7 @@ public class GnArea extends DataEntity<GnArea> {
 	
 	@JsonBackReference
 	@Length(min=1, max=32, message="所属省编码长度必须介于 1 和 32 之间")
-	@NotNull(message="所属省不能为空")
+	
 	public String getProvinceCode() {
 		return provinceCode;
 	}
@@ -71,7 +73,7 @@ public class GnArea extends DataEntity<GnArea> {
 	
 	@JsonBackReference
 	@Length(min=1, max=32, message="所属市编码长度必须介于 1 和 32 之间")
-	@NotNull(message="所属市不能为空")
+	
 	public String getCityCode() {
 		return cityCode;
 	}
