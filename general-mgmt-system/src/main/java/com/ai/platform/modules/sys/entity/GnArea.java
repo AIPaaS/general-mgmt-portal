@@ -102,7 +102,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this.parentAreaCode = parentAreaCode;
 	}
 	
-	
+	@Max(10)
 	public Integer getSortId() {
 		return sortId;
 	}
