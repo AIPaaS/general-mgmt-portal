@@ -140,6 +140,7 @@ public class GnAreaController extends BaseController {
 		//如果是街道级所属市为当前区域的编码
 		if("4".equals(gnArea.getAreaLevel()) ){
 			String  cityCode = gnAreaService.getByCode(gnArea.getParentAreaCode()).getParentAreaCode();
+
 			String  provinceCode = gnAreaService.getByCode(cityCode).getParentAreaCode();
 			gnArea.setCityCode(cityCode);
 			gnArea.setProvinceCode(provinceCode);
@@ -165,8 +166,8 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId,GnArea gnArea, HttpServletResponse response) {
-		
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
+			
 		
 		List<Map<String, Object>>  mapList = Lists.newArrayList();
 		List<GnArea> list = GnAreaUtils.getGnAreaList();
