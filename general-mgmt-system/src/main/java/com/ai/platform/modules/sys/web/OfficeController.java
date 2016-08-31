@@ -169,10 +169,10 @@ public class OfficeController extends BaseController {
 		if (!beanValidator(model, office)){
 			return form(office, model);
 		}
-		if (!"true".equals(checkName(office.getOldName(),office.getName()))){
+/*		if (!"true".equals(checkName(office.getOldName(),office.getName()))){
 			addMessage(model, "保存部门'" + office.getName() + "'失败, 部门名称已存在");
 			return form(office, model);
-		}
+		}*/
 		if (!"true".equals(checkCode(office.getOldCode(),office.getCode()))){
 			addMessage(model, "保存部门'" + office.getCode() + "'失败, 部门编码已存在");
 			return form(office, model);

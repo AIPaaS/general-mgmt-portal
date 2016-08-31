@@ -10,11 +10,11 @@
 			//$("#code").focus();
 			$("#inputForm").validate({
 				rules: {
-					name: {remote: "${ctx}/sys/office/checkName?oldName=" + encodeURIComponent("${office.name}")},
+					
 					code: {remote: "${ctx}/sys/office/checkCode?oldCode=" + encodeURIComponent("${office.code}")}
 				},
 				messages: {
-					name: {remote: "部门名称已存在"},
+					
 					code: {remote: "部门编码已存在"}
 				},
 				submitHandler: function(form){
