@@ -76,15 +76,7 @@
 				<span class="help-inline"><font color="red">*</font></span>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">是否可用</label>
-			<div class="controls">
-				<form:select path="useable">
-					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-				<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>
-			</div>
-		</div>
+		<input id="useable" name="useable" type="hidden" value="1">
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
