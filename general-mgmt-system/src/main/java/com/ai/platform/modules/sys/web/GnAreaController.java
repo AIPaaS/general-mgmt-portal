@@ -104,9 +104,6 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("sys:gnArea:edit")
 	@RequestMapping(value = "save")
 	public String save(GnArea gnArea, Model model, RedirectAttributes redirectAttributes) {
-		if (!beanValidator(model, gnArea)){
-			return form(gnArea, model);
-		}
 
 		gnArea.setId(gnArea.getAreaCode());
 		
@@ -146,6 +143,9 @@ public class GnAreaController extends BaseController {
 			gnArea.setProvinceCode(provinceCode);
 		}
 		gnArea.setIsNewRecord(true);
+//		if (!beanValidator(model, gnArea)){
+//			return form(gnArea, model);
+//		}
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
 		addMessage(redirectAttributes, "保存地区信息成功");
