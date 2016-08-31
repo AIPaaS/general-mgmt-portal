@@ -31,7 +31,7 @@
 			for(var i=0; i<inputvals.length; i++){
 				if(String(inputvals[i])==String(url)){
 					
-					alertx("您已经选中d该文件!");
+					alertx("您已经选中该文件!");
 					return;
 				}
 			}

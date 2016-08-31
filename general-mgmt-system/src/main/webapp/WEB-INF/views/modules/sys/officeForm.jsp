@@ -70,7 +70,7 @@
 			<label class="control-label">部门名称:</label>
 			<div class="controls">
 			    <input id="oldName" name="oldName" type="hidden" value="${office.name}">
-				<form:input path="name" htmlEscape="false" maxlength="15" class="required"/>
+				<form:input path="name" htmlEscape="false" maxlength="15" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

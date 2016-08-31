@@ -8,13 +8,16 @@
 	
 	function levelchane(){
 		var level = $("#areaLevel").val();
-		if(level ==1){
+		alert(level);
+		if(String(level) =="1"){
 			$("#provinceDIV").hide();
 			$("#cityDIV").hide();
-		}
-		if(level ==2){
-			
+		}else if(String(level) =="2"){
+			$("#provinceDIV").show();
 			$("#cityDIV").hide();
+		}else{
+			$("#provinceDIV").show();
+			$("#cityDIV").show();
 		}
 		
 	}
@@ -50,7 +53,7 @@
 		<div class="control-group">
 			<label class="control-label">区域编码：</label>
 			<div class="controls">
-				<form:input path="areaCode" htmlEscape="false" maxlength="32" class="input-xlarge required"/>
+				<form:input path="areaCode" htmlEscape="false" maxlength="32" class="input-xlarge required digits"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -65,6 +68,7 @@
 			<label class="control-label">行政级别：</label>
 			<div class="controls">
 				<form:select path="areaLevel" class="input-medium" onchange="levelchane()" id="areaLevel">
+				<form:option value="" label="请选择"/>
 					<form:options items="${fns:getDictList('gn_area_level')}" itemLabel="label" itemValue="value" htmlEscape="false" />
 				</form:select>			
 					
@@ -100,7 +104,7 @@
 			<div class="controls">
 			<c:set var="cityCode" value="${gnArea.cityCode}"/>
 			 <sys:treeselect id="cityCode" name="cityCode" value="${gnArea.cityCode}" labelName="${fns:getAreaName(cityCode)}" labelValue="${fns:getAreaName(cityCode)}"
-					title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
+					title="区域" url="/sys/gnArea/treeData"  extId="${id}" cssClass="required" notAllowSelectRoot="true" allowClear=""/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 			</div>
@@ -133,9 +137,9 @@
 		</div>
 		<div class="form-actions">
 			<shiro:hasPermission name="sys:gnArea:edit">
-		<c:if test="${gnArea.areaLevel ne '0'}"> 
+		
 			<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;
-		 </c:if> 
+		
 			</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
