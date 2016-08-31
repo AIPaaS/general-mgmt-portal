@@ -49,7 +49,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this.areaCode = areaCode;
 	}
 	
-	@Length(min=1, max=500, message="区域名称长度必须介于 1 和 500 之间")
+	@Length(min=1, max=16, message="区域名称长度必须介于 1 和 16之间")
 	public String getAreaName() {
 		return areaName;
 	}
