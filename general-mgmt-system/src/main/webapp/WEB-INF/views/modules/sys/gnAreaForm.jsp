@@ -8,6 +8,7 @@
 	
 	function levelchane(){
 		var level = $("#areaLevel").val();
+		
 		if(level ==1){
 			$("#provinceDIV").hide();
 			$("#cityDIV").hide();
@@ -50,7 +51,7 @@
 		<div class="control-group">
 			<label class="control-label">区域编码：</label>
 			<div class="controls">
-				<form:input path="areaCode" htmlEscape="false" maxlength="32" class="input-xlarge required"/>
+				<form:input path="areaCode" htmlEscape="false" maxlength="32" class="input-xlarge required digits"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -65,6 +66,7 @@
 			<label class="control-label">行政级别：</label>
 			<div class="controls">
 				<form:select path="areaLevel" class="input-medium" onchange="levelchane()" id="areaLevel">
+				<form:option value="" label="请选择"/>
 					<form:options items="${fns:getDictList('gn_area_level')}" itemLabel="label" itemValue="value" htmlEscape="false" />
 				</form:select>			
 					
@@ -86,7 +88,7 @@
 			<div class="controls">
 			<c:set var="provinceCode" value="${gnArea.provinceCode}"/>
 			 <sys:treeselect id="provinceCode" name="provinceCode" value="${gnArea.provinceCode}" labelName="${fns:getAreaName(provinceCode)}" labelValue="${fns:getAreaName(provinceCode)}"
-					title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
+					title="区域" url="/sys/gnArea/treeData?areaLevel=1" extId="${id}" cssClass="required" allowClear=""/>
 				
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -100,7 +102,7 @@
 			<div class="controls">
 			<c:set var="cityCode" value="${gnArea.cityCode}"/>
 			 <sys:treeselect id="cityCode" name="cityCode" value="${gnArea.cityCode}" labelName="${fns:getAreaName(cityCode)}" labelValue="${fns:getAreaName(cityCode)}"
-					title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
+					title="区域" url="/sys/gnArea/treeData?provinceCode=${gnArea.provinceCode}"  extId="${id}" cssClass="required" notAllowSelectRoot="true" allowClear=""/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 			</div>
