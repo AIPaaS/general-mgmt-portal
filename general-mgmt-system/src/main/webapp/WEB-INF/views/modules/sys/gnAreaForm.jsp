@@ -8,14 +8,16 @@
 	
 	function levelchane(){
 		var level = $("#areaLevel").val();
-		
-		if(level ==1){
+		alert(level);
+		if(String(level) =="1"){
 			$("#provinceDIV").hide();
 			$("#cityDIV").hide();
-		}
-		if(level ==2){
-			
+		}else if(String(level) =="2"){
+			$("#provinceDIV").show();
 			$("#cityDIV").hide();
+		}else{
+			$("#provinceDIV").show();
+			$("#cityDIV").show();
 		}
 		
 	}
@@ -88,7 +90,7 @@
 			<div class="controls">
 			<c:set var="provinceCode" value="${gnArea.provinceCode}"/>
 			 <sys:treeselect id="provinceCode" name="provinceCode" value="${gnArea.provinceCode}" labelName="${fns:getAreaName(provinceCode)}" labelValue="${fns:getAreaName(provinceCode)}"
-					title="区域" url="/sys/gnArea/treeData?areaLevel=1" extId="${id}" cssClass="required" allowClear=""/>
+					title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" allowClear=""/>
 				
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -102,7 +104,7 @@
 			<div class="controls">
 			<c:set var="cityCode" value="${gnArea.cityCode}"/>
 			 <sys:treeselect id="cityCode" name="cityCode" value="${gnArea.cityCode}" labelName="${fns:getAreaName(cityCode)}" labelValue="${fns:getAreaName(cityCode)}"
-					title="区域" url="/sys/gnArea/treeData?provinceCode=${gnArea.provinceCode}"  extId="${id}" cssClass="required" notAllowSelectRoot="true" allowClear=""/>
+					title="区域" url="/sys/gnArea/treeData"  extId="${id}" cssClass="required" notAllowSelectRoot="true" allowClear=""/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 			</div>
@@ -135,9 +137,9 @@
 		</div>
 		<div class="form-actions">
 			<shiro:hasPermission name="sys:gnArea:edit">
-		<c:if test="${gnArea.areaLevel ne '0'}"> 
+		
 			<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;
-		 </c:if> 
+		
 			</shiro:hasPermission>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
