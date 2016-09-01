@@ -43,7 +43,7 @@
 		<div class="control-group">
 			<label class="control-label">名称:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="16" class="required input-xlarge userName"/>
+				<form:input path="name" htmlEscape="false" maxlength="16" class="required menuName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
