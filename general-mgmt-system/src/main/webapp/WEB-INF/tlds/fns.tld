@@ -75,7 +75,7 @@
     <name>getThemeIndex</name>
     <function-class>com.ai.platform.modules.sys.utils.UserUtils</function-class>
     <function-signature>com.ai.platform.modules.sys.entity.User getThemeIndex()</function-signature>
-    <example>${getThemeIndex()}</example>  
+    <example>${fns:getThemeIndex()}</example>  
   </function>   
   <function>
     <description>获取授权用户信息</description>
@@ -155,6 +155,14 @@
     <function-class>com.ai.platform.modules.sys.utils.DictUtils</function-class>
     <function-signature>java.lang.String getDictListJson(java.lang.String)</function-signature>
     <example>${fns:getDictListJson(type)}</example>  
+  </function>
+ 
+   <function>
+    <description>根据地区编码返回地区名称</description>
+    <name>getAreaName</name>
+    <function-class>com.ai.platform.modules.sys.utils.GnAreaUtils</function-class>
+    <function-signature>java.lang.String getAreaName(java.lang.String)</function-signature>
+    <example>${fns:getAreaName(code)}</example>  
   </function>
  
    <function>

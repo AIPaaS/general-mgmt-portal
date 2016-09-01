@@ -26,7 +26,7 @@
 		<script type="text/javascript">
 			$("#assignButton").click(function(){
 				top.$.jBox.open("iframe:${ctx}/sys/role/usertorole?id=${role.id}", "分配角色",document.body.clientWidth-200,document.body.clientHeight,{
-					buttons:{"确定分配":"ok", "清除已选":"clear", "关闭":true}, bottomText:"通过选择部门，然后为列出的人员分配角色。",submit:function(v, h, f){
+					buttons:{"确定分配":"ok", "关闭":true}, bottomText:"通过选择部门，然后为列出的人员分配角色。",submit:function(v, h, f){
 						var pre_ids = h.find("iframe")[0].contentWindow.pre_ids;
 						var ids = h.find("iframe")[0].contentWindow.ids;
 						//nodes = selectedTree.getSelectedNodes();
@@ -55,6 +55,13 @@
 		                }
 					}, loaded:function(h){
 						$(".jbox-content", top.document).css("overflow-y","hidden");
+						$(".jbox-content", top.document).removeClass("height");
+						$(".jbox-content", top.document).css("height","auto");
+						$(".jbox-content", top.document).css("min-height","350px");
+						$("#jbox-state-state0>div", top.document).css("height","auto");
+						$("#jbox-state-state0>div", top.document).css("min-height","50px");
+						$("#jbox-iframe", top.document).removeClass("height");
+						$("#jbox-iframe", top.document).css("min-height","350px");
 					}
 				});
 			});

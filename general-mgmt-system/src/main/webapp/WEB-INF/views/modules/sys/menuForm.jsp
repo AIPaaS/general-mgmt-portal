@@ -37,7 +37,7 @@
 			<label class="control-label">上级菜单:</label>
 			<div class="controls">
                 <sys:treeselect id="menu" name="parent.id" value="${menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
-					title="菜单" url="/sys/menu/treeData"  cssClass="required"/>
+					title="菜单" url="/sys/menu/treeData" notAllowSelectfourmenu="true" cssClass="required"/>
 			</div>
 		</div>
 		<div class="control-group">

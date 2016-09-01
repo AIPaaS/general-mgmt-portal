@@ -45,7 +45,7 @@ public class OaNotify extends DataEntity<OaNotify> {
 		super(id);
 	}
 
-	@Length(min=0, max=200, message="标题长度必须介于 0 和 200 之间")
+	@Length(min=0, max=30, message="标题长度必须介于 0 和 30 之间")
 	public String getTitle() {
 		return title;
 	}
@@ -80,7 +80,7 @@ public class OaNotify extends DataEntity<OaNotify> {
 	public void setFiles(String files) {
 		this.files = files;
 	}
-
+	@Length(min=0, max=2000, message="内容长度必须介于 0 和 2000 之间")
 	public String getContent() {
 		return content;
 	}

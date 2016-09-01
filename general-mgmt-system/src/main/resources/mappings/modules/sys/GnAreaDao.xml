@@ -5,10 +5,10 @@
 	<sql id="gnAreaColumns">
 		a.area_code AS "areaCode",
 		a.area_name AS "areaName",
-		a.province_code AS "provinceCode.areaCode",
-		a.city_code AS "cityCode.areaCode",
+		a.province_code AS "provinceCode",
+		a.city_code AS "cityCode",
 		a.area_level AS "areaLevel",
-		a.parent_area_code AS "parentAreaCode.areaCode",
+		a.parent_area_code AS "parentAreaCode",
 		a.sort_id AS "sortId",
 		a.state AS "state",
 		a.remark AS "remark",
@@ -31,7 +31,18 @@
 		
 		</where>
 	</select>
-	
+	<select id="getByCode" resultType="GnArea">
+		SELECT 
+			<include refid="gnAreaColumns"/>
+		FROM gn_area a
+		<include refid="gnAreaJoins"/>
+
+		<where>
+			
+				AND a.AREA_CODE = #{areaCode}
+		
+		</where>
+	</select>	
 	<!-- add by zhouxiaohu -->
 	<select id="findListByParentAreaCode" resultType="GnArea">
 		SELECT 
@@ -95,7 +106,7 @@
 	<select id="findByParentIdsLike" resultType="GnArea">
 		SELECT
 			a.id,
-			a.parent_id AS "parentAreaCode.id",
+			a.parent_id AS "parentAreaCode",
 			a.parent_ids
 		FROM gn_area a
 		<include refid="gnAreaJoins"/>
@@ -120,10 +131,10 @@
 		) VALUES (
 			#{areaCode},
 			#{areaName},
-			#{provinceCode.areaCode},
-			#{cityCode.areaCode},
+			#{provinceCode},
+			#{cityCode},
 			#{areaLevel},
-			#{parentAreaCode.areaCode},
+			#{parentAreaCode},
 			#{sortId},
 			#{state},
 			#{remark},
@@ -136,10 +147,10 @@
 		UPDATE gn_area SET 	
 			area_code = #{areaCode},
 			area_name = #{areaName},
-			province_code = #{provinceCode.areaCode},
-			city_code = #{cityCode.areaCode},
+			province_code = #{provinceCode},
+			city_code = #{cityCode},
 			area_level = #{areaLevel},
-			parent_area_code = #{parentAreaCode.areaCode},
+			parent_area_code = #{parentAreaCode},
 			sort_id = #{sortId},
 			state = #{state},
 			remark = #{remark},
@@ -149,7 +160,7 @@
 	
 	<update id="updateParentIds">
 		UPDATE gn_area SET 
-			parent_id = #{parentAreaCode.id}, 
+			parent_id = #{parentAreaCode}, 
 			parent_ids = #{parentIds}
 		WHERE id = #{id}
 	</update>

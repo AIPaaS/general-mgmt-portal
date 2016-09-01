@@ -8,7 +8,7 @@
 	<meta name="decorator" content="mgmt"/>
   </head>
 <body>
-<div id="${fns:getTheme()}" class="xyindex">
+<div id="${fns:getThemeIndex()}" class="${fns:getThemeIndex()}">
     <header class="navbar" id="header-navbar">
         <div class="container">
             <a href="index.html" id="logo" class="navbar-brand"><img  src="${iotStatic}/img/logo.png" alt="" class="normal-logo logo-white"/></a>
@@ -81,10 +81,10 @@
 		            <a class="skin-changer" data-skin="theme-white" data-toggle="tooltip" title="绿色" style="background-color: #2ecc71;height:20px;width:10px;padding:0 10px;float:left" onclick="location='${pageContext.request.contextPath}/theme/green?url='+location.href">
 		            </a>
 		            </li>
-		             <li>
+		         <!--     <li>
 		            <a class="skin-changer" data-skin="theme-amethyst" data-toggle="tooltip" title="紫色" style="background-color: #9b59b6;height:20px;width:10px;padding:0 10px;float:left">
 		            </a>
-		            </li>
+		            </li> -->
 		            <!--
 		             <li>
 		            <a class="skin-changer" data-skin="" data-toggle="tooltip" title="black" style="background-color: #34495e;height:20px;width:10px;padding:0 10px;float:left">
@@ -123,7 +123,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="${ctx}/sys/user/info" target="mainFrame"><i class="fa fa-user"></i>个人中心</a></li>
                     <li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame"><i class="fa fa-key"></i>修改密码</a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li>
+                    <!-- <li><a href="#"><i class="fa fa-cog"></i>系统设置</a></li> -->
                 </ul>
             </li>
          <!--/用户信息结束-->

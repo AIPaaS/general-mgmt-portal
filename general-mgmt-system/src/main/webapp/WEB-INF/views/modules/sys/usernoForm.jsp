@@ -8,7 +8,7 @@
 		$(document).ready(function() {
 			$("#no").focus();
 			$("#btnSubmit").click(function(){
-				var beginDate=$("#effectiveDate").val();  
+				 var beginDate=$("#effectiveDate").val();  
 				 var endDate=$("#expiryDate").val();  
 				 var d1 = new Date(beginDate.replace(/\-/g, "\/"));  
 				 var d2 = new Date(endDate.replace(/\-/g, "\/"));  
@@ -16,18 +16,6 @@
 					 alert("失效时间要大于生效时间");
 					 return false;
 				 }
-				 
-				 var confirmNewPassword=$("#confirmNewPassword").val();  
-				 var newPassword=$("#newPassword").val();  
-				 if(newPassword.indexOf(" ") != -1 || newPassword.indexOf(" ")==''){
-					 alert("密码不能包含空格");
-					 return false;
-				 }
-				 if(confirmNewPassword.indexOf(" ") != -1 || confirmNewPassword.indexOf(" ") ==''){
-					 alert("确认密码不能包含空格");
-					 return false;
-				 }
-				 
 				 
 			});
 			$("#inputForm").validate({
@@ -109,14 +97,14 @@
 			<label class="control-label">登录名:</label>
 			<div class="controls">
 				<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
-				<form:input path="loginName" htmlEscape="false" maxlength="50" class="required userName"/>
+				<form:input path="loginName" htmlEscape="false" maxlength="20" class="required username"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">密码:</label>
 			<div class="controls">
-				<input id="newPassword" name="newPassword" type="password" value="" maxlength="50" minlength="3" class="${empty user.id?'required':''} password"/>
+				<input id="newPassword" name="newPassword" type="password" onpaste="return false"  onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" value="" maxlength="50" minlength="3" class="${empty user.id?'required':''} "/>
 				<c:if test="${empty user.id}"><span class="help-inline"><font color="red">*</font> </span></c:if>
 				<c:if test="${not empty user.id}"><span class="help-inline">若不修改密码，请留空。</span></c:if>
 			</div>
@@ -124,14 +112,14 @@
 		<div class="control-group">
 			<label class="control-label">确认密码:</label>
 			<div class="controls">
-				<input id="confirmNewPassword" name="confirmNewPassword" type="password" value="" maxlength="50" minlength="3" equalTo="#newPassword"/>
+				<input id="confirmNewPassword" name="confirmNewPassword" onpaste="return false" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" type="password" value="" maxlength="50" minlength="3" equalTo="#newPassword" />
 				<c:if test="${empty user.id}"><span class="help-inline"><font color="red">*</font> </span></c:if>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">邮箱:</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="30" minlength="3" class="required email"/>
+				<form:input path="email" htmlEscape="false" maxlength="25" minlength="5" class="required email"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -181,23 +169,24 @@
 			<div class="control-group">
 				<label class="control-label">生效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
+					<label class="lbl"><input id="effectiveDate" name="effectiveDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.effectiveDate}" type="both"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/></label>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">失效时间:</label>
 				<div class="controls">
-					<label class="lbl"><input id="expiryDate" name="expiryDate" type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both" dateStyle="full"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/></label>
+					<label class="lbl"><input id="expiryDate" name="expiryDate"  type="text" readonly="readonly" maxlength="30" class="input Wdate" value="<fmt:formatDate value="${user.expiryDate}" type="both"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/></label>
 				</div>
 			</div>
 		<c:if test="${not empty user.id}">
 			
+			<%--
 			<div class="control-group">
 				<label class="control-label">最后登陆:</label>
 				<div class="controls">
-					<label class="lbl">IP: ${user.loginIp}&nbsp;&nbsp;&nbsp;&nbsp;时间：<fmt:formatDate value="${user.loginDate}" type="both" dateStyle="full"/></label>
+					<label class="lbl">IP: ${user.loginIp}&nbsp;&nbsp;&nbsp;&nbsp;时间： <fmt:formatDate value="${user.loginDate}" type="both" dateStyle="full"/> </label>
 				</div>
-			</div>
+			</div>--%>
 		</c:if>
 		<div class="form-actions">
 			<shiro:hasPermission name="sys:user:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>

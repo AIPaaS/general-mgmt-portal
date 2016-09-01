@@ -64,7 +64,7 @@
 			<label class="control-label">角色名称:</label>
 			<div class="controls">
 				<input id="oldName" name="oldName" type="hidden" value="${role.name}">
-				<form:input path="name" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="name" htmlEscape="false" maxlength="15" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -72,19 +72,11 @@
 			<label class="control-label">英文名称:</label>
 			<div class="controls">
 				<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">
-				<form:input path="enname" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="enname" htmlEscape="false" maxlength="20" class="required"/>
 				<span class="help-inline"><font color="red">*</font></span>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">是否可用</label>
-			<div class="controls">
-				<form:select path="useable">
-					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-				<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>
-			</div>
-		</div>
+		<input id="useable" name="useable" type="hidden" value="1">
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">

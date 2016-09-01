@@ -49,7 +49,7 @@
 		<div class="control-group">
 			<label class="control-label">标题：</label>
 			<div class="controls">
-				<form:input path="title" htmlEscape="false" maxlength="200" class="input-xlarge required"/>
+				<form:input path="title" htmlEscape="false" maxlength="18" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -66,6 +66,7 @@
 				<div class="controls">
 					<form:hidden id="files" path="files" htmlEscape="false" maxlength="255" class="input-xlarge"/>
 					<sys:ckfinder input="files" type="files" uploadPath="/oa/notify" selectMultiple="true"/>
+					<span class="help-inline"> 最多不能超过三个附件。</span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -117,7 +118,7 @@
 									${fns:getDictLabel(oaNotifyRecord.readFlag, 'oa_notify_read', '')}
 								</td>
 								<td>
-									<fmt:formatDate value="${oaNotifyRecord.readDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${oaNotifyRecord.readDate}" pattern="yyyy-MM-dd"/>
 								</td>
 							</tr>
 						</c:forEach>

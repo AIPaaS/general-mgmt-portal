@@ -10,11 +10,11 @@
 			//$("#code").focus();
 			$("#inputForm").validate({
 				rules: {
-					name: {remote: "${ctx}/sys/office/checkName?oldName=" + encodeURIComponent("${office.name}")},
+					
 					code: {remote: "${ctx}/sys/office/checkCode?oldCode=" + encodeURIComponent("${office.code}")}
 				},
 				messages: {
-					name: {remote: "部门名称已存在"},
+					
 					code: {remote: "部门编码已存在"}
 				},
 				submitHandler: function(form){
@@ -70,7 +70,7 @@
 			<label class="control-label">部门名称:</label>
 			<div class="controls">
 			    <input id="oldName" name="oldName" type="hidden" value="${office.name}">
-				<form:input path="name" htmlEscape="false" maxlength="15" class="required"/>
+				<form:input path="name" htmlEscape="false" maxlength="15" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

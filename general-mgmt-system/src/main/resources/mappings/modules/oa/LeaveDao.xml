@@ -41,7 +41,7 @@
 		<if test="ids != null and ids != ''">
 			AND a.id IN (${ids})
 		</if>
-		${sqlMap.dsf}
+		<!--${sqlMap.dsf}-->
 		ORDER BY a.id DESC
 	</select>
 	

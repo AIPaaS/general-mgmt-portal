@@ -62,7 +62,7 @@ public class UserUtils {
 	
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
 
-
+	private static Map<String, Object> CacheMap = new HashMap<String, Object>();
 	/**
 	 * 根据ID获取用户
 	 * 
@@ -319,8 +319,9 @@ public class UserUtils {
 	 * 获取当前登录者对象
 	 */
 	public static Principal getPrincipal(){
+		Subject subject;
 		try{
-			Subject subject = SecurityUtils.getSubject();
+		    subject = SecurityUtils.getSubject();
 			Principal principal = (Principal)subject.getPrincipal();
 			if (principal != null){
 				return principal;
@@ -330,6 +331,9 @@ public class UserUtils {
 			
 		}catch (InvalidSessionException e){
 			
+		}finally{
+			//add by zhouxiaohu 
+			subject =null;
 		}
 		return null;
 	}
@@ -378,7 +382,7 @@ public class UserUtils {
 	 if(principal!=null){
 		 return principal.getCacheMap();
 	 }
-	 return new HashMap<String, Object>();
+	 return CacheMap;
 	 }
 
 }

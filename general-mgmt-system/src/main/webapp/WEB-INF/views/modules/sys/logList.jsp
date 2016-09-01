@@ -23,24 +23,24 @@
 		<input id="title" name="title" type="hidden" value="${log.title}" />
 		<div>
 			<!-- <label>操作菜单：</label><input id="title" name="title" type="text" maxlength="50" class="input-mini" value="${log.title}" readonly/> -->
-			<label>姓名：</label><input id="createBy.name" name="createBy.name" type="text" maxlength="50" class="input-mini" value="${log.createBy.name}"/>
+			<label>ID：</label><input id="createBy.id" name="createBy.id" type="text" maxlength="50" class="input-mini" value="${log.createBy.id}"/>
 			<label>URI：</label><input id="requestUri" name="requestUri" type="text" maxlength="50" class="input-mini" value="${log.requestUri}"/>
-		</div><div style="margin-top:8px;">
+		
 			<label>日期范围：&nbsp;</label><input id="beginDate" name="beginDate" type="text" readonly="readonly" maxlength="20" class="input-mini Wdate"
 				value="<fmt:formatDate value="${log.beginDate}" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,maxDate:'#F{$dp.$D(\'endDate\')}'});"/>
 			<label>&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input id="endDate" name="endDate" type="text" readonly="readonly" maxlength="20" class="input-mini Wdate"
 				value="<fmt:formatDate value="${log.endDate}" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false,minDate:'#F{$dp.$D(\'beginDate\')}'});"/>&nbsp;&nbsp;
-			&nbsp;<label for="exception"><input id="exception" name="exception" type="checkbox"${log.exception eq '1'?' checked':''} value="1"/>只查询异常信息</label>
-			&nbsp;&nbsp;&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>&nbsp;&nbsp;
 		</div>
 	</form:form>
 	<sys:message content="${message}"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>操作菜单</th><th>姓名</th><th>归属公司</th><th>归属部门</th><th>URI</th><th>提交方式</th><th>操作者IP</th><th>操作时间</th></thead>
+		<thead><tr><th>操作菜单</th><th>ID</th><th>姓名</th><th>归属公司</th><th>归属部门</th><th>URI</th><th>提交方式</th><th>操作者IP</th><th>操作时间</th></thead>
 		<tbody><%request.setAttribute("strEnter", "\n");request.setAttribute("strTab", "\t");%>
 		<c:forEach items="${page.list}" var="log">
 			<tr>
 				<td>${log.title}</td>
+				<td>${log.createBy.id}</td>
 				<td>${log.createBy.name}</td>
 				<td>${log.createBy.company.name}</td>
 				<td>${log.createBy.office.name}</td>

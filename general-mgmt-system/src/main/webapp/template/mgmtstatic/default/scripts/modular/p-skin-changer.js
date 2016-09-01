@@ -9,7 +9,8 @@ try {
 }
 if (storage) {
 	try {
-		var usedSkin = localStorage.getItem('config-skin');
+		var usedSkin = ${fns:getThemeIndex()};
+		
 		if (usedSkin != '' && usedSkin != null) {
 			 $("body").attr("class",usedSkin);
 		} else {

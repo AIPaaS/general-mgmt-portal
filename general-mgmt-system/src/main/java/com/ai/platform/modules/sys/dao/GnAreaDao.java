@@ -17,5 +17,9 @@ import com.ai.platform.modules.sys.entity.GnArea;
 @MyBatisDao
 public interface GnAreaDao extends CrudDao<GnArea> {
 	public List<GnArea> findListByParentAreaCode(String parentAreaCode);
+	@Override
+	public List<GnArea> findList(GnArea gnArea);
+	
+	public GnArea getByCode(String areaCode);
 	
 }

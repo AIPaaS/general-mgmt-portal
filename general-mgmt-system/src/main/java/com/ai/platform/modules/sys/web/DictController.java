@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
+import com.ai.platform.common.utils.Encodes;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Dict;
@@ -62,6 +63,8 @@ public class DictController extends BaseController {
 	@RequiresPermissions("sys:dict:view")
 	@RequestMapping(value = "form")
 	public String form(Dict dict, Model model) {
+		if(dict != null && dict.getDescription() !=null)
+			dict.setDescription(Encodes.urlDecode(dict.getDescription()));
 		model.addAttribute("dict", dict);
 		return "modules/sys/dictForm";
 	}
@@ -78,7 +81,7 @@ public class DictController extends BaseController {
 		}
 		dictService.save(dict);
 		addMessage(redirectAttributes, "保存字典'" + dict.getLabel() + "'成功");
-		return "redirect:" + adminPath + "/sys/dict/?repage&type="+dict.getType();
+		return "redirect:" + adminPath + "/sys/dict/?repage";
 	}
 	
 	@RequiresPermissions("sys:dict:edit")
@@ -90,7 +93,7 @@ public class DictController extends BaseController {
 		}
 		dictService.delete(dict);
 		addMessage(redirectAttributes, "删除字典成功");
-		return "redirect:" + adminPath + "/sys/dict/?repage&type="+dict.getType();
+		return "redirect:" + adminPath + "/sys/dict/?repage";
 	}
 	
 	@RequiresPermissions("user")
