@@ -36,14 +36,14 @@
 		<div class="control-group">
 			<label class="control-label">应用编码：</label>
 			<div class="controls">
-				<form:input path="systemId" htmlEscape="false" maxlength="32" class="input-xlarge required"/>
+				<form:input path="systemId" htmlEscape="false" maxlength="32" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">应用名称：</label>
 			<div class="controls">
-				<form:input path="systemName" htmlEscape="false" maxlength="64" class="input-xlarge required"/>
+				<form:input path="systemName" htmlEscape="false" maxlength="50" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 		<div class="control-group">
 			<label class="control-label">应用上下文：</label>
 			<div class="controls">
-				<form:input path="systemUrlContext" htmlEscape="false" maxlength="500" class="input-xlarge "/>
+				<form:input path="systemUrlContext" htmlEscape="false" maxlength="400" class="input-xlarge "/>
 			</div>
 		</div>
 		<div class="form-actions">
