@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,8 +43,28 @@ public class UserfilesDownloadServlet extends HttpServlet {
 		}
 		File file = new File(Global.getUserfilesBaseDir() + Global.USERFILES_BASE_URL + filepath);
 		try {
-			FileCopyUtils.copy(new FileInputStream(file), resp.getOutputStream());
-			resp.setHeader("Content-Type", "application/octet-stream");
+//			FileCopyUtils.copy(new FileInputStream(file), resp.getOutputStream());
+//			resp.setContentType("application/x-msdownload");
+//			resp.addHeader("Content-Disposition", "attachment;");
+			 
+			resp.setContentType("application/x-msdownload");
+            // 添加下载文件的头信息。此信息在下载时会在下载面板上显示，比如：
+            // 迅雷下载显示的文件名称，就是此处filiname
+			resp.addHeader("Content-Disposition", "attachment;filename="+  file.getName());
+            // 添加文件的大小信息
+			resp.setContentLength((int) file.length());
+            // 获得输出网络流
+            ServletOutputStream sos = resp.getOutputStream();
+            FileInputStream fis = new FileInputStream(file);
+            byte[] buffer = new byte[1024];
+            int i = 0;
+            while ((i = fis.read(buffer)) != -1) {
+                sos.write(buffer, 0, i);
+                sos.flush();
+            }
+            sos.close();
+            fis.close();
+             
 			return;
 		} catch (FileNotFoundException e) {
 			req.setAttribute("exception", new FileNotFoundException("请求的文件不存在"));
