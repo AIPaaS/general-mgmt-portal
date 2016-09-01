@@ -324,6 +324,8 @@ public class UserUtils {
 		    subject = SecurityUtils.getSubject();
 //			Principal principal = (Principal)subject.getPrincipal();
 		    User user =getByLoginName(subject.getPrincipal()+"");
+		    if(user == null)
+		    	return null;
 			Principal principal =new Principal(user, false);
 			if (principal != null){
 				return principal;
@@ -331,7 +333,7 @@ public class UserUtils {
 //			subject.logout();
 		}catch (UnavailableSecurityManagerException e) {
 			
-		}catch (InvalidSessionException e){
+		}catch (Exception e){
 			
 		}
 		return null;

@@ -30,7 +30,7 @@
 
 /**商品编辑地市弹出**/
 
-.eject-large{ width:800px; background:#fff; position:fixed; padding:20px 24px;top:50%;left:50%;margin-top:-320px;margin-left:-400px;z-index:99;display: none;}
+.eject-large{ width:800px; background:#fff; position:fixed; padding:20px 24px;top:50%;left:50%;margin-top:-320px;margin-left:-400px;z-index:999;display: none;}
 .eject-large-list{width:100%;}
 .account-title .wnc{float:right;height:30px;padding:0 10px;}
 .user-list-title-list{width:100%;float:left;border:1px solid #e7e7e7;background:#fbfbfb;margin-top:15px;padding:0px 0 10px 10px;}
@@ -120,6 +120,7 @@
 .table  tr .bot-none{border-bottom: none;}
 
 
+
 /**查询区域加分割线**/
 .bd-bottom{float:left;border-bottom:1px  solid #efefef;margin-bottom: 10px;}
 .bc-ang{width: 100%;text-align: center;}
@@ -147,7 +148,6 @@
 .title-right .plus-word a{ padding:0  12px; height:30px; float:left;  text-align:center; line-height:30px; font-size:14px; color:#fff;}
 .title-right .plus-word a:hover{ background:#0887e1; }
 
-
 /**库存管理**/
 .table tr td .sku-bot-none ul{border:none;}
 .table tr td .sku-bot-none ul li{border-bottom:none;}
@@ -166,6 +166,7 @@
 .mg-0 ul li{border:none;padding-left:10px;}
 .setup-sku ul .sk-title{ padding-left: 20px;}
 .center{text-align: center;}
+
  /**商品编辑**/
 .cit-width{width:100%; padding:0 200px 0 150px;float:left;}
 .cit-width a{color:#1c9aec;margin-left:20px;}
@@ -181,3 +182,8 @@
 .user-list-title-list ul{width:100%;float:left;}
 .user-list-title-list ul li{float:left;margin-top:10px;}
 .user-list-title-list ul li p{float:left;margin-right:10px}
+
+.table tr .hind1{width:120px;position:relative}
+.table tr .hind1 .center-hind{width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor: pointer;}
+.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:99;border:1px solid #ddd;text-align:left;display: none;}
+.table tr .hind1 .fa-posi{position:absolute; top:-14px;left:40px;z-index: 999;font-size:18px;}

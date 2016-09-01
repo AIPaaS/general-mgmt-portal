@@ -58,25 +58,27 @@
 		<div class="control-group">
 			<label class="control-label">姓名:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="50" class="required" readonly="true"/>
+				<form:input path="name" htmlEscape="false" maxlength="20" class="required" readonly="true"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">邮箱:</label>
 			<div class="controls">
-				<form:input path="email" htmlEscape="false" maxlength="50" class="email"/>
+				<form:input path="email" htmlEscape="false" maxlength="25" minlength="5" class="required email"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">电话:</label>
 			<div class="controls">
-				<form:input path="phone" htmlEscape="false" maxlength="50"/>
+				<form:input path="phone" htmlEscape="false" maxlength="50"  class="simplePhone"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">手机:</label>
 			<div class="controls">
-				<form:input path="mobile" htmlEscape="false" maxlength="50"/>
+				<form:input path="mobile" htmlEscape="false" maxlength="50" class="mobile"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -98,10 +100,10 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">上次登录:</label>
+			<%-- <label class="control-label">上次登录:</label>
 			<div class="controls">
 				<label class="lbl">IP: ${user.oldLoginIp}&nbsp;&nbsp;&nbsp;&nbsp;时间：<fmt:formatDate value="${user.oldLoginDate}" type="both" dateStyle="full"/></label>
-			</div>
+			</div> --%>
 		</div>
 		<div class="form-actions">
 			<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>

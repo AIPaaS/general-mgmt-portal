@@ -1,61 +1,3 @@
-window.onload=function(){
-	//提示操作弹出框
-	var oPo=document.getElementById('popup');
-	var oOpe=document.getElementById('operation');
-	var oClosebtn=document.getElementById('closebtn');
-	var oXclose=document.getElementById('xclose');
-	
-	oOpe.onclick=function(){
-		oPo.style.display='block';
-	}
-	oClosebtn.onclick=function(){
-		oPo.style.display='none';
-	}
-	oXclose.onclick=function(){
-		oPo.style.display='none';
-	};
-	
-	//提示弹出框
-var oChoice=document.getElementById('choice');
-var oCbtn=document.getElementById('choice-btn');
-var oXclosea=document.getElementById('xclose-a');
-	oCbtn.onclick=function(){
-		oChoice.style.display='block';
-	}
-	oXclosea.onclick=function(){
-		oChoice.style.display='none';
-	};
-	
-	//树状弹出框
-	var oTree=document.getElementById('tree');
-	var oTreebtn=document.getElementById('tree-btn');
-	var oTreeclose=document.getElementById('tree-close');
-	
-	oTreebtn.onclick=function(){
-		oTree.style.display='block';
-	}
-	oTreeclose.onclick=function(){
-		oTree.style.display='none';
-	};
-
-};
-	var aD=document.getElementById('addcity');
-	var aF=document.getElementById('addfrei');
-	aD.onclick=function(){
-		if(aF.style.display=='block'){
-			aF.style.display='none';
-		}else{
-			aF.style.display='block';
-		}	
-	};
-
-//类目属性 table 点击展开
-$(function () {
-    $(".relation-special table tr .click a").click(function () {
-		$(this).children('i').toggleClass("fa-minus fa-plus");
-		$(this).parent().parent().parent().parent().parent().parent().parent().children('.zhank').slideToggle(100);
-    });
-});	
 
 /**去掉最后的线条**/
 $(function () {
@@ -137,9 +79,75 @@ $('.order-list-table ul li a').click(function(){
 //table切换结束
 
 
-//已选中关闭
+/**商品编辑 其他设置 全国 部分 table**/
 $(function(){
-$(".form-label .close1").click(function () {
-	$(".form-label").hide(300)
+$(".radioa").click(function () {
+	$('#check1').show();
+	$('#check2').hide();
+});
+});
+
+$(function(){
+$(".radiob").click(function () {
+	$('#check2').show();
+	$('#check1').hide();
+});
+});
+/**商品编辑 其他设置 全国 部分 table**/
+$(function(){
+$(".radioc").click(function () {
+	$('#check3').show();
+	$('#check4').hide();
+});
+});
+
+$(function(){
+$(".radiod").click(function () {
+	$('#check4').show();
+	$('#check3').hide();
+});
+});
+
+//商品编辑展开更多 点击展开
+$(function () {
+    $(".cit-width .zk").click(function () {
+		$(this).children('i').toggleClass("icon-angle-down  icon-angle-up");
+		$(this).parents().children('.open').slideToggle(100);
+    });
+});	
+
+//搜索已选中关闭
+$(function(){
+$(".form-label .fa-times").click(function () {
+	$(this).parent('.img').hide();
 	});
-	});
+	});  
+
+//商品编辑上传图片弹出框 点击展开
+$(function () {
+    $(".int-zk").click(function () {
+		$(this).parents().children('.mouse-open').slideToggle(100);
+    });
+});	
+$(function () {
+    $(".newly-build").click(function () {
+		$(this).parents().children('.newly-build-onclick').slideToggle(100);
+    });
+});	
+
+
+//头部点击2 
+ $(function () {
+    var st = 100;
+    $('.center-hind').mouseenter(function () {
+		$('.showbj').show(1);
+    })
+		$(".showbj").click(function () {
+                $(this).hide(1);
+            });
+			
+		$('.center-hind').mouseleave(function () {
+        $('.showbj').hide(1);
+	
+    });	
+  });

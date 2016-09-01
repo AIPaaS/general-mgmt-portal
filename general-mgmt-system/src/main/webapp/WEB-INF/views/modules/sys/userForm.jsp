@@ -71,7 +71,7 @@
 		<div class="control-group">
 			<label class="control-label">姓名:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="name" htmlEscape="false" maxlength="20" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -107,7 +107,7 @@
 		<div class="control-group">
 			<label class="control-label">电话:</label>
 			<div class="controls">
-				<form:input path="phone" htmlEscape="false" maxlength="100" class="phone"/>
+				<form:input path="phone" htmlEscape="false" maxlength="100" class="simplePhone"/>
 			</div>
 		</div>
 		<div class="control-group">

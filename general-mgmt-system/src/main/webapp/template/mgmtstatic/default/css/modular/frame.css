@@ -967,7 +967,7 @@ color:#344644;
 }
 }
 #footer-bar {
-	background: #f1f3f7;
+	background: #fff;
 	bottom: 0;
 	font-size: 0.8em;
 	height: 36px;
@@ -6516,6 +6516,8 @@ svg {
 .theme-amethyst  #sidebar-nav .nav li .submenu .three-list .three-list-active{background:#2a3139;}
 .theme-amethyst  #sidebar-nav .nav li .submenu .three-list .three-list-active a{color:#fff}
 .theme-amethyst  #sidebar-nav .nav li .submenu .three-list .three-list-active a:hover{background:#2a3139;color:#fff}
+
+
 .theme-whbl #sidebar-nav .nav li .submenu > li > a {
 	color: #fff;
 }
@@ -6942,7 +6944,7 @@ svg {
 	margin-top: 0;
 	margin-bottom: 0;
 	position: relative;
-	min-height: 650px;	
+	min-height: 1200px;	
 }
 
 @media (max-width: 991px) {
@@ -6990,6 +6992,9 @@ svg {
 .theme-whbl .mouse-open ul li,.theme-whbl .mouse-open ul .newly-build-onclick a,.theme-whbl .mouse-open ul .newly-build a{color:#10a2fb}
 .theme-white .mouse-open ul li,.theme-white .mouse-open ul .newly-build-onclick a,.theme-white .mouse-open ul .newly-build a{color:#27ae60}
 .theme-amethyst .mouse-open ul li,.theme-amethyst .mouse-open ul .newly-build-onclick a,.theme-amethyst .mouse-open ul .newly-build a{color:#8e44ad}
+
+
+
 /**步骤条**/
 .theme-whbl .steps ul li{background:#e1e1e1;color:#333}
 .theme-whbl .steps ul li i{color:#e1e1e1;}
@@ -7054,3 +7059,4 @@ svg {
 /**tree**/
 .trees{width:100%;float:left}
 .trees p{width:100%;float:left;text-align: center;}
+
