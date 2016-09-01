@@ -81,7 +81,7 @@ public class DictController extends BaseController {
 		}
 		dictService.save(dict);
 		addMessage(redirectAttributes, "保存字典'" + dict.getLabel() + "'成功");
-		return "redirect:" + adminPath + "/sys/dict/?repage&type="+dict.getType();
+		return "redirect:" + adminPath + "/sys/dict/?repage";
 	}
 	
 	@RequiresPermissions("sys:dict:edit")
@@ -93,7 +93,7 @@ public class DictController extends BaseController {
 		}
 		dictService.delete(dict);
 		addMessage(redirectAttributes, "删除字典成功");
-		return "redirect:" + adminPath + "/sys/dict/?repage&type="+dict.getType();
+		return "redirect:" + adminPath + "/sys/dict/?repage";
 	}
 	
 	@RequiresPermissions("user")

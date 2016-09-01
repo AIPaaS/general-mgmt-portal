@@ -104,12 +104,15 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("sys:gnArea:edit")
 	@RequestMapping(value = "save")
 	public String save(GnArea gnArea, Model model, RedirectAttributes redirectAttributes) {
-
-		
-		
-		if(gnAreaService.getByCode(gnArea.getAreaCode())!=null){
+		if((gnArea.getId() ==null || "".equals(gnArea.getId())) && gnAreaService.getByCode(gnArea.getAreaCode())!=null){
 			addMessage(model, "保存失败，区域编码已存在");
 			return form(gnArea, model);
+		}
+		//设置记录是否为新记录
+		if(gnArea.getId() ==null || "".equals(gnArea.getId())){
+			gnArea.setIsNewRecord(true);
+		}else{
+			gnArea.setIsNewRecord(false);
 		}
 		gnArea.setId(gnArea.getAreaCode());
 		//如果是省级 则将所属市编码插入为 000 所属省为当前区域的编码
@@ -143,10 +146,8 @@ public class GnAreaController extends BaseController {
 			gnArea.setCityCode(cityCode);
 			gnArea.setProvinceCode(provinceCode);
 		}
-		gnArea.setIsNewRecord(true);
-//		if (!beanValidator(model, gnArea)){
-//			return form(gnArea, model);
-//		}
+		
+		
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
 		addMessage(redirectAttributes, "保存地区信息成功");
