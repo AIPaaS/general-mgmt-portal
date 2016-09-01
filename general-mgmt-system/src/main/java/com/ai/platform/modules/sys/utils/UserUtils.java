@@ -322,19 +322,18 @@ public class UserUtils {
 		Subject subject;
 		try{
 		    subject = SecurityUtils.getSubject();
-//			Principal principal = (Principal)subject.getPrincipal();
-		    User user =getByLoginName(subject.getPrincipal()+"");
-		    if(user == null)
-		    	return null;
-			Principal principal =new Principal(user, false);
+			Principal principal = (Principal)subject.getPrincipal();
 			if (principal != null){
 				return principal;
 			}
 //			subject.logout();
 		}catch (UnavailableSecurityManagerException e) {
 			
-		}catch (Exception e){
+		}catch (InvalidSessionException e){
 			
+		}finally{
+			//add by zhouxiaohu 
+			subject =null;
 		}
 		return null;
 	}

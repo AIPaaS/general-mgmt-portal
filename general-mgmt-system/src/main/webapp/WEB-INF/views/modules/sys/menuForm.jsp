@@ -43,7 +43,7 @@
 		<div class="control-group">
 			<label class="control-label">名称:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="50" class="required input-xlarge"/>
+				<form:input path="name" htmlEscape="false" maxlength="16" class="required input-xlarge userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -61,7 +61,7 @@
 		<div class="control-group">
 			<label class="control-label">链接:</label>
 			<div class="controls">
-				<form:input path="href" htmlEscape="false" maxlength="2000" class="input-xxlarge"/>
+				<form:input path="href" htmlEscape="false" maxlength="200" class="input-xxlarge"/>
 				<span class="help-inline">点击菜单跳转的页面</span>
 			</div>
 		</div>

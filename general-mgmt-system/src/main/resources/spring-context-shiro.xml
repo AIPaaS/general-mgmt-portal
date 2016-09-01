@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd"
 	default-lazy-init="true">
 
 	<description>Shiro Configuration</description>
 
-	<!-- 加载配置属性文件 -->
-	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:mgmt.properties,classpath:sso.properties" />
-
+    <!-- 加载配置属性文件 -->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:mgmt.properties,classpath:sso.properties" />
+	
 	<!-- Shiro权限过滤过滤器定义 -->
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
@@ -19,131 +17,94 @@
 				/static/** = anon
 				/mgmtstatic/** = anon
 				/userfiles/** = anon
-				${adminPath}/cas = cas
 				${adminPath}/login = authc
 				${adminPath}/logout = logout
-				${adminPath}/** = user
 				/act/editor/** = user
 				/ReportServer/** = user
+				${adminPath}/** = user
 			</value>
 		</constructor-arg>
 	</bean>
-
+	
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="${casServerLoginUrl}?service=${serverName_Inner}/portal${adminPath}/cas" />
-
-
-		<property name="successUrl" value="${adminPath}?login" />
+		<!--<property name="loginUrl" value="${cas.server.url}?service=${cas.project.url}${adminPath}/cas" 
+			/> -->
+		<property name="loginUrl" value="${adminPath}/login" />
+		<property name="successUrl" value="${adminPath}/" />
 		<property name="filters">
 			<map>
-				<entry key="cas" value-ref="casFilter" />
-				<entry key="logout" value-ref="logoutFilter" />
-				<entry key="authc" value-ref="formAuthenticationFilter" />
+				<entry key="authc" value-ref="customFormAuthenticationFilter" />
+				<entry key="logout" value-ref="logout" />  
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
-			<ref bean="shiroFilterChainDefinitions" />
+			<ref bean="shiroFilterChainDefinitions"/>
 		</property>
 	</bean>
-
-	<!-- CAS认证过滤器 -->
-	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
-		<property name="failureUrl" value="${adminPath}/login" />
-	</bean>
-	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-	   <property name="redirectUrl" value="${logOutServerUrl_Inner}?service=${logOutBackUrl_Inner}"/>  
-	</bean>
-
-	<bean id="casRealm" class="com.ai.platform.modules.sys.realm.UserCasRealm">
-		<property name="cachingEnabled" value="true" />
-		<property name="authenticationCachingEnabled" value="true" />
-		<property name="authenticationCacheName" value="authenticationCache" />
-		<property name="authorizationCachingEnabled" value="true" />
-		<property name="authorizationCacheName" value="authorizationCache" />
-		<property name="casServerUrlPrefix" value="${casServerUrlPrefix}" />
-		<property name="casService" value="${serverName_Inner}/portal${adminPath}/cas" />
-	</bean>
-
-
+	
+	<bean id="logout" class="org.apache.shiro.web.filter.authc.LogoutFilter">  
+          <property name="redirectUrl" value="${logOutServerUrl_Inner}?service=${logOutBackUrl_Inner}"/>  
+	</bean>  
 
 	<bean id="casSubjectFactory" class="org.apache.shiro.cas.CasSubjectFactory" />
 	<!-- 定义Shiro安全管理配置 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="casRealm" />
-		<property name="sessionManager" ref="sessionManager" />
+		<property name="realm" ref="systemAuthorizingRealm" />
+		<!--property name="sessionManager" ref="sessionManager" /-->
 		<property name="cacheManager" ref="shiroCacheManager" />
-		<property name="subjectFactory" ref="casSubjectFactory" />
 	</bean>
-	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
-	<bean
-		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-		<property name="staticMethod"
-			value="org.apache.shiro.SecurityUtils.setSecurityManager" />
-		<property name="arguments" ref="securityManager" />
-	</bean>
+
 
 	<!-- 自定义会话管理配置 -->
-	<bean id="sessionManager"
-		class="com.ai.platform.common.security.shiro.session.SessionManager">
-		<property name="sessionDAO" ref="sessionDAO" />
-
-		<!-- 会话超时时间，单位：毫秒 -->
-		<property name="globalSessionTimeout" value="${session.sessionTimeout}" />
-
-		<!-- 定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话 -->
-		<property name="sessionValidationInterval" value="${session.sessionTimeoutClean}" />
-		<!-- <property name="sessionValidationSchedulerEnabled" value="false"/> -->
-		<property name="sessionValidationSchedulerEnabled" value="true" />
-
-		<property name="sessionIdCookie" ref="sessionIdCookie" />
-		<property name="sessionIdCookieEnabled" value="true" />
+	<bean id="sessionManager" class="com.ai.platform.common.security.shiro.session.SessionManager"> 
+		<property name="sessionDAO" ref="sessionDAO"/>
+		
+		<!-- 会话超时时间，单位：毫秒  -->
+		<property name="globalSessionTimeout" value="${session.sessionTimeout}"/>
+		
+		<!-- 定时清理失效会话, 清理用户直接关闭浏览器造成的孤立会话   -->
+		<property name="sessionValidationInterval" value="${session.sessionTimeoutClean}"/>
+<!--  		<property name="sessionValidationSchedulerEnabled" value="false"/> -->
+ 		<property name="sessionValidationSchedulerEnabled" value="true"/>
+ 		
+		<property name="sessionIdCookie" ref="sessionIdCookie"/>
+		<property name="sessionIdCookieEnabled" value="true"/>
 	</bean>
-
 	<!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID, 
 		当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
 	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-		<constructor-arg name="name" value="platform.session.id" />
+		<constructor-arg name="name" value="jeesite.session.id" />
 	</bean>
 
 	<!-- 自定义Session存储容器 -->
-	<!-- <bean id="sessionDAO" class="com.ai.platform.common.security.shiro.session.JedisSessionDAO"> -->
-	<!-- <property name="sessionIdGenerator" ref="idGen" /> -->
-	<!-- <property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" 
-		/> -->
-	<!-- </bean> -->
-	<bean id="sessionDAO"
-		class="com.ai.platform.common.security.shiro.session.CacheSessionDAO">
+<!-- 	<bean id="sessionDAO" class="com.ai.platform.common.security.shiro.session.JedisSessionDAO"> -->
+<!-- 		<property name="sessionIdGenerator" ref="idGen" /> -->
+<!-- 		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" /> -->
+<!-- 	</bean> -->
+	<bean id="sessionDAO" class="com.ai.platform.common.security.shiro.session.CacheSessionDAO">
 		<property name="sessionIdGenerator" ref="idGen" />
 		<property name="activeSessionsCacheName" value="activeSessionsCache" />
 		<property name="cacheManager" ref="shiroCacheManager" />
 	</bean>
-
-	<!-- 自定义系统缓存管理器 -->
-	<!-- <bean id="shiroCacheManager" class="com.ai.platform.common.security.shiro.cache.JedisCacheManager"> -->
-	<!-- <property name="cacheKeyPrefix" value="${redis.keyPrefix}_cache_" /> -->
-	<!-- </bean> -->
+	
+	<!-- 自定义系统缓存管理器-->
+<!-- 	<bean id="shiroCacheManager" class="com.ai.platform.common.security.shiro.cache.JedisCacheManager"> -->
+<!-- 		<property name="cacheKeyPrefix" value="${redis.keyPrefix}_cache_" /> -->
+<!-- 	</bean> -->
 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-		<property name="cacheManager" ref="cacheManager" />
+		<property name="cacheManager" ref="cacheManager"/>
 	</bean>
-
+	
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-
-	<!-- AOP式方法级权限检查 -->
-	<bean
-		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-		depends-on="lifecycleBeanPostProcessor">
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+	<!-- AOP式方法级权限检查  -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />
 	</bean>
-	<bean
-		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager" />
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    	<property name="securityManager" ref="securityManager"/>
 	</bean>
-
-
-	<bean id="sessionIdGenerator"
-		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
-
 </beans>
