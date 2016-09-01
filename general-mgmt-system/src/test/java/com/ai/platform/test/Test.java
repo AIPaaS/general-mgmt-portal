@@ -23,6 +23,7 @@ public class Test {
 	@org.junit.Test
     public void testSSO() throws RPCSystemException{
 		List<GnArea> list = areaDao.findList(new GnArea());
+		System.out.println("");
 		while(true){
 			
 		}
