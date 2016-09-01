@@ -37,30 +37,35 @@
 			<label class="control-label">键值:</label>
 			<div class="controls">
 				<form:input path="value" htmlEscape="false" maxlength="20" class="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">标签:</label>
 			<div class="controls">
 				<form:input path="label" htmlEscape="false" maxlength="20" class="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">类型:</label>
 			<div class="controls">
 				<form:input path="type" htmlEscape="false" maxlength="20" class="required abc"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">描述:</label>
 			<div class="controls">
 				<form:input path="description" htmlEscape="false" maxlength="50" class="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">排序:</label>
 			<div class="controls">
 				<form:input path="sort" htmlEscape="false" maxlength="5" class="required digits"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">

@@ -21,14 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
-import com.ai.platform.common.utils.CacheUtils;
-import com.ai.platform.common.utils.EhCacheUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.utils.GnAreaUtils;
-import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
