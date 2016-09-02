@@ -77,7 +77,9 @@
 					<fmt:formatDate value="${oaNotify.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
 				<c:if test="${!requestScope.oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><td>
-    				<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">修改</a>
+					<c:if test="${oaNotify.status ne '1'}">
+						<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">修改</a>
+					</c:if>
 					<a href="${ctx}/oa/oaNotify/delete?id=${oaNotify.id}" onclick="return confirmx('确认要删除该站内信吗？', this.href)">删除</a>
 				</td></shiro:hasPermission></c:if>
 			</tr>
