@@ -6,20 +6,7 @@
 	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 	
-	function levelchane(){
-		var level = $("#areaLevel").val();
-		if(String(level) =="1"){
-			$("#provinceDIV").hide();
-			$("#cityDIV").hide();
-		}else if(String(level) =="2"){
-			$("#provinceDIV").show();
-			$("#cityDIV").hide();
-		}else{
-			$("#provinceDIV").show();
-			$("#cityDIV").show();
-		}
-		
-	}
+
 	
 		$(document).ready(function() {
 			//$("#name").focus();
@@ -63,24 +50,24 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
+<%-- 		<div class="control-group">
 			<label class="control-label">行政级别：</label>
 			<div class="controls">
-				<form:select path="areaLevel" class="input-medium required" onchange="levelchane()" id="areaLevel">
+				<form:select path="areaLevel" class="input-medium required"  id="areaLevel">
 				<form:option value="" label="请选择"/>
 					<form:options items="${fns:getDictList('gn_area_level')}" itemLabel="label" itemValue="value" htmlEscape="false" />
 				</form:select>			
 					
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label" for="parentAreaCode">所属区域：</label>
 			<div class="controls">
-			<c:set var="parentAreaCode" value="${gnArea.parentAreaCode}"/>
-				
+			
+				<c:set var="parentAreaCode" value="${gnArea.parentAreaCode}"/>
 			 <sys:treeselect id="parentAreaCode" name="parentAreaCode" value="${gnArea.parentAreaCode}" labelName="${fns:getAreaName(parentAreaCode)}" labelValue="${fns:getAreaName(parentAreaCode)}"
-		title="区域" url="/sys/gnArea/treeData" extId="${id}" cssClass="required" dataMsgRequired="必填信息"/>
+		title="区域" url="/sys/gnArea/treeData" selectgnArea="true" extId="${id}" cssClass="required" dataMsgRequired="必填信息"/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>		

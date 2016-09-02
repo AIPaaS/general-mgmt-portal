@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class WaitjobsController extends BaseController {
 	@Autowired
 	private SystemService systemService;
 	
+	@RequiresPermissions("sys:waitjobs:view")
 	@RequestMapping(value = {"list"})
 	public String pagelist(HttpServletRequest request, HttpServletResponse response, Model model) {
 		String userId = UserUtils.getUser().getId();

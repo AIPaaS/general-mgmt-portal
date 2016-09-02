@@ -46,7 +46,27 @@ public class GnAreaUtils {
 		return null;
 	}
 	
-	
+	public static GnArea getGnAreaByCode(String code){
+		if (StringUtils.isNotBlank(code) && StringUtils.isNotBlank(code)){
+			for (GnArea gnArea : GnAreaUtils.getGnAreaList()){
+				if((code).equals(gnArea.getAreaCode())){
+					return gnArea;
+				}
+			}
+		}
+		return null;
+	}
+
+	public static String getParentCode(String code){
+		if (StringUtils.isNotBlank(code) && StringUtils.isNotBlank(code)){
+			for (GnArea gnArea : GnAreaUtils.getGnAreaList()){
+				if((code).equals(gnArea.getAreaCode())){
+					return gnArea.getParentAreaCode();
+				}
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * 清除数据缓存

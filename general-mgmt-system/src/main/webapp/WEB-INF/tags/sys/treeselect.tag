@@ -13,6 +13,7 @@
 <%@ attribute name="notAllowSelectRoot" type="java.lang.Boolean" required="false" description="不允许选择根节点"%>
 <%@ attribute name="notAllowSelectParent" type="java.lang.Boolean" required="false" description="不允许选择父节点"%>
 <%@ attribute name="notAllowSelectfourmenu" type="java.lang.Boolean" required="false" description="不允许选择三级菜单"%>
+<%@ attribute name="selectgnArea" type="java.lang.Boolean" required="false" description="根据行政级别过滤区域树形选择"%>
 <%@ attribute name="module" type="java.lang.String" required="false" description="过滤栏目模型（只显示指定模型，仅针对CMS的Category树）"%>
 <%@ attribute name="selectScopeModule" type="java.lang.Boolean" required="false" description="选择范围内的模型（控制不能选择公共模型，不能选择本栏目外的模型）（仅针对CMS的Category树）"%>
 <%@ attribute name="allowClear" type="java.lang.Boolean" required="false" description="是否允许清除"%>
@@ -34,13 +35,16 @@
 		if ($("#${id}Button").hasClass("disabled")){
 			return true;
 		}
+	
 		// 正常打开	
-		top.$.jBox.open("iframe:${ctx}/tag/treeselect?url="+encodeURIComponent("${url}")+"&module=${module}&checked=${checked}&extId=${extId}&isAll=${isAll}", "选择${title}", 300, 420, {
+		top.$.jBox.open("iframe:${ctx}/tag/treeselect?url="+encodeURIComponent("${url}")+"&module=${module}&checked=${checked}&extId=${extId}&isAll=${isAll}&selectgnArea=${selectgnArea}", "选择${title}", 300, 420, {
 			ajaxData:{selectIds: $("#${id}Id").val()},buttons:{"确定":"ok", ${allowClear?"\"清除\":\"clear\", ":""}"关闭":true}, submit:function(v, h, f){
 				
 				if (v=="ok"){
 					var tree = h.find("iframe")[0].contentWindow.tree;//h.find("iframe").contents();
 					var ids = [], names = [], nodes = [];
+					var areaLevel = $("#areaLevel").val();
+				
 					if ("${checked}" == "true"){
 						nodes = tree.getCheckedNodes(true);
 					}else{
@@ -54,6 +58,10 @@
 						}//</c:if><c:if test="${notAllowSelectRoot}">
 						if (nodes[i].level == 0){
 							top.$.jBox.tip("不能选择根节点（"+nodes[i].name+"）请重新选择。");
+							return false;
+						}//</c:if><c:if test="${selectgnArea}">
+						if (nodes[i].level >=4 ){
+							top.$.jBox.tip("所属区域不能选择乡镇街道级");
 							return false;
 						}//</c:if><c:if test="${notAllowSelectfourmenu}">
 						if (nodes[i].level >=3){
