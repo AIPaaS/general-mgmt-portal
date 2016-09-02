@@ -322,7 +322,11 @@ public class UserUtils {
 		Subject subject;
 		try{
 		    subject = SecurityUtils.getSubject();
-			Principal principal = (Principal)subject.getPrincipal();
+//			Principal principal = (Principal)subject.getPrincipal();
+		    User user =getByLoginName(subject.getPrincipal()+"");
+		    if(user == null)
+		    	return null;
+			Principal principal =new Principal(user, false);
 			if (principal != null){
 				return principal;
 			}
@@ -333,7 +337,7 @@ public class UserUtils {
 			
 		}finally{
 			//add by zhouxiaohu 
-			subject =null;
+//			subject =null;
 		}
 		return null;
 	}
