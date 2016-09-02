@@ -66,7 +66,7 @@
 		<div class="control-group">
 			<label class="control-label">行政级别：</label>
 			<div class="controls">
-				<form:select path="areaLevel" class="input-medium" onchange="levelchane()" id="areaLevel">
+				<form:select path="areaLevel" class="input-medium required" onchange="levelchane()" id="areaLevel">
 				<form:option value="" label="请选择"/>
 					<form:options items="${fns:getDictList('gn_area_level')}" itemLabel="label" itemValue="value" htmlEscape="false" />
 				</form:select>			
