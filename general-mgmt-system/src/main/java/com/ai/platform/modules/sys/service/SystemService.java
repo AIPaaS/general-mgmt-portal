@@ -693,6 +693,23 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户缓存
 		UserUtils.clearCache(user);
 	}
+	
+	@Transactional(readOnly = false)
+	public void saveImportUser(User user) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isBlank(user.getId())){
+			user.preInsert();
+			userDao.saveImportUser(user);	
+		}else{
+			user.preUpdate();
+			userDao.updateUserNoUser(user);
+		}
+
+		// 清除用户缓存
+		UserUtils.clearCache(user);
+	}
+	
+	
 
 
 	public List<User> findAllNoAccountUser(){

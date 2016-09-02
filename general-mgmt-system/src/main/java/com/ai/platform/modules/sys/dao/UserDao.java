@@ -95,5 +95,9 @@ public interface UserDao extends CrudDao<User> {
 	 * @return
 	 */
 	public List<User> findAllNoAccountUser();
+	
+	
+	public void saveImportUser(User user);
+	
 
 }

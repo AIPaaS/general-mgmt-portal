@@ -17,7 +17,7 @@
 			});
 			$("#btnImport").click(function(){
 				$.jBox($("#importBox").html(), {title:"导入数据", buttons:{"关闭":true}, 
-					bottomText:"导入文件不能超过5M，仅允许导入“xls”或“xlsx”格式文件！"});
+					bottomText:"导入文件不能超过5M，仅允许导入“txt”格式文件！"});
 			});
 		});
 		function page(n,s){
@@ -30,14 +30,14 @@
 	</script>
 </head>
 <body>
-<%-- 	<div id="importBox" class="hide">
+ 	<div id="importBox" class="hide">
 		<form id="importForm" action="${ctx}/sys/user/import" method="post" enctype="multipart/form-data"
 			class="form-search" style="padding-left:20px;text-align:center;" onsubmit="loading('正在导入，请稍等...');"><br/>
 			<input id="uploadFile" name="file" type="file" style="width:330px"/><br/><br/>　　
 			<input id="btnImportSubmit" class="btn btn-primary" type="submit" value="   导    入   "/>
-			<a href="${ctx}/sys/user/import/template">下载模板</a>
+			<%-- <a href="${ctx}/sys/user/import/template">下载模板</a> --%>
 		</form>
-	</div> --%>
+	</div>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/user/listno">账号列表</a></li>
 		<shiro:hasPermission name="sys:user:edit"><li><a href="${ctx}/sys/user/formno">账号添加</a></li></shiro:hasPermission>
@@ -55,8 +55,8 @@
 			<li><label>姓&nbsp;&nbsp;&nbsp;名：</label><form:input path="name" htmlEscape="false" maxlength="50" class="input-medium"/></li>
 			<li><label>邮&nbsp;&nbsp;&nbsp;箱：</label><form:input path="email" htmlEscape="false" maxlength="50" class="input-medium"/></li>
 			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询" onclick="return page();"/>
-				<!-- <input id="btnExport" class="btn btn-primary" type="button" value="导出"/>
-				<input id="btnImport" class="btn btn-primary" type="button" value="导入"/></li> -->
+				<input id="btnExport" class="btn btn-primary" type="button" value="导出"/>
+				<input id="btnImport" class="btn btn-primary" type="button" value="导入"/></li>
 			<li class="clearfix"></li>
 			
 		</ul>
