@@ -10,11 +10,9 @@
 			//$("#code").focus();
 			$("#inputForm").validate({
 				rules: {
-					
 					code: {remote: "${ctx}/sys/office/checkCode?oldCode=" + encodeURIComponent("${office.code}")}
 				},
 				messages: {
-					
 					code: {remote: "部门编码已存在"}
 				},
 				submitHandler: function(form){
@@ -32,15 +30,6 @@
 				}
 			});
 		});
-		jQuery.validator.addMethod("myPhone", function(value, element) {
-			var tel = /(^0[1-9]{1}\d{9,10}$)|(^1\d{10}$)/g;     
-			return this.optional(element) || (tel.test(value));     
-		}, "格式为:固话为区号(3-4位)号码(7-9位),手机为:11位数字");
-		// 邮政编码验证
-		jQuery.validator.addMethod("myZipCode", function(value, element) {
-		    var tel = /^[0-9]{6}$/;
-		    return this.optional(element) || (tel.test(value));
-		}, "请正确填写您的邮政编码");
 	</script>
 </head>
 <body>
@@ -130,7 +119,7 @@
 		<div class="control-group">
 			<label class="control-label">邮政编码:</label>
 			<div class="controls">
-				<form:input path="zipCode" htmlEscape="false" maxlength="50" class="myZipCode"/>
+				<form:input path="zipCode" htmlEscape="false" maxlength="50" class="zipCode"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -142,7 +131,7 @@
 		<div class="control-group">
 			<label class="control-label">电话:</label>
 			<div class="controls">
-				<form:input path="phone" htmlEscape="false" maxlength="50" class="myPhone"/>
+				<form:input path="phone" htmlEscape="false" maxlength="50" class="simplePhone"/>
 			</div>
 		</div>
 		<!--  <div class="control-group">
