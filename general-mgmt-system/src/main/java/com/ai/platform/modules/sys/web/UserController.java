@@ -445,7 +445,11 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/listno?repage";
 		}
 		
-		systemService.resetPassword(user);
+		try {
+			systemService.resetPassword(user);
+		} catch (Exception e) {
+			addMessage(redirectAttributes, "密码重置失败！失败信息："+e.getMessage());
+		}
 		
 		addMessage(redirectAttributes, "重置密码成功");
 		return "redirect:" + adminPath + "/sys/user/listno?repage";

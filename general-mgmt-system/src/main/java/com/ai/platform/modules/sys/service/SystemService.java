@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.opt.sdk.components.mail.EmailFactory;
+import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 import com.ai.opt.sdk.util.Md5Encoder;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.mail.MailMessageFactory;
@@ -593,20 +595,25 @@ public class SystemService extends BaseService implements InitializingBean {
 		
 	}	
 	@Transactional
-	public void resetPassword(User user){
+	public void resetPassword(User user) throws Exception{
 		String resetPass = RandomUtils.generateString(8);
 		user.setPassword(entryptPassword(resetPass));
 		userDao.updatePasswordById(user);
 		sendMail(user,resetPass);
 	}
-	
-	public void sendMail(User user,String resetPass){
+	/**
+	 * 发送邮件
+	 * @param user
+	 * @param resetPass
+	 * @throws Exception
+	 */
+	public void sendMail(User user,String resetPass) throws Exception{
 
-		MailMessageFactory mms = new MailMessageFactory(SendMailType.HTML);  
-		mms.setTo(user.getEmail());
-        mms.setSubject("运营管理平台密码重置通知")  
-        .setText("<html><head><meta http-equiv='content-type' content='text/html; charset=GBK'>" +  
-                "</head><body><h1>您的密码初始化完成，新密码为"+resetPass+"</h1></body></html>").send(); 
+		String[] tomails = new String[] { user.getEmail() };
+		String subject = "运营管理平台密码重置通知";
+		String[] data = new String[] { user.getName(), resetPass};
+		String htmlcontext= EmailTemplateUtil.buildHtmlTextFromTemplate(UserUtils.BIND_EMAIL, data);
+		EmailFactory.SendEmail(tomails, null, subject, htmlcontext);
 	
 	}
 	

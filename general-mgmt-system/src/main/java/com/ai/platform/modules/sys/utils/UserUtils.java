@@ -63,6 +63,9 @@ public class UserUtils {
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
 
 	private static Map<String, Object> CacheMap = new HashMap<String, Object>();
+	
+	public static final String BIND_EMAIL = "email/pwd-reset-binemail.xml";
+
 	/**
 	 * 根据ID获取用户
 	 * 
