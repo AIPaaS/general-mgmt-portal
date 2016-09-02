@@ -40,7 +40,7 @@
     				<a href="${ctx}/sys/dict/form?id=${dict.id}">修改</a>
 					<a href="${ctx}/sys/dict/delete?id=${dict.id}&type=${dict.type}" onclick="return confirmx('确认要删除该字典吗？', this.href)">删除</a>
 					<c:set var="description" value="${dict.description}"/>
-    				<a href="<c:url value='${fns:getAdminPath()}/sys/dict/form?type=${dict.type}&sort=${dict.sort+10}'><c:param name='description' value='${fns:urlEncode(description)}'/></c:url>">添加键值</a>
+    				<a href="<c:url value='${fns:getAdminPath()}/sys/dict/form?type=${dict.type}&sort=${dict.sort}'><c:param name='description' value='${fns:urlEncode(description)}'/></c:url>">添加键值</a>
     				<c:set var="description" value=""/>
 				</td></shiro:hasPermission>
 			</tr>
