@@ -69,7 +69,7 @@ public class UserCasRealm  extends CasRealm{
 			// 更新登录IP和时间
 			getSystemService().updateUserLoginInfo(user);
 			// 记录登录日志
-			LogUtils.saveLog(Servlets.getRequest(), "系统登录");
+//			LogUtils.saveLog(Servlets.getRequest(), "系统登录");
 			return info;
 		} else {
 			return null;
