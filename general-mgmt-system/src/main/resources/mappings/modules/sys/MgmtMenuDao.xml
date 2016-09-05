@@ -51,6 +51,7 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
+		ORDER BY a.create_date DESC
 	</select>
 	<insert id="insert">
 		INSERT INTO sys_menu(
