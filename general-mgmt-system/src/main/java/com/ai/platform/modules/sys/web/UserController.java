@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,6 @@ import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.utils.excel.ExportExcel;
-import com.ai.platform.common.utils.excel.ImportExcel;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
@@ -315,58 +316,62 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		try {
+			// 验证导入文件是否合法
+			String fileName = file.getOriginalFilename();
+			if (StringUtils.isBlank(fileName)) {
+				throw new RuntimeException("导入文档为空!");
+			} else if (!fileName.toLowerCase().endsWith(".txt")) {
+				throw new RuntimeException("文档格式不正确!");
+			}
 			int successNum = 0;
 			int failureNum = 0;
 			StringBuilder failureMsg = new StringBuilder();
 			InputStream is;
-			try {
-				is = file.getInputStream();
-				InputStreamReader isr = new InputStreamReader(is);
-				BufferedReader br = new BufferedReader(isr);
-				String s;
-				while ((s = br.readLine()) != null) {
-					if (s.startsWith("#LOGINNAME"))
-						continue;
-					String[] userInfo = s.split("\\\\t");
-					User user = new User();
-					user.setLoginName(userInfo[0]);
-					user.setNo(userInfo[1]);
-					user.setName(userInfo[2]);
-					user.setEmail(userInfo[3]);
-					user.setMobile(userInfo[4]);
-					user.setCompany(new Office(userInfo[5]));
-					user.setOffice(new Office(userInfo[6]));
-					
-					try {
-						if ("true".equals(checkLoginName("", user.getLoginName()))) {
-							user.setPassword(SystemService.entryptPassword("123456"));
-							BeanValidators.validateWithException(validator, user);
-							systemService.saveImportUser(user);
-							successNum++;
-						} else {
-							failureMsg.append("<br/>登录名 " + user.getLoginName() + " 已存在; ");
-							failureNum++;
-						}
-					} catch (ConstraintViolationException ex) {
-						failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：");
-						List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-						for (String message : messageList) {
-							failureMsg.append(message + "; ");
-							failureNum++;
-						}
-					} catch (Exception ex) {
-						failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
+			is = file.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String lineContent;
+			while ((lineContent = br.readLine()) != null) {
+				if (lineContent.startsWith("#LOGINNAME"))
+					continue;
+				String[] userInfo = lineContent.split("\\\\t");
+				if(userInfo.length !=7)
+					throw new RuntimeException("文档格式不正确!");
+				User user = new User();
+				user.setLoginName(userInfo[0]);
+				user.setNo(userInfo[1]);
+				user.setName(userInfo[2]);
+				user.setEmail(userInfo[3]);
+				user.setMobile(userInfo[4]);
+				user.setCompany(new Office(userInfo[5]));
+				user.setOffice(new Office(userInfo[6]));
+
+				try {
+					if ("true".equals(checkLoginName("", user.getLoginName()))) {
+						user.setPassword(SystemService.entryptPassword("123456"));
+						BeanValidators.validateWithException(validator, user);
+						systemService.saveImportUser(user);
+						successNum++;
+					} else {
+						failureMsg.append("<br/>登录名 " + user.getLoginName() + " 已存在; ");
+						failureNum++;
 					}
+				} catch (ConstraintViolationException ex) {
+					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：");
+					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
+					for (String message : messageList) {
+						failureMsg.append(message + "; ");
+						failureNum++;
+					}
+				} catch (Exception ex) {
+					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
 				}
-
-				br.close();
-				isr.close();
-				is.close();
-
-			} catch (IOException e) {
-
 			}
-			
+			//关闭文件流
+			br.close();
+			isr.close();
+			is.close();
+
 			if (failureNum > 0) {
 				failureMsg.insert(0, "，失败 " + failureNum + " 条员工信息，导入信息如下：");
 			}
@@ -563,9 +568,9 @@ public class UserController extends BaseController {
 	// }
 	// });
 	// }
-	
+
 	public static void main(String[] args) {
-		String a ="zhangsan\\t001\\t张三\\tzhangsan@163.com\\t13333333333\\t0001\\t00011";
+		String a = "zhangsan\\t001\\t张三\\tzhangsan@163.com\\t13333333333\\t0001\\t00011";
 		String[] b = a.split("\\\\t");
 		System.out.println();
 	}
