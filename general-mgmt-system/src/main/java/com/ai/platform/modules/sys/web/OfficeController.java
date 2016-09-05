@@ -3,11 +3,15 @@
  */
 package com.ai.platform.modules.sys.web;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +19,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
+import com.ai.platform.modules.sys.entity.Area;
+import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.OfficeService;
@@ -197,6 +206,126 @@ public class OfficeController extends BaseController {
 		//String id = "0".equals(office.getParentId()) ? "" : office.getParentId();
 		//return "redirect:" + adminPath + "/sys/office/list?id="+id+"&parentIds="+office.getParentIds();
 		return "redirect:" + adminPath + "/sys/office/page";
+	}
+	
+	/**
+	 * 导入部门信息数据
+	 * 
+	 * @param file
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@RequiresPermissions("sys:office:edit")
+	@RequestMapping(value = "import", method = RequestMethod.POST)
+	public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
+		if (Global.isDemoMode()) {
+			addMessage(redirectAttributes, "演示模式，不允许操作！");
+			return "redirect:" + adminPath + "/sys/office/page?repage";
+		}
+		try {
+			// 验证导入文件是否合法
+			String fileName = file.getOriginalFilename();
+			if (StringUtils.isBlank(fileName)) {
+				throw new RuntimeException("导入文档为空!");
+			} else if (!fileName.toLowerCase().endsWith(".txt")) {
+				throw new RuntimeException("文档格式不正确!");
+			}
+			int successNum = 0;
+			int failureNum = 0;
+			int alldataNum = 0;
+			StringBuilder failureMsg = new StringBuilder();
+			InputStream is;
+			is = file.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			String lineContent;
+			while ((lineContent = br.readLine()) != null) {
+				if (lineContent.startsWith("#CODE"))
+					continue;
+				alldataNum++;
+				String[] userInfo = lineContent.split("\\\\t");
+				if(userInfo.length !=6)
+					throw new RuntimeException("文档格式不正确!");
+				//封装导入用户信息
+				Office office = setOfficeInfo(userInfo);
+				try {
+					if ("true".equals(checkCode("", office.getCode()))) {
+						office.setType("1");
+						office.setGrade("1");
+						office.setTenantId("changhong_d");
+						office.setDelFlag("0");
+						office.setZipCode("");
+						office.setRemarks("");
+						office.setPhone("");
+						office.setEmail("");
+						office.setAddress("");
+						office.setFax("");
+//						BeanValidators.validateWithException(validator, office);
+						if("".equals(office.getCode()) || office.getCode() ==null){
+							failureMsg.append("<br/> 第" + alldataNum + "条数据机构编码，不能为空; ");
+							failureNum++;
+							continue;
+						}
+						if("".equals(office.getName()) || office.getName() ==null){
+							failureMsg.append("<br/> 第" + alldataNum + "条数据机构名称，不能为空; ");
+							failureNum++;
+							continue;
+						}
+						if("".equals(office.getParentIds()) || office.getParentIds() ==null){
+							failureMsg.append("<br/> 第" + alldataNum + "条数据上级编码，不能为空; ");
+							failureNum++;
+							continue;
+						}
+						successNum++;
+						officeService.save(office);
+					} else {
+						failureMsg.append("<br/>编码 " + office.getCode() + " 已存在; ");
+						failureNum++;
+					}
+				} catch (ConstraintViolationException ex) {
+					ex.printStackTrace();
+					failureMsg.append("<br/>编码 " + office.getCode() + " 导入失败：");
+					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
+					for (String message : messageList) {
+						failureMsg.append(message + "; ");
+						failureNum++;
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+					failureMsg.append("<br/>编码 " + office.getCode() + " 导入失败：" + ex.getMessage());
+				}
+			}
+			//关闭文件流
+			br.close();
+			isr.close();
+			is.close();
+
+			if (failureNum > 0) {
+				failureMsg.insert(0, "，失败 " + failureNum + " 条部门信息，导入信息如下：");
+			}
+			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条部门信息" + failureMsg);
+		} catch (Exception e) {
+			addMessage(redirectAttributes, "导入部门信息失败！失败信息：" + e.getMessage());
+		}
+		return "redirect:" + adminPath + "/sys/office/page?repage";
+	}
+	
+	/**
+	 * 封装导入用户信息
+	 * @param userInfo
+	 * @return user
+	 */
+	private Office setOfficeInfo(String[] officeInfo){
+		Office office = new Office();
+		office.setCode(officeInfo[0]);
+		office.setName(officeInfo[1]);
+		office.setParentIds(officeInfo[2]);
+		office.setSort(Integer.valueOf(officeInfo[3]));
+		office.setMaster(officeInfo[4]);
+		Area area = new Area();
+		area.setId(officeInfo[5]);
+		office.setArea(area);
+		return office;
 	}
 	
 	@RequiresPermissions("sys:office:edit")
