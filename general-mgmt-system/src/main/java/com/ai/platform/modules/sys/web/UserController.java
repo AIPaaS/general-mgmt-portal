@@ -337,15 +337,8 @@ public class UserController extends BaseController {
 				String[] userInfo = lineContent.split("\\\\t");
 				if(userInfo.length !=7)
 					throw new RuntimeException("文档格式不正确!");
-				User user = new User();
-				user.setLoginName(userInfo[0]);
-				user.setNo(userInfo[1]);
-				user.setName(userInfo[2]);
-				user.setEmail(userInfo[3]);
-				user.setMobile(userInfo[4]);
-				user.setCompany(new Office(userInfo[5]));
-				user.setOffice(new Office(userInfo[6]));
-
+				//封装导入用户信息
+				User user =setUserInfo(userInfo);
 				try {
 					if ("true".equals(checkLoginName("", user.getLoginName()))) {
 						user.setPassword(SystemService.entryptPassword("123456"));
@@ -380,6 +373,22 @@ public class UserController extends BaseController {
 			addMessage(redirectAttributes, "导入员工信息失败！失败信息：" + e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
+	}
+	/**
+	 * 封装导入用户信息
+	 * @param userInfo
+	 * @return user
+	 */
+	private User setUserInfo(String[] userInfo){
+		User user = new User();
+		user.setLoginName(userInfo[0]);
+		user.setNo(userInfo[1]);
+		user.setName(userInfo[2]);
+		user.setEmail(userInfo[3]);
+		user.setMobile(userInfo[4]);
+		user.setCompany(new Office(userInfo[5]));
+		user.setOffice(new Office(userInfo[6]));
+		return user;
 	}
 
 	/**
