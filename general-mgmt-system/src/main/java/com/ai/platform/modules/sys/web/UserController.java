@@ -341,7 +341,7 @@ public class UserController extends BaseController {
 				User user =setUserInfo(userInfo);
 				try {
 					if ("true".equals(checkLoginName("", user.getLoginName()))) {
-						user.setPassword(SystemService.entryptPassword("123456"));
+						user.setPassword(SystemService.entryptPassword(user.getLoginName()+Global.getPasswordRule()));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveImportUser(user);
 						successNum++;
@@ -388,6 +388,9 @@ public class UserController extends BaseController {
 		user.setMobile(userInfo[4]);
 		user.setCompany(new Office(userInfo[5]));
 		user.setOffice(new Office(userInfo[6]));
+		user.setDelFlag("0");
+		user.setLoginFlag("1");
+		
 		return user;
 	}
 

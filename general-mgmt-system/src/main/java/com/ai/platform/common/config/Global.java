@@ -192,6 +192,16 @@ public class Global {
 		return getConfig("web.tenant.id");
 
 	}
+	/**
+	 * 获取密码规则
+	 * @return
+	 */
+	public static String getPasswordRule() {
+
+		return getConfig("user.password.rule");
+
+	}
+	
     
 	/**
 	 * 页面获取常量
