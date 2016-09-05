@@ -36,7 +36,7 @@ public class LinkService extends CrudService<LinkDao, Link> {
 			dao.updateExpiredWeight(link);
 			CacheUtils.put("updateExpiredWeightDateByLink", DateUtils.addHours(new Date(), 6));
 		}
-		link.getSqlMap().put("dsf", dataScopeFilter(link.getCurrentUser(), "o", "u"));
+//		link.getSqlMap().put("dsf", dataScopeFilter(link.getCurrentUser(), "o", "u"));
 		
 		return super.findPage(page, link);
 	}

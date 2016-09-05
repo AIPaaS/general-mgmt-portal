@@ -35,7 +35,7 @@ public class GuestbookService extends CrudService<GuestbookDao, Guestbook> {
 //		dc.add(Restrictions.eq(Guestbook.FIELD_DEL_FLAG, guestbook.getDelFlag()));
 //		dc.addOrder(Order.desc("createDate"));
 //		return dao.find(page, dc);
-		guestbook.getSqlMap().put("dsf", dataScopeFilter(guestbook.getCurrentUser(), "o", "u"));
+//		guestbook.getSqlMap().put("dsf", dataScopeFilter(guestbook.getCurrentUser(), "o", "u"));
 		
 		guestbook.setPage(page);
 		page.setList(dao.findList(guestbook));

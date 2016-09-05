@@ -31,7 +31,7 @@ public class SiteService extends CrudService<SiteDao, Site> {
 //		//dc.addOrder(Order.asc("id"));
 //		return siteDao.find(page, dc);
 		
-		site.getSqlMap().put("site", dataScopeFilter(site.getCurrentUser(), "o", "u"));
+//		site.getSqlMap().put("site", dataScopeFilter(site.getCurrentUser(), "o", "u"));
 		
 		return super.findPage(page, site);
 	}

@@ -31,7 +31,7 @@ public class CommentService extends CrudService<CommentDao, Comment> {
 //		dc.add(Restrictions.eq(Comment.FIELD_DEL_FLAG, comment.getDelFlag()));
 //		dc.addOrder(Order.desc("id"));
 //		return commentDao.find(page, dc);
-		comment.getSqlMap().put("dsf", dataScopeFilter(comment.getCurrentUser(), "o", "u"));
+//		comment.getSqlMap().put("dsf", dataScopeFilter(comment.getCurrentUser(), "o", "u"));
 		
 		return super.findPage(page, comment);
 	}
