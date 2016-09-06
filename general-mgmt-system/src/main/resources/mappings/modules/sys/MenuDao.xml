@@ -15,7 +15,7 @@
 		a.permission,
 		a.remarks,
 		a.create_by AS "createBy.id",
-		a.system_id As "gnTabSystem.id",
+		a.system_id As "gnTabSystem",
 		a.create_date,
 		a.tenant_id AS "tenantId",
 		a.update_by AS "updateBy.id",
@@ -27,9 +27,7 @@
 	<sql id="menuJoins">
 		LEFT JOIN sys_menu p ON p.id = a.parent_id
     </sql>
-	<sql id="systemJoins">
-		left join  gn_tab_system g ON g.id = a.system_id
-    </sql>
+
 	<select id="get" resultType="Menu">
 		SELECT
 			<include refid="menuColumns"/>
@@ -58,10 +56,10 @@
 	</select>
 	<select id="findMenuChilds"  resultType="Menu">
 		SELECT
-			<include refid="menuColumns"/>,g.SYSTEM_URL_CONTEXT AS "gnTabSystem.SYSTEM_URL_CONTEXT"
+			<include refid="menuColumns"/>
 		FROM sys_menu a
 		<include refid="menuJoins"/>
-		<include refid="systemJoins"/>
+		
 		WHERE a.del_flag = '0'  and a.is_show = '1' AND a.parent_id = #{parent.id}
 		ORDER BY a.sort
 	</select>	
@@ -115,7 +113,7 @@
 			#{updateDate}, 
 			#{remarks}, 
 			#{tenantId},
-			#{gnTabSystem.id},
+			#{gnTabSystem},
 			#{delFlag}
 		)
 	</insert>
@@ -129,7 +127,7 @@
 			target = #{target}, 
 			icon = #{icon}, 
 			sort = #{sort}, 
-			system_id = #{gnTabSystem.id},
+			system_id = #{gnTabSystem},
 			is_show = #{isShow}, 
 			permission = #{permission}, 
 			update_by = #{updateBy.id}, 

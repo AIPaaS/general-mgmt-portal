@@ -38,14 +38,14 @@ public class Menu extends DataEntity<Menu> {
 	/**
 	 * 增加所属应用 by:mengbo creat 20160811
 	 */
-	private GnTabSystem gnTabSystem;
+	private String gnTabSystem;
 
 	
-	public GnTabSystem getGnTabSystem() {
+	public String getGnTabSystem() {
 		return gnTabSystem;
 	}
 
-	public void setGnTabSystem(GnTabSystem gnTabSystem) {
+	public void setGnTabSystem(String gnTabSystem) {
 		this.gnTabSystem = gnTabSystem;
 	}
 

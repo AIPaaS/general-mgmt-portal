@@ -292,7 +292,7 @@ public class UserUtils {
 				 MenuNodes.add(menu);
 			}
 		}
-		System.out.println("=========="+MenuNodes.toString());
+
 		// putCache(CACHE_MENU_CHILDLIST+menu.getId(), menuList);
 		// }
 		return MenuNodes;

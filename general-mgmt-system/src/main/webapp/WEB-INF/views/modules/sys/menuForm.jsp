@@ -50,7 +50,7 @@
 		<div class="control-group">
 			<label class="control-label">所属应用:</label>
 			<div class="controls">
-				<form:select path="gnTabSystem.id" class="required input-xlarge">
+				<form:select path="gnTabSystem" class="required input-xlarge">
 				<c:set var="productName" value="${fns:getConfig('productName')}"/>
 					<form:option value="--" label="${productName}"/>
 					<form:options items="${tableList}" itemLabel="systemName" itemValue="id" htmlEscape="false"/>

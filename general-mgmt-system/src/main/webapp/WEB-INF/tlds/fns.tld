@@ -92,6 +92,15 @@
     <function-signature>java.util.List getMenuList()</function-signature>
     <example>${fns:getMenuList()}</example>  
   </function>
+  
+  <function>
+    <description>获取当前用户的应用对象</description>
+    <name>getGnTabSystemUrl</name>
+    <function-class>com.ai.platform.modules.sys.utils.GnTabSystemUtils</function-class>
+    <function-signature>java.lang.String getGnTabSystemUrl(java.lang.String)</function-signature>
+    <example>${fns:getGnTabSystemUrl(id)}</example>  
+  </function>  
+  
     <function>
     <description>获取当前用户的菜单对象列表</description>
     <name>getChildsMenu</name>

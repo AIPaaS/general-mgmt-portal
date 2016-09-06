@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.service.CrudService;
 import com.ai.platform.modules.sys.entity.GnTabSystem;
+import com.ai.platform.modules.sys.utils.GnTabSystemUtils;
 import com.ai.platform.modules.sys.dao.GnTabSystemDao;
 
 /**
@@ -41,11 +42,13 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	@Transactional(readOnly = false)
 	public void save(GnTabSystem gnTabSystem) {
 		super.save(gnTabSystem);
+		GnTabSystemUtils.clearCache();
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GnTabSystem gnTabSystem) {
 		super.delete(gnTabSystem);
+		GnTabSystemUtils.clearCache();
 	}
 
 	public List<GnTabSystem> findAll() {
