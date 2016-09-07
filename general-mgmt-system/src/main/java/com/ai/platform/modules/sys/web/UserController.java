@@ -333,7 +333,7 @@ public class UserController extends BaseController {
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
-				if (lineContent.startsWith("#LOGINNAME"))
+				if (lineContent.contains("#LOGINNAME"))
 					continue;
 				alldataNum++;
 				String[] userInfo = lineContent.split("\\\\t");
