@@ -338,6 +338,9 @@ public class UserController extends BaseController {
 				alldataNum++;
 				String[] userInfo = lineContent.split("\\\\t");
 				if(userInfo.length !=7){
+					if(alldataNum==1){
+						throw new RuntimeException("文档格式不正确!");
+					}
 					failureMsg.append("<br/>数据"+alldataNum+":信息格式不正确;");
 					failureNum++;
 					continue;
@@ -359,8 +362,8 @@ public class UserController extends BaseController {
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
 					for (String message : messageList) {
 						failureMsg.append(message + "; ");
-						failureNum++;
 					}
+					failureNum++;
 				} catch (Exception ex) {
 					failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
 				}
@@ -371,11 +374,11 @@ public class UserController extends BaseController {
 			is.close();
 
 			if (failureNum > 0) {
-				failureMsg.insert(0, "，失败 " + failureNum + " 条员工信息，导入信息如下：");
+				failureMsg.insert(0, "，失败 " + failureNum + " 条工号信息，导入信息如下：");
 			}
-			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条员工信息" + failureMsg);
+			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条工号信息" + failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入员工信息失败！失败信息：" + e.getMessage());
+			addMessage(redirectAttributes, "导入工号信息失败！失败信息：" + e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
