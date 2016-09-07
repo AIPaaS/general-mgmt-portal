@@ -352,29 +352,6 @@ public class UserController extends BaseController {
 				User user =setUserInfo(userInfo);
 				try {
 					if ("true".equals(checkLoginName("", user.getLoginName()))) {
-						//验证公司编码
-						Office company = new Office();
-						company.setCode(userInfo[5]);
-						List<Office> companyList = officeService.find(company);
-						if(!companyList.isEmpty()){
-							company = companyList.get(0);
-							user.setCompany(company);
-							
-							//验证部门编码
-							Office office = new Office();
-							office.setCode(userInfo[6]);
-							List<Office> officeList = officeService.find(office);
-							if(!officeList.isEmpty()){
-								office = officeList.get(0);
-								user.setOffice(office);
-							}else{
-								failureMsg.append("<br/>数据"+alldataNum+":部门编码 " + userInfo[6] + " 不存在; ");
-								failureNum++;
-							}
-						}else{
-							failureMsg.append("<br/>数据"+alldataNum+":公司编码 " + userInfo[5] + " 不存在; ");
-							failureNum++;
-						}
 						user.setPassword(SystemService.entryptPassword(user.getLoginName()+Global.getPasswordRule()));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveImportUser(user);
@@ -423,6 +400,24 @@ public class UserController extends BaseController {
 		user.setMobile(userInfo[4]);
 		user.setDelFlag("0");
 		user.setLoginFlag("1");
+		
+		//验证公司编码
+		Office company = new Office();
+		company.setCode(userInfo[5]);
+		List<Office> companyList = officeService.find(company);
+		if(!companyList.isEmpty()){
+			company = companyList.get(0);
+			user.setCompany(company);
+			
+			//验证部门编码
+			Office office = new Office();
+			office.setCode(userInfo[6]);
+			List<Office> officeList = officeService.find(office);
+			if(!officeList.isEmpty()){
+				office = officeList.get(0);
+				user.setOffice(office);
+			}
+		}
 		
 		return user;
 	}
