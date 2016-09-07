@@ -136,18 +136,15 @@ $(function () {
 });	
 
 
-//头部点击2 
+//table 下拉
  $(function () {
     var st = 100;
-    $('.center-hind').mouseenter(function () {
-		$('.showbj').show(1);
-    })
-		$(".showbj").click(function () {
-                $(this).hide(1);
-            });
-			
-		$('.center-hind').mouseleave(function () {
-        $('.showbj').hide(1);
-	
+     $(".center-hind").mouseenter(function () {
+		$(this).parent().children('.showbj').slideToggle(100);
+    });
+    $('.center-hind').mouseleave(function () {
+    	$(this).parent().children('.showbj').hide(1);
     });	
-  });
+    
+});
+   

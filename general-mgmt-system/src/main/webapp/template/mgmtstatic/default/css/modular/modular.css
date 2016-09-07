@@ -183,20 +183,18 @@
 .user-list-title-list ul li{float:left;margin-top:10px;}
 .user-list-title-list ul li p{float:left;margin-right:10px}
 
-.table tr .hind1{width:120px;position:relative}
+.table tr .hind1{width:120px;position:relative;}
 .table tr .hind1 .center-hind{width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor: pointer;font-size:12px;}
-.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:99;border:1px solid #ddd;text-align:left;display: none;}
-.table tr .hind1 .fa-posi{position:absolute; top:-14px;left:40px;z-index: 999;font-size:18px;}
+.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:30;border:1px solid #ddd;text-align:left;display: none;}
+.table tr .hind1 .fa-posi{position:absolute; top:-14px;left:40px;z-index:31;font-size:18px;}
 
-.table tr .hind1-medium{width:200px;position:relative}
+.table tr .hind1-medium{width:200px;position:relative;}
 .table tr .hind1-medium .center-hind{width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor: pointer;font-size:12px;}
-.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:99;border:1px solid #ddd;text-align:left;display: none;}
-.table tr .hind1-medium .fa-posi{position:absolute; top:-14px;left:40px;z-index: 999;font-size:18px;}
+.table tr .hind1-medium .fa-posi{position:absolute; top:-14px;left:40px;z-index:999;font-size:18px;display: block;}
 
-.table tr .hind1-large{width:400px;position:relative}
+.table tr .hind1-large{width:400px;position:relative;}
 .table tr .hind1-large .center-hind{width:400px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor: pointer;font-size:12px;}
-.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:99;border:1px solid #ddd;text-align:left;display: none;}
-.table tr .hind1-large .fa-posi{position:absolute; top:-14px;left:40px;z-index: 999;font-size:18px;}
+.table tr .hind1-large .fa-posi{position:absolute; top:-14px;left:40px;z-index:39;font-size:18px;}
 
 
 /**添加商品**/

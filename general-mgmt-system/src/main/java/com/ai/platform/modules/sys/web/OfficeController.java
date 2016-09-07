@@ -253,28 +253,16 @@ public class OfficeController extends BaseController {
 				Office office = setOfficeInfo(userInfo);
 				try {
 					if ("true".equals(checkCode("", office.getCode()))) {
-						office.setType("1");
-						office.setGrade("1");
-						office.setTenantId("changhong_d");
-						office.setDelFlag("0");
-						office.setZipCode("");
-						office.setRemarks("");
-						office.setPhone("");
-						office.setEmail("");
-						office.setAddress("");
-						office.setFax("");
 //						BeanValidators.validateWithException(validator, office);
 						if("".equals(office.getCode()) || office.getCode() ==null){
 							failureMsg.append("<br/>数据"+alldataNum+":机构编码，不能为空; ");
 							failureNum++;
 							continue;
-						}
-						if("".equals(office.getName()) || office.getName() ==null){
+						}else if("".equals(office.getName()) || office.getName() ==null){
 							failureMsg.append("<br/>数据"+alldataNum+":机构名称，不能为空; ");
 							failureNum++;
 							continue;
-						}
-						if("".equals(office.getParentIds()) || office.getParentIds() ==null){
+						}else if("".equals(office.getParentIds()) || office.getParentIds() ==null){
 							failureMsg.append("<br/>数据"+alldataNum+":上级编码，不能为空; ");
 							failureNum++;
 							continue;
@@ -328,6 +316,17 @@ public class OfficeController extends BaseController {
 		Area area = new Area();
 		area.setId(officeInfo[5]);
 		office.setArea(area);
+		
+		office.setType("1");
+		office.setGrade("1");
+		office.setTenantId(Global.getTenantID());
+		office.setDelFlag("0");
+		office.setZipCode("");
+		office.setRemarks("");
+		office.setPhone("");
+		office.setEmail("");
+		office.setAddress("");
+		office.setFax("");
 		return office;
 	}
 	
