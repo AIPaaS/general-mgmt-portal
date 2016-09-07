@@ -198,7 +198,7 @@ public class UserUtils {
 		Principal principal = getPrincipal();
 		if (principal != null) {
 			User user = get(principal.getId());
-			System.out.println("当前登录用户------"+user.getName());
+		
 			if (user != null) {
 				return user;
 			}
