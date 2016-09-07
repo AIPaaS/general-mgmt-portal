@@ -39,6 +39,7 @@ import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
+import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
@@ -56,6 +57,8 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private SystemService systemService;
+	@Autowired
+	private OfficeService officeService;
 
 	@ModelAttribute
 	public User get(@RequestParam(required = false) String id) {
@@ -349,6 +352,29 @@ public class UserController extends BaseController {
 				User user =setUserInfo(userInfo);
 				try {
 					if ("true".equals(checkLoginName("", user.getLoginName()))) {
+						//验证公司编码
+						Office company = new Office();
+						company.setCode(userInfo[5]);
+						List<Office> companyList = officeService.find(company);
+						if(!companyList.isEmpty()){
+							company = companyList.get(0);
+							user.setCompany(company);
+							
+							//验证部门编码
+							Office office = new Office();
+							office.setCode(userInfo[6]);
+							List<Office> officeList = officeService.find(office);
+							if(!officeList.isEmpty()){
+								office = officeList.get(0);
+								user.setOffice(office);
+							}else{
+								failureMsg.append("<br/>数据"+alldataNum+":部门编码 " + userInfo[6] + " 不存在; ");
+								failureNum++;
+							}
+						}else{
+							failureMsg.append("<br/>数据"+alldataNum+":公司编码 " + userInfo[5] + " 不存在; ");
+							failureNum++;
+						}
 						user.setPassword(SystemService.entryptPassword(user.getLoginName()+Global.getPasswordRule()));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveImportUser(user);
@@ -357,6 +383,7 @@ public class UserController extends BaseController {
 						failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 已存在; ");
 						failureNum++;
 					}
+					
 				} catch (ConstraintViolationException ex) {
 					failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
@@ -394,8 +421,6 @@ public class UserController extends BaseController {
 		user.setName(userInfo[2]);
 		user.setEmail(userInfo[3]);
 		user.setMobile(userInfo[4]);
-		user.setCompany(new Office(userInfo[5]));
-		user.setOffice(new Office(userInfo[6]));
 		user.setDelFlag("0");
 		user.setLoginFlag("1");
 		
