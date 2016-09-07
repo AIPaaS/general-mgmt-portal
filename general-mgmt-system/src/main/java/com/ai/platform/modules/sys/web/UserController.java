@@ -325,6 +325,7 @@ public class UserController extends BaseController {
 			}
 			int successNum = 0;
 			int failureNum = 0;
+			int alldataNum = 0;
 			StringBuilder failureMsg = new StringBuilder();
 			InputStream is;
 			is = file.getInputStream();
@@ -334,9 +335,13 @@ public class UserController extends BaseController {
 			while ((lineContent = br.readLine()) != null) {
 				if (lineContent.startsWith("#LOGINNAME"))
 					continue;
+				alldataNum++;
 				String[] userInfo = lineContent.split("\\\\t");
-				if(userInfo.length !=7)
-					throw new RuntimeException("文档格式不正确!");
+				if(userInfo.length !=7){
+					failureMsg.append("<br/>数据"+alldataNum+":信息格式不正确;");
+					failureNum++;
+					continue;
+				}
 				//封装导入用户信息
 				User user =setUserInfo(userInfo);
 				try {
@@ -346,18 +351,18 @@ public class UserController extends BaseController {
 						systemService.saveImportUser(user);
 						successNum++;
 					} else {
-						failureMsg.append("<br/>登录名 " + user.getLoginName() + " 已存在; ");
+						failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 已存在; ");
 						failureNum++;
 					}
 				} catch (ConstraintViolationException ex) {
-					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：");
+					failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
 					for (String message : messageList) {
 						failureMsg.append(message + "; ");
 						failureNum++;
 					}
 				} catch (Exception ex) {
-					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
+					failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
 				}
 			}
 			//关闭文件流

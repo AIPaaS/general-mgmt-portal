@@ -240,12 +240,15 @@ public class OfficeController extends BaseController {
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
-				if (lineContent.startsWith("#CODE"))
+				if (lineContent.contains("#CODE"))
 					continue;
 				alldataNum++;
 				String[] userInfo = lineContent.split("\\\\t");
-				if(userInfo.length !=6)
-					throw new RuntimeException("文档格式不正确!");
+				if(userInfo.length !=6){
+					failureMsg.append("<br/>数据"+alldataNum+":信息格式不正确;");
+					failureNum++;
+					continue;
+				}
 				//封装导入用户信息
 				Office office = setOfficeInfo(userInfo);
 				try {
@@ -262,29 +265,29 @@ public class OfficeController extends BaseController {
 						office.setFax("");
 //						BeanValidators.validateWithException(validator, office);
 						if("".equals(office.getCode()) || office.getCode() ==null){
-							failureMsg.append("<br/> 第" + alldataNum + "条数据机构编码，不能为空; ");
+							failureMsg.append("<br/>数据"+alldataNum+":机构编码，不能为空; ");
 							failureNum++;
 							continue;
 						}
 						if("".equals(office.getName()) || office.getName() ==null){
-							failureMsg.append("<br/> 第" + alldataNum + "条数据机构名称，不能为空; ");
+							failureMsg.append("<br/>数据"+alldataNum+":机构名称，不能为空; ");
 							failureNum++;
 							continue;
 						}
 						if("".equals(office.getParentIds()) || office.getParentIds() ==null){
-							failureMsg.append("<br/> 第" + alldataNum + "条数据上级编码，不能为空; ");
+							failureMsg.append("<br/>数据"+alldataNum+":上级编码，不能为空; ");
 							failureNum++;
 							continue;
 						}
 						successNum++;
 						officeService.save(office);
 					} else {
-						failureMsg.append("<br/>编码 " + office.getCode() + " 已存在; ");
+						failureMsg.append("<br/>数据"+alldataNum+":编码 " + office.getCode() + " 已存在; ");
 						failureNum++;
 					}
 				} catch (ConstraintViolationException ex) {
 					ex.printStackTrace();
-					failureMsg.append("<br/>编码 " + office.getCode() + " 导入失败：");
+					failureMsg.append("<br/>数据"+alldataNum+":编码 " + office.getCode() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
 					for (String message : messageList) {
 						failureMsg.append(message + "; ");
@@ -292,7 +295,7 @@ public class OfficeController extends BaseController {
 					}
 				} catch (Exception ex) {
 					ex.printStackTrace();
-					failureMsg.append("<br/>编码 " + office.getCode() + " 导入失败：" + ex.getMessage());
+					failureMsg.append("<br/>数据"+alldataNum+":编码 " + office.getCode() + " 导入失败：" + ex.getMessage());
 				}
 			}
 			//关闭文件流
