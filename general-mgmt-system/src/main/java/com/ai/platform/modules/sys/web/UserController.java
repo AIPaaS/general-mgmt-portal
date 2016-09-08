@@ -326,6 +326,8 @@ public class UserController extends BaseController {
 				throw new RuntimeException("导入文档为空!");
 			} else if (!fileName.toLowerCase().endsWith(".txt")) {
 				throw new RuntimeException("文档格式不正确!");
+			}else if(file.getSize()>1024*5){
+				throw new RuntimeException("导入文件超过5M!");
 			}
 			int successNum = 0;
 			int failureNum = 0;
