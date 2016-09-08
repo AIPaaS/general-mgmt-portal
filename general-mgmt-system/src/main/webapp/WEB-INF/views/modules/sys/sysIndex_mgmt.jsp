@@ -10,8 +10,18 @@ function setCookie(c_name, value, expiredays){
 　　　　exdate.setDate(exdate.getDate() + expiredays);
 　　　　document.cookie=c_name+ "=" + escape(value) + ((expiredays==null) ? "" : ";path=/;domain=localhost;expires="+exdate.toGMTString());
 　　}
-setCookie('username','Darren',30)
-
+function getcookie(name){  
+	
+    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));  
+    if(arr != null){  
+        return (arr[2]);  
+    }else{  
+        return "";  
+    }  
+}
+alert("setCookie");
+setCookie('username','Darren',30);
+alert(getcookie('username'));
 </script>
 	<meta name="decorator" content="mgmt"/>
   </head>
