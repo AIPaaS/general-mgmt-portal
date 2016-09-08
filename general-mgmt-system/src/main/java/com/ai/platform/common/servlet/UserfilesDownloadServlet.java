@@ -51,13 +51,13 @@ public class UserfilesDownloadServlet extends HttpServlet {
 			String fname = "";
 	        if (req.getHeader("User-Agent").toLowerCase()  
 	                .indexOf("firefox") > 0) {  
-	                fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1"); // firefox浏览器  
+	                fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1").replace("+","%20"); // firefox浏览器  
 	        } else if (req.getHeader("User-Agent").toUpperCase()  
 	                .indexOf("MSIE") > 0) {  
-	            fname = URLEncoder.encode(fileName, "UTF-8");// IE浏览器  
+	            fname = URLEncoder.encode(fileName, "UTF-8").replace("+","%20");// IE浏览器  
 	        }else if (req.getHeader("User-Agent").toUpperCase()  
 	                .indexOf("CHROME") > 0) {  
-	            fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1");// 谷歌  
+	            fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1").replace("+","%20");// 谷歌  
 	        } 
 			resp.setContentType("application/x-msdownload");
             // 添加下载文件的头信息。此信息在下载时会在下载面板上显示，比如：
