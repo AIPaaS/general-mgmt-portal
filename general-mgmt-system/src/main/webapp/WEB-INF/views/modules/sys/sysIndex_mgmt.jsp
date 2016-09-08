@@ -4,31 +4,7 @@
 <html>
 <head>
 	<title>${fns:getConfig('productName')}</title>
-<script type="text/javascript">
-function setCookie(c_name, value, expiredays){
-　　　　var exdate=new Date();
-　　　　exdate.setDate(exdate.getDate() + expiredays);
-　　　　document.cookie=c_name+ "=" + escape(value) + ((expiredays==null) ? "" : ";path=/;domain=localhost;expires="+exdate.toGMTString());
-　　}
-function setCookie1(c_name, value, expiredays){
-　　　　var exdate=new Date();
-　　　　exdate.setDate(exdate.getDate() + expiredays);
-　　　　document.cookie=c_name+ "=" + escape(value) + ((expiredays==null) ? "" : ";path=/;domain=10.19.13.14;expires="+exdate.toGMTString());
-　　}
-function getcookie(name){  
-	
-    var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));  
-    if(arr != null){  
-        return (arr[2]);  
-    }else{  
-        return "";  
-    }  
-}
-alert("setCookie");
-setCookie('username','Darren',30);
-setCookie1('username','Darren_1',30);
-alert(getcookie('username'));
-</script>
+
 	<meta name="decorator" content="mgmt"/>
   </head>
 <body>
@@ -196,7 +172,7 @@ alert(getcookie('username'));
 						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
 						                        <c:set var="systemId" value="${menuNodethree.gnTabSystem}"/>
 						                        
-						                        <li><a href="${empty fns:getGnTabSystemUrl(systemId) ? ctx : fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        <li><a href="${empty fns:getGnTabSystemUrl(systemId) ? ctx : fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
 						                         <c:set var="systemId" value=""/>
 						                        </c:forEach>
 					                 	   	</ul>
