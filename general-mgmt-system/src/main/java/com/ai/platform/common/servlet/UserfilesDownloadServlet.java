@@ -59,8 +59,8 @@ public class UserfilesDownloadServlet extends HttpServlet {
 	                .indexOf("CHROME") > 0) {  
 	            fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1");// 谷歌  
 	        } 
-//			resp.setContentType("application/x-msdownload");
-			resp.setContentType("application/octet-stream");//设置文件类型
+			resp.setContentType("application/x-msdownload");
+//			resp.setContentType("application/octet-stream");//设置文件类型
             // 添加下载文件的头信息。此信息在下载时会在下载面板上显示，比如：
             // 迅雷下载显示的文件名称，就是此处filiname
 			resp.addHeader("Content-Disposition", "attachment;filename=\""+ fname +"\"");
