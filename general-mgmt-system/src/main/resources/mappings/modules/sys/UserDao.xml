@@ -186,7 +186,7 @@
 			<if test="dbName == 'mysql'">CONCAT('%', #{email}, '%')</if>
 		</if>
 		<!-- 数据范围过滤 -->
-		<!--${sqlMap.dsf} -->
+		${sqlMap.dsf}
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}

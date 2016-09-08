@@ -104,8 +104,8 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 设置分页参数
 		user.setPage(page);
 		// 执行分页查询
-		//page.setList(userDao.findList(user));
-		page.setList(UserUtils.getUserList(user));
+		page.setList(userDao.findList(user));
+//		page.setList(UserUtils.getUserList(user));
 		return page;
 	}
 	

@@ -240,8 +240,12 @@ public class OfficeController extends BaseController {
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
-				if (lineContent.contains("#CODE"))
-					continue;
+				if(alldataNum==0){
+					if(!lineContent.contains("#CODE") )
+						throw new RuntimeException("文档格式不正确!");
+					else
+						continue;
+				}
 				alldataNum++;
 				String[] userInfo = lineContent.split("\\\\t");
 				if(userInfo.length !=6){

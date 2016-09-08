@@ -86,6 +86,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "listno" })
 	public String listno(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		user.getSqlMap().put("dsf", " AND a.login_name IS NOT NULL");
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
 		model.addAttribute("page", page);
 		return "modules/sys/usernoList";
@@ -336,14 +337,15 @@ public class UserController extends BaseController {
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
-				if (lineContent.contains("#LOGINNAME"))
-					continue;
+				if(alldataNum==0){
+					if(!lineContent.contains("#LOGINNAME") )
+						throw new RuntimeException("文档格式不正确!");
+					else
+						continue;
+				}
 				alldataNum++;
 				String[] userInfo = lineContent.split("\\\\t");
 				if(userInfo.length !=7){
-					if(alldataNum==1){
-						throw new RuntimeException("文档格式不正确!");
-					}
 					failureMsg.append("<br/>数据"+alldataNum+":信息格式不正确;");
 					failureNum++;
 					continue;
