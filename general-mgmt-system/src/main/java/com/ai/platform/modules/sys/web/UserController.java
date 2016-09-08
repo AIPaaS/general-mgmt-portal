@@ -408,15 +408,14 @@ public class UserController extends BaseController {
 		if(!companyList.isEmpty()){
 			company = companyList.get(0);
 			user.setCompany(company);
-			
-			//验证部门编码
-			Office office = new Office();
-			office.setCode(userInfo[6]);
-			List<Office> officeList = officeService.find(office);
-			if(!officeList.isEmpty()){
-				office = officeList.get(0);
-				user.setOffice(office);
-			}
+		}
+		//验证部门编码
+		Office office = new Office();
+		office.setCode(userInfo[6]);
+		List<Office> officeList = officeService.find(office);
+		if(!officeList.isEmpty()){
+			office = officeList.get(0);
+			user.setOffice(office);
 		}
 		
 		return user;

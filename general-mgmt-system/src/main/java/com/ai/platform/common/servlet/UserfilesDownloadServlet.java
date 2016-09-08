@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.util.UriUtils;
 
 import com.ai.platform.common.config.Global;
@@ -50,7 +50,7 @@ public class UserfilesDownloadServlet extends HttpServlet {
 			resp.setContentType("application/x-msdownload");
             // 添加下载文件的头信息。此信息在下载时会在下载面板上显示，比如：
             // 迅雷下载显示的文件名称，就是此处filiname
-			resp.addHeader("Content-Disposition", "attachment;filename="+  file.getName());
+			resp.addHeader("Content-Disposition", "attachment;filename=\""+  URLEncoder.encode(file.getName(), "UTF-8") +"\"");
             // 添加文件的大小信息
 			resp.setContentLength((int) file.length());
             // 获得输出网络流
