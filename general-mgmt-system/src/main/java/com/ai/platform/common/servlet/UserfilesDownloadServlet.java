@@ -46,11 +46,23 @@ public class UserfilesDownloadServlet extends HttpServlet {
 //			FileCopyUtils.copy(new FileInputStream(file), resp.getOutputStream());
 //			resp.setContentType("application/x-msdownload");
 //			resp.addHeader("Content-Disposition", "attachment;");
-			 
+	        // 解决中文文件名乱码问题  
+			String fileName =file.getName();  
+			String fname = "";
+	        if (req.getHeader("User-Agent").toLowerCase()  
+	                .indexOf("firefox") > 0) {  
+	                fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1"); // firefox浏览器  
+	        } else if (req.getHeader("User-Agent").toUpperCase()  
+	                .indexOf("MSIE") > 0) {  
+	            fname = URLEncoder.encode(fileName, "UTF-8");// IE浏览器  
+	        }else if (req.getHeader("User-Agent").toUpperCase()  
+	                .indexOf("CHROME") > 0) {  
+	            fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1");// 谷歌  
+	        } 
 			resp.setContentType("application/x-msdownload");
             // 添加下载文件的头信息。此信息在下载时会在下载面板上显示，比如：
             // 迅雷下载显示的文件名称，就是此处filiname
-			resp.addHeader("Content-Disposition", "attachment;filename=\""+  URLEncoder.encode(file.getName(), "UTF-8") +"\"");
+			resp.addHeader("Content-Disposition", "attachment;filename=\""+ fname +"\"");
             // 添加文件的大小信息
 			resp.setContentLength((int) file.length());
             // 获得输出网络流
