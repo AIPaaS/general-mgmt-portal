@@ -10,6 +10,11 @@ function setCookie(c_name, value, expiredays){
 　　　　exdate.setDate(exdate.getDate() + expiredays);
 　　　　document.cookie=c_name+ "=" + escape(value) + ((expiredays==null) ? "" : ";path=/;domain=localhost;expires="+exdate.toGMTString());
 　　}
+function setCookie1(c_name, value, expiredays){
+　　　　var exdate=new Date();
+　　　　exdate.setDate(exdate.getDate() + expiredays);
+　　　　document.cookie=c_name+ "=" + escape(value) + ((expiredays==null) ? "" : ";path=/;domain=10.19.13.14;expires="+exdate.toGMTString());
+　　}
 function getcookie(name){  
 	
     var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));  
@@ -21,6 +26,7 @@ function getcookie(name){
 }
 alert("setCookie");
 setCookie('username','Darren',30);
+setCookie1('username','Darren_1',30);
 alert(getcookie('username'));
 </script>
 	<meta name="decorator" content="mgmt"/>
