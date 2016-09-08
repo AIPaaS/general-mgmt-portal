@@ -19,12 +19,10 @@ import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
-import com.ai.platform.modules.sys.dao.AreaDao;
 import com.ai.platform.modules.sys.dao.MenuDao;
 import com.ai.platform.modules.sys.dao.OfficeDao;
 import com.ai.platform.modules.sys.dao.RoleDao;
 import com.ai.platform.modules.sys.dao.UserDao;
-import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
@@ -111,9 +109,13 @@ public class UserUtils {
 	 */
 	public static String getTheme() {
 		String theme = "";
-		User user = (User) getUser();
-		theme = user.getTheme();
-		if (!StringUtils.isNotBlank(theme)) {
+		String themeIndex = getThemeIndex();
+		
+		 if(StringUtils.equals(themeIndex, "theme-white")){
+			theme= "green";
+		}else if(StringUtils.equals(themeIndex, "theme-whbl")){
+			theme= "cerulean";
+		}else{			
 			theme = USER_DEFAULT_THEME;
 		}
 		return theme;
@@ -129,8 +131,7 @@ public class UserUtils {
 		String theme_index="";
 		User user = (User) getUser();
 		theme = user.getTheme();
-		
-		
+
 		if(StringUtils.equals(theme, "cerulean") || StringUtils.equals(theme, "default")){
 			
 			theme_index="theme-whbl";
