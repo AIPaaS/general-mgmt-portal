@@ -337,44 +337,48 @@ public class UserController extends BaseController {
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
-				if(alldataNum==0){
-					if(!lineContent.contains("#LOGINNAME") )
-						throw new RuntimeException("文档格式不正确!");
-					else
-						continue;
-				}
-				alldataNum++;
-				String[] userInfo = lineContent.split("\\\\t");
-				if(userInfo.length !=7){
-					failureMsg.append("<br/>数据"+alldataNum+":信息格式不正确;");
-					failureNum++;
-					continue;
-				}
-				//封装导入用户信息
-				User user =setUserInfo(userInfo);
+				User user = new User();
 				try {
+					if (alldataNum == 0) {
+						if (!lineContent.contains("#LOGINNAME"))
+							throw new RuntimeException("文档格式不正确!");
+						else
+							continue;
+					}
+					String[] userInfo = lineContent.split("\\\\t");
+					if (userInfo.length != 7) {
+						failureMsg.append("<br/>数据" + alldataNum + ":信息格式不正确;");
+						failureNum++;
+						continue;
+					}
+					// 封装导入用户信息
+					user = setUserInfo(userInfo);
+
 					if ("true".equals(checkLoginName("", user.getLoginName()))) {
-						user.setPassword(SystemService.entryptPassword(user.getLoginName()+Global.getPasswordRule()));
+						user.setPassword(SystemService.entryptPassword(user.getLoginName() + Global.getPasswordRule()));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveImportUser(user);
 						successNum++;
 					} else {
-						failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 已存在; ");
+						failureMsg.append("<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 已存在; ");
 						failureNum++;
 					}
-					
+
 				} catch (ConstraintViolationException ex) {
-					failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 导入失败：");
+					failureMsg.append("<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
 					for (String message : messageList) {
 						failureMsg.append(message + "; ");
 					}
 					failureNum++;
 				} catch (Exception ex) {
-					failureMsg.append("<br/>数据"+alldataNum+":登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
+					failureMsg.append(
+							"<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
+				} finally {
+					alldataNum++;
 				}
 			}
-			//关闭文件流
+			// 关闭文件流
 			br.close();
 			isr.close();
 			is.close();
@@ -388,12 +392,14 @@ public class UserController extends BaseController {
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
+
 	/**
 	 * 封装导入用户信息
+	 * 
 	 * @param userInfo
 	 * @return user
 	 */
-	private User setUserInfo(String[] userInfo){
+	private User setUserInfo(String[] userInfo) {
 		User user = new User();
 		user.setLoginName(userInfo[0]);
 		user.setNo(userInfo[1]);
@@ -402,24 +408,24 @@ public class UserController extends BaseController {
 		user.setMobile(userInfo[4]);
 		user.setDelFlag("0");
 		user.setLoginFlag("1");
-		
-		//验证公司编码
+
+		// 验证公司编码
 		Office company = new Office();
 		company.setCode(userInfo[5]);
 		List<Office> companyList = officeService.find(company);
-		if(!companyList.isEmpty()){
+		if (!companyList.isEmpty()) {
 			company = companyList.get(0);
 			user.setCompany(company);
 		}
-		//验证部门编码
+		// 验证部门编码
 		Office office = new Office();
 		office.setCode(userInfo[6]);
 		List<Office> officeList = officeService.find(office);
-		if(!officeList.isEmpty()){
+		if (!officeList.isEmpty()) {
 			office = officeList.get(0);
 			user.setOffice(office);
 		}
-		
+
 		return user;
 	}
 
