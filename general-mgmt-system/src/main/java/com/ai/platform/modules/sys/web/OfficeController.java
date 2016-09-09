@@ -35,6 +35,7 @@ import com.ai.platform.modules.sys.entity.Area;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
+import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.utils.DictUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
@@ -53,6 +54,8 @@ public class OfficeController extends BaseController {
 
 	@Autowired
 	private OfficeService officeService;
+	@Autowired
+	private GnAreaService areaService;
 
 	@ModelAttribute("office")
 	public Office get(@RequestParam(required = false) String id) {
@@ -102,7 +105,7 @@ public class OfficeController extends BaseController {
 			o.setType(type);
 		}
 		model.addAttribute("page", pge);
-		return "modules/mgmtsys/iotofficeList";
+		return "modules/sys/officeList";
 	}
 
 	/**
@@ -122,8 +125,8 @@ public class OfficeController extends BaseController {
 			office.setParent(user.getOffice());
 		}
 		office.setParent(officeService.get(office.getParent().getId()));
-		if (office.getArea() == null && user != null) {
-			office.setArea(user.getOffice().getArea());
+		if (office.getGnArea() == null && user != null) {
+			office.setGnArea(user.getOffice().getGnArea());
 		}
 		// 自动获取排序号
 		if (StringUtils.isBlank(office.getId()) && office.getParent() != null) {
@@ -153,8 +156,8 @@ public class OfficeController extends BaseController {
 			}
 		}
 		office.setParent(officeService.get(office.getParent().getId()));
-		if (office.getArea() == null) {
-			office.setArea(user.getOffice().getArea());
+		if (office.getGnArea() == null) {
+			office.setGnArea(user.getOffice().getGnArea());
 		}
 		// 自动获取排序号
 		if (StringUtils.isBlank(office.getId()) && office.getParent() != null) {
@@ -184,6 +187,7 @@ public class OfficeController extends BaseController {
 		if (!beanValidator(model, office)) {
 			return form(office, model);
 		}
+		
 		/*
 		 * if (!"true".equals(checkName(office.getOldName(),office.getName()))){
 		 * addMessage(model, "保存部门'" + office.getName() + "'失败, 部门名称已存在");
@@ -201,7 +205,7 @@ public class OfficeController extends BaseController {
 				childOffice = new Office();
 				childOffice.setName(DictUtils.getDictLabel(id, "sys_office_common", "未知"));
 				childOffice.setParent(office);
-				childOffice.setArea(office.getArea());
+				childOffice.setGnArea(office.getGnArea());
 				childOffice.setType("2");
 				childOffice.setGrade(String.valueOf(Integer.valueOf(office.getGrade()) + 1));
 				childOffice.setUseable(Global.YES);
@@ -277,7 +281,6 @@ public class OfficeController extends BaseController {
 						failureNum++;
 					}
 				} catch (ConstraintViolationException ex) {
-					ex.printStackTrace();
 					failureMsg.append("<br/>数据" + alldataNum + ":编码 " + office.getCode() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
 					for (String message : messageList) {
@@ -316,14 +319,22 @@ public class OfficeController extends BaseController {
 		Office office = new Office();
 		office.setCode(officeInfo[0]);
 		office.setName(officeInfo[1]);
-		office.setParentIds(officeInfo[2]);
+
+		Office parentOffice = new Office();
+		parentOffice.setCode(officeInfo[2]);
+		List<Office> parentList = officeService.find(parentOffice);
+		if(!parentList.isEmpty()){
+			office.setParent(parentList.get(0));
+		}
+		
+		
 		office.setSort(Integer.valueOf(officeInfo[3]));
 		office.setMaster(officeInfo[4]);
-		Area area = new Area();
-		area.setId(officeInfo[5]);
-		office.setArea(area);
+		GnArea gnArea = areaService.getByCode(officeInfo[5]);
+		if (gnArea != null) {
+			office.setGnArea(gnArea);
+		}
 		office.setTenantId(Global.getTenantID());
-		office.setParent(new Office());
 		return office;
 	}
 

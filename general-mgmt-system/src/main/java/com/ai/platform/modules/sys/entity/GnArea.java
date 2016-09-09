@@ -42,7 +42,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this();
 		this.areaCode = areaCode;
 	}
-	@Length(min=1, max=32, message="区域编码必须介于 1和32之间")
+	@Length(min=1, max=9, message="区域编码必须介于 1和32之间")
 	public String getAreaCode() {
 		return areaCode;
 	}

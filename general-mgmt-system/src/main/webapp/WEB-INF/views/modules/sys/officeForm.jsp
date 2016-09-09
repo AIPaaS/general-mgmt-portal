@@ -50,7 +50,7 @@
 		<div class="control-group">
 			<label class="control-label">归属区域:</label>
 			<div class="controls">
-                <sys:treeselect id="area" name="area.id" value="${office.area.id}" labelName="area.name" labelValue="${office.area.name}"
+                <sys:treeselect id="gnArea" name="gnArea.id" value="${office.gnArea.id}" labelName="gnArea.areaName" labelValue="${office.gnArea.areaName}"
 					title="区域" url="/sys/gnArea/treeData" dataMsgRequired="必填信息" cssClass="required"/>
 					<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -67,7 +67,7 @@
 			<label class="control-label">部门编码:</label>
 			<div class="controls">
 			<input id="oldCode" name="oldCode" type="hidden" value="${office.code}">
-				<form:input path="code" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="code" htmlEscape="false" maxlength="50" class="required username"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

@@ -39,7 +39,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	 * @return
 	 */
 	@JsonBackReference
-	@NotNull
+	@NotNull(message="上级部门不能为空或不存在")
 	public abstract T getParent();
 
 	/**
@@ -57,7 +57,6 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 		this.parentIds = parentIds;
 	}
 
-	@Length(min=0, max=15,message="部门名称不能为空")
 	public String getName() {
 		return name;
 	}
@@ -65,7 +64,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Integer getSort() {
 		return sort;
 	}

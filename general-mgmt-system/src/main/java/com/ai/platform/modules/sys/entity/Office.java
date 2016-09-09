@@ -21,7 +21,6 @@ import com.ai.platform.common.persistence.TreeEntity;
 public class Office extends TreeEntity<Office> {
 
 	private static final long serialVersionUID = 1L;
-	private Area area; // 归属区域
 	private GnArea gnArea; // 归属区域
 	private String oldName; // 原名称
 	private String oldCode; // 原编码
@@ -122,16 +121,6 @@ public class Office extends TreeEntity<Office> {
 	// this.parentIds = parentIds;
 	// }
 
-	@NotNull
-	public Area getArea() {
-		return area;
-	}
-
-	public void setArea(Area area) {
-		this.area = area;
-	}
-
-	//
 	
 	@Pattern(regexp = "^[\u0391-\uFFE5\\w]+$", message = "部门名称不合法")
 	@Length(min = 1, max = 15, message = "部门名称不能为空")
@@ -151,7 +140,7 @@ public class Office extends TreeEntity<Office> {
 	// public void setSort(Integer sort) {
 	// this.sort = sort;
 	// }
-
+	@NotNull(message="归属区域不能为空")
 	public GnArea getGnArea() {
 		return gnArea;
 	}
@@ -231,8 +220,8 @@ public class Office extends TreeEntity<Office> {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	@Length(min = 1, max = 50,message="部门编码不能为空")
+	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{2,19}$", message = "部门编码格式不正确")
+	@Length(min = 1, max = 20,message="部门编码不能为空")
 	public String getCode() {
 		return code;
 	}
