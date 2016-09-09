@@ -48,7 +48,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	 */
 	public abstract void setParent(T parent);
 
-	@Length(min=1, max=2000)
+	@Length(min=1, max=100,message="上级编码不能为空")
 	public String getParentIds() {
 		return parentIds;
 	}
@@ -57,7 +57,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 		this.parentIds = parentIds;
 	}
 
-	@Length(min=1, max=100)
+	@Length(min=0, max=15,message="部门名称不能为空")
 	public String getName() {
 		return name;
 	}
