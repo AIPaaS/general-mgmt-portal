@@ -269,20 +269,7 @@ public class OfficeController extends BaseController {
 					office = setOfficeInfo(userInfo);
 
 					if ("true".equals(checkCode("", office.getCode()))) {
-						 BeanValidators.validateWithException(validator,office);
-						if ("".equals(office.getCode()) || office.getCode() == null) {
-							failureMsg.append("<br/>数据" + alldataNum + ":部门编码，不能为空; ");
-							failureNum++;
-							continue;
-						} else if ("".equals(office.getName()) || office.getName() == null) {
-							failureMsg.append("<br/>数据" + alldataNum + ":部门名称，不能为空; ");
-							failureNum++;
-							continue;
-						} else if ("".equals(office.getParentIds()) || office.getParentIds() == null) {
-							failureMsg.append("<br/>数据" + alldataNum + ":上级编码，不能为空; ");
-							failureNum++;
-							continue;
-						}
+						BeanValidators.validateWithException(validator,office);
 						successNum++;
 						officeService.save(office);
 					} else {
