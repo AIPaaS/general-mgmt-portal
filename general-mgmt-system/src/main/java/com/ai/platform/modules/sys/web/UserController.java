@@ -335,7 +335,7 @@ public class UserController extends BaseController {
 			StringBuilder failureMsg = new StringBuilder();
 			InputStream is;
 			is = file.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is);
+			InputStreamReader isr = new InputStreamReader(is,"GB2312");
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {

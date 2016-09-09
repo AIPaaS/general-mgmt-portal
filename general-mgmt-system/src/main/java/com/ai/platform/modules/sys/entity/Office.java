@@ -185,7 +185,7 @@ public class Office extends TreeEntity<Office> {
 		this.zipCode = zipCode;
 	}
 
-	@Length(min = 0, max = 50)
+	@Length(min = 0, max = 50,message="负责人长度在0到50之间")
 	public String getMaster() {
 		return master;
 	}
@@ -221,7 +221,7 @@ public class Office extends TreeEntity<Office> {
 		this.email = email;
 	}
 	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{2,19}$", message = "部门编码格式不正确")
-	@Length(min = 1, max = 20,message="部门编码不能为空")
+	@Length(min = 1, max = 20)
 	public String getCode() {
 		return code;
 	}
