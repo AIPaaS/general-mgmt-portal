@@ -327,8 +327,12 @@ public class OfficeController extends BaseController {
 			office.setParent(parentList.get(0));
 		}
 		
+		try {
+			office.setSort(Integer.valueOf(officeInfo[3]));
+		} catch (Exception e) {
+			
+		}
 		
-		office.setSort(Integer.valueOf(officeInfo[3]));
 		office.setMaster(officeInfo[4]);
 		GnArea gnArea = areaService.getByCode(officeInfo[5]);
 		if (gnArea != null) {
