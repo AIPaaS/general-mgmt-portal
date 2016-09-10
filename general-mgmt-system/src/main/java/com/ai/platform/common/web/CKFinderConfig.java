@@ -10,6 +10,7 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.utils.UserUtils;
+import com.ckfinder.connector.ServletContextFactory;
 import com.ckfinder.connector.configuration.Configuration;
 import com.ckfinder.connector.data.AccessControlLevel;
 import com.ckfinder.connector.utils.AccessControlUtil;
@@ -28,6 +29,7 @@ public class CKFinderConfig extends Configuration {
 	@Override
     protected Configuration createConfigurationInstance() {
 		Principal principal = (Principal) UserUtils.getPrincipal();
+		System.out.println("principal=Configuration=="+principal.getId());
 		if (principal == null){
 			return new CKFinderConfig(this.servletConf);
 		}
@@ -50,9 +52,9 @@ public class CKFinderConfig extends Configuration {
 //		}
 		AccessControlUtil.getInstance(this).loadACLConfig();
 		try {
-//			Principal principal = (Principal)SecurityUtils.getSubject().getPrincipal();
-//			this.baseURL = ServletContextFactory.getServletContext().getContextPath()+"/userfiles/"+principal+"/";
-			this.baseURL = FileUtils.path(Servlets.getRequest().getContextPath() + Global.USERFILES_BASE_URL + principal + "/");
+			//Principal principal = (Principal)SecurityUtils.getSubject().getPrincipal();
+			this.baseURL = "http://10.19.13.14:14131/porta"+"/userfiles/"+principal+"/";
+			//this.baseURL = FileUtils.path(Servlets.getRequest().getContextPath() + Global.USERFILES_BASE_URL + principal + "/");
 			this.baseDir = FileUtils.path(Global.getUserfilesBaseDir() + Global.USERFILES_BASE_URL + principal + "/");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
