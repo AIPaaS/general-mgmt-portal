@@ -107,7 +107,7 @@
     </init-param>
     <init-param>
       <param-name>sessionParameterName</param-name>
-      <param-value>jsessionid</param-value>
+      <param-value>platform.session.id</param-value>
     </init-param>
   </filter>
   <filter-mapping>
