@@ -2,7 +2,7 @@
 <ehcache updateCheck="false" name="defaultCache">
  
 	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-		properties="peerDiscovery=manual, socketTimeoutMillis=2000, rmiUrls=//10.1.55.10:40001/defaultCache|//10.19.13.14:40001/defaultCache" />
+		properties="peerDiscovery=manual, socketTimeoutMillis=2000, rmiUrls=//10.1.55.10:40001/activeSessionsCache|//10.19.13.14:40001/activeSessionsCache" />
 <!-- 	<cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
 		properties="hostName=localhost, port=40000, socketTimeoutMillis=2000"/>  -->
 		
