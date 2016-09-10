@@ -19,7 +19,6 @@
 				/static/** = anon
 				/mgmtstatic/** = anon
 				/userfiles/** = anon
-				/ckfinder/** = anon
 				${adminPath}/cas = cas
 				${adminPath}/login = authc
 				${adminPath}/logout = logout
