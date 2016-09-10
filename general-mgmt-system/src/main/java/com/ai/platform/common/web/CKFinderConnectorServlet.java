@@ -14,6 +14,8 @@ import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ckfinder.connector.ConnectorServlet;
+import com.ckfinder.connector.handlers.command.FileUploadCommand;
+import com.sun.corba.se.impl.activation.CommandHandler;
 
 /**
  * CKFinderConnectorServlet
@@ -28,6 +30,7 @@ public class CKFinderConnectorServlet extends ConnectorServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		prepareGetResponse(request, response, false);
+		System.out.println("------------CKFinderConnectorServlet-----------");
 		super.doGet(request, response);
 	}
 	
@@ -41,6 +44,7 @@ public class CKFinderConnectorServlet extends ConnectorServlet {
 	private void prepareGetResponse(final HttpServletRequest request,
 			final HttpServletResponse response, final boolean post) throws ServletException {
 		Principal principal = (Principal) UserUtils.getPrincipal();
+		System.out.println("1-----------------------"+principal.getId());
 		if (principal == null){
 			return;
 		}
@@ -65,10 +69,10 @@ public class CKFinderConnectorServlet extends ConnectorServlet {
 					+ principal + "/" + type + (currentFolder != null ? currentFolder : "");
 			FileUtils.createDirectory(FileUtils.path(realPath));
 		}
-//		System.out.println("------------------------");
-//		for (Object key : request.getParameterMap().keySet()){
-//			System.out.println(key + ": " + request.getParameter(key.toString()));
-//		}
+		System.out.println("------------------------");
+		for (Object key : request.getParameterMap().keySet()){
+			System.out.println(key + ": " + request.getParameter(key.toString()));
+		}
 	}
 	
 }
