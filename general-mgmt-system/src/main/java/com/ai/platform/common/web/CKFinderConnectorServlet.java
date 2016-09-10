@@ -43,6 +43,7 @@ public class CKFinderConnectorServlet extends ConnectorServlet {
 	
 	private void prepareGetResponse(final HttpServletRequest request,
 			final HttpServletResponse response, final boolean post) throws ServletException {
+		System.out.println("000-----------------------"+request.getSession().getId());
 		Principal principal = (Principal) UserUtils.getPrincipal();
 		System.out.println("1-----------------------"+principal.getId());
 		if (principal == null){

@@ -351,9 +351,13 @@ public class UserUtils {
 	public static Principal getPrincipal(){
 		Subject subject;
 		try{
+			System.out.println("Principal---1------");
 		    subject = SecurityUtils.getSubject();
+		    System.out.println("Principal---2------"+subject.getPrincipal());
+		    
 //			Principal principal = (Principal)subject.getPrincipal();
 		    User user =getByLoginName(subject.getPrincipal()+"");
+		    System.out.println("Principal---3------"+user.getId());
 		    if(user == null)
 		    	return null;
 			Principal principal =new Principal(user, false);
