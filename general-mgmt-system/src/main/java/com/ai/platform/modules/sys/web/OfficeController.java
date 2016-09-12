@@ -31,7 +31,6 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
-import com.ai.platform.modules.sys.entity.Area;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
@@ -338,6 +337,7 @@ public class OfficeController extends BaseController {
 		if (gnArea != null) {
 			office.setGnArea(gnArea);
 		}
+		office.setGrade("1");//默认导入的部门级别为：一级
 		office.setTenantId(Global.getTenantID());
 		return office;
 	}
