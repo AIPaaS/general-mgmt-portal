@@ -122,8 +122,7 @@ public class Office extends TreeEntity<Office> {
 	// }
 
 	
-	@Pattern(regexp = "^[\u0391-\uFFE5\\w]+$", message = "部门名称不合法")
-	@Length(min = 1, max = 15, message = "部门名称不能为空")
+	@Pattern(regexp = "^[\u0391-\uFFE5\\w]{1,15}+$", message = "部门名称格式不正确")
 	public String getName() {
 		return name;
 	}
@@ -140,7 +139,7 @@ public class Office extends TreeEntity<Office> {
 	// public void setSort(Integer sort) {
 	// this.sort = sort;
 	// }
-	@NotNull(message="归属区域不能为空")
+	@NotNull(message="归属区域为空或不存在")
 	public GnArea getGnArea() {
 		return gnArea;
 	}
