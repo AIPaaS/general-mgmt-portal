@@ -187,7 +187,7 @@ public class Office extends TreeEntity<Office> {
 		this.zipCode = zipCode;
 	}
 
-	@Length(min = 0, max = 50,message="负责人长度在0到50之间")
+	@Length(min = 0, max = 50,message="联系人长度在0到50之间")
 	public String getMaster() {
 		return master;
 	}
