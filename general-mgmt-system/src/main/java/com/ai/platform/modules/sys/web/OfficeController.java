@@ -273,6 +273,8 @@ public class OfficeController extends BaseController {
 
 					if ("true".equals(checkCode("", office.getCode()))) {
 						BeanValidators.validateWithException(validator,office);
+						if(office.getSortVal() !=null&& !office.getSortVal().isEmpty())
+							office.setSort(new Integer(office.getSortVal()));
 						successNum++;
 						officeService.save(office);
 					} else {
@@ -319,19 +321,17 @@ public class OfficeController extends BaseController {
 		office.setCode(officeInfo[0]);
 		office.setName(officeInfo[1]);
 
-		Office parentOffice = new Office();
-		parentOffice.setCode(officeInfo[2]);
-		List<Office> parentList = officeService.find(parentOffice);
-		if(!parentList.isEmpty()){
-			office.setParent(parentList.get(0));
+		
+		if(!officeInfo[2].isEmpty()){
+			Office parentOffice = new Office();
+			parentOffice.setCode(officeInfo[2]);
+			List<Office> parentList = officeService.find(parentOffice);
+			if(!parentList.isEmpty()){
+				office.setParent(parentList.get(0));
+			}
 		}
 		
-		try {
-			office.setSort(Integer.valueOf(officeInfo[3]));
-		} catch (Exception e) {
-			
-		}
-		
+		office.setSortVal(officeInfo[3]);
 		office.setMaster(officeInfo[4]);
 		GnArea gnArea = areaService.getByCode(officeInfo[5]);
 		if (gnArea != null) {

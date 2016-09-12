@@ -38,6 +38,9 @@ public class Office extends TreeEntity<Office> {
 	private User primaryPerson;// 主负责人
 	private User deputyPerson;// 副负责人
 	private List<String> childDeptList;// 快速添加子部门
+	private String sortVal;//排序字段验证
+
+	
 
 	public Office() {
 		super();
@@ -231,6 +234,14 @@ public class Office extends TreeEntity<Office> {
 	// public String getParentId() {
 	// return parent != null && parent.getId() != null ? parent.getId() : "0";
 	// }
+	@Pattern(regexp = "^[0-9]{0,10}$", message = "排序格式不正确")
+	public String getSortVal() {
+		return sortVal;
+	}
+
+	public void setSortVal(String sortVal) {
+		this.sortVal = sortVal;
+	}
 
 	@Override
 	public String toString() {

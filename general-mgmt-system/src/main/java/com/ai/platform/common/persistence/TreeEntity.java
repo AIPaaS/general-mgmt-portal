@@ -39,7 +39,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	 * @return
 	 */
 	@JsonBackReference
-	@NotNull(message="上级部门不能为空或不存在")
+//	@NotNull(message="上级部门不能为空或不存在")
 	public abstract T getParent();
 
 	/**
