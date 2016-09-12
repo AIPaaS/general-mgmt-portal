@@ -221,7 +221,6 @@ public class Office extends TreeEntity<Office> {
 		this.email = email;
 	}
 	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{2,19}$", message = "部门编码格式不正确")
-	@Length(min = 1, max = 20)
 	public String getCode() {
 		return code;
 	}
