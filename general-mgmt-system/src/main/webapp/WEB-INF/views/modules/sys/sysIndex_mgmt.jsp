@@ -149,7 +149,7 @@
                 <li class="active"><a href="#"><i class="fa fa-home"></i><span>系统控制台</span></a></li>
                 	<c:set var="firstMenu" value="true"/>
                 	<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
-						<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
+						<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1' &&menu.resourceType eq '0'}">
 						
 								<li >
 									<c:if test="${empty menu.href}">

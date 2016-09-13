@@ -90,6 +90,9 @@ public class User extends DataEntity<User> {
 	}
 	
 	public String getPhoto() {
+		if(StringUtils.isBlank(photo)){
+			return "/portal"+"/static/images/userinfo.jpg";
+		}
 		return photo;
 	}
 

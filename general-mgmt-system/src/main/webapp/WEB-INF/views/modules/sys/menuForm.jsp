@@ -51,11 +51,18 @@
 			<label class="control-label">所属应用:</label>
 			<div class="controls">
 				<form:select path="gnTabSystem" class="required input-xlarge">
-				<c:set var="productName" value="${fns:getConfig('productName')}"/>
-					<form:option value="--" label="${productName}"/>
+				
+					<form:option value="" label=""/>
 					<form:options items="${tableList}" itemLabel="systemName" itemValue="id" htmlEscape="false"/>
 				</form:select>
 				<span class="help-inline">生成的数据表，一对多情况下请选择主表。</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">资源类型:</label>
+			<div class="controls">
+				<form:radiobuttons path="resourceType" items="${fns:getDictList('resource_type')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
+				<span class="help-inline">该资源属于菜单资源或是集成入口资源</span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -89,7 +96,7 @@
 			<label class="control-label">可见:</label>
 			<div class="controls">
 				<form:radiobuttons path="isShow" items="${fns:getDictList('show_hide')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
-				<span class="help-inline">该菜单或操作是否显示到系统菜单中</span>
+				<span class="help-inline">该菜单或操作是否显示</span>
 			</div>
 		</div> 
 		 <div class="control-group">

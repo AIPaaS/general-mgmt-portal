@@ -6993,6 +6993,15 @@ svg {
 .theme-white .mouse-open ul li,.theme-white .mouse-open ul .newly-build-onclick a,.theme-white .mouse-open ul .newly-build a{color:#27ae60}
 .theme-amethyst .mouse-open ul li,.theme-amethyst .mouse-open ul .newly-build-onclick a,.theme-amethyst .mouse-open ul .newly-build a{color:#8e44ad}
 
+/**系统控制台**/
+/**下边框**/
+.theme-whbl  .con-border{border-bottom: 1px solid #2e93ff;}
+.theme-white  .con-border{border-bottom: 1px solid #27ae60;}
+.theme-amethyst  .con-border{border-bottom: 1px solid #8e44ad;}
+/**文字颜色**/
+.theme-whbl .console ul li .word-color{color:#2e93ff}
+.theme-white .console ul li .word-color{color:#27ae60}
+.theme-amethyst .console ul li .word-color{color:#8e44ad}
 
 
 /**步骤条**/
@@ -7045,7 +7054,7 @@ svg {
 .form-label ul li .sos a{ color:#666}
 .form-label ul .width-xlag{width:100%;}
 .form-label ul li .img{position:relative;border:1px solid #e7e7e7;}
-.form-label ul li .img .fa-times{position:absolute;right:0px; top:6px; cursor: pointer;color:#1295f2;color:#1b2936}
+.form-label ul li .img .fa-times{position:absolute;right:-4px; top:-6px; cursor: pointer;color:#1295f2;color:#1b2936}
 .form-label ul li .width-img{width:550px;float:left;display: block;}
 /**新建运费模版**/
 .form-label .add-city{width: 100%;display:inline-block;margin-left:130px;cursor: pointer;margin-top: 10px;}

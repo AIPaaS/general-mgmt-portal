@@ -185,7 +185,8 @@
 
 .table tr .hind1{width:120px;position:relative;}
 .table tr .hind1 .center-hind{width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor: pointer;font-size:12px;}
-.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:30;border:1px solid #ddd;text-align:left;display: none;}
+.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:30;border:1px solid #ddd;text-align:left;display: none;word-wrap:break-word; }
+.table tr .showbj1{top:58px;left:5px}
 .table tr .hind1 .fa-posi{position:absolute; top:-14px;left:40px;z-index:31;font-size:18px;}
 
 .table tr .hind1-medium{width:200px;position:relative;}
@@ -210,3 +211,44 @@
 .add-ctn-list-table ul li{height:40px;line-height:40px; }
 .add-ctn-list-table ul li a{width:100%;float:left;color:#666;padding-left:40px;}
 .add-ctn-list-table ul li .current{background:#f6f6f6;}
+
+/**系统控制台**/
+.console{width:100%;float:left;padding: 30px 0;}
+.con-border{border-bottom: 1px solid #2e93ff;}
+.console ul{width: 100%;float:left;}
+.console ul li{float:left;margin-left:20px;}
+.console ul li p{color:#8f8f8f;}
+.console ul li .sz{color:#555;font-size:20px;}
+.console ul li .word-color{color:#2e93ff}
+.console ul .img1{width:50px;height:50px;background: url(../../images/xt-icon1.png) no-repeat;}
+.console ul .img2{width:50px;height:50px;background: url(../../images/xt-icon2.png) no-repeat;}
+.console ul .img3{width:50px;height:50px;background: url(../../images/xt-icon3.png) no-repeat;}
+.console ul .img4{width:50px;height:50px;background: url(../../images/xt-icon4.png) no-repeat;}
+
+/**运营管理平台**/
+.work-nav{margin:0 auto;height:80px;padding:0 5%;}
+.work-logo{float:left;margin-top:26px;}
+.work-right{float:right;margin-top:20px;}
+.work-right a{ color:#333;font-size: 14px;margin-left:10px;}
+.work-right a img{border-radius: 50%;margin-right:10px;}
+.work-right .blue{color:#1c9aec;}
+.work-bottom{width:100%;float:left;text-align:center;margin-top:40px;font-size:14px;}
+
+.platform-bj{width:100%;background:url(../../images/up-bj.png) no-repeat;height:500px;float:left;background-size:100% 100%;min-width: 900px;}
+.workbench{width:900px;margin: 0 auto;margin-top: 100px;}
+.workbench ul{width:113px;float:left;margin:0 80px 20px 0}
+.workbench ul li{text-align: center;line-height:50px;font-size:14px}
+.workbench ul li a{color:#555;font-size:14px}
+.workbench .none-ml{margin-right:0px;}
+.workbench ul li:hover{color:#00a0e9;}
+.workbench ul .circular{width:113px;height:113px;background: #fff;}
+.workbench ul .c-img1 a{width:113px;height:113px;float:left;border: 1px solid #00a0e9;border-radius:50%;background-image:url(../../images/work-icon1.png);background-repeat: no-repeat;background-position: center;}
+.workbench ul .c-img1 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon1a.png);background-repeat: no-repeat;}
+.workbench ul .c-img2 a{width:113px;height:113px;float:left;border: 1px solid #00a0e9;border-radius:50%;background-image:url(../../images/work-icon2.png);background-repeat: no-repeat;background-position: center;}
+.workbench ul .c-img2 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon2a.png);background-repeat: no-repeat;}
+.workbench ul .c-img3 a{width:113px;height:113px;float:left;border: 1px solid #00a0e9;border-radius:50%;background-image:url(../../images/work-icon3.png);background-repeat: no-repeat;background-position: center;}
+.workbench ul .c-img3 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon3a.png);background-repeat: no-repeat;}
+.workbench ul .c-img4 a{width:113px;height:113px;float:left;border: 1px solid #00a0e9;border-radius:50%;background-image:url(../../images/work-icon4.png);background-repeat: no-repeat;background-position: center;}
+.workbench ul .c-img4 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon4a.png);background-repeat: no-repeat;}
+.workbench ul .c-img5 a{width:113px;height:113px;float:left;border: 1px solid #00a0e9;border-radius:50%;background-image:url(../../images/work-icon5.png);background-repeat: no-repeat;background-position: center;}
+.workbench ul .c-img5 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon5a.png);background-repeat: no-repeat;}

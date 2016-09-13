@@ -32,18 +32,25 @@
 					<li><label>名称：</label>
 						<form:input path="name" htmlEscape="false" maxlength="100" class="input-medium" id="menuName"/>
 					</li>
+					<li><label>资源类型：</label>
+					<form:select path="resourceType" class="input-medium">
+						<form:option value="" label=""/>
+						<form:options items="${fns:getDictList('resource_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+					</form:select>
+					</li>
 					<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
 					<li class="clearfix"></li>
 				</ul>
 	       </form:form>
 	   	<!--查询结束-->      
               <table class="table table-hover table-border table-bordered">
-                 <thead><tr><th>所属应用</th><th>名称</th><th>链接</th><th>操作</th></tr></thead>
+                 <thead><tr><th>所属应用</th><th>名称</th><th>资源类型</th><th>链接</th><th>操作</th></tr></thead>
                   <tbody>
 		              <c:forEach items="${page.list}" var="menu">
 						<tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
 						   <td >${not empty menu.gnTabSystem.systemName?menu.gnTabSystem.systemName:'统一系统管理平台'}</td>
 							<td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
+							<td>${fns:getDictLabel(menu.resourceType, 'resource_type', '')}</td>
 							<td title="${menu.href}">${fns:abbr(menu.href,30)}</td>
 							<!--<td style="text-align:center;">
 							<shiro:hasPermission name="sys:menu:edit">
