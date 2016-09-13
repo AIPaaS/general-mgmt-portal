@@ -125,7 +125,7 @@ public class Office extends TreeEntity<Office> {
 	// }
 
 	
-	@Pattern(regexp = "^[\u0391-\uFFE5\\w]{1,15}+$", message = "部门名称格式不正确")
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{0,14}+$", message = "部门名称格式不正确")
 	public String getName() {
 		return name;
 	}
@@ -222,7 +222,7 @@ public class Office extends TreeEntity<Office> {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{2,19}$", message = "部门编码格式不正确")
+	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{0,19}$", message = "部门编码格式不正确")
 	public String getCode() {
 		return code;
 	}
