@@ -194,13 +194,13 @@ public class User extends DataEntity<User> {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{0,19}+$", message = "姓名格式不正确")
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{0,19}$", message = "姓名格式不正确")
 	@ExcelField(title="姓名", align=2, sort=40)
 	public String getName() {
 		return name;
 	}
 	
-	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{0,49}+$", message = "工号格式不正确")
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{0,49}$", message = "工号格式不正确")
 	@ExcelField(title="工号", align=2, sort=45)
 	public String getNo() {
 		return no;

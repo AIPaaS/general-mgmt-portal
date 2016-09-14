@@ -29,6 +29,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
+import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.GnArea;
@@ -250,7 +251,7 @@ public class OfficeController extends BaseController {
 			StringBuilder failureMsg = new StringBuilder();
 			InputStream is;
 			is = file.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is,"GB2312");
+			InputStreamReader isr = new InputStreamReader(is,FileUtils.getCharset(is));
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
