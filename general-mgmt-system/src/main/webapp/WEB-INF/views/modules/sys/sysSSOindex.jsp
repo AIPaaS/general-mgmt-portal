@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="col-xs-12 work-nav">
 				<div class="work-logo"><img src="${iotStatic}/images/worl-logo.png" ></div>
-				<div class="work-right"><a href="#"><img  src="${fns:getUser().photo}" /></a>${fns:getUser().name}，您好 <a href="${ctx}/logout" class="blue"><i class=" icon-off"></i>退出</a></div>
+				<div class="work-right"><a href="#"><img  src="${fns:getUser().photo}" height="35" width="35"/></a>${fns:getUser().name}，您好 <a href="${ctx}/logout" class="blue"><i class=" icon-off"></i>退出</a></div>
 			</div>
 		</div>
 		<div class="container  platform-bj">
