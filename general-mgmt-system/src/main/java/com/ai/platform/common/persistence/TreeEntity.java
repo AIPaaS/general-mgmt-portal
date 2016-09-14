@@ -3,8 +3,6 @@
  */
 package com.ai.platform.common.persistence;
 
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 
 import com.ai.platform.common.utils.Reflections;

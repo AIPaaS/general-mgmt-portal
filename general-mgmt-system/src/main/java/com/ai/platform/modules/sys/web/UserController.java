@@ -33,6 +33,7 @@ import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.DateUtils;
+import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.utils.excel.ExportExcel;
 import com.ai.platform.common.web.BaseController;
@@ -333,9 +334,8 @@ public class UserController extends BaseController {
 			int failureNum = 0;
 			int alldataNum = 0;
 			StringBuilder failureMsg = new StringBuilder();
-			InputStream is;
-			is = file.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is,"GB2312");
+			InputStream is = file.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is,FileUtils.getCharset(is));
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
