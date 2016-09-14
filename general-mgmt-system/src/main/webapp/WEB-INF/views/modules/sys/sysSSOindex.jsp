@@ -24,7 +24,7 @@
 					<c:set var="systemId" value="${menu.gnTabSystem}"/>
 					<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1' &&menu.resourceType eq '1'}">
 						<ul class="col-xs-2">
-							<li class="circular c-img1"><a href="${empty fns:getGnTabSystemUrl(systemId) ? ctx : fns:getGnTabSystemUrl(systemId)}${menu.href}" target="_blank"></a></li>
+							<li class="circular c-img1"><a href="${fns:getGnTabSystemUrl(systemId)}${menu.href}" target="_blank"></a></li>
 							<li><a href="#">${menu.name}</a></li>
 						</ul>
 					</c:if>
