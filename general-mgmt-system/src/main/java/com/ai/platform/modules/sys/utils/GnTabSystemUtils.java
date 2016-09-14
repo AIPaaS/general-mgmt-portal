@@ -3,6 +3,7 @@ package com.ai.platform.modules.sys.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -63,8 +64,11 @@ public class GnTabSystemUtils {
 	 * 清除数据缓存
 	 */
 	public static void clearCache(){
-		cache_tabsystem_data.clear();
-		cache_tabsystem_data=null;
+		if(cache_tabsystem_data!=null){
+			cache_tabsystem_data.clear();
+			cache_tabsystem_data=null;
+		}
+		
 	}
 
 }
