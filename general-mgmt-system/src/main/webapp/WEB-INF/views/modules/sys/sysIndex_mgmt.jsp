@@ -165,7 +165,7 @@
 										<c:forEach items="${fns:getChildsMenu(rootMenuId)}" var="menuNode" varStatus="idxStatus">
 										<c:set var="systemId" value="${menuNode.gnTabSystem}"/>
 										<c:if test="${empty menuNode.href}">
-											<li><a href="${empty fns:getGnTabSystemUrl(systemId) ? ctx : fns:getGnTabSystemUrl(systemId)}${menuNode.href}" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
+											<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
 											<!--三级菜单-->
 					                        <ul class="submenu three-list">
 						                        <c:forEach items="${fns:getChildsMenu(menuNode.id)}" var="menuNodethree" varStatus="idxStatus">

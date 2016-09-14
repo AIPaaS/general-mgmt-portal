@@ -64,11 +64,8 @@ public class GnTabSystemUtils {
 	 * 清除数据缓存
 	 */
 	public static void clearCache(){
-		if(cache_tabsystem_data!=null){
-			cache_tabsystem_data.clear();
-			cache_tabsystem_data=null;
-		}
-		
+		cache_tabsystem_data = new ArrayList<GnTabSystem>();
+				
 	}
 
 }
