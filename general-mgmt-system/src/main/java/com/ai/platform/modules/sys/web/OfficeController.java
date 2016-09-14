@@ -258,9 +258,9 @@ public class OfficeController extends BaseController {
 				Office office = new Office();
 				try {
 					if (alldataNum == 0) {
-						if (!lineContent.contains("#CODE"))
-							throw new RuntimeException("文档格式不正确!");
-						else
+//						if (!lineContent.contains("#CODE"))
+//							throw new RuntimeException("文档格式不正确!");
+//						else
 							continue;
 					}
 					String[] userInfo = lineContent.split("\\\\t");

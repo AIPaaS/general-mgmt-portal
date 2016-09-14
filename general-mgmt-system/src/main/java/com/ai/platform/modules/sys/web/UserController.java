@@ -342,9 +342,9 @@ public class UserController extends BaseController {
 				User user = new User();
 				try {
 					if (alldataNum == 0) {
-						if (!lineContent.contains("#LOGINNAME"))
-							throw new RuntimeException("文档格式不正确!");
-						else
+//						if (!lineContent.contains("#LOGINNAME"))
+//							throw new RuntimeException("文档格式不正确!");
+//						else
 							continue;
 					}
 					String[] userInfo = lineContent.split("\\\\t");
