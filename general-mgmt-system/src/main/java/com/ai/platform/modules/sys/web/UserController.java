@@ -412,20 +412,24 @@ public class UserController extends BaseController {
 		user.setLoginFlag("1");
 
 		// 验证公司编码
-		Office company = new Office();
-		company.setCode(userInfo[5]);
-		List<Office> companyList = officeService.find(company);
-		if (!companyList.isEmpty()) {
-			company = companyList.get(0);
-			user.setCompany(company);
+		if(!userInfo[5].isEmpty()){
+			Office company = new Office();
+			company.setCode(userInfo[5]);
+			List<Office> companyList = officeService.find(company);
+			if (!companyList.isEmpty()) {
+				company = companyList.get(0);
+				user.setCompany(company);
+			}
 		}
 		// 验证部门编码
-		Office office = new Office();
-		office.setCode(userInfo[6]);
-		List<Office> officeList = officeService.find(office);
-		if (!officeList.isEmpty()) {
-			office = officeList.get(0);
-			user.setOffice(office);
+		if(!userInfo[6].isEmpty()){
+			Office office = new Office();
+			office.setCode(userInfo[6]);
+			List<Office> officeList = officeService.find(office);
+			if (!officeList.isEmpty()) {
+				office = officeList.get(0);
+				user.setOffice(office);
+			}
 		}
 
 		return user;

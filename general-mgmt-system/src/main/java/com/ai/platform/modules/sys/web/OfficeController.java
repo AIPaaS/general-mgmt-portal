@@ -334,9 +334,11 @@ public class OfficeController extends BaseController {
 		
 		office.setSortVal(officeInfo[3]);
 		office.setMaster(officeInfo[4]);
-		GnArea gnArea = areaService.getByCode(officeInfo[5]);
-		if (gnArea != null) {
-			office.setGnArea(gnArea);
+		if(!officeInfo[5].isEmpty()){
+			GnArea gnArea = areaService.getByCode(officeInfo[5]);
+			if (gnArea != null) {
+				office.setGnArea(gnArea);
+			}
 		}
 		office.setGrade("1");//默认导入的部门级别为：一级
 		office.setTenantId(Global.getTenantID());
