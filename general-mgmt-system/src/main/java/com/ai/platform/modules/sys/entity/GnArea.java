@@ -40,7 +40,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this();
 		this.areaCode = areaCode;
 	}
-	@Pattern(regexp = "^[0-9]+(.[0-9]{1,9})?$", message = "区域编码不合法")
+	@Pattern(regexp = "^[0-9]{1,9}$", message = "区域编码不合法")
 	@Length(min=1, max=9, message="区域编码必须介于 1和9之间")
 	public String getAreaCode() {
 		return areaCode;
