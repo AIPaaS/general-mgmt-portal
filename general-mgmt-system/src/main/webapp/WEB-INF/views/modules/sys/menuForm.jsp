@@ -55,6 +55,7 @@
 					<form:option value="" label=""/>
 					<form:options items="${tableList}" itemLabel="systemName" itemValue="id" htmlEscape="false"/>
 				</form:select>
+				<span class="help-inline"><font color="red">*</font> </span>
 				<span class="help-inline">生成的数据表，一对多情况下请选择主表。</span>
 			</div>
 		</div>
@@ -63,12 +64,14 @@
 			<div class="controls">
 				<form:radiobuttons path="resourceType" items="${fns:getDictList('resource_type')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
 				<span class="help-inline">该资源属于菜单资源或是集成入口资源</span>
+				
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">链接:</label>
 			<div class="controls">
 				<form:input path="href" htmlEscape="false" maxlength="200" class="input-xxlarge"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 				<span class="help-inline">点击菜单跳转的页面</span>
 			</div>
 		</div>
