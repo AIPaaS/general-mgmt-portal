@@ -527,7 +527,7 @@ public class UserController extends BaseController {
 	public String prohibitLogin(User user, RedirectAttributes redirectAttributes) {
 		user.setLoginFlag("0");
 		systemService.updateLoginFalg(user);
-		addMessage(redirectAttributes, "冻结改账号成功");
+		addMessage(redirectAttributes, "冻结该账号成功");
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 
