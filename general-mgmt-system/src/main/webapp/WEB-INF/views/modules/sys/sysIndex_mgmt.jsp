@@ -165,14 +165,14 @@
 										<c:forEach items="${fns:getChildsMenu(rootMenuId)}" var="menuNode" varStatus="idxStatus">
 										<c:set var="systemId" value="${menuNode.gnTabSystem}"/>
 										<c:if test="${empty menuNode.href}">
-											<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
+											<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
 											<!--三级菜单-->
 					                        <ul class="submenu three-list">
 						                        <c:forEach items="${fns:getChildsMenu(menuNode.id)}" var="menuNodethree" varStatus="idxStatus">
 						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
 						                        <c:set var="systemId" value="${menuNodethree.gnTabSystem}"/>
 						                        
-						                        <li><a href="${empty fns:getGnTabSystemUrl(systemId) ? ctx : fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
 						                         <c:set var="systemId" value=""/>
 						                        </c:forEach>
 					                 	   	</ul>
