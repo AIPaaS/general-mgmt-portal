@@ -120,7 +120,7 @@
 			<div class="controls">
 				
 				<form:textarea path="remark" htmlEscape="false" rows="3" maxlength="100" class="input-xlarge"/>
-			<span class="help-inline">请输入50以内的汉字</span>
+			<span class="help-inline">请输入长度50以内的中文</span>
 			</div>
 		</div>
 		<div class="form-actions">
