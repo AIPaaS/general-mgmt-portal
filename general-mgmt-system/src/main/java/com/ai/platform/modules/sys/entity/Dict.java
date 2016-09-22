@@ -4,6 +4,7 @@
 package com.ai.platform.modules.sys.entity;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import org.hibernate.validator.constraints.Length;
@@ -68,6 +69,7 @@ public class Dict extends DataEntity<Dict> {
 	}
 
 	@XmlAttribute
+	@Pattern(regexp = "^[a-zA-Z0-9\u4e00-\u9fa5]+$", message = "输入格式错误，描述只能包含中文、字母或数字")
 	@Length(min=0, max=100)
 	public String getDescription() {
 		return description;

@@ -153,7 +153,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
-		addMessage(redirectAttributes, "保存地区信息成功");
+		addMessage(redirectAttributes, "保存区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
 	
@@ -161,7 +161,7 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "refCacheArea")
 	public String refCacheArea(RedirectAttributes redirectAttributes){
 		GnAreaUtils.clearCache();
-		addMessage(redirectAttributes, "刷新地区缓存成功");
+		addMessage(redirectAttributes, "刷新区域缓存成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
 	
@@ -173,7 +173,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.delete(gnArea);
 		GnAreaUtils.clearCache();
-		addMessage(redirectAttributes, "删除地区信息成功");
+		addMessage(redirectAttributes, "删除区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
 
