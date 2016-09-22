@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.Collections3;
+import com.ai.platform.common.utils.ObjectUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Office;
@@ -90,6 +91,19 @@ public class MgmtRoleController extends BaseController {
 			return "redirect:" + adminPath + "/sys/role/list?repage";
 		}
 		if (!beanValidator(model, role)){
+			return form(role, model);
+		}
+		
+		Role isUniqueByName = (Role) systemService.getRoleByName(role.getName());
+		
+		Role isUniqueByEnName = (Role) systemService.getRoleByEnname(role.getEnname());
+		
+		if(!StringUtils.isNullOrEmpty(isUniqueByName)){
+			addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
+			return form(role, model);
+		}
+		if(!StringUtils.isNullOrEmpty(isUniqueByEnName)){
+			addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
 			return form(role, model);
 		}
 		if (!"true".equals(checkName(role.getOldName(), role.getName()))){

@@ -102,7 +102,7 @@ public class Role extends DataEntity<Role> {
 		this.office = office;
 	}
 
-	@SupCol(isUnique="false")
+
 	@Length(min=1, max=100)
 	public String getName() {
 		return name;
@@ -112,7 +112,7 @@ public class Role extends DataEntity<Role> {
 		this.name = name;
 	}
 
-	@SupCol(isUnique="false")
+
 	@Length(min=1, max=100)
 	public String getEnname() {
 		return enname;
