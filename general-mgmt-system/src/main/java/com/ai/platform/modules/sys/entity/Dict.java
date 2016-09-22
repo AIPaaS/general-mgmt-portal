@@ -40,7 +40,7 @@ public class Dict extends DataEntity<Dict> {
 	}
 	
 	@XmlAttribute
-	@Length(min=1, max=100)
+	@Length(min=1, max=100, message="数据值长度必须介于 1 和 100 之间")
 	public String getValue() {
 		return value;
 	}
@@ -50,7 +50,7 @@ public class Dict extends DataEntity<Dict> {
 	}
 	
 	@XmlAttribute
-	@Length(min=1, max=100)
+	@Length(min=1, max=100, message="标签名长度必须介于 1 和 100 之间")
 	public String getLabel() {
 		return label;
 	}
@@ -59,7 +59,7 @@ public class Dict extends DataEntity<Dict> {
 		this.label = label;
 	}
 
-	@Length(min=1, max=100)
+	@Length(min=1, max=100, message="类型长度必须介于 1 和 100 之间")
 	public String getType() {
 		return type;
 	}
@@ -70,7 +70,7 @@ public class Dict extends DataEntity<Dict> {
 
 	@XmlAttribute
 	@Pattern(regexp = "^[a-zA-Z0-9\u4e00-\u9fa5]+$", message = "输入格式错误，描述只能包含中文、字母或数字")
-	@Length(min=0, max=100)
+	@Length(min=0, max=100, message="描述长度必须介于 1 和 100 之间")
 	public String getDescription() {
 		return description;
 	}
