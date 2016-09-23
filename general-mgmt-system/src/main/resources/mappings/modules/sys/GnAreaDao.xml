@@ -154,6 +154,7 @@
 			sort_id = #{sortId},
 			state = #{state},
 			remark = #{remark},
+			id = #{areaCode},
 			tenant_id = #{tenantId}
 		WHERE id = #{id}
 	</update>

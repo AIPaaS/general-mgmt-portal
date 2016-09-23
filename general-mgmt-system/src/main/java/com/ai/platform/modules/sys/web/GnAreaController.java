@@ -84,12 +84,14 @@ public class GnAreaController extends BaseController {
 			return form(gnArea, model);
 		}
 		//设置记录是否为新记录
-	
-		gnArea.setIsNewRecord(true);
-			
+		if(gnArea.getId() ==null || "".equals(gnArea.getId())){
+			gnArea.setIsNewRecord(true);
+			gnArea.setId(gnArea.getAreaCode());
+		}else{
+			gnArea.setIsNewRecord(false);
+		}
 		
 		
-		gnArea.setId(gnArea.getAreaCode());
 		GnArea parentArea = gnAreaService.getByCode(gnArea.getParentAreaCode());
 		
 		gnArea.setAreaLevel(Integer.toString(StringUtils.toInteger(parentArea.getAreaLevel())+1));
