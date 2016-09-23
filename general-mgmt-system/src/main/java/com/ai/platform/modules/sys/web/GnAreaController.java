@@ -66,25 +66,6 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(GnArea gnArea, Model model) {
 		gnArea.setParentAreaCode(GnAreaUtils.getParentCode(gnArea.getAreaCode()));
-//		if (gnArea.getParentAreaCode()!=null && StringUtils.isNotBlank(gnArea.getParentAreaCode())){
-//			gnArea.setParentAreaCode(gnArea.getParentAreaCode());
-//			// 获取排序号，最末节点排序号+30
-//			if (StringUtils.isBlank(gnArea.getAreaCode())){
-//				GnArea gnAreaChild = new GnArea();
-//				gnAreaChild.setParentAreaCode(gnArea.getParentAreaCode());
-//				List<GnArea> list = gnAreaService.findList(gnArea); 
-//				if (list.size() > 0){
-//					gnArea.setSortId(list.get(list.size()-1).getSortId());
-//					if (gnArea.getSortId() != null){
-//						gnArea.setSortId(gnArea.getSortId() + 30);
-//					}
-//				}
-//			}
-//			if (gnArea.getSortId() == null){
-//				gnArea.setSortId(30);
-//			}
-//
-//		}
 
 		
 		model.addAttribute("gnArea", gnArea);
@@ -103,15 +84,17 @@ public class GnAreaController extends BaseController {
 			return form(gnArea, model);
 		}
 		//设置记录是否为新记录
-		if(gnArea.getId() ==null || "".equals(gnArea.getId())){
-			gnArea.setIsNewRecord(true);
-		}else{
-			gnArea.setIsNewRecord(false);
-		}
-		gnArea.setId(gnArea.getAreaCode());
+	
+		gnArea.setIsNewRecord(true);
+			
 		
-		GnArea parentArea = GnAreaUtils.getGnAreaByCode(gnArea.getParentAreaCode());
+		
+		gnArea.setId(gnArea.getAreaCode());
+		GnArea parentArea = gnAreaService.getByCode(gnArea.getParentAreaCode());
+		
 		gnArea.setAreaLevel(Integer.toString(StringUtils.toInteger(parentArea.getAreaLevel())+1));
+		
+		
 		
 		if(StringUtils.toInteger(parentArea.getAreaLevel())>=4){
 			addMessage(model, "保存失败，所属区域不能选择乡镇街道级");
