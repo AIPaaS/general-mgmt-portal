@@ -12,6 +12,7 @@
 		a.icon,
 		a.sort,
 		a.is_show,
+		a.resource_type,
 		a.permission,
 		a.remarks,
 		a.create_by AS "createBy.id",
@@ -51,6 +52,10 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
+			<if test="resourceType != null and resourceType != ''">
+				AND a.resource_type = #{resourceType}
+				
+			</if>
 		ORDER BY a.create_date DESC
 	</select>
 	<insert id="insert">
@@ -64,6 +69,7 @@
 			icon, 
 			sort, 
 			is_show, 
+			resource_type,
 			permission, 
 			create_by, 
 			create_date, 
@@ -82,6 +88,7 @@
 			#{icon}, 
 			#{sort}, 
 			#{isShow}, 
+			#{resourceType},
 			#{permission}, 
 			#{createBy.id}, 
 			#{createDate}, 
@@ -103,6 +110,7 @@
 			icon = #{icon}, 
 			sort = #{sort}, 
 			is_show = #{isShow}, 
+			resource_type = #{resourceType},
 			permission = #{permission}, 
 			update_by = #{updateBy.id}, 
 			update_date = #{updateDate}, 

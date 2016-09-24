@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.DataEntity;
+import com.ai.platform.common.supcan.annotation.treelist.cols.SupCol;
 import com.google.common.collect.Lists;
 
 /**
@@ -101,6 +102,7 @@ public class Role extends DataEntity<Role> {
 		this.office = office;
 	}
 
+
 	@Length(min=1, max=100)
 	public String getName() {
 		return name;
@@ -109,6 +111,7 @@ public class Role extends DataEntity<Role> {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	@Length(min=1, max=100)
 	public String getEnname() {

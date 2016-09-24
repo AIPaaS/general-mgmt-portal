@@ -76,18 +76,7 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
  
-  <servlet>
-    <servlet-name>DruidStatView</servlet-name>
-    <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-    <init-param>
-      <param-name>allow</param-name>
-      <param-value>127.0.0.1</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DruidStatView</servlet-name>
-    <url-pattern>/druid/*</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <servlet-name>CKFinderConnectorServlet</servlet-name>
     <servlet-class>com.ai.platform.common.web.CKFinderConnectorServlet</servlet-class>
@@ -141,7 +130,8 @@
     <servlet-name>ValidateCodeServlet</servlet-name>
     <url-pattern>/servlet/validateCodeServlet</url-pattern>
   </servlet-mapping>
-  <error-page>
+  
+  <error-page>  
     <error-code>500</error-code>
     <location>/WEB-INF/views/error/500.jsp</location>
   </error-page>

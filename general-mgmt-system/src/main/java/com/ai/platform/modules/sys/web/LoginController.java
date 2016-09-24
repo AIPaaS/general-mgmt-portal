@@ -192,9 +192,18 @@ public class LoginController extends BaseController{
 //		System.out.println("==========================b");
 		
 		initLoginInfo(model, principal);
+		return "modules/sys/sysSSOindex";
+	}
+	/**
+	 * 登录成功，进入管理首页
+	 */
+	@RequiresPermissions("user")
+	@RequestMapping(value = "${adminPath}/iotIndex")
+	public String iotIndex(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Principal principal = UserUtils.getPrincipal();
+		initLoginInfo(model, principal);
 		return "modules/sys/sysIndex_mgmt";
 	}
-
 	/**
 	 * 初始化登录后信息
 	 * @param model

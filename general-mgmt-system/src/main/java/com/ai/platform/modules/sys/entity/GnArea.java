@@ -3,14 +3,12 @@
  */
 package com.ai.platform.modules.sys.entity;
 
-import org.hibernate.validator.constraints.Length;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.ai.platform.common.persistence.DataEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * Common工程统一区域代码Entity
@@ -42,7 +40,7 @@ public class GnArea extends DataEntity<GnArea> {
 		this();
 		this.areaCode = areaCode;
 	}
-	@Length(min=1, max=32, message="区域编码必须介于 1和32之间")
+	@Pattern(regexp = "^[0-9]{1,9}$", message = "区域编码不合法")
 	public String getAreaCode() {
 		return areaCode;
 	}

@@ -20,7 +20,20 @@ public class MgmtMenu  extends DataEntity<MgmtMenu>{
 	private String permission;		// 权限标识
 	private String tenantId;		// tenant_id
 	private String systemId;		// 系统标识
+	private String resourceType;
 	
+	/**
+	 * 增加菜单资源类型 by:mengbo creat 20160912
+	 */
+	@Length(min=1, max=1)
+	public String getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
+	}
+
 	public MgmtMenu() {
 		super();
 	}

@@ -66,25 +66,6 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(GnArea gnArea, Model model) {
 		gnArea.setParentAreaCode(GnAreaUtils.getParentCode(gnArea.getAreaCode()));
-//		if (gnArea.getParentAreaCode()!=null && StringUtils.isNotBlank(gnArea.getParentAreaCode())){
-//			gnArea.setParentAreaCode(gnArea.getParentAreaCode());
-//			// 获取排序号，最末节点排序号+30
-//			if (StringUtils.isBlank(gnArea.getAreaCode())){
-//				GnArea gnAreaChild = new GnArea();
-//				gnAreaChild.setParentAreaCode(gnArea.getParentAreaCode());
-//				List<GnArea> list = gnAreaService.findList(gnArea); 
-//				if (list.size() > 0){
-//					gnArea.setSortId(list.get(list.size()-1).getSortId());
-//					if (gnArea.getSortId() != null){
-//						gnArea.setSortId(gnArea.getSortId() + 30);
-//					}
-//				}
-//			}
-//			if (gnArea.getSortId() == null){
-//				gnArea.setSortId(30);
-//			}
-//
-//		}
 
 		
 		model.addAttribute("gnArea", gnArea);
@@ -105,13 +86,17 @@ public class GnAreaController extends BaseController {
 		//设置记录是否为新记录
 		if(gnArea.getId() ==null || "".equals(gnArea.getId())){
 			gnArea.setIsNewRecord(true);
+			gnArea.setId(gnArea.getAreaCode());
 		}else{
 			gnArea.setIsNewRecord(false);
 		}
-		gnArea.setId(gnArea.getAreaCode());
 		
-		GnArea parentArea = GnAreaUtils.getGnAreaByCode(gnArea.getParentAreaCode());
+		
+		GnArea parentArea = gnAreaService.getByCode(gnArea.getParentAreaCode());
+		
 		gnArea.setAreaLevel(Integer.toString(StringUtils.toInteger(parentArea.getAreaLevel())+1));
+		
+		
 		
 		if(StringUtils.toInteger(parentArea.getAreaLevel())>=4){
 			addMessage(model, "保存失败，所属区域不能选择乡镇街道级");
@@ -153,7 +138,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
-		addMessage(redirectAttributes, "保存地区信息成功");
+		addMessage(redirectAttributes, "保存区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
 	
@@ -161,7 +146,7 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "refCacheArea")
 	public String refCacheArea(RedirectAttributes redirectAttributes){
 		GnAreaUtils.clearCache();
-		addMessage(redirectAttributes, "刷新地区缓存成功");
+		addMessage(redirectAttributes, "刷新区域缓存成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
 	
@@ -173,7 +158,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.delete(gnArea);
 		GnAreaUtils.clearCache();
-		addMessage(redirectAttributes, "删除地区信息成功");
+		addMessage(redirectAttributes, "删除区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
 

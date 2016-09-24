@@ -31,21 +31,33 @@ public class Menu extends DataEntity<Menu> {
 	private Integer sort; 	// 排序
 	private String isShow; 	// 是否在菜单中显示（1：显示；0：不显示）
 	private String permission; // 权限标识
-	
+	private String resourceType;
 	private String userId;
 	
 	
 	/**
+	 * 增加菜单资源类型 by:mengbo creat 20160912
+	 */
+	@Length(min=1, max=1)
+	public String getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
+	}
+
+	/**
 	 * 增加所属应用 by:mengbo creat 20160811
 	 */
-	private GnTabSystem gnTabSystem;
+	private String gnTabSystem;
 
 	
-	public GnTabSystem getGnTabSystem() {
+	public String getGnTabSystem() {
 		return gnTabSystem;
 	}
 
-	public void setGnTabSystem(GnTabSystem gnTabSystem) {
+	public void setGnTabSystem(String gnTabSystem) {
 		this.gnTabSystem = gnTabSystem;
 	}
 

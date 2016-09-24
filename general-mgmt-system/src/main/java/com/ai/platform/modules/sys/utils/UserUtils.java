@@ -3,6 +3,7 @@
  */
 package com.ai.platform.modules.sys.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,6 @@ import com.ai.platform.common.service.BaseService;
 import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
-import com.ai.platform.modules.sys.dao.AreaDao;
 import com.ai.platform.modules.sys.dao.MenuDao;
 import com.ai.platform.modules.sys.dao.OfficeDao;
 import com.ai.platform.modules.sys.dao.RoleDao;
@@ -57,7 +57,7 @@ public class UserUtils {
 	public static final String CACHE_AREA_LIST = "areaList";
 	public static final String CACHE_OFFICE_LIST = "officeList";
 	public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
-
+	public static final String CACHE_USER_LIST = "userList";
 	public static final String USER_DEFAULT_THEME = Global.getDefTheme();
 	
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
@@ -65,6 +65,21 @@ public class UserUtils {
 	private static Map<String, Object> CacheMap = new HashMap<String, Object>();
 	
 	public static final String BIND_EMAIL = "email/pwd-reset-binemail.xml";
+	
+	private static List<User> cache_user_data = new ArrayList<User>();
+	
+	
+	public static List<User> getUserList(User user){
+		@SuppressWarnings("unchecked")
+		List<User> userList = (List<User>) getCache(CACHE_USER_LIST);
+		if (userList == null || userList.isEmpty() ) {
+			
+			userList =userDao.findList(user);
+			putCache(CACHE_USER_LIST, userList);
+		}
+		return userList;
+	}
+	
 
 	/**
 	 * 根据ID获取用户
@@ -94,9 +109,13 @@ public class UserUtils {
 	 */
 	public static String getTheme() {
 		String theme = "";
-		User user = (User) getUser();
-		theme = user.getTheme();
-		if (!StringUtils.isNotBlank(theme)) {
+		String themeIndex = getThemeIndex();
+		
+		 if(StringUtils.equals(themeIndex, "theme-white")){
+			theme= "green";
+		}else if(StringUtils.equals(themeIndex, "theme-whbl")){
+			theme= "cerulean";
+		}else{			
 			theme = USER_DEFAULT_THEME;
 		}
 		return theme;
@@ -112,8 +131,7 @@ public class UserUtils {
 		String theme_index="";
 		User user = (User) getUser();
 		theme = user.getTheme();
-		
-		
+
 		if(StringUtils.equals(theme, "cerulean") || StringUtils.equals(theme, "default")){
 			
 			theme_index="theme-whbl";
@@ -181,6 +199,7 @@ public class UserUtils {
 		Principal principal = getPrincipal();
 		if (principal != null) {
 			User user = get(principal.getId());
+		
 			if (user != null) {
 				return user;
 			}
@@ -204,7 +223,7 @@ public class UserUtils {
 				roleList = roleDao.findAllList(new Role());
 			} else {
 				Role role = new Role();
-				role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
+				//role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
 				roleList = roleDao.findList(role);
 			}
 			putCache(CACHE_ROLE_LIST, roleList);
@@ -223,7 +242,7 @@ public class UserUtils {
 		if (user.isAdmin()) {
 			roleList = roleDao.findAllByParams(role);
 		} else {
-			role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
+			//role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
 			roleList = roleDao.findListByParams(role);
 		}
 		return roleList;
@@ -234,17 +253,23 @@ public class UserUtils {
 	 * 
 	 * @return
 	 */
+	
 	public static List<Menu> getMenuList() {
+		
+		return getMenuList(new Menu());
+	}
+	
+	public static List<Menu> getMenuList(Menu menu) {
 		@SuppressWarnings("unchecked")
 		List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+		
 		if (menuList == null) {
 			User user = getUser();
 			if (user.isAdmin()) {
 				menuList = menuDao.findAllList(new Menu());
 			} else {
-				Menu m = new Menu();
-				m.setUserId(user.getId());
-				menuList = menuDao.findByUserId(m);
+				menu.setUserId(user.getId());
+				menuList = menuDao.findByUserId(menu);
 			}
 			putCache(CACHE_MENU_LIST, menuList);
 		}
@@ -257,19 +282,21 @@ public class UserUtils {
 	 * @return
 	 */
 	public static List<Menu> getMenuNodesbyId(String id) {
-		@SuppressWarnings("unchecked")
+		
 		// List<Menu> menuList = (List<Menu>)getCache(CACHE_MENU_CHILDLIST+id);
 		// if (menuList == null || menuList.isEmpty()){
 		//
-		Menu menu = new Menu();
-		Menu menuParent = new Menu();
-		menuParent.setId(id);
-		menu.setParent(menuParent);
-		List<Menu> menuList = menuDao.findMenuChilds(menu);
+		List<Menu> MenuNodes = new ArrayList<Menu>();
+		List<Menu> menuList = getMenuList(new Menu());
+		for(Menu menu :menuList){
+			if((id).equals(menu.getParentId())){
+				 MenuNodes.add(menu);
+			}
+		}
 
 		// putCache(CACHE_MENU_CHILDLIST+menu.getId(), menuList);
 		// }
-		return menuList;
+		return MenuNodes;
 	}
 
 	
@@ -333,7 +360,6 @@ public class UserUtils {
 			if (principal != null){
 				return principal;
 			}
-//			subject.logout();
 		}catch (UnavailableSecurityManagerException e) {
 			
 		}catch (InvalidSessionException e){

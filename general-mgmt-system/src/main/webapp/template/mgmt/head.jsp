@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${iotStatic}/css/bootstrap/font-awesome.css"/>
 <link rel="stylesheet" type="text/css" href="${iotStatic}/css/modular/frame.css"/>
 <link rel="stylesheet" type="text/css" href="${iotStatic}/css/modular/global.css"/>
+<link rel="stylesheet" type="text/css" href="${iotStatic}/css/modular/modular.css"/>
 <link rel="stylesheet" type="text/css" href="${iotStatic}/css/ztree/zTreeStyle.css"/>
 <script src="${iotStatic}/scripts/plugin/jquery-1.9.1.js"></script>
 <script src="${iotStatic}/scripts/plugin/bootstrap.js"></script>

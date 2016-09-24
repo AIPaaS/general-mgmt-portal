@@ -2,18 +2,19 @@
 *{font-family:"Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing:grayscale; box-sizing: border-box; border:0; padding:0; margin:0;}
 body{font-size:14px; color:#333;}
 ul{ list-style:none;}
-a{text-decoration:none;}
+a{text-decoration:none;font-size:12px;}
 a:link{ text-decoration:none;}
 a:active{ text-decoration:none;}
 var,em {font-style:normal;}
 table{border-collapse:collapse;}
 .left{ float:left}
 .right{ float:right;}
+.center{text-align: center;}
 input{outline:none;}
 button{outline:none; cursor:pointer;}
 html,body {height:100%; }
 
-h1,h2,h3,h4,h5,h6{font-weight:200;line-height:1.1;color:inherit}
+h1,h2,h3,h4,h5,h6{font-weight:200;line-height:1.1;color:inherit;font-family: "微软雅黑";}
 h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small{font-weight:normal;line-height:1;color:#999}
 h1,h2,h3{margin-top:10px;margin-bottom:10px}
 h1 small,h2 small,h3 small,h1 .small,h2 .small,h3 .small{font-size:65%}
@@ -261,7 +262,7 @@ pre ol.linenums li {
 .table tr th{text-align:center;}
 /**带水平线**/
 .table th{font-weight:bold}
-.table th,.table td{height:35px;line-height:20px;font-size:12px}
+.table th,.table td{height:35px;line-height:20px;font-size:12px;}
 .table td{text-align:left}
 .table tbody tr.success > td{background-color:#dff0d8}
 .table tbody tr.error > td{background-color:#f2dede}
@@ -362,6 +363,7 @@ pre ol.linenums li {
 /**按钮自适应大小**/
 .btn-auto{padding:0 14px;height:30px;}
 
+
 /************************表单************************/
 .int-text{border:1px solid #e4e4e4;background:#fff; outline:none;}
 .int-text:hover{border:1px solid #ccc;}
@@ -373,6 +375,10 @@ pre ol.linenums li {
 .int-xxlarge{width:500px;height:30px;padding-left:4px;}
 .int-xxxlarge{width:700px;height:30px;padding-left:4px;}
 .textarea-xlarge{width:350px;height:80px;padding-left:4px;}
+
+/**禁用**/
+.input-disabled{cursor:not-allowed;background:#eee;}
+.input-disabled:hover{border:1px solid #c7c7c7;}
 
 /************************checkbox************************/
 .skin-minimal .checkbox-1,.checkbox-2,.checkbox-disabled,.checkbox-disabled-checked{width:14px;height:14px;}

@@ -27,7 +27,6 @@ public class GnAreaUtils {
 	public static List<GnArea> getGnAreaList() {
 		
 		if (cache_tree_data == null || cache_tree_data.isEmpty() ) {
-			cache_tree_data = new ArrayList<GnArea>();
 			
 			cache_tree_data.addAll(GnAreaUtils.gnAreaDao.findList(new GnArea()));
 		}
@@ -72,8 +71,7 @@ public class GnAreaUtils {
 	 * 清除数据缓存
 	 */
 	public static void clearCache(){
-		cache_tree_data.clear();
-		cache_tree_data=null;
+		cache_tree_data = new ArrayList<GnArea>();
 	}
 
 }

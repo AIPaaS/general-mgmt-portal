@@ -6,13 +6,17 @@ package com.ai.platform.common.web;
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
@@ -24,6 +28,8 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.beanvalidator.BeanValidators;
@@ -171,7 +177,7 @@ public abstract class BaseController {
     public String bindException() {  
         return "error/400";
     }
-	
+
 	/**
 	 * 授权登录异常
 	 */
@@ -180,6 +186,13 @@ public abstract class BaseController {
         return "error/403";
     }
 	
+	@ExceptionHandler(MaxUploadSizeExceededException.class)         
+    public String handleException(Exception ex,HttpServletRequest request) {       
+ 
+         return "error/errorfileupload";  
+                  
+    } 
+
 	/**
 	 * 初始化数据绑定
 	 * 1. 将所有传递进来的String进行HTML编码，防止XSS攻击

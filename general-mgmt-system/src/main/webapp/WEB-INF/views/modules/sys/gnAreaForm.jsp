@@ -118,7 +118,9 @@
 		<div class="control-group">
 			<label class="control-label">备注：</label>
 			<div class="controls">
-				<form:input path="remark" htmlEscape="false" maxlength="1024" class="input-xlarge "/>
+				
+				<form:textarea path="remark" htmlEscape="false" rows="3" maxlength="100" class="input-xlarge"/>
+			
 			</div>
 		</div>
 		<div class="form-actions">

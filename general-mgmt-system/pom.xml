@@ -61,36 +61,47 @@
 	<!-- 设定主仓库，按设定顺序进行查找。 -->
 	<repositories>
 		<repository>
-			<id>central-repos</id>
-			<name>central repository</name>
-			<url>http://10.1.228.199:18081/nexus/content/groups/public</url>
+			<id>jboss-repos</id>
+			<name>jboss repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</repository>
+	
+
+
 		<repository>
-			<id>jeesite-repos</id>
-			<name>Jeesite Repository</name>
-			<url>http://maven.jeesite.com/nexus/content/groups/public</url>
+			<id>springframework</id>
+			<name>springframework repository</name>
+			<url>http://maven.springframework.org/release</url>
 		</repository>
-		<repository>
-			<id>oschina</id>
-			<name>oschina repository</name>
-			<url>http://maven.oschina.net/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>nexus-tmatesoft</id>
-			<name>Nexus tmatesoft</name>
-			<url>http://maven.tmatesoft.com/content/groups/public/</url>
-		</repository>					
+					
 	</repositories>
 	
 	<!-- 设定插件仓库 -->
 	<pluginRepositories> 
 	
 		<pluginRepository>
-			<id>jeesite-repos</id>
-			<name>Jeesite Repository</name>
-			<url>http://maven.jeesite.com/nexus/content/groups/public</url>
+			<id>gradle-repos</id>
+			<name>gradle Repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
 		</pluginRepository>
-		
+	    <pluginRepository>    
+	        <id>central</id>    
+	        <name>Maven plugin</name>    
+	        <url>htpp://repo1.maven.org/maven2</url>    
+	        <layout>default</layout>    
+	        <snapshots>    
+	            <enabled>true</enabled>    
+	        </snapshots>    
+	        <releases>    
+	            <enabled>false</enabled>    
+	        </releases>    
+	    </pluginRepository> 		
 	</pluginRepositories> 
 	
 	<!-- 依赖项定义 -->
@@ -387,7 +398,7 @@
 			<artifactId>activiti-spring</artifactId>
 			<version>${activiti.version}</version>
 		</dependency>
-		<dependency>
+		<dependency> 
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-explorer</artifactId>
 			<version>${activiti.version}</version>
@@ -797,7 +808,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
+				<version>2.6</version>
 				<configuration>
 					<packagingExcludes>
 						<!-- WEB-INF/classes/com/thinkgem/jeesite/** -->
@@ -900,12 +911,7 @@
 				</configuration>
 			</plugin>
 			
-			<!-- resource插件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
-			</plugin>
+	
 			
 			<!-- install插件 -->
 			<plugin>

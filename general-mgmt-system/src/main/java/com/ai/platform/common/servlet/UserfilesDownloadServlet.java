@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.util.UriUtils;
 
 import com.ai.platform.common.config.Global;
@@ -46,11 +46,24 @@ public class UserfilesDownloadServlet extends HttpServlet {
 //			FileCopyUtils.copy(new FileInputStream(file), resp.getOutputStream());
 //			resp.setContentType("application/x-msdownload");
 //			resp.addHeader("Content-Disposition", "attachment;");
-			 
+	        // 解决中文文件名乱码问题  
+			String fileName =file.getName();  
+			String fname = "";
+	        if (req.getHeader("User-Agent").toLowerCase()  
+	                .indexOf("firefox") > 0) {  
+	                fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1").replace("+","%20"); // firefox浏览器  
+	        } else if (req.getHeader("User-Agent").toUpperCase()  
+	                .indexOf("MSIE") > 0) {  
+	            fname = URLEncoder.encode(fileName, "UTF-8").replace("+","%20");// IE浏览器  
+	        }else if (req.getHeader("User-Agent").toUpperCase()  
+	                .indexOf("CHROME") > 0) {  
+	            fname = new String(fileName.getBytes("UTF-8"), "ISO8859-1").replace("+","%20");// 谷歌  
+	        } 
 			resp.setContentType("application/x-msdownload");
+//			resp.setContentType("application/octet-stream");//设置文件类型
             // 添加下载文件的头信息。此信息在下载时会在下载面板上显示，比如：
             // 迅雷下载显示的文件名称，就是此处filiname
-			resp.addHeader("Content-Disposition", "attachment;filename="+  file.getName());
+			resp.addHeader("Content-Disposition", "attachment;filename=\""+ fname +"\"");
             // 添加文件的大小信息
 			resp.setContentLength((int) file.length());
             // 获得输出网络流

@@ -3,8 +3,6 @@
  */
 package com.ai.platform.common.persistence;
 
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.Length;
 
 import com.ai.platform.common.utils.Reflections;
@@ -39,7 +37,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	 * @return
 	 */
 	@JsonBackReference
-	@NotNull
+//	@NotNull(message="上级部门不能为空或不存在")
 	public abstract T getParent();
 
 	/**
@@ -48,7 +46,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	 */
 	public abstract void setParent(T parent);
 
-	@Length(min=1, max=2000)
+	@Length(min=1, max=100,message="上级编码不能为空")
 	public String getParentIds() {
 		return parentIds;
 	}
@@ -57,7 +55,6 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 		this.parentIds = parentIds;
 	}
 
-	@Length(min=1, max=100)
 	public String getName() {
 		return name;
 	}
@@ -65,7 +62,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public Integer getSort() {
 		return sort;
 	}

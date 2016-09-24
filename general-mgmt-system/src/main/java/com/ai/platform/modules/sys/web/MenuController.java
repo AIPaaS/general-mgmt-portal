@@ -30,6 +30,7 @@ import com.ai.platform.modules.sys.service.MgmtMenuService;
 //import com.ai.platform.modules.sys.entity.MgmtMenu;
 //import com.ai.platform.modules.sys.service.MgmtMenuService;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.DictUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -188,7 +189,7 @@ public class MenuController extends BaseController {
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("id", e.getId());
 				map.put("pId", e.getParentId());
-				map.put("name", e.getName());
+				map.put("name", "["+DictUtils.getDictLabel(e.getResourceType(), "resource_type", "")+"]"+e.getName());
 				mapList.add(map);
 			}
 		}

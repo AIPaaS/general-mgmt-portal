@@ -33,12 +33,14 @@ import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.DateUtils;
+import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.utils.excel.ExportExcel;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
+import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
@@ -56,6 +58,8 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private SystemService systemService;
+	@Autowired
+	private OfficeService officeService;
 
 	@ModelAttribute
 	public User get(@RequestParam(required = false) String id) {
@@ -83,6 +87,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "listno" })
 	public String listno(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		user.getSqlMap().put("dsf", " AND a.login_name IS NOT NULL");
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
 		model.addAttribute("page", page);
 		return "modules/sys/usernoList";
@@ -322,72 +327,111 @@ public class UserController extends BaseController {
 				throw new RuntimeException("导入文档为空!");
 			} else if (!fileName.toLowerCase().endsWith(".txt")) {
 				throw new RuntimeException("文档格式不正确!");
+			}else if(file.getSize()>1024*5){
+				throw new RuntimeException("导入文件超过5M!");
 			}
 			int successNum = 0;
 			int failureNum = 0;
+			int alldataNum = 0;
 			StringBuilder failureMsg = new StringBuilder();
-			InputStream is;
-			is = file.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is);
+			InputStream is = file.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is,FileUtils.getCharset(is));
 			BufferedReader br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
-				if (lineContent.startsWith("#LOGINNAME"))
-					continue;
-				String[] userInfo = lineContent.split("\\\\t");
-				if(userInfo.length !=7)
-					throw new RuntimeException("文档格式不正确!");
-				//封装导入用户信息
-				User user =setUserInfo(userInfo);
+				User user = new User();
 				try {
+					if (alldataNum == 0) {
+//						if (!lineContent.contains("#LOGINNAME"))
+//							throw new RuntimeException("文档格式不正确!");
+//						else
+							continue;
+					}
+					String[] userInfo = lineContent.split("\\\\t");
+					if (userInfo.length != 7) {
+						failureMsg.append("<br/>数据" + alldataNum + ":信息格式不正确;");
+						failureNum++;
+						continue;
+					}
+					// 封装导入用户信息
+					user = setUserInfo(userInfo);
+
 					if ("true".equals(checkLoginName("", user.getLoginName()))) {
-						user.setPassword(SystemService.entryptPassword("123456"));
+						user.setPassword(SystemService.entryptPassword(user.getLoginName() + Global.getPasswordRule()));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveImportUser(user);
 						successNum++;
 					} else {
-						failureMsg.append("<br/>登录名 " + user.getLoginName() + " 已存在; ");
+						failureMsg.append("<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 已存在; ");
 						failureNum++;
 					}
+
 				} catch (ConstraintViolationException ex) {
-					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：");
+					failureMsg.append("<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
 					for (String message : messageList) {
 						failureMsg.append(message + "; ");
-						failureNum++;
 					}
+					failureNum++;
 				} catch (Exception ex) {
-					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
+					failureMsg.append(
+							"<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
+				} finally {
+					alldataNum++;
 				}
 			}
-			//关闭文件流
+			// 关闭文件流
 			br.close();
 			isr.close();
 			is.close();
 
 			if (failureNum > 0) {
-				failureMsg.insert(0, "，失败 " + failureNum + " 条员工信息，导入信息如下：");
+				failureMsg.insert(0, "，失败 " + failureNum + " 条工号信息，导入信息如下：");
 			}
-			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条员工信息" + failureMsg);
+			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条工号信息" + failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入员工信息失败！失败信息：" + e.getMessage());
+			addMessage(redirectAttributes, "导入工号信息失败！失败信息：" + e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
+
 	/**
 	 * 封装导入用户信息
+	 * 
 	 * @param userInfo
 	 * @return user
 	 */
-	private User setUserInfo(String[] userInfo){
+	private User setUserInfo(String[] userInfo) {
 		User user = new User();
 		user.setLoginName(userInfo[0]);
 		user.setNo(userInfo[1]);
 		user.setName(userInfo[2]);
 		user.setEmail(userInfo[3]);
 		user.setMobile(userInfo[4]);
-		user.setCompany(new Office(userInfo[5]));
-		user.setOffice(new Office(userInfo[6]));
+		user.setDelFlag("0");
+		user.setLoginFlag("1");
+
+		// 验证公司编码
+		if(!userInfo[5].isEmpty()){
+			Office company = new Office();
+			company.setCode(userInfo[5]);
+			List<Office> companyList = officeService.find(company);
+			if (!companyList.isEmpty()) {
+				company = companyList.get(0);
+				user.setCompany(company);
+			}
+		}
+		// 验证部门编码
+		if(!userInfo[6].isEmpty()){
+			Office office = new Office();
+			office.setCode(userInfo[6]);
+			List<Office> officeList = officeService.find(office);
+			if (!officeList.isEmpty()) {
+				office = officeList.get(0);
+				user.setOffice(office);
+			}
+		}
+
 		return user;
 	}
 
@@ -483,7 +527,7 @@ public class UserController extends BaseController {
 	public String prohibitLogin(User user, RedirectAttributes redirectAttributes) {
 		user.setLoginFlag("0");
 		systemService.updateLoginFalg(user);
-		addMessage(redirectAttributes, "冻结改账号成功");
+		addMessage(redirectAttributes, "冻结该账号成功");
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 

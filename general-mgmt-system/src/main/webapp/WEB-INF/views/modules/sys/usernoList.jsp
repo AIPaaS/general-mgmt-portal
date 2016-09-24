@@ -33,7 +33,7 @@
  	<div id="importBox" class="hide">
 		<form id="importForm" action="${ctx}/sys/user/import" method="post" enctype="multipart/form-data"
 			class="form-search" style="padding-left:20px;text-align:center;" onsubmit="loading('正在导入，请稍等...');"><br/>
-			<input id="uploadFile" name="file" type="file" style="width:330px"/><br/><br/>　　
+			<input id="uploadFile" name="file" type="file"  accept=".txt" style="width:330px"/><br/><br/>　　
 			<input id="btnImportSubmit" class="btn btn-primary" type="submit" value="   导    入   "/>
 			<%-- <a href="${ctx}/sys/user/import/template">下载模板</a> --%>
 		</form>
@@ -79,7 +79,7 @@
 				<shiro:hasPermission name="sys:user:edit"><td>
     				<a href="${ctx}/sys/user/formno?id=${user.id}">修改</a>
     				<a href="${ctx}/sys/user/resetPWD?id=${user.id}" onclick="return confirmx('确认要重置密码吗？', this.href)">密码重置</a>
-    				<a href="${ctx}/sys/user/prohibit?id=${user.id}" onclick="return confirmx('确认要冻结改账号吗？', this.href)">冻结</a>    					
+    				<a href="${ctx}/sys/user/prohibit?id=${user.id}" onclick="return confirmx('确认要冻结该账号吗？', this.href)">冻结</a>    					
 					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
 					
 				</td></shiro:hasPermission>

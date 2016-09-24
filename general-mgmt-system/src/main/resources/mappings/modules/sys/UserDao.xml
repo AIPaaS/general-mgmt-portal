@@ -186,13 +186,13 @@
 			<if test="dbName == 'mysql'">CONCAT('%', #{email}, '%')</if>
 		</if>
 		<!-- 数据范围过滤 -->
-		<!--${sqlMap.dsf} -->
+		${sqlMap.dsf}
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY c.code, o.code, a.name
+				ORDER BY a.update_date DESC 
 			</otherwise>
 		</choose>
 	</select>
@@ -283,6 +283,7 @@
 		office_id,
 		no,
 		login_name,
+		password,
 		name,
 		email,
 		mobile,
@@ -300,6 +301,7 @@
 		#{office.id},
 		#{no},
 		#{loginName},
+		#{password},
 		#{name},
 		#{email},
 		#{mobile},

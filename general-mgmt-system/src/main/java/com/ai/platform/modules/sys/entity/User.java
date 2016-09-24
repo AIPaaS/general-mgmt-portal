@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
@@ -88,6 +88,9 @@ public class User extends DataEntity<User> {
 	}
 	
 	public String getPhoto() {
+		if(StringUtils.isBlank(photo)){
+			return "/portal"+"/static/images/userinfo.jpg";
+		}
 		return photo;
 	}
 
@@ -110,7 +113,7 @@ public class User extends DataEntity<User> {
 	}
 
 	@JsonIgnore
-	@NotNull(message="归属公司不能为空")
+	@NotNull(message="归属公司为空或不存在")
 	@ExcelField(title="归属公司", align=2, sort=20)
 	public Office getCompany() {
 		return company;
@@ -121,7 +124,7 @@ public class User extends DataEntity<User> {
 	}
 	
 	@JsonIgnore
-	@NotNull(message="归属部门不能为空")
+	@NotNull(message="归属部门为空或不存在")
 	@ExcelField(title="归属部门", align=2, sort=25)
 	public Office getOffice() {
 		return office;
@@ -172,9 +175,8 @@ public class User extends DataEntity<User> {
 	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-
-	@Length(min=1, max=100, message="登录名长度必须介于 1 和 100 之间")
-	@ExcelField(title="登录名", align=2, sort=30)
+	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{2,20}$", message = "登录名格式不正确")
+	@ExcelField(title="登录名", align=2, sort=20)
 	public String getLoginName() {
 		return loginName;
 	}
@@ -192,14 +194,13 @@ public class User extends DataEntity<User> {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Length(min=1, max=100, message="姓名长度必须介于 1 和 100 之间")
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,20}$", message = "姓名格式不正确")
 	@ExcelField(title="姓名", align=2, sort=40)
 	public String getName() {
 		return name;
 	}
 	
-	@Length(min=1, max=100, message="工号长度必须介于 1 和 100 之间")
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,50}$", message = "工号格式不正确")
 	@ExcelField(title="工号", align=2, sort=45)
 	public String getNo() {
 		return no;
@@ -212,9 +213,8 @@ public class User extends DataEntity<User> {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	@Email(message="邮箱格式不正确")
-	@Length(min=1, max=100, message="邮箱长度必须介于 1 和 100 之间")
+	@Pattern(regexp = "^[a-zA-Z0-9_+.-]+\\@([a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,4}$", message = "邮箱格式不正确")
+	@Length(min=1, max=50, message="邮箱长度必须介于 1 和 100 之间")
 	@ExcelField(title="邮箱", align=1, sort=50)
 	public String getEmail() {
 		return email;
@@ -243,7 +243,8 @@ public class User extends DataEntity<User> {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	
+	@Pattern(regexp = "^$|^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\\d{8})$", message = "手机号码格式不正确")
 	@Length(min=0, max=200, message="手机长度必须介于 1 和 200 之间")
 	@ExcelField(title="手机", align=2, sort=70)
 	public String getMobile() {

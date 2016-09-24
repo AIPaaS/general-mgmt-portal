@@ -11,7 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.service.CrudService;
+import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.modules.sys.entity.GnTabSystem;
+import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
+import com.ai.platform.modules.sys.utils.GnTabSystemUtils;
+import com.ai.platform.modules.sys.utils.LogUtils;
+import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ai.platform.modules.sys.dao.GnTabSystemDao;
 
 /**
@@ -25,6 +30,8 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	
 	@Autowired
 	private GnTabSystemDao gnTabSystemDao;
+	@Autowired
+	private SystemAuthorizingRealm systemRealm;
 	
 	public GnTabSystem get(String id) {
 		return super.get(id);
@@ -41,11 +48,19 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	@Transactional(readOnly = false)
 	public void save(GnTabSystem gnTabSystem) {
 		super.save(gnTabSystem);
+		GnTabSystemUtils.clearCache();
+		// 清除用户菜单缓存
+		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
+//		// 清除权限缓存
+		systemRealm.clearAllCachedAuthorizationInfo();
+		// 清除日志相关缓存
+		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GnTabSystem gnTabSystem) {
 		super.delete(gnTabSystem);
+		GnTabSystemUtils.clearCache();
 	}
 
 	public List<GnTabSystem> findAll() {

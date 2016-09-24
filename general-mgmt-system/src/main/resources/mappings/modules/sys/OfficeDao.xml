@@ -6,7 +6,7 @@
 		a.id,
 		a.parent_id AS "parent.id",
 		a.parent_ids,
-		a.area_id AS "area.id",
+		a.area_id AS "gnArea.id",
 		a.code,
 		a.name,
 		a.sort,
@@ -28,8 +28,8 @@
 		a.useable AS useable,
 		a.primary_person AS "primaryPerson.id",
 		a.deputy_person AS "deputyPerson.id",
-		<!--  ar.name AS "area.name"-->
-		ar.area_name AS "area.name"
+		<!--  ar.name AS "gnArea.areaName"-->
+		ar.area_name AS "gnArea.areaName"
 		<!-- pp.name AS "primaryPerson.name",
 		dp.name AS "deputyPerson.name" -->
 	</sql>
@@ -37,7 +37,7 @@
 		a.id,
 		a.parent_id AS "parent.id",
 		a.parent_ids,
-		a.area_id AS "area.id",
+		a.area_id AS "gnArea.id",
 		a.code,
 		a.name,
 		a.sort,
@@ -56,7 +56,7 @@
 		a.update_date,
 		a.del_flag,
 		a.tenant_id AS "tenantId",
-		ar.name AS "area.name"
+		ar.name AS "gnArea.areaName"
 	</sql>
 	<sql id="officeJoins">
 		<!--  LEFT JOIN sys_office p ON p.id = a.parent_id-->
@@ -161,7 +161,7 @@
 			#{id}, 
 			#{parent.id}, 
 			#{parentIds}, 
-			#{area.id}, 
+			#{gnArea.id}, 
 			#{code}, 
 			#{name}, 
 			#{sort}, 
@@ -190,7 +190,7 @@
 		UPDATE sys_office SET 
 			parent_id = #{parent.id}, 
 			parent_ids = #{parentIds}, 
-			area_id = #{area.id}, 
+			area_id = #{gnArea.id}, 
 			code = #{code}, 
 			name = #{name}, 
 			type = #{type}, 
