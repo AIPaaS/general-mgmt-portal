@@ -63,7 +63,7 @@
 		<property name="authorizationCachingEnabled" value="true" />
 		<property name="authorizationCacheName" value="authorizationCache" />
 		<property name="casServerUrlPrefix" value="${casServerUrlPrefix}" />
-		<property name="casService" value="${serverName_Inner}/portal${adminPath}/cas" />
+		<property name="casService" value="${serverName_Inner}${adminPath}/cas" />
 	</bean>
 
 
