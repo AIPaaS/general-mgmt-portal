@@ -69,6 +69,15 @@
 
 .medium-list-form ul .posi-file{position:relative;}
 .medium-list-form ul .posi-file .al-file{width:230px;height:38px;position:absolute;top:28px;left:114px;background:#000; opacity:0;}
+
+/**商品评价管理弹出**/
+.roll-scroll{position: relative;width:630px;float:left;}
+#loopedSlider{position: relative;left:130px;top:0; width:300px;height:230px;}
+.slidepic{position:relative;height:230px;width:300px;overflow:hidden;}
+.slidepic div{opacity:0;z-index:0;position:absolute;top:0;left:0;width:300px;}
+.nav-buttons li.p{position:absolute;top:110px;left:-100px;}
+.nav-buttons li.n{position:absolute;top:110px;right:-100px;}
+.nav-buttons i{font-size:30px;}
 /**类目属性**/
 .table-special .table-border{ border:none;}
 .table-special .table-border td{ border:none;}
@@ -107,13 +116,13 @@
 .relation-table-div ul li  p{float:left;margin-right:10px}
 
 /**选项卡**/
-.order-list-table{ width:100%;display:inline-block;border-bottom:1px solid #e4e4e4;padding-bottom:px;margin-top:25px;}
+.order-list-table{ width:100%;display:inline-block;padding-bottom:10px;border-bottom:1px solid #e4e4e4;padding-bottom:px;margin-top:25px;}
 .order-list-table ul{ width:100%; float:left;}
 .order-list-table ul li{ float:left;border-right:1px solid #ccc;padding:0 10px 0 10px;}
 .order-list-table ul li a{ font-size:14px; color:#333;padding:0 10px 0 10px;}
 .order-list-table ul li a:hover,.order-list-table ul p a:hover{ color:#1598f5;}
 .order-list-table ul li .current{color:#1598f5;border-bottom:2px solid #1598f5;padding-bottom:11px;}
-.order-list-table ul li .current a{ }
+.order-list-table ul li .current a{}
 
 /**table td三行样式**/
 .table  tr .new-td{ border:none;border-bottom: 1px solid #ddd;height:40px;margin:0;padding: 0;}
@@ -185,8 +194,8 @@
 
 .table tr .hind1{width:120px;position:relative;}
 .table tr .hind1 .center-hind{width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor: pointer;font-size:12px;}
-.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:32px;left:-10px; z-index:30;border:1px solid #ddd;text-align:left;display: none;word-wrap:break-word; }
-.table tr .showbj1{top:58px;left:5px}
+.table tr .showbj{width:300px;height: auto; padding:6px; background:#eee;position:absolute;top:20px;left:-10px; z-index:30;border:1px solid #ddd;text-align:left;display: none;word-wrap:break-word;font-size:12px; }
+.table tr .showbj1{top:20px;}
 .table tr .hind1 .fa-posi{position:absolute; top:-14px;left:40px;z-index:31;font-size:18px;}
 
 .table tr .hind1-medium{width:200px;position:relative;}
@@ -252,3 +261,5 @@
 .workbench ul .c-img4 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon4a.png);background-repeat: no-repeat;}
 .workbench ul .c-img5 a{width:113px;height:113px;float:left;border: 1px solid #00a0e9;border-radius:50%;background-image:url(../../images/work-icon5.png);background-repeat: no-repeat;background-position: center;}
 .workbench ul .c-img5 a:hover{background-color:#00a0e9;background-image:url(../../images/work-icon5a.png);background-repeat: no-repeat;}
+
+

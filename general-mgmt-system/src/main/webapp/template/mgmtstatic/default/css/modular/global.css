@@ -24,7 +24,7 @@ h1{font-size:36px}
 h2{font-size:30px}
 h3{font-size:24px}
 h4{font-size:18px}
-h5{font-size:14px}
+h5{font-size:16px}
 h6{font-size:12px}
 /*************************文字样式*************************/
 small{font-size:85%}		/**小型文本**/
@@ -385,7 +385,7 @@ pre ol.linenums li {
 .checkbox-disabled,.checkbox-disabled-checked{cursor:not-allowed;}
 /************************select************************/
 .select{border:1px solid #e4e4e4;background:#fff; outline:none;}
-.select:hover{border:1px solid #0697ef;}
+.select:hover{border:1px solid #ccc;}
 .select-mini{width:102px;height:30px;padding-left:4px;}
 .select-small{width:140px;height:30px;padding-left:4px;}
 .select-medium{width:190px;height:30px;padding-left:4px;}
@@ -396,7 +396,7 @@ pre ol.linenums li {
 
 /**上传按钮**/
 .btn-upload{width:auto;position: relative; display:inline-block;height:36px; *display:inline;overflow:hidden;vertical-align:middle;cursor:pointer}
-.btn-upload .int-file{position: absolute;top:0;left:0;cursor: pointer; z-index:1; font-size:30em; *font-size:30px;opacity:0;filter: alpha(opacity=0)}
+.btn-upload .int-file{width:320px;position:absolute;left:0;top:0;height:36px;opacity:0;filter: alpha(opacity=0)}
 
 /************************进度条************************/
 .biu-progress{max-width:500px;background-color:#eee;border-radius:4px;}

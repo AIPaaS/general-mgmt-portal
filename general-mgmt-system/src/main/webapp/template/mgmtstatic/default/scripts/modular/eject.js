@@ -183,3 +183,15 @@ jQuery(document).ready(function($) {
 	$('#upload').slideUp(150);
 	})
 })
+
+//商品编辑 上传图片
+jQuery(document).ready(function($) {
+	$('#look-btn').click(function(){
+	$('#eject-mask').fadeIn(100);
+	$('#look').slideDown(200);
+	})
+	$('.eject-medium-title .img').click(function(){
+	$('#eject-mask').fadeOut(100);
+	$('#look').slideUp(150);
+	})
+})
