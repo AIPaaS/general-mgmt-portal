@@ -32,7 +32,7 @@
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="${casServerLoginUrl}?service=${serverName_Inner}" />
+		<property name="loginUrl" value="${casServerLoginUrl}?service=${shiroServerName}" />
 
 
 		<property name="successUrl" value="${adminPath}?login" />
@@ -63,7 +63,7 @@
 		<property name="authorizationCachingEnabled" value="true" />
 		<property name="authorizationCacheName" value="authorizationCache" />
 		<property name="casServerUrlPrefix" value="${casServerUrlPrefix}" />
-		<property name="casService" value="${serverName_Inner}" />
+		<property name="casService" value="${shiroServerName}" />
 	</bean>
 
 
