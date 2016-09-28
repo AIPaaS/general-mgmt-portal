@@ -34,7 +34,7 @@ public class GnTabSystemUtils {
 		}
 		return cache_tabsystem_data;
 	}
-
+ 
 	
 
 	public static GnTabSystem getGnTabSystem(String id){
@@ -47,7 +47,16 @@ public class GnTabSystemUtils {
 		}
 		return null;
 	}
-
+	public static String getGnTabSystemName(String id){
+		if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(id)){
+			for (GnTabSystem gnTabSystem : getGnTabSystemList()){
+				if((id).equals(gnTabSystem.getId())){
+					return gnTabSystem.getSystemName();
+				}
+			}
+		}
+		return null;
+	}
 	public static String getGnTabSystemUrl(String id){
 		if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(id)){
 			for (GnTabSystem gnTabSystem : getGnTabSystemList()){

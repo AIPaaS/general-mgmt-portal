@@ -94,13 +94,19 @@
   </function>
   
   <function>
-    <description>获取当前用户的应用对象</description>
+    <description>获取当前用户的应用对象的url</description>
     <name>getGnTabSystemUrl</name>
     <function-class>com.ai.platform.modules.sys.utils.GnTabSystemUtils</function-class>
     <function-signature>java.lang.String getGnTabSystemUrl(java.lang.String)</function-signature>
     <example>${fns:getGnTabSystemUrl(id)}</example>  
   </function>  
-  
+    <function>
+    <description>获取当前用户的应用对象的名称</description>
+    <name>getGnTabSystem</name>
+    <function-class>com.ai.platform.modules.sys.utils.GnTabSystemUtils</function-class>
+    <function-signature>java.lang.String getGnTabSystemName(java.lang.String)</function-signature>
+    <example>${fns:getGnTabSystemName(id)}</example>  
+  </function> 
     <function>
     <description>获取当前用户的菜单对象列表</description>
     <name>getChildsMenu</name>

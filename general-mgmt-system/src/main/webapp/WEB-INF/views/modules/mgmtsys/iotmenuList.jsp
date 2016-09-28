@@ -48,7 +48,7 @@
                   <tbody>
 		              <c:forEach items="${page.list}" var="menu">
 						<tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
-						   <td >${not empty menu.gnTabSystem.systemName?menu.gnTabSystem.systemName:'统一系统管理平台'}</td>
+						   <td >${fns:getGnTabSystem(menu.gnTabSystem)}</td>
 							<td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
 							<td>${fns:getDictLabel(menu.resourceType, 'resource_type', '')}</td>
 							<td title="${menu.href}">${fns:abbr(menu.href,30)}</td>
