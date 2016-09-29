@@ -56,7 +56,7 @@
   </filter>
   <filter-mapping>
     <filter-name>sitemeshFilter</filter-name>
-    <url-pattern>/a/*</url-pattern>
+    <url-pattern>/home/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
     <filter-name>sitemeshFilter</filter-name>

@@ -52,7 +52,7 @@ public class LoginController extends BaseController{
 	/**
 	 * 管理登录
 	 */
-	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
+	@RequestMapping(value = "${adminPath}/index", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Principal principal = UserUtils.getPrincipal();
 

@@ -92,7 +92,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="${adminPath}/**" />
 			<mvc:exclude-mapping path="${adminPath}/"/>
-			<mvc:exclude-mapping path="${adminPath}/login"/>
+			<mvc:exclude-mapping path="${adminPath}/index"/>
 			<mvc:exclude-mapping path="${adminPath}/sys/menu/tree"/>
 			<mvc:exclude-mapping path="${adminPath}/sys/menu/treeData"/>
 			<mvc:exclude-mapping path="${adminPath}/oa/oaNotify/self/count"/>

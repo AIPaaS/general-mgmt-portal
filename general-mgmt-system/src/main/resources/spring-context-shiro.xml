@@ -20,7 +20,7 @@
 				/mgmtstatic/** = anon
 				/userfiles/** = anon
 				${adminPath}/cas = cas
-				${adminPath}/login = authc
+				${adminPath}/index = authc
 				${adminPath}/logout = logout
 				${adminPath}/** = user
 				/act/editor/** = user
@@ -35,7 +35,7 @@
 		<property name="loginUrl" value="${casServerLoginUrl}?service=${serverName_Inner}${serverContextPath}${adminPath}/cas" />
 
 
-		<property name="successUrl" value="${adminPath}?login" />
+		<property name="successUrl" value="${adminPath}?index" />
 		<property name="filters">
 			<map>
 				<entry key="cas" value-ref="casFilter" />
@@ -50,7 +50,7 @@
 
 	<!-- CAS认证过滤器 -->
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
-		<property name="failureUrl" value="${adminPath}/login" />
+		<property name="failureUrl" value="${adminPath}/index" />
 	</bean>
 	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 	   <property name="redirectUrl" value="${logOutServerUrl_Inner}?service=${logOutBackUrl_Inner}"/>  
