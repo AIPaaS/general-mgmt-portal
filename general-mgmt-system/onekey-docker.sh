@@ -1,6 +1,6 @@
-git reset　--hard origin/master
+git reset --hard origin/master 
 git pull 
-chmod  a+x onekey-docker.sh
+chmod a+x onekey-docker.sh 
 gradle clean && gradle build -x test 
 docker build -t 10.19.13.18:5000/general-mgmt-portal:v1.0 .   
 docker push 10.19.13.18:5000/general-mgmt-portal:v1.0 
