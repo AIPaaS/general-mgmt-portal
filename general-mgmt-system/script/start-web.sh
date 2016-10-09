@@ -18,7 +18,7 @@ sed -i "s%serverName_Inner=.*%serverName_Inner=${serverName_Inner}%g" ./sso.prop
 sed -i "s%logOutServerUrl_Inner=.*%logOutServerUrl_Inner=${logOutServerUrl_Inner}%g" ./sso.properties
 sed -i "s%logOutBackUrl_Inner=.*%logOutBackUrl_Inner=${logOutBackUrl_Inner}%g" ./sso.properties
 sed -i "s%innerDomains=.*%innerDomains=${innerDomains}%g" ./sso.properties
-sed -i "s%shiroServerName=.*%shiroServerName=${shiroServerName}%g" ./sso.properties
+sed -i "s%serverContextPath=.*%serverContextPath=${serverContextPath}%g" ./sso.properties
 
 
 sed -i "s%whiteList=.*%whiteList=${whiteList}%g" ./whitelist.properties
