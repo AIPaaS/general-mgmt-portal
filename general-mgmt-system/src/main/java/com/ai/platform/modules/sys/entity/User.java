@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
 import com.ai.opt.sdk.components.sequence.util.SeqUtil;
+import com.ai.opt.sso.client.filter.SSOClientUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.DataEntity;
 import com.ai.platform.common.supcan.annotation.treelist.cols.SupCol;
@@ -23,6 +24,7 @@ import com.ai.platform.modules.sys.utils.UserUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
+
 
 /**
  * 用户Entity
@@ -89,7 +91,7 @@ public class User extends DataEntity<User> {
 	
 	public String getPhoto() {
 		if(StringUtils.isBlank(photo)){
-			return "/portal"+"/static/images/userinfo.jpg";
+			return SSOClientUtil.getProperty("serverContextPath")+"/static/images/userinfo.jpg";
 		}
 		return photo;
 	}
