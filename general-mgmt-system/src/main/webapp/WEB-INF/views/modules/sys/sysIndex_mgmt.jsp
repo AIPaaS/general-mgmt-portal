@@ -7,7 +7,9 @@
 
 	<meta name="decorator" content="mgmt"/>
   </head>
+
 <body>
+
 <div id="${fns:getThemeIndex()}" class="${fns:getThemeIndex()}">
     <header class="navbar" id="header-navbar">
         <div class="container">
@@ -40,7 +42,7 @@
             </li>
          /搜索结束 -->
          <!--待办事项-->
-            <li class="dropdown hidden-xs">
+            <%-- <li class="dropdown hidden-xs">
               
                 <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i>
                 	<c:if test="${waitjobsCount gt 0}"> 
@@ -66,7 +68,7 @@
 	                	</c:if>
 	                </ul>
                 </c:if>
-            </li>
+            </li> --%>
          <!--/待办事项-->
          <!--颜色设置-->     
       	 <li class="dropdown hidden-xs notifications-list">
@@ -172,14 +174,14 @@
 						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
 						                        <c:set var="systemId" value="${menuNodethree.gnTabSystem}"/>
 						                        
-						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
 						                         <c:set var="systemId" value=""/>
 						                        </c:forEach>
 					                 	   	</ul>
 							     		</c:if>
 							     		<c:if test="${not empty menuNode.href}">
 							     		
-							     			<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
+							     			<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
 							     	
 							     		</c:if>
 										<c:set var="systemId" value=""/>
@@ -241,11 +243,11 @@
          </div>
      </div>	
      <%-- ${ctx}/sys/portal --%>
-     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0" ></iframe>
+     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0"></iframe>
 	
 	    <!--底部-->
     <footer id="footer-bar" class="row">
-   		 <p id="footer-copyright" class="col-xs-12">亚信</p>
+   		 <p id="footer-copyright" class="col-xs-12">亚信e</p>
     </footer>
    <!--/底部结束-->
     </div>
