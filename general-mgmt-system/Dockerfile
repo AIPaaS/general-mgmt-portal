@@ -11,6 +11,6 @@ RUN cd /opt/apache-tomcat-7.0.72/webapps/ROOT && jar -xf ROOT.war && rm -rf /opt
 
 ADD ./script/start-web.sh /start-web.sh
 RUN chmod 755 /*.sh
-
+ENV         LANG         en_US.UTF-8
 # Define default command.
 CMD ["/start-web.sh"]

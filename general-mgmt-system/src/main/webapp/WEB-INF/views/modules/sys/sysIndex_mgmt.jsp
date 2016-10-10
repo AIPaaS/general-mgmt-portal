@@ -148,7 +148,7 @@
         <div id="col-left-inner" class="col-left-nano-content">
             <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
                 <ul id="menu" class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="fa fa-home"></i><span>系统控制台</span></a></li>
+                <li class="active"><a href="#"><i class="fa fa-home"></i><span><font>系统控制台</font></span></a></li>
                 	<c:set var="firstMenu" value="true"/>
                 	<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
 						<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1' &&menu.resourceType eq '0'}">
@@ -158,7 +158,7 @@
 										<input type="hidden" id="menuId" value="${menu.id}"/>
 										<a class="dropdown-toggle" href="javascript:void(0);" id="fisrtmenu"
 										data-href="#" data-id="${menu.id}" target="mainFrame">										
-										 <i class="fa fa-inbox"></i><span>${menu.name}</span>
+										 <i class="fa fa-inbox"></i><span><font>${menu.name}</font></span>
 					                     <i class="fa fa-chevron-circle-right drop-icon"></i>
 										</a>
 										
