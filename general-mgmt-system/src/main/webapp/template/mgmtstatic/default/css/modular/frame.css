@@ -6944,7 +6944,6 @@ svg {
 	margin-top: 0;
 	margin-bottom: 0;
 	position: relative;
-	min-height: 1200px;	
 }
 
 @media (max-width: 991px) {

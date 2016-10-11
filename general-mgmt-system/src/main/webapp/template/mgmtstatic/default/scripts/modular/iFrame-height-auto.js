@@ -30,7 +30,7 @@ var browserVersion = window.navigator.userAgent.toUpperCase();
                 bHeight += 3;
 
             var height = Math.max(bHeight, dHeight);
-            if (height < minHeight) height = minHeight;
+           // if (height < minHeight) height = minHeight;
             iframe.style.height = height + "px";
         } catch (ex) { }
     }
