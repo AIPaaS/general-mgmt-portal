@@ -7,15 +7,24 @@ function calcPageHeight(doc) {
 }
 
 window.onload = function() {
-	var locURL=window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/"+window.location.pathname;
-
+	
+	var mgmtPath = document.URL.getParameter("mgmtPath");
+	
+	if(mgmtPath !=null && mgmtPath!="null"){
+		setCookie("mgmtPath", mgmtPath, 60*60*24);	
+	}
+	
+	if(mgmtPath== null|| mgmtPath=="null"){	
+		
+		mgmtPath=unescape(getcookie("mgmtPath"));		
+	}
     var doc = document;
     var height = calcPageHeight(doc);
    
     var myifr = doc.getElementById('myifr');
 
     if (myifr) {
-        myifr.src = unescape(getcookie("mgmtPath"))+'/static/agentifram.jsp?height=' + height;
+        myifr.src = mgmtPath+'/static/agentifram.jsp?height=' + height;
         // console.log(doc.documentElement.scrollHeight)     
     }
 };

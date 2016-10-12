@@ -5,13 +5,13 @@ MAINTAINER gucl<gucl@asiainfo.com>
 RUN  yum -y groupinstall "Chinese Support"
 RUN  yum -y install kde-l10n-Chinese
 RUN  yum -y reinstall glibc-common
-RUN  export LANG=zh_CN.UTF-8  
-RUN  echo 'LANG=zh_CN.UTF-8' > /etc/environment && echo 'LC_ALL=' >> /etc/environment  
+RUN  export LANG=zh_CN.utf8  
+RUN  echo 'LANG=zh_CN.utf8' > /etc/environment && echo 'LC_ALL=' >> /etc/environment  
 RUN  source /etc/environment  
-#RUN  localedef -v -c -i zh_CN -f UTF-8 zh_CN.UTF-8 > /dev/null 2>&1 
+#RUN  localedef -v -c -i zh_CN -f UTF-8 zh_CN.utf8 > /dev/null 2>&1 
 
 # 设置语言环境变量
-ENV LANG zh_CN.UTF-8
+ENV LANG zh_CN.utf8
 ENV LANGUAGE zh_CN:zh
 # Install tomcat7
 RUN rm -rf /opt/apache-tomcat-7.0.72/webapps/* && mkdir /opt/apache-tomcat-7.0.72/webapps/ROOT
