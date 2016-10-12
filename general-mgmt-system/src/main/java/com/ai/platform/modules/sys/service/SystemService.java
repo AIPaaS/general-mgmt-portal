@@ -740,4 +740,8 @@ public class SystemService extends BaseService implements InitializingBean {
 		
 	}
 	
+	public User getUserByNo(String no) {
+		return userDao.getByNo(no);
+	}
+	
 }
