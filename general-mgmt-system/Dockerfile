@@ -4,6 +4,7 @@ MAINTAINER gucl<gucl@asiainfo.com>
 # 设置语言环境变量
 RUN  yum -y groupinstall "Chinese Support"
 RUN  yum -y install kde-l10n-Chinese
+RUN  yum -y reinstall glibc-common
 RUN  export LANG=zh_CN.UTF-8  
 RUN  echo 'LANG=zh_CN.UTF-8' > /etc/environment && echo 'LC_ALL=' >> /etc/environment  
 RUN  source /etc/environment  
