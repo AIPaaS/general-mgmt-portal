@@ -216,7 +216,7 @@ public class User extends DataEntity<User> {
 		this.name = name;
 	}
 	@Pattern(regexp = "^[a-zA-Z0-9_+.-]+\\@([a-zA-Z0-9-]+\\.)+[a-zA-Z0-9]{2,4}$", message = "邮箱格式不正确")
-	@Length(min=1, max=50, message="邮箱长度必须介于 1 和 100 之间")
+	@Length(min=1, max=50, message="邮箱长度必须介于 1 和 50 之间")
 	@ExcelField(title="邮箱", align=1, sort=50)
 	public String getEmail() {
 		return email;

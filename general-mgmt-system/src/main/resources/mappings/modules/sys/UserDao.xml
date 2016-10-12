@@ -139,6 +139,13 @@
 			ON ro.role_id = r.id -->
 		WHERE a.login_name = #{loginName} AND a.del_flag = #{DEL_FLAG_NORMAL}
 	</select>
+	<select id="getByNo" resultType="User" parameterType="User">
+		SELECT
+		<include refid="userColumns" />
+		FROM sys_user a
+		<include refid="userJoins" />
+		WHERE a.no = #{no}
+	</select>
 
 	<!-- 分页查询用户信息 -->
 	<select id="findList" resultType="User">
