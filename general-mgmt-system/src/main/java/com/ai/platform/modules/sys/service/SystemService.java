@@ -168,7 +168,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			UserUtils.clearCache(user);
 			UserUtils.removeCache(UserUtils.CACHE_USER_LIST);
 //			// 清除权限缓存
-//			systemRealm.clearAllCachedAuthorizationInfo();
+			systemRealm.clearAllCachedAuthorizationInfo();
 		}
 	}
 	
@@ -180,7 +180,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.clearCache(user);
 		UserUtils.removeCache(UserUtils.CACHE_USER_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
 	@Transactional(readOnly = false)
@@ -192,7 +192,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.clearCache(user);
 		UserUtils.removeCache(UserUtils.CACHE_USER_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
 	@Transactional(readOnly = false)
@@ -205,7 +205,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		UserUtils.clearCache(user);
 		UserUtils.removeCache(UserUtils.CACHE_USER_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
 	@Transactional(readOnly = false)
@@ -335,7 +335,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户角色缓存
 		UserUtils.removeCache(UserUtils.CACHE_ROLE_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
 	@Transactional(readOnly = false)
