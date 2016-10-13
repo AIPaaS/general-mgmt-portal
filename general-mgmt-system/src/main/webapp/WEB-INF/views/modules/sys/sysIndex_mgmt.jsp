@@ -243,7 +243,7 @@
          </div>
      </div>	
      <%-- ${ctx}/sys/portal --%>
-     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;"  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0"></iframe>
+     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;min-height:1200px "  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0"></iframe>
 	
 	    <!--底部-->
     <footer id="footer-bar" class="row">
