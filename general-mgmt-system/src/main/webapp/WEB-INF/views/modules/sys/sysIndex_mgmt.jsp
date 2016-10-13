@@ -235,7 +235,7 @@
 						            <ul id="elem2">
 						            </ul>
 						            </div>
-            						 <p class="dclose"><A href="#"><i class="icon-remove"></i></A></p>
+            						 <!-- <p class="dclose"><A href="#"><i class="icon-remove"></i></A></p> -->
 	                    		</div>
 	         			</div>
 	                	</div>
