@@ -114,13 +114,17 @@ public class RoleController extends BaseController {
 		if (!beanValidator(model, role)){
 			return form(role, model);
 		}
-		if (!"true".equals(checkName(role.getOldName(), role.getName()))){
-			addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
-			return form(role, model);
-		}
-		if (!"true".equals(checkEnname(role.getOldEnname(), role.getEnname()))){
-			addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
-			return form(role, model);
+		if(StringUtils.isNotBlank(role.getId())){
+			
+		
+			if (!"true".equals(checkName(role.getOldName(), role.getName()))){
+				addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
+				return form(role, model);
+			}
+			if (!"true".equals(checkEnname(role.getOldEnname(), role.getEnname()))){
+				addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
+				return form(role, model);
+			}
 		}
 		systemService.saveRole(role);
 		addMessage(redirectAttributes, "保存角色'" + role.getName() + "'成功");

@@ -115,7 +115,7 @@
 			<label class="control-label">角色名称:</label>
 			<div class="controls">
 				<input id="oldName" name="oldName" type="hidden" value="${role.name}">
-				<form:input path="name" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="name" htmlEscape="false" maxlength="50" class="${empty role.id?'required':''} "/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -123,7 +123,7 @@
 			<label class="control-label">英文名称:</label>
 			<div class="controls">
 				<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">
-				<form:input path="enname" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="enname" htmlEscape="false" maxlength="50" class="${empty role.id?'required':''} "/>
 				<span class="help-inline"><font color="red">*</font> 工作流用户组标识</span>
 			</div>
 		</div>
