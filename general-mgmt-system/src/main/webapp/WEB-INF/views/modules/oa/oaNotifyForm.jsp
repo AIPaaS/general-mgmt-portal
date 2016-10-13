@@ -8,6 +8,16 @@
 		$(document).ready(function() {
 			//$("#name").focus();
 			$("#inputForm").validate({
+				rules: {
+					oaNotifyRecordName:{
+						 required:true
+					}
+				},
+				messages:{
+					oaNotifyRecordName:{
+						 required:"请选择接受人"
+					}
+				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
 					form.submit();
@@ -16,7 +26,15 @@
 				errorPlacement: function(error, element) {
 					$("#messageBox").text("输入有误，请先更正。");
 					if (element.is(":checkbox")||element.is(":radio")||element.parent().is(".input-append")){
-						error.appendTo(element.parent().parent());
+						
+						if(element.attr("name")=="oaNotifyRecordNames"){
+							
+							$("#treeerro").find("label").remove();
+							$("<label for='title' class='error'>必填信息</label>").appendTo("#treeerro");
+							
+						}else{
+							error.appendTo(element.parent().parent());
+						}
 					} else {
 						error.insertAfter(element);
 					}
@@ -34,7 +52,7 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>	
 		<div class="control-group">
-			<label class="control-label">类型：</label>
+			<label class="control-label">类cc型：</label>
 			<div class="controls">
 			<c:if test="${not empty oaNotify.id && oaNotify.status eq '1'}">
 				<c:set var="disabled" value="true"/>
@@ -81,7 +99,7 @@
 				<div class="controls">
 	                <sys:treeselect id="oaNotifyRecord" name="oaNotifyRecordIds" value="${oaNotify.oaNotifyRecordIds}" labelName="oaNotifyRecordNames" labelValue="${oaNotify.oaNotifyRecordNames}"
 						title="用户" url="/sys/office/treeData?type=3" cssClass="input-xxlarge required" notAllowSelectParent="true" checked="true"/>
-					<span class="help-inline"><font color="red">*</font> </span>
+					<span id="treeerro" class="help-inline"><font color="red">*</font> </span>
 				</div>
 			</div>
 		</c:if>
