@@ -33,7 +33,7 @@ jQuery.validator.addMethod("abc",function(value, element) {
 },"请输入字母数字或下划线");
 
 jQuery.validator.addMethod("username",function(value, element) {
-	return this.optional(element) || /^[a-zA-Z0-9][a-zA-Z0-9_]{2,19}$/.test(value);
+	return this.optional(element) || /^[a-zA-Z0-9][a-zA-Z0-9_.]{2,19}$/.test(value);
 },"3-20位字母或数字开头，允许字母数字下划线");
 
 jQuery.validator.addMethod("noEqualTo",function(value, element, param) {

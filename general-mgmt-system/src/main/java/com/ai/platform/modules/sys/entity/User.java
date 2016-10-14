@@ -177,7 +177,7 @@ public class User extends DataEntity<User> {
 	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_]{2,20}$", message = "登录名格式不正确")
+	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_.]{2,20}$", message = "登录名格式不正确")
 	@ExcelField(title="登录名", align=2, sort=20)
 	public String getLoginName() {
 		return loginName;
