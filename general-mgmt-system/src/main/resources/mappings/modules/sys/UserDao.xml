@@ -300,6 +300,7 @@
 		update_date,
 		remarks,
 		tenant_id,
+		login_flag,
 		del_flag,
 		category
 		) VALUES (
@@ -318,6 +319,7 @@
 		#{updateDate},
 		#{remarks},
 		#{tenantId},
+		#{loginFlag},
 		#{delFlag},
 		#{category}
 		)
