@@ -24,7 +24,7 @@ public class ReadFileThred extends Thread {
 		for (String file : fileList) {
 			try {
 				readFile(file, ftp);
-//				ftp.deleteFile(file);
+				ftp.deleteFile(file);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
