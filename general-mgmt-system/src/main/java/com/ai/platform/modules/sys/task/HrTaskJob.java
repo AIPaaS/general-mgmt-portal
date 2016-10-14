@@ -30,7 +30,7 @@ public class HrTaskJob {
 
 	public static ExecutorService handlePool;
 
-	@Scheduled(cron = "0 0 24 ? * *")
+	@Scheduled(cron = "0 59 23 ? * *")
 	public void hrImportJob() {
 		run();
 	}
