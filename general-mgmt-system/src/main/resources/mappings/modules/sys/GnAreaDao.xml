@@ -62,10 +62,8 @@
 		<where>
 			AND a.state = 1
 			<if test="areaCode != null and areaCode != ''">
-				AND a.area_code like 
-					<if test="dbName == 'oracle'">'%'||#{areaCode}||'%'</if>
-					<if test="dbName == 'mssql'">'%'+#{areaCode}+'%'</if>
-					<if test="dbName == 'mysql'">CONCAT('%', #{areaCode}, '%')</if>
+				AND a.area_code =#{areaCode} 
+				
 			</if>
 			<if test="areaName != null and areaName != ''">
 				AND a.area_name like 

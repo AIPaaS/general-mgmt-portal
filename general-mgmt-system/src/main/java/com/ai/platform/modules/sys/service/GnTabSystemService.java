@@ -67,5 +67,10 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 		// TODO Auto-generated method stub
 		return gnTabSystemDao.findAllList(new GnTabSystem());
 	}
+
+	public List<GnTabSystem> findvalidateList(GnTabSystem gnTabSystem) {
+		// TODO Auto-generated method stub
+		return gnTabSystemDao.findAllList(gnTabSystem);
+	}
 	
 }

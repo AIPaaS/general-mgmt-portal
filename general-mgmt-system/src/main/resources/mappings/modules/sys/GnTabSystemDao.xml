@@ -64,6 +64,14 @@
 		<include refid="gnTabSystemJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="systemId != null and systemId != ''">
+				AND a.system_id = #{systemId}
+				
+			</if>
+			<if test="systemName != null and systemName != ''">
+				AND a.system_name = #{systemName}
+			
+			</if>
 		</where>		
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">

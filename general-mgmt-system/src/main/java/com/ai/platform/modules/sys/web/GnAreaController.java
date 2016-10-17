@@ -38,6 +38,9 @@ import com.google.common.collect.Maps;
 @RequestMapping(value = "${adminPath}/sys/gnArea")
 public class GnAreaController extends BaseController {
 
+	
+	private static List<Map<String, Object>>  mapList = Lists.newArrayList();
+	
 	@Autowired
 	private GnAreaService gnAreaService;
 	
@@ -138,6 +141,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
+		mapList = Lists.newArrayList();
 		addMessage(redirectAttributes, "保存区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -158,6 +162,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.delete(gnArea);
 		GnAreaUtils.clearCache();
+		mapList = Lists.newArrayList();
 		addMessage(redirectAttributes, "删除区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -168,17 +173,18 @@ public class GnAreaController extends BaseController {
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
 			
 		
-		List<Map<String, Object>>  mapList = Lists.newArrayList();
-		List<GnArea> list = GnAreaUtils.getGnAreaList();
 		
-		for (int i=0; i<list.size(); i++){
-			GnArea e = list.get(i);
-			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
-				Map<String, Object> map = Maps.newHashMap();
-				map.put("id", e.getId());
-				map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
-				map.put("name", e.getAreaName());
-				mapList.add(map);
+		List<GnArea> list = GnAreaUtils.getGnAreaList();
+		if(mapList.isEmpty() || mapList==null){
+			for (int i=0; i<list.size(); i++){
+				GnArea e = list.get(i);
+				if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
+					Map<String, Object> map = Maps.newHashMap();
+					map.put("id", e.getId());
+					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
+					map.put("name", e.getAreaName());
+					mapList.add(map);
+				}
 			}
 		}
 		return mapList;

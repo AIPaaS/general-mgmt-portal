@@ -7,7 +7,28 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			//$("#name").focus();
+	
 			$("#inputForm").validate({
+				rules: {
+					systemId: { required:true,remote:{
+						url:"${ctx}/sys/gnTabSystem/checkSystemId",
+						type:"post",
+						data:{"id": "${gnTabSystem.id}"}
+                            
+						} 
+					},
+					systemName:{ required:true,remote:{
+						url:"${ctx}/sys/gnTabSystem/checkSystemName",
+						type:"post",
+						data:{"id": "${gnTabSystem.id}"}
+                            
+						}
+					}			
+				},
+				messages: {
+					systemId: {remote: "应用编码已存在"},
+					systemName: {remote: "应用名称已存在"}
+				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
 					form.submit();
@@ -31,19 +52,19 @@
 		<li class="active"><a href="${ctx}/sys/gnTabSystem/form?id=${gnTabSystem.id}">应用配置<shiro:hasPermission name="sys:gnTabSystem:edit">${not empty gnTabSystem.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:gnTabSystem:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="gnTabSystem" action="${ctx}/sys/gnTabSystem/save" method="post" class="form-horizontal">
-		<form:hidden path="id"/>
+		<form:hidden path="id" value="${gnTabSystem.id}"/>
 		<sys:message content="${message}"/>		
 		<div class="control-group">
 			<label class="control-label">应用编码：</label>
 			<div class="controls">
-				<form:input path="systemId" htmlEscape="false" maxlength="32" class="required"/>
+				<form:input path="systemId" htmlEscape="false" maxlength="32" class=" ${empty gnTabSystem.id?'required systemId':''}"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">应用名称：</label>
 			<div class="controls">
-				<form:input path="systemName" htmlEscape="false" maxlength="50" class="required"/>
+				<form:input path="systemName" htmlEscape="false" maxlength="50" class="required ${empty gnTabSystem.id?'systemName':''}"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

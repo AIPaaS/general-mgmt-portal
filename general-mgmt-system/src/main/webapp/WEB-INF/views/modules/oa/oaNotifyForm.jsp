@@ -11,11 +11,27 @@
 				rules: {
 					oaNotifyRecordName:{
 						 required:true
+					},
+					title:{
+						required:true,
+						maxlength: 18
+					},
+					content:{
+						required:true,
+						maxlength: 224
 					}
 				},
 				messages:{
 					oaNotifyRecordName:{
 						 required:"请选择接受人"
+					},
+					title:{
+						required: "请输入标题", 
+						maxlength: "标题长度不能超过18个字符", 
+					},
+					content:{
+						required: "请输入标题", 
+						maxlength: "标题长度不能超过224个字符", 
 					}
 				},
 				submitHandler: function(form){
@@ -52,7 +68,7 @@
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>	
 		<div class="control-group">
-			<label class="control-label">类cc型：</label>
+			<label class="control-label">类型：</label>
 			<div class="controls">
 			<c:if test="${not empty oaNotify.id && oaNotify.status eq '1'}">
 				<c:set var="disabled" value="true"/>
@@ -67,14 +83,14 @@
 		<div class="control-group">
 			<label class="control-label">标题：</label>
 			<div class="controls">
-				<form:input path="title" htmlEscape="false" maxlength="18" disabled="${oaNotify.status eq '1' ? true : false}" class="input-xlarge required"/>
+				<form:input path="title" htmlEscape="false"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">内容：</label>
 			<div class="controls">
-				<form:textarea path="content" htmlEscape="false" rows="6" maxlength="1000" disabled="${oaNotify.status eq '1' ? true : false}" class="input-xxlarge required"/>
+				<form:textarea path="content" htmlEscape="false" rows="6"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xxlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

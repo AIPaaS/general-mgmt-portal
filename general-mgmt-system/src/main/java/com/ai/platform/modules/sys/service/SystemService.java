@@ -316,6 +316,8 @@ public class SystemService extends BaseService implements InitializingBean {
 //		saveActivitiGroup(role);
 		// 清除用户角色缓存
 		UserUtils.removeCache(UserUtils.CACHE_ROLE_LIST);
+//		// 清除权限缓存
+		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
 	@Transactional(readOnly = false)
@@ -324,7 +326,11 @@ public class SystemService extends BaseService implements InitializingBean {
 		if (roleMenu.getMenuList().size() > 0){
 			roleMenuDao.insertRoleMenu(roleMenu);
 		}
-		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);	
+		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
+		// 清除用户角色缓存
+		UserUtils.removeCache(UserUtils.CACHE_ROLE_LIST);
+		// 清除权限缓存
+		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 
 	@Transactional(readOnly = false)
