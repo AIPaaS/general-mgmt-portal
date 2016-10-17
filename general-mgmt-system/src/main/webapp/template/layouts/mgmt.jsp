@@ -4,7 +4,7 @@
 <c:set var="iotStatic" value="${pageContext.request.contextPath}/template/mgmtstatic/default"/>
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
 <!DOCTYPE html>
-<html style="overflow-x:auto;overflow-y:auto;">
+<html style="overflow-x:hidden;overflow-y:hidden;">
 <head>
 	<title>运营管理平台<sitemesh:title/></title>
 	<%@include file="/template/mgmt/head.jsp" %>		

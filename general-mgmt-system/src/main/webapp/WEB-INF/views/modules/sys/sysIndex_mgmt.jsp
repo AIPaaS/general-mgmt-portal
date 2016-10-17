@@ -151,6 +151,7 @@
                 <li class="active"><a href="#"><i class="fa fa-home"></i><span><font>系统控制台</font></span></a></li>
                 	<c:set var="firstMenu" value="true"/>
                 	<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
+               
 						<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1' &&menu.resourceType eq '0'}">
 						
 								<li >
@@ -166,8 +167,8 @@
 										<c:set var="rootMenuId" value="${menu.id}"/>
 										<c:forEach items="${fns:getChildsMenu(rootMenuId)}" var="menuNode" varStatus="idxStatus">
 										<c:set var="systemId" value="${menuNode.gnTabSystem}"/>
-										<c:if test="${empty menuNode.href}">
-											<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
+										<c:if test="${empty menuNode.href &&menuNode.isShow eq '1'}">
+											<li><a href="#" data-id="${menuNode.id}" class="dropdown-toggle" target="mainFrame">${menuNode.name}<i class="fa fa-chevron-circle-right drop-icon"></i></a>
 											<!--三级菜单-->
 					                        <ul class="submenu three-list">
 						                        <c:forEach items="${fns:getChildsMenu(menuNode.id)}" var="menuNodethree" varStatus="idxStatus">
@@ -179,7 +180,7 @@
 						                        </c:forEach>
 					                 	   	</ul>
 							     		</c:if>
-							     		<c:if test="${not empty menuNode.href}">
+							     		<c:if test="${not empty menuNode.href &&menuNode.isShow eq '1'}">
 							     		
 							     			<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
 							     	
@@ -243,12 +244,12 @@
          </div>
      </div>	
      <%-- ${ctx}/sys/portal --%>
-     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow:visible;min-height:1200px "  frameborder="0"  scrolling="no" marginheight="0" width="100%" marginwidth="0"></iframe>
-	
-	    <!--底部-->
+     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow-x:hidden;" scrolling="auto" frameborder="no" width="100%"  marginheight="50px" marginwidth="0"></iframe>
+<!-- 	
+	    底部
     <footer id="footer-bar" class="row">
-   		 <p id="footer-copyright" class="col-xs-12">亚信e</p>
-    </footer>
+   		 <p id="footer-copyright" class="col-xs-12">亚信</p>
+    </footer> -->
    <!--/底部结束-->
     </div>
     </div>
@@ -258,4 +259,5 @@
 
 	
 </body>
+	
 </html>

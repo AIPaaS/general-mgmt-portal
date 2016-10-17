@@ -74,7 +74,7 @@
 		</ul>
      </form:form>
   	<!--查询结束-->      
-      <table id="contentTable" class="table table-hover table-border table-bordered">
+      <table id="contentTable" class="table table-striped table-bordered table-condensed">
           <thead>
               <tr>
                   <th>部门名称</th>

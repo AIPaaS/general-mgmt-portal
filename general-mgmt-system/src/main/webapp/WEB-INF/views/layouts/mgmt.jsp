@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <%@ taglib prefix="sitemesh" uri="http://www.opensymphony.com/sitemesh/decorator" %>
 <!DOCTYPE html>
-<html style="overflow-x:auto;overflow-y:auto;">
+<html style="overflow-x:hidden;overflow-y:hidden;">
 <head>
 	<title>运营管理平台<sitemesh:title/></title>
 	<%@include file="/WEB-INF/views/include/mgmt/head.jsp" %>		
@@ -10,6 +10,7 @@
 	<sitemesh:head/>
 </head>
 <body>
+
 <sitemesh:body/>
 
  
