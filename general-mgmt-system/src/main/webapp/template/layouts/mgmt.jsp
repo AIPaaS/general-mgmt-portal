@@ -21,7 +21,7 @@
 <script src="${iotStatic}/scripts/modular/frame.js"></script>  
 <script src="${iotStatic}/scripts/modular/eject.js"></script>  
 <script src="${iotStatic}/scripts/modular/scripts.js"></script>
-<script src="${iotStatic}/scripts/modular/iFrame-height-auto.js"></script>
+
 
 
 <!--日期-->
