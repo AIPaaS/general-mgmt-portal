@@ -37,9 +37,11 @@ import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.utils.excel.ExportExcel;
 import com.ai.platform.common.web.BaseController;
+import com.ai.platform.modules.sys.entity.GnTenant;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
+import com.ai.platform.modules.sys.service.GnTenantService;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
@@ -60,7 +62,9 @@ public class UserController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private OfficeService officeService;
-
+	@Autowired
+	private GnTenantService gnTenantService;
+	
 	@ModelAttribute
 	public User get(@RequestParam(required = false) String id) {
 		if (StringUtils.isNotBlank(id)) {
@@ -134,6 +138,7 @@ public class UserController extends BaseController {
 		} else {
 			model.addAttribute("userList", systemService.findAllNoAccountUser());
 		}
+		model.addAttribute("gnTenantList", gnTenantService.findList(new GnTenant()));
 		model.addAttribute("user", user);
 		model.addAttribute("allRoles", systemService.findAllRole());
 		return "modules/sys/usernoForm";
@@ -231,6 +236,18 @@ public class UserController extends BaseController {
 			}
 		}
 		user.setRoleList(roleList);
+		
+		
+//		List<GnTenant> gnTenantList = Lists.newArrayList();
+//		List<String> gnTenantIdList = user.getTenantIdList();
+//		for (GnTenant g : gnTenantService.findList(new GnTenant())) {
+//			if (gnTenantIdList.contains(g.getTenantId())) {
+//				gnTenantList.add(g);
+//			}
+//		}
+//		user.setTenantId(gnTenantList.get(0).getTenantId());
+		
+		
 		// 插入员工信息时给予员工信息默认主题
 		if (StringUtils.isNotBlank(user.getTheme())) {
 			user.setTheme(Global.getDefTheme());
@@ -525,7 +542,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "prohibit")
 	public String prohibitLogin(User user, RedirectAttributes redirectAttributes) {
-		user.setLoginFlag("0");
+		//user.setLoginFlag("0");
 		systemService.updateLoginFalg(user);
 		addMessage(redirectAttributes, "冻结该账号成功");
 		return "redirect:" + adminPath + "/sys/user/listno?repage";

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.platform.modules.sys.dao.GnTenantDao">
+     
+	<sql id="gnTenantColumns">
+		a.tenant_id AS "tenantId",
+		a.tenant_name AS "tenantName",
+		a.tenant_pwd AS "tenantPwd",
+		a.state AS "state",
+		a.industry_code AS "industryCode",
+		a.logo AS "logo",
+		a.frame_page_template AS "framePageTemplate"
+	</sql>
+	
+	<sql id="gnTenantJoins">
+	</sql>
+    
+	<select id="get" resultType="GnTenant">
+		SELECT 
+			<include refid="gnTenantColumns"/>
+		FROM gn_tenant a
+		<include refid="gnTenantJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="GnTenant">
+		SELECT 
+			<include refid="gnTenantColumns"/>
+		FROM gn_tenant a
+		<include refid="gnTenantJoins"/>
+		<where>
+			
+			<if test="tenantId != null and tenantId != ''">
+				AND a.tenant_id = #{tenantId}
+			</if>
+			<if test="tenantName != null and tenantName != ''">
+				AND a.tenant_name = #{tenantName}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="GnTenant">
+		SELECT 
+			<include refid="gnTenantColumns"/>
+		FROM gn_tenant a
+		<include refid="gnTenantJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO gn_tenant(
+			tenant_id,
+			tenant_name
+		) VALUES (
+			#{tenantId},
+			#{tenantName}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE gn_tenant SET 	
+			tenant_id = #{tenantId},
+			tenant_name = #{tenantName}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM gn_tenant
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

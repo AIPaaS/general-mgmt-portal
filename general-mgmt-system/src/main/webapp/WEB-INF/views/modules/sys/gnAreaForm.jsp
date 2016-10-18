@@ -11,6 +11,42 @@
 		$(document).ready(function() {
 			//$("#name").focus();
 			$("#inputForm").validate({
+				rules: {
+					areaCode:{
+						 required:true,
+						 maxlength: 9
+					},
+					areaName:{
+						required:true,
+						maxlength: 16
+					},
+					sortId:{
+						
+						maxlength: 4
+					},
+					remark:{
+						
+						maxlength: 100
+					}
+				},
+				messages:{
+					areaCode:{
+						 required:"请输入区域编码", 
+						 maxlength: "区域编码长度不能超过9个字符"
+					},
+					areaName:{
+						required: "请输入区域名称", 
+						maxlength: "区域名称不能超过16个字符"
+					},
+					sortId:{
+						
+						maxlength: "排序长度不能超过4个字符" 
+					},
+					remark:{
+						
+						maxlength: "备注长度不能超过100个字符"
+					}
+				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
 					form.submit();
@@ -39,14 +75,14 @@
 		<div class="control-group">
 			<label class="control-label">区域编码：</label>
 			<div class="controls">
-				<form:input path="areaCode" htmlEscape="false" maxlength="9" class="input-xlarge required digits"/>
+				<form:input path="areaCode" htmlEscape="false" maxlength="10" class="input-xlarge required digits"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">区域名称：</label>
 			<div class="controls">
-				<form:input path="areaName" htmlEscape="false" maxlength="16" class="input-xlarge required"/>
+				<form:input path="areaName" htmlEscape="false" maxlength="17" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -119,7 +155,7 @@
 			<label class="control-label">备注：</label>
 			<div class="controls">
 				
-				<form:textarea path="remark" htmlEscape="false" rows="3" maxlength="100" class="input-xlarge"/>
+				<form:textarea path="remark" htmlEscape="false" rows="3" maxlength="101" class="input-xlarge"/>
 			
 			</div>
 		</div>

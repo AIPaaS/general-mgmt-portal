@@ -61,7 +61,7 @@
          <ul class="ul-form">
 			<li><label>上级部门：</label>
 			<sys:treeselect id="parent" name="parent.id" value="${parent.id}" labelName="parent.name" labelValue="${parent.name}" 
-				title="部门" url="/sys/office/treeData" cssClass="input-small" allowClear="false"/>
+				title="部门" url="/sys/office/treeData" cssClass="input-small" allowClear="true"/>
 			</li>
 			<li><label>名称：</label>
 				<form:input path="name" htmlEscape="false" maxlength="100" class="input-medium"/>

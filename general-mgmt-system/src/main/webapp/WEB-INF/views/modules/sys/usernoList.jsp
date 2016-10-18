@@ -79,7 +79,12 @@
 				<shiro:hasPermission name="sys:user:edit"><td>
     				<a href="${ctx}/sys/user/formno?id=${user.id}">修改</a>
     				<a href="${ctx}/sys/user/resetPWD?id=${user.id}" onclick="return confirmx('确认要重置密码吗？', this.href)">密码重置</a>
-    				<a href="${ctx}/sys/user/prohibit?id=${user.id}" onclick="return confirmx('确认要冻结该账号吗？', this.href)">冻结</a>    					
+    				<c:if test="${user.loginFlag eq '1'}">
+    					<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=0" onclick="return confirmx('确认要冻结该账号吗？', this.href)">冻结</a>    					
+					</c:if>
+					<c:if test="${user.loginFlag eq '0'}">
+						<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=1" onclick="return confirmx('确认要解冻该账号吗？', this.href)">解冻</a>   
+					</c:if>
 					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
 					
 				</td></shiro:hasPermission>

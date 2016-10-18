@@ -69,6 +69,10 @@ public class User extends DataEntity<User> {
 	private Role role;	// 根据角色查询用户条件
 	
 	private List<Role> roleList = Lists.newArrayList(); // 拥有角色列表
+	private List<GnTenant> tenantList = Lists.newArrayList(); // 拥有租户列表
+
+
+
 
 	public User() {
 		super();
@@ -354,6 +358,16 @@ public class User extends DataEntity<User> {
 	}
 
 	@JsonIgnore
+	@ExcelField(title="业务平台", align=1, sort=800)
+	public List<GnTenant> getTenantList() {
+		return tenantList;
+	}
+
+	public void setTenantList(List<GnTenant> tenantList) {
+		this.tenantList = tenantList;
+	}
+	
+	@JsonIgnore
 	public List<String> getRoleIdList() {
 		List<String> roleIdList = Lists.newArrayList();
 		for (Role role : roleList) {
@@ -368,6 +382,25 @@ public class User extends DataEntity<User> {
 			Role role = new Role();
 			role.setId(roleId);
 			roleList.add(role);
+		}
+	}
+	@JsonIgnore
+	public List<String> getTenantIdList() {
+		List<String> tenantIdList = Lists.newArrayList();
+		for (GnTenant GnTenant : tenantList) {
+			tenantIdList.add(GnTenant.getId());
+		}
+
+		return tenantIdList;
+	}
+
+	public void setTenantIdList(List<String> tenantIdList) {
+		tenantList = Lists.newArrayList();
+		for (String gnTenantId : tenantIdList) {
+			GnTenant  gnTenant= new GnTenant();
+			gnTenant.setId(gnTenantId);
+			gnTenant.setTenantId(gnTenantId);
+			tenantList.add(gnTenant);
 		}
 	}
 	

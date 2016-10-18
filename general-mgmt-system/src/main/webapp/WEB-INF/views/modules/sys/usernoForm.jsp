@@ -154,6 +154,15 @@
 			</div>
 		</div> --%>
 		<div class="control-group">
+			<label class="control-label">所属业务平台:</label>
+			<div class="controls">
+				
+					<form:radiobuttons path="tenantId" items="${gnTenantList}" itemLabel="tenantName" itemValue="tenantId" htmlEscape="false" class="required"/>
+		
+			</div>
+		</div>		
+		
+		<div class="control-group">
 			<label class="control-label">账号角色:</label>
 			<div class="controls">
 				<form:checkboxes path="roleIdList" items="${allRoles}" itemLabel="name" itemValue="id" htmlEscape="false" class="required"/>
@@ -166,6 +175,7 @@
 				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="200" class="input-xlarge"/>
 			</div>
 		</div> --%>
+		
 			<div class="control-group">
 				<label class="control-label">生效时间:</label>
 				<div class="controls">
