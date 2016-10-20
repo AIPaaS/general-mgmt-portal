@@ -269,7 +269,7 @@ JavaScript
          </div>
      </div>	
      <%-- ${ctx}/sys/portal --%>
-     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" onload="javascript:dyniframesize('mainFrame');" style="overflow-x:hidden;overflow-y:scroll;height:520px;" scrolling="auto" frameborder="no" width="100%"  marginheight="50px" marginwidth="0"  height="520"></iframe>
+     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" onload="javascript:dyniframesize('mainFrame');" style="overflow-x:hidden;overflow-y:scroll;height:520px;" scrolling="auto" frameborder="no" width="100%"  marginheight="50px" marginwidth="0"></iframe>
 <!-- 	
 	    底部
     <footer id="footer-bar" class="row">
