@@ -63,7 +63,6 @@ public class UserThead extends Thread {
 				findUser.setCompany(user.getCompany());
 				findUser.setOffice(user.getOffice());
 				findUser.setDelFlag(userInfo[6]);
-				findUser.setLoginFlag("1");
 				systemService.saveImportUser(findUser);
 			} else {
 				systemService.saveImportUser(user);
