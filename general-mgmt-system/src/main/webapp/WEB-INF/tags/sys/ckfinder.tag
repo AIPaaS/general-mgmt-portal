@@ -13,7 +13,7 @@
 		var date = new Date(), year = date.getFullYear(), month = (date.getMonth()+1)>9?date.getMonth()+1:"0"+(date.getMonth()+1);
 		var url = "${ctxStatic}/ckfinder/ckfinder.html?type=${ctype}&start=${ctype}:${uploadPath}/"+year+"/"+month+
 			"/&action=js&func=${input}SelectAction&thumbFunc=${input}ThumbSelectAction&cb=${input}Callback&dts=${type eq 'thumb'?'1':'0'}&sm=${selectMultiple?1:0}";
-		windowOpen(url,"文件管理",1000,700);
+		windowOpen(url,"文件管理",800,500);
 		//top.$.jBox("iframe:"+url+"&pwMf=1", {title: "文件管理", width: 1000, height: 500, buttons:{'关闭': true}});
 	}
 	function ${input}SelectAction(fileUrl, data, allFiles){
@@ -61,7 +61,24 @@
 		//top.$.jBox.close();
 	}
 	function ${input}Callback(api){
+
 		ckfinderAPI = api;
+		api.disableFolderContextMenuOption('kl', false);
+		api.disableFolderContextMenuOption('lI', false);
+		
+		api.disableFolderContextMenuOption('removeFolder', false);
+	
+		// Disable download function
+		
+		api.disableFileContextMenuOption( 'selectFile', false );
+		api.disableFileContextMenuOption( 'SelectThumbnail', false );
+		api.disableFileContextMenuOption( 'downloadFile', false );
+	
+		api.disableFileContextMenuOption( 'renameFile', false );
+	
+		
+		api.disableFileContextMenuOption( 'viewFile', false );
+		
 	}
 	function ${input}Del(obj){
 		var url = $(obj).prev().attr("url");
@@ -79,6 +96,7 @@
 	
 		for (var i=0; i<urls.length; i++){
 			if (urls[i]!=""){//<c:if test="${type eq 'thumb' || type eq 'images'}">
+			
 				li = "<li><img src=\""+urls[i]+"\" url=\""+urls[i]+"\" style=\"max-width:${empty maxWidth ? 200 : maxWidth}px;max-height:${empty maxHeight ? 200 : maxHeight}px;_height:${empty maxHeight ? 200 : maxHeight}px;border:0;padding:3px;\">";//</c:if><c:if test="${type ne 'thumb' && type ne 'images'}">
 				li = "<li><a href=\""+urls[i]+"\" url=\""+urls[i]+"\" target=\"_blank\">"+decodeURIComponent(urls[i].substring(urls[i].lastIndexOf("/")+1))+"</a>";//</c:if>
 				li += "&nbsp;&nbsp;<c:if test="${!readonly}"><a href=\"javascript:\" onclick=\"${input}Del(this);\">×</a></c:if></li>";

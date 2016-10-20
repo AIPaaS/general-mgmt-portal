@@ -51,14 +51,14 @@
 			<role>*</role>
 			<resourceType>*</resourceType>
 			<folder>/</folder>
-			<folderView>false</folderView>
-			<folderCreate>false</folderCreate>
-			<folderRename>false</folderRename>
-			<folderDelete>false</folderDelete>
-			<fileView>false</fileView>
-			<fileUpload>false</fileUpload>
-			<fileRename>false</fileRename>
-			<fileDelete>false</fileDelete>
+			<folderView>true</folderView>
+			<folderCreate>true</folderCreate>
+			<folderRename>true</folderRename>
+			<folderDelete>true</folderDelete>
+			<fileView>true</fileView>
+			<fileUpload>true</fileUpload>
+			<fileRename>true</fileRename>
+			<fileDelete>true</fileDelete>
 		</accessControl>
 	</accessControls>
 	<thumbs>
@@ -71,7 +71,7 @@
 		<quality>80</quality>
 	</thumbs>
 	<plugins>
-		<plugin>
+<!-- 		<plugin>
 			<name>imageresize</name>
 			<class>com.ckfinder.connector.plugins.ImageResize</class>
 			<params>
@@ -79,12 +79,12 @@
 				<param name="mediumThumb" value="120x120"></param>
 				<param name="largeThumb" value="180x180"></param>
 			</params>
-		</plugin>
-		<plugin>
+		</plugin> -->
+<!-- 		<plugin>
 			<name>fileeditor</name>
 			<class>com.ckfinder.connector.plugins.FileEditor</class>
 			<params></params>
-		</plugin>
+		</plugin> -->
 	</plugins>
 	<basePathBuilderImpl>com.ckfinder.connector.configuration.ConfigurationPathBuilder</basePathBuilderImpl>
 </config>
