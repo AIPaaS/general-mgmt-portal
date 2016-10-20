@@ -9,7 +9,10 @@
   </head>
 
 <body>
+<script type="text/javascript">
 
+
+</script>
 <div id="${fns:getThemeIndex()}" class="${fns:getThemeIndex()}">
     <header class="navbar" id="header-navbar">
         <div class="container">
@@ -244,8 +247,8 @@
          </div>
      </div>	
      <iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="${iotStatic}/images/welcome.png"
-      style="overflow-x:hidden;overflow-y:scroll;height:520px;" scrolling="auto" frameborder="no" width="100%" 
-       marginheight="50px" marginwidth="0"  height="520"></iframe>
+      style="padding: 0px;overflow-x:hidden;overflow-y:scroll;" scrolling="auto" frameborder="no" width="100%" 
+       marginheight="50px" marginwidth="0" ></iframe>
 <!-- 	
 	    底部
     <footer id="footer-bar" class="row">
