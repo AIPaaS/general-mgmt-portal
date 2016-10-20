@@ -190,7 +190,7 @@ public class LoginController extends BaseController{
 ////			request.getSession().setAttribute("aaa", "aa");
 ////		}
 //		System.out.println("==========================b");
-		
+		LogUtils.saveLog(request, "系统登录");
 		initLoginInfo(model, principal);
 		return "modules/sys/sysSSOindex";
 	}
