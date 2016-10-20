@@ -246,7 +246,7 @@
               </div>
          </div>
      </div>	
-     <iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="${iotStatic}/images/welcome.png"
+     <iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="${iotStatic}/welcome.jsp"
       style="padding: 0px;overflow-x:hidden;overflow-y:scroll;" scrolling="auto" frameborder="no" width="100%" 
        marginheight="50px" marginwidth="0" ></iframe>
 <!-- 	
