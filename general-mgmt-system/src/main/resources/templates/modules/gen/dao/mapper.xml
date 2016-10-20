@@ -85,17 +85,17 @@ ${columnField?substring(0, columnField?last_index_of(","))}
 				AND a.${c.name} LIKE 
 					<if test="dbName == 'oracle'">'%'||${"#"}{${c.javaFieldId}}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+${"#"}{${c.javaFieldId}}+'%'</if>
-					<if test="dbName == 'mysql'">concat('%',${"#"}{${c.javaFieldId}},'%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%/',${"#"}{${c.javaFieldId}},'%')  ESCAPE '/' </if>
 					<#elseif c.queryType ?? && c.queryType == 'left_like'>
 				AND a.${c.name} LIKE 
 					<if test="dbName == 'oracle'">'%'||${"#"}{${c.javaFieldId}}</if>
 					<if test="dbName == 'mssql'">'%'+${"#"}{${c.javaFieldId}}</if>
-					<if test="dbName == 'mysql'">concat('%',${"#"}{${c.javaFieldId}})</if>
+					<if test="dbName == 'mysql'">CONCAT('%/',${"#"}{${c.javaFieldId}}) ESCAPE '/'</if>
 					<#elseif c.queryType ?? && c.queryType == 'right_like'>
 				AND a.${c.name} LIKE 
 					<if test="dbName == 'oracle'">${"#"}{${c.javaFieldId}}||'%'</if>
 					<if test="dbName == 'mssql'">${"#"}{${c.javaFieldId}}+'%'</if>
-					<if test="dbName == 'mysql'">concat(${"#"}{${c.javaFieldId}},'%')</if>
+					<if test="dbName == 'mysql'">concat(${"#"}{${c.javaFieldId}},'%')  ESCAPE '/' </if>
 					<#else>
 				AND a.${c.name} ${c.queryType} ${"#"}{${c.javaFieldId}}
 					</#if>

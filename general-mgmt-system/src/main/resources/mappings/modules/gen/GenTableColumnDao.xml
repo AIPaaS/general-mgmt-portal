@@ -34,7 +34,7 @@
 			AND a.name LIKE 
 				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+				<if test="dbName == 'mysql'">CONCAT('%/',#{name},'%')  ESCAPE '/' </if>
 		</if>
 		<if test="genTable != null and genTable.id != null and genTable.id != ''">
 			AND a.gen_table_id = #{genTable.id}

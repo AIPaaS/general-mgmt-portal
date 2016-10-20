@@ -19,7 +19,7 @@
 			AND a.title LIKE 
 					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
-					<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%/', #{title}, '%')  ESCAPE '/' </if>
 		</if>
 		<if test="createBy != null and createBy.id != null and createBy.id != ''">
 			AND a.create_by = #{createBy.id}
@@ -28,7 +28,7 @@
 			AND a.request_uri LIKE 
 					<if test="dbName == 'oracle'">'%'||#{requestUri}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{requestUri}+'%'</if>
-					<if test="dbName == 'mysql'">CONCAT('%', #{requestUri}, '%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%/', #{requestUri}, '%')  ESCAPE '/' </if>
 		</if>
 		<if test="exception != null and exception != ''">
 			AND a.type = #{TYPE_EXCEPTION}

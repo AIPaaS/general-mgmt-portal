@@ -54,7 +54,7 @@
 			AND a.TITLE LIKE 
 					<if test="dbName == 'oracle'">'%'||#{title}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{title}+'%'</if>
-					<if test="dbName == 'mysql'">CONCAT('%', #{title}, '%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%/', #{title}, '%')  ESCAPE '/' </if>
 		</if>
 		<if test="type != null and type != ''">
 			AND a.TYPE = #{type}

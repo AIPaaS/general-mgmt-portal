@@ -132,15 +132,15 @@
 			AND a.name LIKE
 			<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
 			<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-			<if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>
+			<if test="dbName == 'mysql'">CONCAT('%/', #{name}, '%')  ESCAPE '/' </if>
 		</if>
 		<if test="enname != null and enname != ''">
 			AND a.enname LIKE
 			<if test="dbName == 'oracle'">'%'||#{enname}||'%'</if>
 			<if test="dbName == 'mssql'">'%'+#{enname}+'%'</if>
-			<if test="dbName == 'mysql'">CONCAT('%', #{enname}, '%')</if>
+			<if test="dbName == 'mysql'">CONCAT('%/', #{enname}, '%')  ESCAPE '/' </if>
 		</if>
-		AND a.tenant_id = #{tenantId}
+		<!-- AND a.tenant_id = #{tenantId} -->
 		<!-- 数据范围过滤 -->
 		<!--${sqlMap.dsf}-->
 		ORDER BY a.name
@@ -157,15 +157,17 @@
 			AND a.name LIKE
 			<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
 			<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-			<if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>
+			<if test="dbName == 'mysql'">CONCAT('%/', #{name}, '%')  ESCAPE '/'  </if>
+			
 		</if>
 		<if test="enname != null and enname != ''">
 			AND a.enname LIKE
 			<if test="dbName == 'oracle'">'%'||#{enname}||'%'</if>
 			<if test="dbName == 'mssql'">'%'+#{enname}+'%'</if>
-			<if test="dbName == 'mysql'">CONCAT('%', #{enname}, '%')</if>
+			<if test="dbName == 'mysql'">CONCAT('%/', #{enname}, '%')  ESCAPE '/' </if>
+			
 		</if>
-		AND a.tenant_id = #{tenantId}
+		<!-- AND a.tenant_id = #{tenantId} -->
 		<!-- 数据范围过滤 -->
 		<!--${sqlMap.dsf}-->
 		ORDER BY  a.name

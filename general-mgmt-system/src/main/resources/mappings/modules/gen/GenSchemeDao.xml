@@ -29,7 +29,7 @@
 			AND a.name LIKE 
 				<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-				<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+				<if test="dbName == 'mysql'">CONCAT('%/',#{name},'%')  ESCAPE '/' </if>
 		</if>
 		ORDER BY a.update_date DESC
 	</select>

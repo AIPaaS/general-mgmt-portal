@@ -69,7 +69,7 @@
 				AND a.area_name like 
 					<if test="dbName == 'oracle'">'%'||#{areaName}||'%'</if>
 					<if test="dbName == 'mssql'">'%'+#{areaName}+'%'</if>
-					<if test="dbName == 'mysql'">CONCAT('%', #{areaName}, '%')</if>
+					<if test="dbName == 'mysql'">CONCAT('%/', #{areaName}, '%')  ESCAPE '/' </if>
 			</if>
 			<if test="id != null and id != ''">
 				AND a.id = #{id}

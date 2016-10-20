@@ -38,13 +38,13 @@
 				AND a.system_id LIKE 
 				<if test="dbName == 'oracle'">'%'||#{systemId}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{systemId}+'%'</if>
-				<if test="dbName == 'mysql'">concat('%',#{systemId},'%')</if>
+				<if test="dbName == 'mysql'">CONCAT('%/',#{systemId},'%')  ESCAPE '/' </if>
 			</if>
 			<if test="systemName != null and systemName != ''">
 				AND a.system_name LIKE 
 				<if test="dbName == 'oracle'">'%'||#{systemName}||'%'</if>
 				<if test="dbName == 'mssql'">'%'+#{systemName}+'%'</if>
-				<if test="dbName == 'mysql'">concat('%',#{systemName},'%')</if>
+				<if test="dbName == 'mysql'">CONCAT('%/',#{systemName},'%')  ESCAPE '/' </if>
 			</if>
 		</where>
 		<choose>

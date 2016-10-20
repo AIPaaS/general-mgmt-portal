@@ -543,8 +543,14 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "prohibit")
 	public String prohibitLogin(User user, RedirectAttributes redirectAttributes) {
 		//user.setLoginFlag("0");
-		systemService.updateLoginFalg(user);
-		addMessage(redirectAttributes, "冻结该账号成功");
+		if(user.getLoginFlag()!=null && ("0").equals(user.getLoginFlag())){
+			systemService.updateLoginFalg(user);
+			addMessage(redirectAttributes, "冻结该账号成功");
+		}else if(user.getLoginFlag()!=null && ("1").equals(user.getLoginFlag())){
+			systemService.updateLoginFalg(user);
+			addMessage(redirectAttributes, "解冻该账号成功");
+		}
+
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 
