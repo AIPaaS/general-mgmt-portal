@@ -7,7 +7,9 @@
 
 	<meta name="decorator" content="mgmt"/>
   </head>
-JavaScript
+
+
+<body>
 <script type="text/javascript">
         function dyniframesize(down) {
             var pTar = null;
@@ -33,8 +35,6 @@ JavaScript
             }
         } 
     </script>
-<body>
-
 <div id="${fns:getThemeIndex()}" class="${fns:getThemeIndex()}">
     <header class="navbar" id="header-navbar">
         <div class="container">
