@@ -1,13 +1,38 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <c:set var="iotStatic" value="${pageContext.request.contextPath}/template/mgmtstatic/default"/>
-<html>
+<html sytle="overflow-x:hidden;">
 <head>
 	<title>${fns:getConfig('productName')}</title>
 
 	<meta name="decorator" content="mgmt"/>
   </head>
-
+JavaScript
+<script type="text/javascript">
+        function dyniframesize(down) {
+            var pTar = null;
+            if (document.getElementById) {
+                pTar = document.getElementById(down);
+            }
+            else {
+                eval('pTar = ' + down + ';');
+            }
+            if (pTar && !window.opera) {
+                //begin resizing iframe 
+                pTar.style.display = "block";
+                if (pTar.contentDocument && pTar.contentDocument.body.offsetHeight) {
+                    //ns6 syntax 
+                    pTar.height = document.body.offsetHeight - 80;
+                    pTar.width = document.body.scrollWidth + 0;
+                }
+                else if (pTar.Document && pTar.Document.body.scrollHeight) {
+                    //ie5+ syntax 
+                    pTar.height = document.body.offsetHeight - 80;
+                    pTar.width = pTar.Document.body.scrollWidth;
+                }
+            }
+        } 
+    </script>
 <body>
 
 <div id="${fns:getThemeIndex()}" class="${fns:getThemeIndex()}">
@@ -244,7 +269,7 @@
          </div>
      </div>	
      <%-- ${ctx}/sys/portal --%>
-     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" style="overflow-x:hidden;overflow-y:scroll;height:520px;" scrolling="auto" frameborder="no" width="100%"  marginheight="50px" marginwidth="0"  height="520"></iframe>
+     <!--框架标签结束--><iframe class="content-wrapper-iframe" id="mainFrame" name="mainFrame" src="" onload="javascript:dyniframesize('mainFrame');" style="overflow-x:hidden;overflow-y:scroll;height:520px;" scrolling="auto" frameborder="no" width="100%"  marginheight="50px" marginwidth="0"  height="520"></iframe>
 <!-- 	
 	    底部
     <footer id="footer-bar" class="row">
