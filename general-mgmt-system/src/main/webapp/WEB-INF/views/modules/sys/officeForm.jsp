@@ -50,8 +50,8 @@
 		<div class="control-group">
 			<label class="control-label">归属区域:</label>
 			<div class="controls">
-                <sys:treeselect id="gnArea" name="gnArea.id" value="${office.gnArea.id}" labelName="gnArea.areaName" labelValue="${office.gnArea.areaName}"
-					title="区域" url="/sys/gnArea/treeData" dataMsgRequired="必填信息" cssClass="required"/>
+                <sys:treeasync id="gnArea" name="gnArea.id" value="${office.gnArea.id}" labelName="gnArea.areaName" labelValue="${office.gnArea.areaName}"
+					title="区域" url="/sys/gnArea/treeData?type=2" dataMsgRequired="必填信息" cssClass="required"/>
 					<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
