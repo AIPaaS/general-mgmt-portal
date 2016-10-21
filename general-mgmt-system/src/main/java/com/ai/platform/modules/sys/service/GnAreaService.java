@@ -38,8 +38,8 @@ public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
 		return areaDao.findList(gnArea);
 	}
 	
-	public List<GnArea> findListByParentAreaCode(String code) {
-		return areaDao.findListByParentAreaCode(code);
+	public List<GnArea> findListByParentAreaCode(GnArea gnArea) {
+		return areaDao.findListByParentAreaCode(gnArea);
 	}
 	
 	public Page<GnArea> findPage(Page<GnArea> page, GnArea gnArea) {
@@ -55,5 +55,12 @@ public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
 	public void delete(GnArea gnArea) {
 		super.delete(gnArea);
 	}
+
+	public List<GnArea> findTreeInit() {
+		// TODO Auto-generated method stub
+		return areaDao.findTreeInit();
+	}
+
+	
 	
 }

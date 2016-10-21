@@ -39,7 +39,7 @@ import com.google.common.collect.Maps;
 public class GnAreaController extends BaseController {
 
 	
-	private static List<Map<String, Object>>  mapList = Lists.newArrayList();
+	
 	
 	@Autowired
 	private GnAreaService gnAreaService;
@@ -141,7 +141,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.save(gnArea);
 		GnAreaUtils.clearCache();
-		mapList = Lists.newArrayList();
+		//mapList = Lists.newArrayList();
 		addMessage(redirectAttributes, "保存区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -162,7 +162,7 @@ public class GnAreaController extends BaseController {
 		
 		gnAreaService.delete(gnArea);
 		GnAreaUtils.clearCache();
-		mapList = Lists.newArrayList();
+		//mapList = Lists.newArrayList();
 		addMessage(redirectAttributes, "删除区域信息成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnArea/?repage";
 	}
@@ -170,23 +170,58 @@ public class GnAreaController extends BaseController {
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId, HttpServletResponse response) {
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) String areaId,@RequestParam(required=false) boolean init, HttpServletResponse response) {
+		List<Map<String, Object>>  mapList = Lists.newArrayList();
+		if(init==true){
+			 mapList = Lists.newArrayList();
+			List<GnArea> listInit = gnAreaService.findTreeInit();
+
 			
-		
-		
-		List<GnArea> list = GnAreaUtils.getGnAreaList();
-		if(mapList.isEmpty() || mapList==null){
-			for (int i=0; i<list.size(); i++){
-				GnArea e = list.get(i);
-				if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(e.getId()) )){
+			for (int i=0; i<listInit.size(); i++){
+				GnArea e = listInit.get(i);
+				if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
 					Map<String, Object> map = Maps.newHashMap();
 					map.put("id", e.getId());
 					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
 					map.put("name", e.getAreaName());
+					map.put("isParent", true);
+					mapList.add(map);
+				}
+			}
+		}else if(StringUtils.isNotBlank(areaId) ){
+			 mapList = Lists.newArrayList();
+			GnArea gnAreaParent = new GnArea();
+			gnAreaParent.setParentAreaCode(areaId);
+			List<GnArea> listAsyc = gnAreaService.findListByParentAreaCode(gnAreaParent);
+			for (int i=0; i<listAsyc.size(); i++){
+				GnArea e = listAsyc.get(i);
+				if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
+					Map<String, Object> map = Maps.newHashMap();
+					map.put("id", e.getId());
+					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
+					map.put("name", e.getAreaName());
+					map.put("isParent",isParent(e.getId()));
 					mapList.add(map);
 				}
 			}
 		}
+		
+		
+
 		return mapList;
+	}
+	
+	private boolean isParent(String ParentId){
+		if(StringUtils.isBlank(ParentId)){
+			return false;
+		}
+		GnArea gnAreaParent = new GnArea();
+		gnAreaParent.setParentAreaCode(ParentId);
+		List<GnArea>  list = gnAreaService.findListByParentAreaCode(gnAreaParent);
+		if(!list.isEmpty()){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

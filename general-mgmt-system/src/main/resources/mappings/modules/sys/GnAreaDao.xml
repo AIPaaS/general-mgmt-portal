@@ -50,7 +50,13 @@
 		FROM gn_area a
 		<where>
 	    AND a.state = 1
-		AND a.parent_area_code=#{parentAreaCode}
+	    <if test="parentAreaCode != null and parentAreaCode != ''">
+				AND a.parent_area_code =#{parentAreaCode} 
+		</if>
+		 <if test="parentAreaCode == null || parentAreaCode == ''">
+				AND a.parent_area_code IS NULL
+		</if>
+		
 		</where>
 	</select>
 	
@@ -101,6 +107,19 @@
 		</choose>
 	</select>
 	
+	<select id="findTreeInit" resultType="GnArea">
+		SELECT
+			a.id,
+			a.parent_area_code AS "parentAreaCode",
+			a.area_name AS "areaName"
+		FROM gn_area a
+	
+		<where>
+			AND a.parent_area_code = '00'
+			or a.parent_area_code is null
+		</where>
+		ORDER BY sort_id
+	</select>
 	<select id="findByParentIdsLike" resultType="GnArea">
 		SELECT
 			a.id,
