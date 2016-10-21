@@ -14,7 +14,7 @@ height: 50px;
 </style>
 	<title><sitemesh:title/> </title>
 	<%@include file="/WEB-INF/views/include/head.jsp" %>		
-	<!-- Baidu tongji analytics --><script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();</script>
+	<!-- Baidu tongji analytics --><!-- <script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();</script> -->
 	<sitemesh:head/>
 </head>
 <body>
