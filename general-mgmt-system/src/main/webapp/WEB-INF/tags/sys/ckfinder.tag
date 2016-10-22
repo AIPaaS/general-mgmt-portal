@@ -71,9 +71,10 @@
 		// Disable download function
 		
 		api.disableFileContextMenuOption( 'selectFile', false );
-		api.disableFileContextMenuOption( 'SelectThumbnail', false );
+		
 		api.disableFileContextMenuOption( 'downloadFile', false );
-	
+		
+		api.disableFileContextMenuOption( 'nA', false );
 		api.disableFileContextMenuOption( 'renameFile', false );
 	
 		

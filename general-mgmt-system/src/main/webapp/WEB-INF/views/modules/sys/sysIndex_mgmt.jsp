@@ -10,6 +10,21 @@
 
 <body>
 <script type="text/javascript">
+var messenger = new Messenger('parent', 'MgmtMessage'),
+iframe1 = document.getElementById('mainFrame'),
+
+input = document.getElementById('message');
+
+messenger.listen(function (msg) {
+
+	if(msg=="caslogin"){
+	
+		window.location.href=location.href;
+	}
+
+});
+
+messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 
 
 </script>
@@ -116,7 +131,6 @@
                 </ul>
       	 </li>
          <!--/颜色设置结束-->      
-
            <li class="dropdown hidden-xs"><a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-info-circle"></i></a></li>
          <!--用户信息-->
             <li class="dropdown profile-dropdown">

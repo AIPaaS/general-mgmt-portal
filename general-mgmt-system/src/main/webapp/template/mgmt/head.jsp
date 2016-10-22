@@ -11,4 +11,5 @@
 <link rel="stylesheet" type="text/css" href="${iotStatic}/css/ztree/zTreeStyle.css"/>
 <script src="${iotStatic}/scripts/plugin/jquery-1.9.1.js"></script>
 <script src="${iotStatic}/scripts/plugin/bootstrap.js"></script>
+<script src="${iotStatic}/scripts/messenger.js"></script>
 <script type="text/javascript">var ctx = '${ctx}', ctxStatic='${ctxStatic}',mgmt='${iotStatic}';</script>
