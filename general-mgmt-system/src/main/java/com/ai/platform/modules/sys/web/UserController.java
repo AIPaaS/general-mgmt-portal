@@ -212,8 +212,10 @@ public class UserController extends BaseController {
 		// user.setCompany(new Office(request.getParameter("company.id")));
 		// user.setOffice(new Office(request.getParameter("office.id")));
 		// 如果新密码为空，则不更换密码
+		try {
 		if (StringUtils.isNotBlank(user.getNewPassword())) {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
+			systemService.sendMail(user, user.getNewPassword());
 		}
 		if (!beanValidator(model, user)) {
 			return formno(user, model);
@@ -222,7 +224,7 @@ public class UserController extends BaseController {
 			addMessage(model, "保存账号'" + user.getLoginName() + "'失败，登录名已存在");
 			return formno(user, model);
 		}
-		try {
+		
 			if(StringUtils.isBlank(user.getOldLoginName())){
 				
 					sendSaveMail(user,"注册");
