@@ -8,6 +8,18 @@
 		$(document).ready(function() {
 			$("#name").focus();
 			$("#inputForm").validate({
+				rules: {
+					sort:{
+						 required:true,
+						 maxlength: 9
+					}
+				},
+				messages:{
+					sort:{
+						 required:"请选择接受人",
+						 maxlength: "排序字段不能超过9个字符", 
+					}
+				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
 					form.submit();
