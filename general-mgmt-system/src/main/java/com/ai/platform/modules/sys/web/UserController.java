@@ -215,7 +215,9 @@ public class UserController extends BaseController {
 		try {
 		if (StringUtils.isNotBlank(user.getNewPassword())) {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
-			systemService.sendMail(user, user.getNewPassword());
+			if(StringUtils.isBlank(user.getOldLoginName())){
+				systemService.sendMail(user, user.getNewPassword());
+			}
 		}
 		if (!beanValidator(model, user)) {
 			return formno(user, model);
