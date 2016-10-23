@@ -86,14 +86,14 @@
 			<div class="controls">
 				<sys:iconselect id="icon" name="icon" value="${menu.icon}"/>
 			</div>
-		</div>
+		</div>-->
 		<div class="control-group">
 			<label class="control-label">排序:</label>
 			<div class="controls">
 				<form:input path="sort" htmlEscape="false" maxlength="50" class="required digits input-small"/>
 				<span class="help-inline">排列顺序，升序。</span>
 			</div>
-		</div>-->
+		</div>
 		<div class="control-group">
 			<label class="control-label">可见:</label>
 			<div class="controls">

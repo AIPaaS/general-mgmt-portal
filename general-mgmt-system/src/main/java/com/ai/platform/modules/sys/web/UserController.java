@@ -215,7 +215,7 @@ public class UserController extends BaseController {
 		try {
 		if (StringUtils.isNotBlank(user.getNewPassword())) {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
-			if(StringUtils.isBlank(user.getOldLoginName())){
+			if(StringUtils.isNotBlank(user.getOldLoginName())){
 				systemService.sendMail(user, user.getNewPassword());
 			}
 		}
@@ -327,7 +327,10 @@ public class UserController extends BaseController {
 		} else if (User.isAdmin(user.getId())) {
 			addMessage(redirectAttributes, "删除账号失败, 不允许删除超级管理员账号");
 		} else {
-			systemService.deleteUser(user);
+			user.setLoginName(null);
+			user.setOldLoginName(null);
+			user.setPassword(null);
+			systemService.saveUser(user);
 			addMessage(redirectAttributes, "删除账号成功");
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
