@@ -128,7 +128,6 @@ public class Menu extends DataEntity<Menu> {
 	}
 	
 	@NotNull
-	@Length(min=1, max=10,message="排序字段必须介于1到10之间")
 	public Integer getSort() {
 		return sort;
 	}
