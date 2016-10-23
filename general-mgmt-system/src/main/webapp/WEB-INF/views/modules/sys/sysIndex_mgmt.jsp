@@ -11,9 +11,7 @@
 <body>
 <script type="text/javascript">
 var messenger = new Messenger('parent', 'MgmtMessage'),
-iframe1 = document.getElementById('mainFrame'),
-
-input = document.getElementById('message');
+iframe1 = document.getElementById('mainFrame');
 
 messenger.listen(function (msg) {
 
@@ -203,24 +201,19 @@ messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 							     	
 							     		</c:if>
 										<c:set var="systemId" value=""/>
-										</li>
 										</c:forEach>
 										</ul>
-									</c:if>
+										</c:if>
 										
-
-										
-									
-								</li>
+										</li>
+							
 								<c:if test="${firstMenu}">
 									<c:set var="firstMenuId" value="${menu.id}"/>
 								</c:if>
 								<c:set var="firstMenu" value="false"/>
 							</c:if>
 						</c:forEach>
-                	
-                  
-                
+               
                 </ul>
             </div>
         </div>

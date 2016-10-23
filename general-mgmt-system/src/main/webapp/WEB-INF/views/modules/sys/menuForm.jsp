@@ -90,7 +90,7 @@
 		<div class="control-group">
 			<label class="control-label">排序:</label>
 			<div class="controls">
-				<form:input path="sort" htmlEscape="false" maxlength="50" class="required digits input-small"/>
+				<form:input path="sort" htmlEscape="false" maxlength="10" class="required digits input-small"/>
 				<span class="help-inline">排列顺序，升序。</span>
 			</div>
 		</div>
