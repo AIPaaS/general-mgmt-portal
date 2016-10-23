@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ai.opt.sdk.components.mail.EmailFactory;
+import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
@@ -220,12 +222,36 @@ public class UserController extends BaseController {
 			addMessage(model, "保存账号'" + user.getLoginName() + "'失败，登录名已存在");
 			return formno(user, model);
 		}
-
+		try {
+			if(StringUtils.isBlank(user.getOldLoginName())){
+				
+					sendSaveMail(user,"注册");
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.error("保存账号发送邮件失败");
+		}
 		savemethod(user);
+		
 		addMessage(redirectAttributes, "保存账号'" + user.getLoginName() + "'成功");
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
+	/**
+	 * 发送邮件-维护账号
+	 * @param user
+	 * @param resetPass
+	 * @throws Exception
+	 */
+	public void sendSaveMail(User user,String type) throws Exception{
 
+		String[] tomails = new String[] { user.getEmail() };
+		String subject = "运营管理平台新增用户登录信息通知";
+		String[] data = new String[] { user.getName(),user.getNewPassword(),type,user.getLoginName()};
+		String htmlcontext= EmailTemplateUtil.buildHtmlTextFromTemplate(UserUtils.SAVEUSER_EMAIL, data);
+		EmailFactory.SendEmail(tomails, null, subject, htmlcontext);
+	
+	}
 	public void savemethod(User user) {
 		// 角色数据有效性验证，过滤不在授权内的角色
 		List<Role> roleList = Lists.newArrayList();
@@ -254,7 +280,11 @@ public class UserController extends BaseController {
 		}
 
 		// 保存员工信息信息
-		systemService.saveUser(user);
+		try {
+			systemService.saveUser(user);
+		} catch (Exception e) {
+			logger.error("保存员工信息时发送邮件出错");
+		}
 		// 清除当前员工信息缓存
 		if (user.getLoginName().equals(UserUtils.getUser().getLoginName())) {
 			UserUtils.clearCache();

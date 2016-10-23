@@ -616,7 +616,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		sendMail(user,resetPass);
 	}
 	/**
-	 * 发送邮件
+	 * 发送邮件-重置密码
 	 * @param user
 	 * @param resetPass
 	 * @throws Exception
@@ -630,7 +630,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		EmailFactory.SendEmail(tomails, null, subject, htmlcontext);
 	
 	}
-	
+
 	/**
 	 * 验证密码
 	 * 

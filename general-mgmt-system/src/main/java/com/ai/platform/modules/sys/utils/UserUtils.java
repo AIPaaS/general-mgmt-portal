@@ -65,7 +65,7 @@ public class UserUtils {
 	private static Map<String, Object> CacheMap = new HashMap<String, Object>();
 	
 	public static final String BIND_EMAIL = "email/pwd-reset-binemail.xml";
-	
+	public static final String SAVEUSER_EMAIL = "email/user-save-binemail.xml";
 	private static List<User> cache_user_data = new ArrayList<User>();
 	
 	

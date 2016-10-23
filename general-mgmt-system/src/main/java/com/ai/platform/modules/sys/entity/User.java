@@ -206,7 +206,7 @@ public class User extends DataEntity<User> {
 		return name;
 	}
 	
-	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,50}$", message = "工号格式不正确")
+	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,50}$", message = "员工编号格式不正确")
 	@ExcelField(title="工号", align=2, sort=45)
 	public String getNo() {
 		return no;
