@@ -16,7 +16,7 @@
 				},
 				messages:{
 					sort:{
-						 required:"请选择接受人",
+						 required:"请输入排序编号",
 						 maxlength: "排序字段不能超过9个字符", 
 					}
 				},
