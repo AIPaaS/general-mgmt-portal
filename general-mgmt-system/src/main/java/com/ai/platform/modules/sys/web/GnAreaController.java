@@ -184,7 +184,7 @@ public class GnAreaController extends BaseController {
 					map.put("id", e.getId());
 					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
 					map.put("name", e.getAreaName());
-					map.put("isParent", true);
+					map.put("isParent", isParent(e.getId()));
 					mapList.add(map);
 				}
 			}
@@ -196,6 +196,7 @@ public class GnAreaController extends BaseController {
 			for (int i=0; i<listAsyc.size(); i++){
 				GnArea e = listAsyc.get(i);
 				if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
+
 					Map<String, Object> map = Maps.newHashMap();
 					map.put("id", e.getId());
 					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
@@ -215,9 +216,8 @@ public class GnAreaController extends BaseController {
 		if(StringUtils.isBlank(ParentId)){
 			return false;
 		}
-		GnArea gnAreaParent = new GnArea();
-		gnAreaParent.setParentAreaCode(ParentId);
-		List<GnArea>  list = gnAreaService.findListByParentAreaCode(gnAreaParent);
+		
+		List<GnArea>  list = GnAreaUtils.getParentCodeList(ParentId);
 		if(!list.isEmpty()){
 			return true;
 		}else{

@@ -224,6 +224,17 @@
 		ORDER BY a.name
 	</select>
 
+	<select id="findUserTree" resultType="User" useCache="true">
+		select o.name AS "office.name",
+		o.parent_id AS "office.parent.id",
+		o.parent_ids AS "office.parentIds",
+		o.id
+		 from sys_office o left join sys_user u on u.office_id = o.id 
+		WHERE a.del_flag = 0
+		AND a.login_name is not null
+		AND o.parent_ids = #{office.parentIds}
+		ORDER BY a.update_date
+	</select>
 	<!-- 查询全部用户 -->
 	<select id="findAllList" resultType="User">
 		SELECT

@@ -38,6 +38,7 @@ import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.utils.DictUtils;
+import com.ai.platform.modules.sys.utils.OfficeUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -143,6 +144,7 @@ public class OfficeController extends BaseController {
 					+ StringUtils.leftPad(String.valueOf(size > 0 ? size + 1 : 1), 3, "0"));
 		}
 		model.addAttribute("office", office);
+		OfficeUtils.clearCache();
 		return "modules/mgmtsys/officeForm";
 	}
 
@@ -198,7 +200,7 @@ public class OfficeController extends BaseController {
 			return form(office, model);
 		}
 		officeService.save(office);
-
+		OfficeUtils.clearCache();
 		if (office.getChildDeptList() != null) {
 			Office childOffice = null;
 			for (String id : office.getChildDeptList()) {
@@ -218,6 +220,7 @@ public class OfficeController extends BaseController {
 		// office.getParentId();
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+id+"&parentIds="+office.getParentIds();
+		OfficeUtils.clearCache();
 		return "redirect:" + adminPath + "/sys/office/page";
 	}
 
@@ -308,6 +311,7 @@ public class OfficeController extends BaseController {
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入部门信息失败！失败信息：" + e.getMessage());
 		}
+		OfficeUtils.clearCache();
 		return "redirect:" + adminPath + "/sys/office/page?repage";
 	}
 
@@ -360,6 +364,7 @@ public class OfficeController extends BaseController {
 		// }
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+office.getParentId()+"&parentIds="+office.getParentIds();
+		OfficeUtils.clearCache();
 		return "redirect:" + adminPath + "/sys/office/page";
 	}
 
@@ -429,15 +434,7 @@ public class OfficeController extends BaseController {
 		List<Office> list = officeService.findList(isAll);
 		for (int i = 0; i < list.size(); i++) {
 			Office e = list.get(i);
-			/*
-			 * if ((StringUtils.isBlank(extId) || (extId!=null &&
-			 * !extId.equals(e.getId()) &&
-			 * e.getParentIds().indexOf(","+extId+",")==-1)) && (type == null ||
-			 * (type != null && (type.equals("1") ? type.equals(e.getType()) :
-			 * true))) && (grade == null || (grade != null &&
-			 * Integer.parseInt(e.getGrade()) <= grade.intValue())) &&
-			 * Global.YES.equals(e.getUseable())){
-			 */
+
 			Map<String, Object> map = Maps.newHashMap();
 			map.put("id", e.getId());
 			map.put("pId", e.getParentId());

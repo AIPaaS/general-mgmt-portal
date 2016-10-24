@@ -29,7 +29,7 @@ public class GnTabSystem extends DataEntity<GnTabSystem> {
 
 
 	
-	@Length(min=1, max=32, message="应用编码长度必须介于 1 和 32 之间")
+	@Length(min=1, max=32, message="应用编码长度必须介于 1 和 32 个字符 之间")
 	public String getSystemId() {
 		return systemId;
 	}
@@ -38,7 +38,7 @@ public class GnTabSystem extends DataEntity<GnTabSystem> {
 		this.systemId = systemId;
 	}
 	
-	@Length(min=1, max=64, message="应用名称长度必须介于 1 和 64 之间")
+	@Length(min=1, max=64, message="应用名称长度必须介于 1 和 64  个字符之间")
 	public String getSystemName() {
 		return systemName;
 	}
@@ -47,7 +47,7 @@ public class GnTabSystem extends DataEntity<GnTabSystem> {
 		this.systemName = systemName;
 	}
 	
-	@Length(min=0, max=500, message="应用上下文长度必须介于 0 和 500 之间")
+	@Length(min=0, max=500, message="应用上下文长度必须介于 0 和 500 个字符之间")
 	public String getSystemUrlContext() {
 		return systemUrlContext;
 	}

@@ -10,6 +10,7 @@ import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.modules.sys.dao.GnAreaDao;
 import com.ai.platform.modules.sys.entity.Dict;
 import com.ai.platform.modules.sys.entity.GnArea;
+import com.google.common.collect.Lists;
 
 public class GnAreaUtils {
 	@Autowired
@@ -67,6 +68,18 @@ public class GnAreaUtils {
 		return null;
 	}
 	
+	
+	public static List<GnArea> getParentCodeList(String code){
+		List<GnArea> mapper = Lists.newArrayList();
+		if (StringUtils.isNotBlank(code) && StringUtils.isNotBlank(code)){
+			for (GnArea gnArea : GnAreaUtils.getGnAreaList()){
+				if((code).equals(gnArea.getParentAreaCode())){
+					mapper.add(gnArea);
+				}
+			}
+		}
+		return mapper;
+	}
 	/**
 	 * 清除数据缓存
 	 */

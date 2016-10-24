@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.ai.platform.common.persistence.CrudDao;
 import com.ai.platform.common.persistence.annotation.MyBatisDao;
+import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
 
 /**
@@ -101,6 +102,8 @@ public interface UserDao extends CrudDao<User> {
 	
 	
 	public void saveImportUser(User user);
+
+	public List<User> findUserTree(User user);
 	
 
 }

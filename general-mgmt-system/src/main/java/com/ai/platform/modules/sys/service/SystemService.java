@@ -59,6 +59,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	
 	@Autowired
 	private UserDao userDao;
+	
 	@Autowired
 	private RoleDao roleDao;
 	@Autowired
@@ -127,15 +128,13 @@ public class SystemService extends BaseService implements InitializingBean {
 	 * @param user
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+
 	public List<User> findUserByOfficeId(String officeId) {
-		List<User> list = (List<User>)CacheUtils.get(UserUtils.USER_CACHE, UserUtils.USER_CACHE_LIST_BY_OFFICE_ID_ + officeId);
-		if (list == null){
-			User user = new User();
-			user.setOffice(new Office(officeId));
-			list = userDao.findUserByOfficeId(user);
-			CacheUtils.put(UserUtils.USER_CACHE, UserUtils.USER_CACHE_LIST_BY_OFFICE_ID_ + officeId, list);
-		}
+
+		User user = new User();
+		user.setOffice(new Office(officeId));
+		List<User> list = userDao.findUserByOfficeId(user);
+	
 		return list;
 	}
 	
@@ -733,6 +732,9 @@ public class SystemService extends BaseService implements InitializingBean {
 		return userDao.findAllNoAccountUser();
 	}
 	
+	
+	
+	
 	public User getUserByName(String name) {
 		return userDao.getByName(name);
 	}
@@ -748,6 +750,13 @@ public class SystemService extends BaseService implements InitializingBean {
 	
 	public User getUserByNo(String no) {
 		return userDao.getByNo(no);
+	}
+
+
+
+	public List<User> findUserTree(User user) {
+		// TODO Auto-generated method stub
+		return  userDao.findUserTree(user);
 	}
 	
 }

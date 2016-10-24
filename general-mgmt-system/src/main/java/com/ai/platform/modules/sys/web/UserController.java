@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -46,6 +47,7 @@ import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.GnTenantService;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.OfficeUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -659,6 +661,115 @@ public class UserController extends BaseController {
 		return mapList;
 	}
 
+	
+	@RequiresPermissions("user")
+	@ResponseBody
+	@RequestMapping(value = "treeAsnyData")
+	public List<Map<String, Object>> treeAsnyData(@RequestParam(required = false) String officeId,@RequestParam(required = false) boolean init,
+			HttpServletResponse response) {
+		List<Map<String, Object>> mapList = Lists.newArrayList();
+	
+		if(init==true){
+			
+			List<Office> listInit = OfficeUtils.getChildIdsList("0");
+			
+			for (int i = 0; i < listInit.size(); i++) {
+				Office e = listInit.get(i);
+				Map<String, Object> map = Maps.newHashMap();
+				map.put("id", e.getId());
+				map.put("pId", e.getParentId());
+				map.put("pIds", e.getParentIds());
+				map.put("name", e.getName());
+				map.put("code", e.getCode());
+				map.put("isParent", true);
+				if(isParentUser(e.getId())){
+
+					List<User> list = systemService.findUserByOfficeId(e.getId());
+					for (int j = 0; j < list.size(); j++) {
+						User u = list.get(j);
+						Map<String, Object> mapu = Maps.newHashMap();
+						mapu.put("id", "u_" + u.getId());
+						mapu.put("pId", e.getId());
+						mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
+						mapList.add(mapu);
+					}
+				
+				}
+				
+				mapList.add(map);
+			}
+			
+		}else if(StringUtils.isNotBlank(officeId)){
+			
+			
+			if(isParentOffice(officeId)){
+
+				List<Office> list =OfficeUtils.getChildIdsList(officeId);
+			
+				for (int i = 0; i < list.size(); i++) {
+					Office a = list.get(i);
+					Map<String, Object> map = Maps.newHashMap();
+					map.put("id", a.getId());
+					map.put("pId", a.getParentId());
+					map.put("pIds", a.getParentIds());
+					map.put("name", a.getName());
+					map.put("code", a.getCode());
+					map.put("isParent", isParentOffice(officeId));
+					if(isParentUser(a.getId())){
+
+						List<User> listuser = systemService.findUserByOfficeId(a.getId());
+						for (int j = 0; j < listuser.size(); j++) {
+							User u = listuser.get(j);
+							Map<String, Object> mapu = Maps.newHashMap();
+							mapu.put("id", "u_" + u.getId());
+							mapu.put("pId", a.getId());
+							mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
+							mapList.add(mapu);
+						}
+					
+					}
+					
+					mapList.add(map);
+				}
+			}else{
+				List<User> list = systemService.findUserByOfficeId(officeId);
+				for (int i = 0; i < list.size(); i++) {
+					User e = list.get(i);
+					Map<String, Object> map = Maps.newHashMap();
+					map.put("id", "u_" + e.getId());
+					map.put("pId", officeId);
+					map.put("name", StringUtils.replace(e.getName(), " ", ""));
+					mapList.add(map);
+				}
+			}
+			
+			
+		}
+		
+		return mapList;	
+	}
+
+	
+	
+	private boolean isParentOffice(String officeId){
+		List<Office> list = OfficeUtils.getChildIdsList(officeId);
+		if(list.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	
+	private boolean isParentUser(String officeId){
+
+		List<User> list =systemService.findUserByOfficeId(officeId);
+		if(list.isEmpty()){
+			return false;
+		}else{
+			return true;
+		}
+	}
 	// @InitBinder
 	// public void initBinder(WebDataBinder b) {
 	// b.registerCustomEditor(List.class, "roleList", new
