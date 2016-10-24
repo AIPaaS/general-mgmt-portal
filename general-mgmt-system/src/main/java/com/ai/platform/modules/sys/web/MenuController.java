@@ -86,14 +86,14 @@ public class MenuController extends BaseController {
 		}
 		menu.setParent(systemService.getMenu(menu.getParent().getId()));
 		// 获取排序号，最末节点排序号+30
-		if (StringUtils.isBlank(menu.getId())){
-			List<Menu> list = Lists.newArrayList();
-			List<Menu> sourcelist = systemService.findAllMenu();
-			Menu.sortList(list, sourcelist, menu.getParentId(), false);
-			if (list.size() > 0){
-				menu.setSort(list.get(list.size()-1).getSort() + 30);
-			}
-		}
+//		if (StringUtils.isBlank(menu.getId())){
+//			List<Menu> list = Lists.newArrayList();
+//			List<Menu> sourcelist = systemService.findAllMenu();
+//			Menu.sortList(list, sourcelist, menu.getParentId(), false);
+//			if (list.size() > 0){
+//				menu.setSort(list.get(list.size()-1).getSort() + 30);
+//			}
+//		}
 		
 		model.addAttribute("tableList", gnTabSystemService.findAll());
 		model.addAttribute("menu", menu);
