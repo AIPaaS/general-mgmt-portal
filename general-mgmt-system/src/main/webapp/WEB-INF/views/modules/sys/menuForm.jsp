@@ -103,7 +103,7 @@
 			<label class="control-label">排序:</label>
 			<div class="controls">
 				<form:input path="sort" htmlEscape="false" maxlength="10" class="required digits input-small"/>
-				<span class="help-inline">排列顺序，升序,默认值30。</span>
+				<span class="help-inline"><font color="red">*</font> 排列顺序，升序,默认值30。</span>
 			</div>
 		</div>
 		<div class="control-group">
