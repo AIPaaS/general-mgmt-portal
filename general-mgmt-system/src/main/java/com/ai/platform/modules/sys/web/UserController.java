@@ -100,6 +100,17 @@ public class UserController extends BaseController {
 		model.addAttribute("page", page);
 		return "modules/sys/usernoList";
 	}
+	
+	
+	@RequiresPermissions("sys:user:view")
+	@RequestMapping(value = { "listNOuser" })
+	public String listNOuser(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		user.getSqlMap().put("dsf", " AND a.login_name IS NULL");
+		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
+		model.addAttribute("page", page);
+		return "modules/sys/usernouserList";
+	}
+	
 
 	@ResponseBody
 	@RequiresPermissions("sys:user:view")
