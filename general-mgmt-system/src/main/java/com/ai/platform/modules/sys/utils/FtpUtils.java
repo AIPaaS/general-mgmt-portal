@@ -133,7 +133,7 @@ public class FtpUtils {
 	}
 	
 	public static void main(String[] args) {
-		String ip = "10.1.55.13"; // 服务器IP地址
+		String ip = "10.1.55.15"; // 服务器IP地址
 		String userName = "root"; // 用户名
 		String userPwd = "root"; // 密码
 		int port =21; // 端口号

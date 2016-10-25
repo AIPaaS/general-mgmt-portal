@@ -86,9 +86,10 @@
 		<div class="control-group">
 			<label class="control-label">选择员工:</label>
 			<div class="controls">
-	                <sys:usernotable id="id" name="id" value="${user.id}" labelName="name" labelValue="${user.name}"
-						title="用户" cssClass="required" checked="true"/>
-				
+				<form:select path="id" class="required input-xlarge">
+					<form:option value="" label="${productName}"/>
+					<form:options items="${userList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

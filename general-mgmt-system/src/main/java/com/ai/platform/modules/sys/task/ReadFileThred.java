@@ -47,12 +47,12 @@ public class ReadFileThred extends Thread {
 				}
 				try {
 					String[] hrInfo = line.split("\\t");
-					if (fileName.contains("office")) {
+					if (fileName.equals("office.txt")) {
 						if (hrInfo.length != 4)
 							continue;
 						officeQueue.put(hrInfo);
-					} else if (fileName.contains("user")) {
-						if (hrInfo.length != 7)
+					} else if (fileName.equals("user.txt")) {
+						if (hrInfo.length != 8)
 							continue;
 						userQueue.put(hrInfo);
 
