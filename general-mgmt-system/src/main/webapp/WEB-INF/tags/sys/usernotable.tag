@@ -36,7 +36,7 @@
 		}
 	
 		// 正常打开	
-		top.$.jBox.open("iframe:${ctx}/sys/user/listNOuser", "选择${title}", 400, 420, {
+		top.$.jBox.open("iframe:${ctx}/sys/user/listNOuser", "选择${title}", 450, 420, {
 			ajaxData:{selectIds: $("#ids").val()},buttons:{"确定":"ok", ${allowClear?"\"清除\":\"clear\", ":""}"关闭":true}, submit:function(v, h, f){
 				
 				if (v=="ok"){

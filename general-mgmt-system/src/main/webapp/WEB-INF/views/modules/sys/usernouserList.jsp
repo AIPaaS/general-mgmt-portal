@@ -29,10 +29,10 @@
 <body>
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/user/listno">未创建账号列表</a></li>
+		<li class="active"><a href="${ctx}/sys/user/listNOuser">未创建账号列表</a></li>
 
 	</ul>
-	<form:form id="searchForm" modelAttribute="user" action="${ctx}/sys/user/listno" method="post" class="breadcrumb form-search ">
+	<form:form id="searchForm" modelAttribute="user" action="${ctx}/sys/user/listNOuser" method="post" class="breadcrumb form-search ">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 		<sys:tableSort id="orderBy" name="orderBy" value="${page.orderBy}" callback="page();"/>
@@ -51,14 +51,13 @@
 	<input type="hidden" id="ids"/>
 	<input type="hidden" id="idsVal"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>选择</th><th>归属公司</th><th>归属部门</th><th >登录名</th><th >姓名</th></tr></thead>
+		<thead><tr><th>选择</th><th>归属公司</th><th>归属部门</th><th >姓名</th></tr></thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="user">
 			<tr>
 				<td><input type="radio" value = "${user.id}" onclick="javascript:checkradio(this);"/></td>
 				<td>${user.company.name}</td>
 				<td>${user.office.name}</td>
-				<td>${user.loginName}</td>
 				<td>${user.name}</td>
 				
 			</tr>
