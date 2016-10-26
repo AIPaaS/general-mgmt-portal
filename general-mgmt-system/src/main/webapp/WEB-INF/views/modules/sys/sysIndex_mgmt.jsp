@@ -189,8 +189,12 @@ messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 						                        <c:forEach items="${fns:getChildsMenu(menuNode.id)}" var="menuNodethree" varStatus="idxStatus">
 						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
 						                        <c:set var="systemId" value="${menuNodethree.gnTabSystem}"/>
-						                        
+						                        <c:if test="${not empty menuNodethree.href}">
 						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        </c:if>
+						                        <c:if test="${empty menuNodethree.href}">
+						                        	<li><a href="#" data-id="${menuNodethree.id}" >${menuNodethree.name}</a></li>
+						                        </c:if>
 						                         <c:set var="systemId" value=""/>
 						                        </c:forEach>
 					                 	   	</ul>
