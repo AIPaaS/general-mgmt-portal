@@ -4,7 +4,6 @@
 package com.ai.platform.modules.sys.web;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -15,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
-import org.apache.commons.collections.ListUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,7 +58,8 @@ import com.google.common.collect.Maps;
 @Controller
 @RequestMapping(value = "${adminPath}/sys/user")
 public class UserController extends BaseController {
-
+	private static final Logger LOG = Logger.getLogger(UserController.class);
+	
 	@Autowired
 	private SystemService systemService;
 	@Autowired
@@ -87,17 +85,21 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "list", "" })
 	public String list(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+		LOG.error("开始执行员工信息查询，当前时间戳："+DateUtils.getDateTime());
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
 		model.addAttribute("page", page);
+		LOG.error("结束执行员工信息查询，当前时间戳："+DateUtils.getDateTime());
 		return "modules/sys/userList";
 	}
 
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "listno" })
 	public String listno(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
+    	LOG.error("开始执行员工工号查询，当前时间戳："+DateUtils.getDateTime());
 		user.getSqlMap().put("dsf", " AND a.login_name IS NOT NULL");
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
 		model.addAttribute("page", page);
+    	LOG.error("结束执行员工工号查询，当前时间戳："+DateUtils.getDateTime());
 		return "modules/sys/usernoList";
 	}
 	
@@ -162,6 +164,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "save")
 	public String save(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+		LOG.error("开始执行添加员工信息添加，当前时间戳："+DateUtils.getDateTime());
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/list?repage";
@@ -183,6 +186,7 @@ public class UserController extends BaseController {
 
 		savemethod(user);
 		addMessage(redirectAttributes, "保存员工信息'" + user.getLoginName() + "'成功");
+		LOG.error("结束执行添加员工信息添加，当前时间戳："+DateUtils.getDateTime());
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
 
@@ -217,6 +221,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "saveno")
 	public String saveno(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+		LOG.error("开始执行添加员工工号添加，当前时间戳："+DateUtils.getDateTime());
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/listno?repage";
@@ -252,6 +257,7 @@ public class UserController extends BaseController {
 		savemethod(user);
 		
 		addMessage(redirectAttributes, "保存账号'" + user.getLoginName() + "'成功");
+		LOG.error("结束执行添加员工工号添加，当前时间戳："+DateUtils.getDateTime());
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 	/**

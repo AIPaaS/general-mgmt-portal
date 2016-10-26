@@ -23,7 +23,7 @@ import com.ai.platform.modules.oa.entity.OaNotify;
 import com.ai.platform.modules.oa.service.OaNotifyService;
 
 /**
- * 通知通告Controller
+ * 站内信通告Controller
  * @author ThinkGem
  * @version 2014-05-16
  */
@@ -88,12 +88,12 @@ public class OaNotifyController extends BaseController {
 	@RequestMapping(value = "delete")
 	public String delete(OaNotify oaNotify, RedirectAttributes redirectAttributes) {
 		oaNotifyService.delete(oaNotify);
-		addMessage(redirectAttributes, "删除通知成功");
+		addMessage(redirectAttributes, "删除站内信成功");
 		return "redirect:" + adminPath + "/oa/oaNotify/?repage";
 	}
 	
 	/**
-	 * 我的通知列表
+	 * 我的站内信列表
 	 */
 	@RequestMapping(value = "self")
 	public String selfList(OaNotify oaNotify, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -104,7 +104,7 @@ public class OaNotifyController extends BaseController {
 	}
 
 	/**
-	 * 我的通知列表-数据
+	 * 我的站内信列表-数据
 	 */
 	@RequiresPermissions("oa:oaNotify:view")
 	@RequestMapping(value = "selfData")
@@ -116,7 +116,7 @@ public class OaNotifyController extends BaseController {
 	}
 	
 	/**
-	 * 查看我的通知
+	 * 查看我的站内信
 	 */
 	@RequestMapping(value = "view")
 	public String view(OaNotify oaNotify, Model model) {
@@ -130,7 +130,7 @@ public class OaNotifyController extends BaseController {
 	}
 
 	/**
-	 * 查看我的通知-数据
+	 * 查看我的站内信-数据
 	 */
 	@RequestMapping(value = "viewData")
 	@ResponseBody
@@ -143,7 +143,7 @@ public class OaNotifyController extends BaseController {
 	}
 	
 	/**
-	 * 查看我的通知-发送记录
+	 * 查看我的站内信-发送记录
 	 */
 	@RequestMapping(value = "viewRecordData")
 	@ResponseBody
@@ -156,7 +156,7 @@ public class OaNotifyController extends BaseController {
 	}
 	
 	/**
-	 * 获取我的通知数目
+	 * 获取我的站内信数目
 	 */
 	@RequestMapping(value = "self/count")
 	@ResponseBody

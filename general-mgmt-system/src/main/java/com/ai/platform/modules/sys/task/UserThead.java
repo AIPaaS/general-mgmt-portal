@@ -1,9 +1,11 @@
 package com.ai.platform.modules.sys.task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.modules.sys.entity.Office;
+import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
@@ -12,11 +14,15 @@ public class UserThead extends Thread {
 	private OfficeService officeService;
 	private SystemService systemService;
 	private String[] userInfo;
+	private List<Role> roleList;
 
 	UserThead(String[] userInfo, OfficeService officeService, SystemService systemService) {
 		this.userInfo = userInfo;
 		this.officeService = officeService;
 		this.systemService = systemService;
+		roleList = new ArrayList<>();
+		Role role = systemService.getRole("6");
+		roleList.add(role);
 	}
 
 	public void run() {
@@ -55,7 +61,7 @@ public class UserThead extends Thread {
 				}
 			}
 			user.setDelFlag(userInfo[7]);
-
+			user.setRoleList(roleList);
 			User findUser = systemService.getUserByNo(userInfo[0]);
 			if (findUser != null) {
 				findUser.setNo(userInfo[0]);

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.Collections3;
+import com.ai.platform.common.utils.ObjectUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Office;
@@ -39,7 +40,7 @@ import com.google.common.collect.Maps;
  * @version 2013-12-05
  */
 @Controller
-@RequestMapping(value = "${adminPath}/sysmgmt/role")
+@RequestMapping(value = "${adminPath}/sys/role")
 public class RoleController extends BaseController {
 
 	@Autowired
@@ -58,46 +59,24 @@ public class RoleController extends BaseController {
 	}
 	
 	@RequiresPermissions("sys:role:view")
-	@RequestMapping(value = {"mgmtlist"})
-	public String pagelist(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
-		Page<Role> page = new Page<Role>(request, response, 5);
+	@RequestMapping(value = {"list", ""})
+	public String list(Role role, HttpServletRequest request, HttpServletResponse response, Model model) {
+//		List<Role> list = systemService.findAllRole();
+//		model.addAttribute("list", list);
+		Page<Role> page = new Page<Role>(request, response);
 		role.setPage(page);
 		List<Role> list = systemService.findRoleList(role);
 		page.setList(list);
 		model.addAttribute("page", page);
 		return "modules/mgmtsys/roleList";
 	}
-	
-	@RequiresPermissions("sys:role:view")
-	@RequestMapping(value = "mgmtform")
-	public String mgmtform(Role role, Model model) {
-		if (role.getOffice()==null){
-			role.setOffice(UserUtils.getUser().getOffice());
-		}
-		model.addAttribute("role", role);
-		//model.addAttribute("menuList", systemService.findAllMenu());
-		model.addAttribute("officeList", officeService.findAll());
-		return "modules/mgmtsys/roleForm";
-	}
-	
-	@RequiresPermissions("sys:role:view")
-	@RequestMapping(value = {"list", ""})
-	public String list(Role role, Model model) {
-		List<Role> list = systemService.findAllRole();
-		model.addAttribute("list", list);
-		return "modules/sys/roleList";
-	}
 
 	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
-		if (role.getOffice()==null){
-			role.setOffice(UserUtils.getUser().getOffice());
-		}
-		model.addAttribute("role", role);
-		model.addAttribute("menuList", systemService.findAllMenu());
+		//model.addAttribute("menuList", systemService.findAllMenu());
 		model.addAttribute("officeList", officeService.findAll());
-		return "modules/sys/roleForm";
+		return "modules/mgmtsys/roleForm";
 	}
 	
 	@RequiresPermissions("sys:role:edit")
@@ -105,30 +84,40 @@ public class RoleController extends BaseController {
 	public String save(Role role, Model model, RedirectAttributes redirectAttributes) {
 		if(!UserUtils.getUser().isAdmin()&&role.getSysData().equals(Global.YES)){
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
-			return "redirect:" + adminPath + "/sys/role/?repage";
+			return "redirect:" + adminPath + "/sys/role/list?repage";
 		}
 		if(Global.isDemoMode()){
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/role/?repage";
+			return "redirect:" + adminPath + "/sys/role/list?repage";
 		}
 		if (!beanValidator(model, role)){
 			return form(role, model);
 		}
-		if(StringUtils.isNotBlank(role.getId())){
-			
 		
-			if (!"true".equals(checkName(role.getOldName(), role.getName()))){
-				addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
-				return form(role, model);
-			}
-			if (!"true".equals(checkEnname(role.getOldEnname(), role.getEnname()))){
-				addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
-				return form(role, model);
-			}
+		Role isUniqueByName = (Role) systemService.getRoleByName(role.getName());
+		
+		Role isUniqueByEnName = (Role) systemService.getRoleByEnname(role.getEnname());
+		if(StringUtils.isBlank(role.getId())){
+		if(!StringUtils.isNullOrEmpty(isUniqueByName)){
+			addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
+			return form(role, model);
+		}
+		if(!StringUtils.isNullOrEmpty(isUniqueByEnName)){
+			addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
+			return form(role, model);
+		}
+		if (!"true".equals(checkName(role.getOldName(), role.getName()))){
+			addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
+			return form(role, model);
+		}
+		if (!"true".equals(checkEnname(role.getOldEnname(), role.getEnname()))){
+			addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
+			return form(role, model);
+		}
 		}
 		systemService.saveRole(role);
 		addMessage(redirectAttributes, "保存角色'" + role.getName() + "'成功");
-		return "redirect:" + adminPath + "/sys/role/?repage";
+		return "redirect:" + adminPath + "/sys/role/list?repage";
 	}
 	
 	@RequiresPermissions("sys:role:edit")
@@ -138,18 +127,8 @@ public class RoleController extends BaseController {
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
 			return "redirect:" + adminPath + "/sys/role/?repage";
 		}
-		if(Global.isDemoMode()){
-			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/role/?repage";
-		}
-//		if (Role.isAdmin(id)){
-//			addMessage(redirectAttributes, "删除角色失败, 不允许内置角色或编号空");
-////		}else if (UserUtils.getUser().getRoleIdList().contains(id)){
-////			addMessage(redirectAttributes, "删除角色失败, 不能删除当前用户所在角色");
-//		}else{
-			systemService.deleteRole(role);
-			addMessage(redirectAttributes, "删除角色成功");
-//		}
+		systemService.deleteRole(role);
+		addMessage(redirectAttributes, "删除角色成功");
 		return "redirect:" + adminPath + "/sys/role/?repage";
 	}
 	
@@ -164,7 +143,7 @@ public class RoleController extends BaseController {
 	public String assign(Role role, Model model) {
 		List<User> userList = systemService.findUser(new User(new Role(role.getId())));
 		model.addAttribute("userList", userList);
-		return "modules/sys/roleAssign";
+		return "modules/mgmtsys/roleAssign";
 	}
 	
 	/**
@@ -181,7 +160,7 @@ public class RoleController extends BaseController {
 		model.addAttribute("userList", userList);
 		model.addAttribute("selectIds", Collections3.extractToString(userList, "name", ","));
 		model.addAttribute("officeList", officeService.findAll());
-		return "modules/sys/selectUserToRole";
+		return "modules/mgmtsys/selectUserToRole";
 	}
 	
 	/**
@@ -258,10 +237,15 @@ public class RoleController extends BaseController {
 		StringBuilder msg = new StringBuilder();
 		int newNum = 0;
 		for (int i = 0; i < idsArr.length; i++) {
-			User user = systemService.assignUserToRole(role, systemService.getUser(idsArr[i]));
-			if (null != user) {
-				msg.append("<br/>新增用户【" + user.getName() + "】到角色【" + role.getName() + "】！");
-				newNum++;
+			User user = systemService.getUser(idsArr[i]);
+			if(user != null){
+				User adduser = systemService.assignUserToRole(role,user);
+				if (null != adduser) {
+					msg.append("<br/>新增用户【" + user.getName() + "】到角色【" + role.getName() + "】！");
+					newNum++;
+				}else{
+					msg.append("<br/>"+"角色【" + role.getName() + "】已存在用户【" + user.getName() + "】！");
+				}
 			}
 		}
 		addMessage(redirectAttributes, "已成功分配 "+newNum+" 个用户"+msg);
