@@ -45,7 +45,9 @@
 					<c:if test="${(role.sysData eq fns:getDictValue('是', 'yes_no', '1') && fns:getUser().admin)||!(role.sysData eq fns:getDictValue('是', 'yes_no', '1'))}">
 						<a href="${ctx}/sys/role/form?id=${role.id}">修改</a>
 					</c:if>
-					<a href="${ctx}/sys/role/delete?id=${role.id}" onclick="return confirmx('确认要删除该角色吗？', this.href)">删除</a>
+					<c:if test="${(role.id ne '1')&&(role.id ne '2')&&(role.id ne '3')&&(role.id ne '4')&&(role.id ne '5')&&(role.id ne '6')}">
+						<a href="${ctx}/sys/role/delete?id=${role.id}" onclick="return confirmx('确认要删除该角色吗？', this.href)">删除</a>
+					</c:if>
 				</td></shiro:hasPermission>	
 			</tr>
 		</c:forEach>
