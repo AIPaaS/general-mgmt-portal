@@ -51,7 +51,7 @@ window.onload = function() {
 		mgmtPath=unescape(getcookie("mgmtPath"));		
 	}
     var doc = document;
-    var height = calcPageHeight(doc);
+    var height = calcPageHeight(doc)+20;
    
     var myifr = doc.getElementById('myifr');
 
