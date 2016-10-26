@@ -156,9 +156,8 @@
 		<div class="control-group">
 			<label class="control-label">所属业务平台:</label>
 			<div class="controls">
-				
-					<form:radiobuttons path="tenantId" items="${gnTenantList}" itemLabel="tenantName" itemValue="tenantId" htmlEscape="false" class="required"/>
-		
+				<form:radiobuttons path="tenantId" items="${gnTenantList}" itemLabel="tenantName" itemValue="tenantId" htmlEscape="false" class="required"/>
+				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>		
 		
