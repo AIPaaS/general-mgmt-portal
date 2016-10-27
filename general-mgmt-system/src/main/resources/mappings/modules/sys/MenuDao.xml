@@ -75,29 +75,15 @@
 	</select>
 	
 	<select id="findByAppUserId" resultType="Menu">
-		SELECT 
-			a.id,
-		a.parent_id AS "parent.id",
-		a.parent_ids,
-		a.name,
-		a.href,
-		a.target,
-		a.icon,
-		a.sort,
-		a.is_show,
-		a.resource_type,
-		a.permission,
-		a.remarks,
-		a.create_by AS "createBy.id",
-		a.system_id As "gnTabSystem",
-		a.create_date,
-		a.tenant_id AS "tenantId",
-		a.update_by AS "updateBy.id",
-		a.update_date,
-		a.del_flag
+		SELECT DISTINCT
+			<include refid="menuColumns"/>
 		FROM sys_menu a
-		
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND u.id = #{userId} AND resource_type = '1'
+		LEFT JOIN sys_menu p ON p.id = a.parent_id
+		JOIN sys_role_menu rm ON rm.menu_id = a.id
+		JOIN sys_role r ON r.id = rm.role_id AND r.useable='1'
+		JOIN sys_user_role ur ON ur.role_id = r.id
+		JOIN sys_user u ON u.id = ur.user_id AND u.id = #{userId}
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND resource_type = '1' AND r.del_flag = #{DEL_FLAG_NORMAL} AND u.del_flag = #{DEL_FLAG_NORMAL} 
 		ORDER BY a.sort
 	</select>
 	
