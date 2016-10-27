@@ -14,13 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.SpringContextHolder;
-import com.ai.platform.common.web.Servlets;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.service.SystemService;
-import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
 public class UserCasRealm  extends CasRealm{
