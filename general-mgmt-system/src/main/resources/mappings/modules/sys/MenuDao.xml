@@ -46,6 +46,61 @@
 		ORDER BY a.sort,a.create_date
 	</select>
 	
+	
+		<select id="findAllAppList" resultType="Menu">
+		SELECT
+			a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		a.name,
+		a.href,
+		a.target,
+		a.icon,
+		a.sort,
+		a.is_show,
+		a.resource_type,
+		a.permission,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.system_id As "gnTabSystem",
+		a.create_date,
+		a.tenant_id AS "tenantId",
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag
+		FROM sys_menu a
+
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND resource_type = '1'
+		ORDER BY a.sort
+	</select>
+	
+	<select id="findByAppUserId" resultType="Menu">
+		SELECT DISTINCT
+			a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		a.name,
+		a.href,
+		a.target,
+		a.icon,
+		a.sort,
+		a.is_show,
+		a.resource_type,
+		a.permission,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.system_id As "gnTabSystem",
+		a.create_date,
+		a.tenant_id AS "tenantId",
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag
+		FROM sys_menu a
+		
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND  AND u.id = #{userId} AND resource_type = '1'
+		ORDER BY a.sort
+	</select>
+	
 	<select id="findByParentIdsLike" resultType="Menu">
 		SELECT
 			a.id,
