@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import com.ai.platform.modules.sys.service.SystemService;
 
 @Service
 @Lazy(false)
+@PropertySource("classpath:mgmt.properties")
 public class HrTaskJob {
 	@Autowired
 	OfficeService officeService;
@@ -30,7 +32,7 @@ public class HrTaskJob {
 
 	public static ExecutorService handlePool;
 
-	@Scheduled(cron = "0 59 23 ? * *")
+	@Scheduled(cron = "${jobs.scheduled}")
 	public void hrImportJob() {
 		run();
 	}
