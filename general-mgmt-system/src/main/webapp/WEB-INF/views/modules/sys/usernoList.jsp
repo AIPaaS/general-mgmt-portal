@@ -85,7 +85,7 @@
 					<c:if test="${user.loginFlag eq '0'}">
 						<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=1" onclick="return confirmx('确认要解冻该账号吗？', this.href)">解冻</a>   
 					</c:if>
-					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
+					<a href="${ctx}/sys/user/delete?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
 					
 				</td></shiro:hasPermission>
 			</tr>
