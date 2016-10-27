@@ -548,6 +548,28 @@ public class UserController extends BaseController {
 		}
 		return "false";
 	}
+	@ResponseBody
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "checkEmail")
+	public String checkEmail(String oldLoginName, String email) {
+		if (email != null && email.equals(oldLoginName)) {
+			return "true";
+		} else if (email != null && systemService.getUserByLoginName(email) == null) {
+			return "true";
+		}
+		return "false";
+	}
+	@ResponseBody
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "checkMobile")
+	public String checkMobile(String oldMobile, String mobile) {
+		if (mobile != null && mobile.equals(oldMobile)) {
+			return "true";
+		} else if (mobile != null && systemService.getUserByLoginName(mobile) == null) {
+			return "true";
+		}
+		return "false";
+	}
 
 	/**
 	 * 员工信息信息显示及保存
