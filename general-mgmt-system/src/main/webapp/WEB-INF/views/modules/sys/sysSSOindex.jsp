@@ -20,9 +20,9 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="workbench">
-					<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
+					<c:forEach items="${fns:getAppMenuList()}" var="menu" varStatus="idxStatus">
 					<c:set var="systemId" value="${menu.gnTabSystem}"/>
-					<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1' &&menu.resourceType eq '1'}">
+					<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
 						<ul class="col-xs-2">
 							<li class="circular c-img1"><a href="${fns:getGnTabSystemUrl(systemId)}${menu.href}" target="_blank"></a></li>
 							<li><a href="#">${menu.name}</a></li>

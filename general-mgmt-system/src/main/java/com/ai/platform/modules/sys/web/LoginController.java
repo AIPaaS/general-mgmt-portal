@@ -145,7 +145,7 @@ public class LoginController extends BaseController{
 		Principal principal = UserUtils.getPrincipal();
 
 		// 登录成功后，验证码计算器清零
-		isValidateCodeLogin(principal.getLoginName(), false, true);
+		//isValidateCodeLogin(principal.getLoginName(), false, true);
 		
 		if (logger.isDebugEnabled()){
 			logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
@@ -191,7 +191,7 @@ public class LoginController extends BaseController{
 ////		}
 //		System.out.println("==========================b");
 		LogUtils.saveLog(request, "系统登录");
-		initLoginInfo(model, principal);
+		//initLoginInfo(model, principal);
 		return "modules/sys/sysSSOindex";
 	}
 	/**

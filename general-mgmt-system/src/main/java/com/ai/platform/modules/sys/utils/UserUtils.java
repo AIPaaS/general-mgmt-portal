@@ -59,6 +59,7 @@ public class UserUtils {
 	public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
 	public static final String CACHE_USER_LIST = "userList";
 	public static final String USER_DEFAULT_THEME = Global.getDefTheme();
+	public static final String CACHE_APPMENU_LIST = "menuAppList";
 	
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
 
@@ -258,6 +259,31 @@ public class UserUtils {
 		
 		return getMenuList(new Menu());
 	}
+	
+	/**
+	 * 获取当前用户单点登录应用资源
+	 * 
+	 * @return
+	 */
+	
+	public static List<Menu> getAppMenuList() {
+		@SuppressWarnings("unchecked")
+		List<Menu> menuList = (List<Menu>) getCache(CACHE_APPMENU_LIST);
+		
+		if (menuList == null) {
+			User user = getUser();
+			if (user.isAdmin()) {
+				menuList = menuDao.findAllAppList(new Menu());
+			} else {
+				Menu menu = new Menu();
+				menu.setUserId(user.getId());
+				menuList = menuDao.findByAppUserId(menu);
+			}
+			putCache(CACHE_MENU_LIST, menuList);
+		}
+		return menuList;
+	}
+	
 	
 	public static List<Menu> getMenuList(Menu menu) {
 		@SuppressWarnings("unchecked")

@@ -94,6 +94,14 @@
   </function>
   
   <function>
+    <description>获取当前用户的应用资源列表</description>
+    <name>getAppMenuList</name>
+    <function-class>com.ai.platform.modules.sys.utils.UserUtils</function-class>
+    <function-signature>java.util.List getAppMenuList()</function-signature>
+    <example>${fns:getAppMenuList()}</example>  
+  </function>
+  
+  <function>
     <description>获取当前用户的应用对象的url</description>
     <name>getGnTabSystemUrl</name>
     <function-class>com.ai.platform.modules.sys.utils.GnTabSystemUtils</function-class>
