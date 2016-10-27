@@ -75,7 +75,7 @@
 	</select>
 	
 	<select id="findByAppUserId" resultType="Menu">
-		SELECT DISTINCT
+		SELECT 
 			a.id,
 		a.parent_id AS "parent.id",
 		a.parent_ids,
@@ -97,7 +97,7 @@
 		a.del_flag
 		FROM sys_menu a
 		
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND  AND u.id = #{userId} AND resource_type = '1'
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND u.id = #{userId} AND resource_type = '1'
 		ORDER BY a.sort
 	</select>
 	
