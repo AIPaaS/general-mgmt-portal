@@ -113,13 +113,13 @@
 				<span class="help-inline">该菜单或操作是否显示</span>
 			</div>
 		</div> 
-		 <div class="control-group">
+<%-- 		 <div class="control-group">
 			<label class="control-label">权限标识:</label>
 			<div class="controls">
 				<form:input path="permission" htmlEscape="false" maxlength="100" class="input-xxlarge"/>
 				<span class="help-inline">控制器中定义的权限标识，如：@RequiresPermissions("权限标识")</span>
 			</div>
-		</div>
+		</div> --%>
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
