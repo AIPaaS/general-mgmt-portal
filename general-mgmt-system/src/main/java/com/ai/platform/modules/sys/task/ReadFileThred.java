@@ -29,12 +29,15 @@ public class ReadFileThred extends Thread {
 		for (String file : fileList) {
 			LOG.error("ftp文件名："+file);
 			try {
-				readFile(file, ftp);
-//				ftp.deleteFile(file);
+				if (file.equals("office.txt") || file.equals("user.txt")) {
+					readFile(file, ftp);
+//					ftp.deleteFile(file);
+				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
+		LOG.error("获取ftp文件结束："+DateUtils.getDateTime());
 		ftp.closeServer();
 	}
 

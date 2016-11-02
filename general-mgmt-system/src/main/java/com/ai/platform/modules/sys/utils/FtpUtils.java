@@ -9,8 +9,10 @@ import java.util.List;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+import org.apache.log4j.Logger;
 
 import com.ai.platform.common.config.Global;
+import com.ai.platform.common.utils.DateUtils;
 
 /**
  * ftp工具类
@@ -21,17 +23,19 @@ import com.ai.platform.common.config.Global;
  * @author zhouxh
  */
 public class FtpUtils {
-
+	private static final Logger LOG = Logger.getLogger(FtpUtils.class);
 	private FTPClient ftpClient;
 	/**
 	 * init ftp servere
 	 */
 	public FtpUtils() {
+		LOG.error("开始读取ftp配置信息，当前时间戳："+DateUtils.getDateTime());
 		String ip = Global.getConfig("ftp.ip"); // 服务器IP地址
 		String userName = Global.getConfig("ftp.userName"); // 用户名
 		String userPwd = Global.getConfig("ftp.userPwd"); // 密码
 		int port =Integer.parseInt(Global.getConfig("ftp.port")); // 端口号
 	    String path = Global.getConfig("ftp.path"); // 读取文件的存放目录
+	    LOG.error("FTP信息|ip:"+ip+"|userName:"+userName+"|userPwd:"+userPwd+"|port:"+port+"|path:"+path);
 	    this.connectServer(ip, port, userName, userPwd, path);
 	}
 
@@ -46,6 +50,7 @@ public class FtpUtils {
 	 *             function:连接到服务器
 	 */
 	public void connectServer(String ip, int port, String userName, String userPwd, String path) {
+		LOG.error("开始连接ftp，当前时间戳："+DateUtils.getDateTime());
 		ftpClient = new FTPClient();
 		try {
 			// 连接
@@ -57,10 +62,13 @@ public class FtpUtils {
 				ftpClient.changeWorkingDirectory(path);
 			}
 		} catch (SocketException e) {
+			LOG.error("连接ftp失败，当前时间戳："+DateUtils.getDateTime());
 			e.printStackTrace();
 		} catch (IOException e) {
+			LOG.error("连接ftp失败，当前时间戳："+DateUtils.getDateTime());
 			e.printStackTrace();
 		}
+		LOG.error("连接ftp成功，当前时间戳："+DateUtils.getDateTime());
 	}
 
 	/**

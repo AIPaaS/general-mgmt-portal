@@ -66,6 +66,7 @@ public class HrTaskJob {
 			e.printStackTrace();
 		} finally {
 			handlePool.shutdown();
+			LOG.error("任务开始结束，当前时间戳："+DateUtils.getDateTime());
 		}
 	}
 
