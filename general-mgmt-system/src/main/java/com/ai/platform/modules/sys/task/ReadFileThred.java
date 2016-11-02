@@ -7,9 +7,13 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
+import org.apache.log4j.Logger;
+
+import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.modules.sys.utils.FtpUtils;
 
 public class ReadFileThred extends Thread {
+	private static final Logger LOG = Logger.getLogger(ReadFileThred.class);
 	public BlockingQueue<String[]> userQueue;
 	public BlockingQueue<String[]> officeQueue;
 
@@ -19,9 +23,11 @@ public class ReadFileThred extends Thread {
 	}
 
 	public void run() {
+		LOG.error("开始获取ftp文件："+DateUtils.getDateTime());
 		FtpUtils ftp = new FtpUtils();
 		List<String> fileList = ftp.getFileList("/");
 		for (String file : fileList) {
+			LOG.error("ftp文件名："+file);
 			try {
 				readFile(file, ftp);
 //				ftp.deleteFile(file);
