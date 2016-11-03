@@ -9,9 +9,7 @@
 			//$("#name").focus();
 			$("#inputForm").validate({
 				rules: {
-					oaNotifyRecordName:{
-						 required:true
-					},
+					
 					title:{
 						required:true,
 						maxlength: 18
@@ -20,24 +18,21 @@
 						required:true,
 						maxlength: 224
 					},
-					oaNotifyRecordNames:{
+					oaNotifyRecordName:{
 						required:true
 					}
 				},
 				messages:{
-					oaNotifyRecordName:{
-						 required:"必填信息"
-					},
+					
 					title:{
 						required: "必填信息", 
-						maxlength: "标题长度不能超过18个字符", 
+						maxlength: "标题长度不能ss超过18个字符", 
 					},
 					content:{
 						required: "必填信息", 
 						maxlength: "内容不能超过224个字符", 
-					},
-					oaNotifyRecordNames:{
-						required: "必填信息", 
+					},oaNotifyRecordName:{
+						 required:"必填信息"
 					}
 				},
 				submitHandler: function(form){
@@ -47,18 +42,20 @@
 				errorContainer: "#messageBox",
 				errorPlacement: function(error, element) {
 					$("#messageBox").text("输入有误，请先更正。");
-					if(element.attr("name")=="oaNotifyRecordNames"){
+					if(element.attr("name")=="oaNotifyRecordName"){
 						
 						$("#treeerro").find("label").remove();
 						$("<label for='title' class='error'>必填信息</label>").appendTo("#treeerro");
 						
 					}
-					else if (element.is(":checkbox")||element.is(":radio")||element.parent().is(".input-append")){
+					else if (element.is(":radio")){
 						
-						
+						$("#treeerro").find("label").remove();
 							error.appendTo(element.parent().parent());
 						
 					}else {
+						$("#treeerro").find("label").remove();
+						
 						error.insertAfter(element);
 					}
 				}
