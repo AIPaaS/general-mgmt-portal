@@ -29,7 +29,6 @@ sed -i "s%ccs.zk_address=.*%ccs.zk_address=${ZK_ADDR}%g" ./paas/paas-conf.proper
 
 # 各中心要根据情况自己修改成与dubbo.properties中对应的配置项
 #sed -i "s%dubbo.registry.address=.*%dubbo.registry.address=${REST_REGISTRY_ADDR}%g" ./dubbo/dubbo.properties
-popd
 
 #ftp信息配置
 sed -i "s%ftp.ip=.*%ftp.ip=${ftp.ip}%g" ./mgmt.properties
@@ -38,6 +37,9 @@ sed -i "s%ftp.userPwd=.*%ftp.userPwd=${ftp.userPwd}%g" ./mgmt.properties
 sed -i "s%ftp.port=.*%ftp.port=${ftp.port}%g" ./mgmt.properties
 sed -i "s%ftp.path=.*%ftp.path=${ftp.path}%g" ./mgmt.properties
 sed -i "s%jobs.scheduled=.*%jobs.scheduled=${jobs.scheduled}%g" ./mgmt.properties
+popd
+
+
 
 
 
