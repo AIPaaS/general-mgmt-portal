@@ -100,10 +100,11 @@ public class GnTabSystemController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("user")
 	@RequestMapping(value = "checkSystemId")
-	public String checkSystemId(String systemId,String id) {
-		if(StringUtils.isNotBlank(id)){
+	public String checkSystemId(String systemId,String oldSystemId) {
+		if (oldSystemId != null && systemId.equals(oldSystemId)) {
 			return "true";
 		}
+		
 		GnTabSystem gnTabSystem = new GnTabSystem();
 		gnTabSystem.setSystemId(Encodes.urlDecode(systemId));
 		if (systemId != null &&  gnTabSystemService.findvalidateList(gnTabSystem).isEmpty()) {
@@ -122,9 +123,8 @@ public class GnTabSystemController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("user")
 	@RequestMapping(value = "checkSystemName" )
-	public String checkSystemName(String systemName,String id) {
-
-		if(StringUtils.isNotBlank(id)){
+	public String checkSystemName(String systemName,String oldSystemName) {
+		if (oldSystemName != null && systemName.equals(oldSystemName)) {
 			return "true";
 		}
 		GnTabSystem gnTabSystem = new GnTabSystem();

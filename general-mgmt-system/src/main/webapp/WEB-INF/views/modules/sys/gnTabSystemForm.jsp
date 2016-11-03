@@ -10,20 +10,8 @@
 	
 			$("#inputForm").validate({
 				rules: {
-					systemId: { required:true,remote:{
-						url:"${ctx}/sys/gnTabSystem/checkSystemId",
-						type:"post",
-						data:{"id": "${gnTabSystem.id}"}
-                            
-						} 
-					},
-					systemName:{ required:true,remote:{
-						url:"${ctx}/sys/gnTabSystem/checkSystemName",
-						type:"post",
-						data:{"id": "${gnTabSystem.id}"}
-                            
-						}
-					}			
+					systemId: { remote:"${ctx}/sys/gnTabSystem/checkSystemId?oldSystemId="+encodeURIComponent('${gnTabSystem.systemId}')},
+					systemName:{ remote:"${ctx}/sys/gnTabSystem/checkSystemName?oldSystemName="+encodeURIComponent('${gnTabSystem.systemName}')}			
 				},
 				messages: {
 					systemId: {remote: "应用编码已存在"},
@@ -57,14 +45,14 @@
 		<div class="control-group">
 			<label class="control-label">应用编码：</label>
 			<div class="controls">
-				<form:input path="systemId" htmlEscape="false" maxlength="32" class=" ${empty gnTabSystem.id?'required systemId':''}"/>
+				<form:input path="systemId" htmlEscape="false" maxlength="32" class="required username"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">应用名称：</label>
 			<div class="controls">
-				<form:input path="systemName" htmlEscape="false" maxlength="50" class="required ${empty gnTabSystem.id?'systemName':''}"/>
+				<form:input path="systemName" htmlEscape="false" maxlength="50" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
