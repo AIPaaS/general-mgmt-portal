@@ -19,19 +19,25 @@
 					content:{
 						required:true,
 						maxlength: 224
+					},
+					oaNotifyRecordNames:{
+						required:true
 					}
 				},
 				messages:{
 					oaNotifyRecordName:{
-						 required:"请选择接受人"
+						 required:"必填信息"
 					},
 					title:{
-						required: "请输入标题", 
+						required: "必填信息", 
 						maxlength: "标题长度不能超过18个字符", 
 					},
 					content:{
-						required: "请输入标题", 
-						maxlength: "标题长度不能超过224个字符", 
+						required: "必填信息", 
+						maxlength: "内容不能超过224个字符", 
+					},
+					oaNotifyRecordNames:{
+						required: "必填信息", 
 					}
 				},
 				submitHandler: function(form){
@@ -41,17 +47,18 @@
 				errorContainer: "#messageBox",
 				errorPlacement: function(error, element) {
 					$("#messageBox").text("输入有误，请先更正。");
-					if (element.is(":checkbox")||element.is(":radio")||element.parent().is(".input-append")){
+					if(element.attr("name")=="oaNotifyRecordNames"){
 						
-						if(element.attr("name")=="oaNotifyRecordNames"){
-							
-							$("#treeerro").find("label").remove();
-							$("<label for='title' class='error'>必填信息</label>").appendTo("#treeerro");
-							
-						}else{
+						$("#treeerro").find("label").remove();
+						$("<label for='title' class='error'>必填信息</label>").appendTo("#treeerro");
+						
+					}
+					else if (element.is(":checkbox")||element.is(":radio")||element.parent().is(".input-append")){
+						
+						
 							error.appendTo(element.parent().parent());
-						}
-					} else {
+						
+					}else {
 						error.insertAfter(element);
 					}
 				}
