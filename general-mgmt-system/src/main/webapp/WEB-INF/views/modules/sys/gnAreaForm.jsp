@@ -14,7 +14,7 @@
 				rules: {
 					areaCode:{
 						 required:true,
-						 maxlength: 9
+						 maxlength: 10
 					},
 					areaName:{
 						required:true,
@@ -22,7 +22,7 @@
 					},
 					sortId:{
 						
-						maxlength: 4
+						maxlength: 5
 					},
 					remark:{
 						
@@ -32,7 +32,7 @@
 				messages:{
 					areaCode:{
 						 required:"请输入区域编码", 
-						 maxlength: "区域编码长度不能超过9个字符"
+						 maxlength: "区域编码长度不能超过10个字符"
 					},
 					areaName:{
 						required: "请输入区域名称", 
@@ -40,7 +40,7 @@
 					},
 					sortId:{
 						
-						maxlength: "排序长度不能超过4个字符" 
+						maxlength: "排序长度不能超过5个字符" 
 					},
 					remark:{
 						

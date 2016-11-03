@@ -217,11 +217,11 @@
 
 	<select id="findAllNoAccountUser" resultType="User" useCache="true">
 		SELECT
-		a.id, a.name
+		a.id,a.no
 		FROM sys_user a
 		WHERE a.del_flag = 0
 		AND a.login_name is null
-		ORDER BY a.name
+		ORDER BY a.no
 	</select>
 
 	<select id="findUserTree" resultType="User" useCache="true">

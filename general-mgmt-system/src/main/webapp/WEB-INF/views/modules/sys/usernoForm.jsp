@@ -90,7 +90,7 @@
 			<div class="controls">
 				<form:select path="id" class="required input-xlarge">
 					<form:option value="" label="${productName}"/>
-					<form:options items="${userList}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+					<form:options items="${userList}" itemLabel="no" itemValue="id" htmlEscape="false"/>
 				</form:select>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
