@@ -31,18 +31,12 @@ sed -i "s%ccs.zk_address=.*%ccs.zk_address=${ZK_ADDR}%g" ./paas/paas-conf.proper
 #sed -i "s%dubbo.registry.address=.*%dubbo.registry.address=${REST_REGISTRY_ADDR}%g" ./dubbo/dubbo.properties
 
 #ftp信息配置
-sed -i "s%ftp.ip=.*%ftp.ip=${ftp.ip}%g" ./mgmt.properties
-sed -i "s%ftp.userName=.*%ftp.userName=${ftp.userName}%g" ./mgmt.properties
-sed -i "s%ftp.userPwd=.*%ftp.userPwd=${ftp.userPwd}%g" ./mgmt.properties
-sed -i "s%ftp.port=.*%ftp.port=${ftp.port}%g" ./mgmt.properties
-sed -i "s%ftp.path=.*%ftp.path=${ftp.path}%g" ./mgmt.properties
-sed -i "s%jobs.scheduled=.*%jobs.scheduled=${jobs.scheduled}%g" ./mgmt.properties
+sed -i "s%ftp.ip=.*%ftp.ip=${ftp_ip}%g" ./mgmt.properties
+sed -i "s%ftp.userName=.*%ftp.userName=${ftp_userName}%g" ./mgmt.properties
+sed -i "s%ftp.userPwd=.*%ftp.userPwd=${ftp_userPwd}%g" ./mgmt.properties
+sed -i "s%ftp.port=.*%ftp.port=${ftp_port}%g" ./mgmt.properties
+sed -i "s%ftp.path=.*%ftp.path=${ftp_path}%g" ./mgmt.properties
+sed -i "s%jobs.scheduled=.*%jobs.scheduled=${jobs_scheduled}%g" ./mgmt.properties
 popd
-
-
-
-
-
-
 
 nohup ${CATALINA_HOME}/bin/catalina.sh run >> /${APP_NAME}.log
