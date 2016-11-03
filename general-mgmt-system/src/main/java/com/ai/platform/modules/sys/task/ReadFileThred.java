@@ -61,10 +61,9 @@ public class ReadFileThred extends Thread {
 							continue;
 						officeQueue.put(hrInfo);
 					} else if (fileName.equals("user.txt")) {
-						if (hrInfo.length != 8)
-							continue;
-						userQueue.put(hrInfo);
-
+						if(hrInfo.length == 8 && "0".equals(hrInfo[7])){
+							userQueue.put(hrInfo);
+						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
