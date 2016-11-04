@@ -210,7 +210,6 @@ public class UserController extends BaseController {
 		if (StringUtils.isNotBlank(user.getTheme())) {
 			user.setTheme(Global.getDefTheme());
 		}
-
 		// 保存员工信息信息
 		systemService.saveUserNoUser(user);
 
@@ -236,9 +235,6 @@ public class UserController extends BaseController {
 			if(StringUtils.isNotBlank(user.getOldLoginName())){
 				systemService.sendMail(user, user.getNewPassword());
 			}
-		}
-		if (!beanValidator(model, user)) {
-			return formno(user, model);
 		}
 		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))) {
 			addMessage(model, "保存账号'" + user.getLoginName() + "'失败，登录名已存在");
@@ -571,6 +567,17 @@ public class UserController extends BaseController {
 		return "false";
 	}
 
+	@ResponseBody
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "checkNo")
+	public String checkNo(String oldNo, String no) {
+		if (no != null && no.equals(oldNo)) {
+			return "true";
+		} else if (no != null && systemService.getUserByNo(no) == null) {
+			return "true";
+		}
+		return "false";
+	}
 	/**
 	 * 员工信息信息显示及保存
 	 * 

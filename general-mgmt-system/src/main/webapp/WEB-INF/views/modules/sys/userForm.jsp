@@ -9,10 +9,12 @@
 			$("#no").focus();
 			$("#inputForm").validate({
 				rules: {
-					mobile: {remote: "${ctx}/sys/user/checkMobile?oldMobile=" + encodeURIComponent('${user.mobile}')}
+					mobile: {remote: "${ctx}/sys/user/checkMobile?oldMobile=" + encodeURIComponent('${user.mobile}')},
+					no: {remote: "${ctx}/sys/user/checkNo?oldNo=" + encodeURIComponent('${user.no}')}
 				},
 				messages: {
 					mobile: {remote: "手机号已存在"},
+					no: {remote: "员工编号已存在"},
 					confirmNewPassword: {equalTo: "输入与上面相同的密码"}
 				},
 				submitHandler: function(form){
