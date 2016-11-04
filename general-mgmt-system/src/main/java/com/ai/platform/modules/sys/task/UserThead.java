@@ -29,8 +29,10 @@ public class UserThead extends Thread {
 				user.setPassword(SystemService.entryptPassword(Global.getPasswordRule()));
 			} 
 			user.setName(userInfo[2]);
-			user.setEmail(userInfo[3]);
-			user.setMobile(userInfo[4]);
+			if (!userInfo[3].isEmpty()) 
+				user.setEmail(userInfo[3]);
+			if (!userInfo[4].isEmpty()) 
+				user.setMobile(userInfo[4]);
 			
 			user.setLoginFlag("1");
 			
@@ -58,15 +60,15 @@ public class UserThead extends Thread {
 
 			User findUser = systemService.getUserByNo(userInfo[0]);
 			if (findUser != null) {
-				findUser.setNo(userInfo[0]);
-				findUser.setLoginName(userInfo[1]);
-				findUser.setName(userInfo[2]);
-				findUser.setEmail(userInfo[3]);
-				findUser.setMobile(userInfo[4]);
+				findUser.setNo(user.getNo());
+				findUser.setLoginName(user.getLoginName());
+				findUser.setName(user.getName());
+				findUser.setEmail(user.getEmail());
+				findUser.setMobile(user.getMobile());
 				// 验证公司编码
 				findUser.setCompany(user.getCompany());
 				findUser.setOffice(user.getOffice());
-				findUser.setDelFlag(userInfo[7]);
+				findUser.setDelFlag(user.getDelFlag());
 				systemService.saveImportUser(findUser);
 			} else {
 				systemService.saveImportUser(user);

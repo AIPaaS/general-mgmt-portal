@@ -91,12 +91,12 @@ public class FtpUtils {
 	 * @return function:读取指定目录下的文件名
 	 * @throws IOException
 	 */
-	public List<String> getFileList(String path) {
+	public List<String> getFileList() {
 		List<String> fileLists = new ArrayList<String>();
 		// 获得指定目录下所有文件名
 		FTPFile[] ftpFiles = null;
 		try {
-			ftpFiles = ftpClient.listFiles(path);
+			ftpFiles = ftpClient.listFiles(Global.getConfig("ftp.path"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -141,11 +141,11 @@ public class FtpUtils {
 	}
 	
 	public static void main(String[] args) {
-		String ip = "10.1.55.15"; // 服务器IP地址
-		String userName = "root"; // 用户名
-		String userPwd = "root"; // 密码
+		String ip = "111.9.116.182"; // 服务器IP地址
+		String userName = "test"; // 用户名
+		String userPwd = "123456"; // 密码
 		int port =21; // 端口号
-	    String path = "/"; // 读取文件的存放目录
+	    String path = "/home/test"; // 读取文件的存放目录
 	    FTPClient  ftpClient = new FTPClient();
 		try {
 			// 连接

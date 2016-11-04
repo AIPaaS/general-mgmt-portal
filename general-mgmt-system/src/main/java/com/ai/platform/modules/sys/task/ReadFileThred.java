@@ -25,7 +25,7 @@ public class ReadFileThred extends Thread {
 	public void run() {
 		LOG.error("开始获取ftp文件："+DateUtils.getDateTime());
 		FtpUtils ftp = new FtpUtils();
-		List<String> fileList = ftp.getFileList("/");
+		List<String> fileList = ftp.getFileList();
 		for (String file : fileList) {
 			LOG.error("ftp文件名："+file);
 			try {
