@@ -92,18 +92,23 @@ public class FtpUtils {
 	 * @throws IOException
 	 */
 	public List<String> getFileList() {
+		LOG.error("开始读取ftp文件，当前时间戳："+DateUtils.getDateTime());
 		List<String> fileLists = new ArrayList<String>();
 		// 获得指定目录下所有文件名
 		FTPFile[] ftpFiles = null;
 		try {
 			ftpFiles = ftpClient.listFiles(Global.getConfig("ftp.path"));
+			LOG.error("ftpFiles："+ftpFiles.length+"，当前时间戳："+DateUtils.getDateTime());
 		} catch (IOException e) {
 			e.printStackTrace();
+			LOG.error("读取ftp文件异常,当前时间戳："+DateUtils.getDateTime());
+			LOG.error(e.getMessage());
 		}
 		for (int i = 0; ftpFiles != null && i < ftpFiles.length; i++) {
 			FTPFile file = ftpFiles[i];
 			if (file.isFile()) {
 				fileLists.add(file.getName());
+				LOG.error("ftp文件名称："+file.getName()+"，当前时间戳："+DateUtils.getDateTime());
 			}
 		}
 		return fileLists;
