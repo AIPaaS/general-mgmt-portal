@@ -62,9 +62,11 @@ public class ReadFileThred extends Thread {
 						if (hrInfo.length != 4)
 							continue;
 						officeQueue.put(hrInfo);
+						LOG.error("部门信息："+hrInfo[1]);
 					} else if (fileName.equals("user.txt")) {
 						if(hrInfo.length == 8 && "0".equals(hrInfo[7])){
 							userQueue.put(hrInfo);
+							LOG.error("员工名称："+hrInfo[2]);
 						}
 					}
 				} catch (Exception e) {

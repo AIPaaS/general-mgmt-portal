@@ -49,17 +49,21 @@ public class HrTaskJob {
 
 			handlePool.execute(new ReadFileThred(userQueue, officeQueue));
 			while (true) {
+				LOG.error("部门信息开始导入，当前时间戳："+DateUtils.getDateTime());
 				String[] office = officeQueue.poll(60, TimeUnit.SECONDS);
 				if (null == office) {
 					break;
 				}
+				LOG.error("部门名称:"+office[1]);
 				handlePool.execute(new OfficeThread(office, officeService, areaService));
 			}
 			while (true) {
+				LOG.error("部门信息开始导入，当前时间戳："+DateUtils.getDateTime());
 				String[] user = userQueue.poll(60, TimeUnit.SECONDS);
 				if (null == user) {
 					break;
 				}
+				LOG.error("员工姓名:"+user[2]);
 				handlePool.execute(new UserThead(user, officeService, systemService));
 			}
 		} catch (Exception e) {
