@@ -154,13 +154,18 @@ public class SystemService extends BaseService implements InitializingBean {
 			userDao.update(user);
 		}
 		if (StringUtils.isNotBlank(user.getId())){
-			// 更新用户与角色关联
-			userDao.deleteUserRole(user);
-			if (user.getRoleList() != null && user.getRoleList().size() > 0){
-				userDao.insertUserRole(user);
-			}else{
-				throw new ServiceException(user.getLoginName() + "没有设置角色！");
+			try {
+				userDao.deleteUserRole(user);
+				// 更新用户与角色关联
+				if (user.getRoleList() != null && user.getRoleList().size() > 0){
+					userDao.insertUserRole(user);
+				}else{
+					throw new ServiceException(user.getLoginName() + "没有设置角色！");
+				}
+			} catch (Exception e) {
+				
 			}
+			
 			// 将当前用户同步到Activiti
 //			saveActivitiUser(user);
 			// 清除用户缓存
