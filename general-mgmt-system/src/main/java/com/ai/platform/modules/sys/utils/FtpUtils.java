@@ -7,9 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPClientConfig;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
 
@@ -57,15 +55,11 @@ public class FtpUtils {
 		LOG.error("开始连接ftp，当前时间戳：" + DateUtils.getDateTime());
 		ftpClient = new FTPClient();
 		try {
-			FTPClientConfig config = new FTPClientConfig(FTPClientConfig.SYST_NT);
-			ftpClient.configure(config);
 			// 连接
 			ftpClient.connect(ip, port);
 			// 登录
 			ftpClient.login(userName, userPwd);
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-			ftpClient.setControlEncoding("GBK");
-			ftpClient.enterLocalPassiveMode();
+//			ftpClient.enterLocalPassiveMode();
 			if (path != null && path.length() > 0) {
 				// 跳转到指定目录
 				ftpClient.changeWorkingDirectory(path);
@@ -166,6 +160,7 @@ public class FtpUtils {
 			ftpClient.connect(ip, port);
 			// 登录
 			ftpClient.login(userName, userPwd);
+			ftpClient.enterLocalPassiveMode();
 			if (path != null && path.length() > 0) {
 				// 跳转到指定目录
 				ftpClient.changeWorkingDirectory(path);

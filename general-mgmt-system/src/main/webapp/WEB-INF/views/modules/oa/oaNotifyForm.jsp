@@ -26,7 +26,7 @@
 					
 					title:{
 						required: "必填信息", 
-						maxlength: "标题长度不能ss超过18个字符", 
+						maxlength: "标题长度不能超过18个字符", 
 					},
 					content:{
 						required: "必填信息", 
