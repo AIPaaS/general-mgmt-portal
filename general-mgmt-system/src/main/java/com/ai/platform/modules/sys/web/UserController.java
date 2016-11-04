@@ -149,7 +149,7 @@ public class UserController extends BaseController {
 			List<User> list = new ArrayList<User>();
 			User childUser = new User();
 			childUser.setId(user.getId());
-			childUser.setName(user.getName());
+			childUser.setNo(user.getNo());
 			list.add(childUser);
 			model.addAttribute("userList", list);
 		} else {
