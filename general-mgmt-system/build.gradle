@@ -72,6 +72,7 @@ exclude(module: 'commons-logging')
     compile files('lib/UserAgentUtils-1.13.jar', 'lib/ckfinder-2.3.jar','lib/apache-ant-zip-2.3.jar',
     'lib/ckfinderplugin-fileeditor-2.3.jar','lib/ckfinderplugin-imageresize-2.3.jar',
     'lib/analyzer-2012_u6.jar','lib/thumbnailator-0.4.2.jar')
+	compile group: 'commons-net', name: 'commons-net', version: '3.5'
     compile 'com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT'
 	compile group: 'org.apache.ant', name: 'ant-commons-net', version: '1.9.7'
     compile group: 'com.sun.faces', name: 'jsf-api', version: '2.2.13'

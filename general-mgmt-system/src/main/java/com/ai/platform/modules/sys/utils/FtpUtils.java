@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
@@ -97,7 +98,6 @@ public class FtpUtils {
 		// 获得指定目录下所有文件名
 		FTPFile[] ftpFiles = null;
 		try {
-			ftpClient.enterLocalPassiveMode();
 			ftpFiles = ftpClient.listFiles(Global.getConfig("ftp.path"));
 			LOG.error("ftpFiles："+ftpFiles.length+"，当前时间戳："+DateUtils.getDateTime());
 		} catch (IOException e) {
@@ -118,7 +118,6 @@ public class FtpUtils {
 	public InputStream readFile(String fileName) throws ParseException {
 		InputStream ins=null;
 		try {
-			ftpClient.enterLocalPassiveMode();
 			// 从服务器上读取指定的文件
 		    ins = ftpClient.retrieveFileStream(fileName);
 		} catch (IOException e) {
