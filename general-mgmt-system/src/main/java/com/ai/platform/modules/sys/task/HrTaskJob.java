@@ -49,14 +49,14 @@ public class HrTaskJob {
 
 			handlePool.execute(new ReadFileThred(userQueue, officeQueue));
 			while (true) {
-				String[] office = officeQueue.poll(200, TimeUnit.SECONDS);
+				String[] office = officeQueue.poll(60, TimeUnit.SECONDS);
 				if (null == office) {
 					break;
 				}
 				handlePool.execute(new OfficeThread(office, officeService, areaService));
 			}
 			while (true) {
-				String[] user = userQueue.poll(200, TimeUnit.SECONDS);
+				String[] user = userQueue.poll(60, TimeUnit.SECONDS);
 				if (null == user) {
 					break;
 				}

@@ -59,7 +59,7 @@ public class FtpUtils {
 			ftpClient.connect(ip, port);
 			// 登录
 			ftpClient.login(userName, userPwd);
-//			ftpClient.enterLocalPassiveMode();
+			ftpClient.enterLocalPassiveMode();
 			if (path != null && path.length() > 0) {
 				// 跳转到指定目录
 				ftpClient.changeWorkingDirectory(path);
@@ -121,6 +121,7 @@ public class FtpUtils {
 		InputStream ins = null;
 		try {
 			// 从服务器上读取指定的文件
+			ftpClient.enterLocalPassiveMode();
 			ins = ftpClient.retrieveFileStream(fileName);
 		} catch (IOException e) {
 			e.printStackTrace();
