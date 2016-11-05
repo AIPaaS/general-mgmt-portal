@@ -44,7 +44,7 @@
 		 <AppenderRef ref="RollingFile"/> 
 		 <AppenderRef ref="STDOUT"/>
 	</logger>  
-    <Root level="error">
+    <Root level="debug">
       <AppenderRef ref="RollingFile" />
       <AppenderRef ref="STDOUT" />
     </Root>
