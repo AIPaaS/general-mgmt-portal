@@ -321,12 +321,12 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		if (UserUtils.getUser().getId().equals(user.getId())) {
-			addMessage(redirectAttributes, "删除员工信息失败, 不允许删除当前员工信息");
+			addMessage(redirectAttributes, "删除失败, 不允许删除当前员工信息");
 		} else if (User.isAdmin(user.getId())) {
-			addMessage(redirectAttributes, "删除员工信息失败, 不允许删除超级管理员员工信息");
+			addMessage(redirectAttributes, "删除失败, 不允许删除超级管理员员工信息");
 		} else {
 			systemService.deleteUser(user);
-			addMessage(redirectAttributes, "删除员工信息成功");
+			addMessage(redirectAttributes, "删除成功");
 		}
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
