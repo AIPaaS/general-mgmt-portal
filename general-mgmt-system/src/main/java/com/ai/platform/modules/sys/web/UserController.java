@@ -32,6 +32,7 @@ import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
+import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
@@ -348,6 +349,7 @@ public class UserController extends BaseController {
 			systemService.saveUser(user);
 			addMessage(redirectAttributes, "删除账号成功");
 		}
+		CacheUtils.remove(UserUtils.USER_CACHE);
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 

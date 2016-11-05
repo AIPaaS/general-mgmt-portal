@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.log4j.Logger;
@@ -55,11 +56,13 @@ public class FtpUtils {
 		LOG.error("开始连接ftp，当前时间戳：" + DateUtils.getDateTime());
 		ftpClient = new FTPClient();
 		try {
+			ftpClient.setControlEncoding("UTF-8");
 			// 连接
 			ftpClient.connect(ip, port);
 			// 登录
 			ftpClient.login(userName, userPwd);
 			ftpClient.enterLocalPassiveMode();
+			ftpClient.setFileType(FTP.BINARY_FILE_TYPE); 
 			if (path != null && path.length() > 0) {
 				// 跳转到指定目录
 				ftpClient.changeWorkingDirectory(path);
@@ -114,15 +117,16 @@ public class FtpUtils {
 				LOG.error("ftp文件名称：" + file.getName() + "，当前时间戳：" + DateUtils.getDateTime());
 			}
 		}
+		
 		return fileLists;
 	}
 
 	public InputStream readFile(String fileName) throws ParseException {
 		InputStream ins = null;
 		try {
+				ins = ftpClient.retrieveFileStream(fileName);
 			// 从服务器上读取指定的文件
-			ftpClient.enterLocalPassiveMode();
-			ins = ftpClient.retrieveFileStream(fileName);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -150,6 +154,7 @@ public class FtpUtils {
 	}
 
 	public static void main(String[] args) {
+		
 		String ip = "111.9.116.182"; // 服务器IP地址
 		String userName = "test"; // 用户名
 		String userPwd = "123456"; // 密码
@@ -159,34 +164,42 @@ public class FtpUtils {
 		try {
 			// 连接
 			ftpClient.connect(ip, port);
+			
 			// 登录
 			ftpClient.login(userName, userPwd);
 			ftpClient.enterLocalPassiveMode();
+			//设置文件流传输
+			//设置缓冲
+			//设置文件编码
+			//SYST_NT ---对应windows系统
+			//系统编码为中文
 			if (path != null && path.length() > 0) {
 				// 跳转到指定目录
 				ftpClient.changeWorkingDirectory(path);
 			}
-			List<String> fileLists = new ArrayList<String>();
-			// 获得指定目录下所有文件名
-			FTPFile[] ftpFiles = null;
-			try {
-				ftpFiles = ftpClient.listFiles(path);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			for (int i = 0; ftpFiles != null && i < ftpFiles.length; i++) {
-				FTPFile file = ftpFiles[i];
-				if (file.isFile()) {
-					fileLists.add(file.getName());
-					System.out.println(file.getName());
-				}
-			}
-			for (String file : fileLists) {
-				InputStream ins = ftpClient.retrieveFileStream(file);
-				ins.close();
-				ftpClient.completePendingCommand();
-				System.out.println(ins);
-			}
+//			List<String> fileLists = new ArrayList<String>();
+//			// 获得指定目录下所有文件名
+//			FTPFile[] ftpFiles = null;
+//			try {
+//				ftpFiles = ftpClient.listFiles(path);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//			for (int i = 0; ftpFiles != null && i < ftpFiles.length; i++) {
+//				FTPFile file = ftpFiles[i];
+//				if (file.isFile()) {
+//					fileLists.add(file.getName());
+//					System.out.println(file.getName());
+//				}
+//			}
+//			for (String file : fileLists) {
+//				if (FTPReply.isPositiveCompletion(ftpClient.getReplyCode())){
+					InputStream ins = ftpClient.retrieveFileStream("office.txt");
+					ins.close();
+					ftpClient.completePendingCommand();
+					System.out.println(ins);
+//				}
+//			}
 		} catch (SocketException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

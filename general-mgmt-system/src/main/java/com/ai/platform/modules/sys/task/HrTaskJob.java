@@ -47,7 +47,7 @@ public class HrTaskJob {
 			userQueue = new LinkedBlockingQueue<String[]>(1000);
 			officeQueue = new LinkedBlockingQueue<String[]>(1000);
 
-			handlePool.execute(new ReadFileThred(userQueue, officeQueue));
+			handlePool.execute(new SftpReadFileThred(userQueue, officeQueue));
 			while (true) {
 				LOG.error("部门信息开始导入，当前时间戳："+DateUtils.getDateTime());
 				String[] office = officeQueue.poll(60, TimeUnit.SECONDS);
@@ -58,7 +58,7 @@ public class HrTaskJob {
 				handlePool.execute(new OfficeThread(office, officeService, areaService));
 			}
 			while (true) {
-				LOG.error("部门信息开始导入，当前时间戳："+DateUtils.getDateTime());
+				LOG.error("员工信息开始导入，当前时间戳："+DateUtils.getDateTime());
 				String[] user = userQueue.poll(60, TimeUnit.SECONDS);
 				if (null == user) {
 					break;
@@ -70,7 +70,7 @@ public class HrTaskJob {
 			e.printStackTrace();
 		} finally {
 			handlePool.shutdown();
-			LOG.error("任务开始结束，当前时间戳："+DateUtils.getDateTime());
+			LOG.error("任务结束，当前时间戳："+DateUtils.getDateTime());
 		}
 	}
 

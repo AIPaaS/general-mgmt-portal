@@ -144,7 +144,7 @@
 		<include refid="userColumns" />
 		FROM sys_user a
 		<include refid="userJoins" />
-		WHERE a.no = #{no}
+		WHERE a.no = #{no} AND a.del_flag = #{DEL_FLAG_NORMAL}
 	</select>
 
 	<!-- 分页查询用户信息 -->

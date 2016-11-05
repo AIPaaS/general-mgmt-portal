@@ -167,7 +167,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			}
 			
 			// 将当前用户同步到Activiti
-//			saveActivitiUser(user);
+			deleteActivitiUser(user);
 			// 清除用户缓存
 			UserUtils.clearCache(user);
 			UserUtils.removeCache(UserUtils.CACHE_USER_LIST);
