@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ai.opt.sdk.util.DateUtil;
@@ -23,6 +24,7 @@ import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 
 public final class SftpUtil {
+	private static final Logger LOG = Logger.getLogger(SftpUtil.class);
 	
 	/**
 	 * 连接sftp服务器
@@ -148,13 +150,15 @@ public final class SftpUtil {
      */
 
     public static final InputStream download(String directory, String downloadFile, String saveFile, ChannelSftp sftp) {
-        try {
+    	LOG.error("开始读取文件：" +downloadFile);
+    	try {
             sftp.cd(directory);
             File file = new File(saveFile);
             sftp.get(downloadFile, new FileOutputStream(file));
             InputStream inputStream =new FileInputStream(file);
             return inputStream;
         } catch (Exception e) {
+        	LOG.error("读取文件失败" +e.getMessage());
             e.printStackTrace();
         }
         return null;

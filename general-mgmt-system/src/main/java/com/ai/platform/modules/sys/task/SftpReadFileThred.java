@@ -81,6 +81,7 @@ public class SftpReadFileThred extends Thread {
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
+						LOG.error("读取文件失败：" + e.getMessage());
 					}
 
 				}
