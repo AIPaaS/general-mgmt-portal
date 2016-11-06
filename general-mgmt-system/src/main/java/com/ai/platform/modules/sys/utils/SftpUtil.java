@@ -149,11 +149,18 @@ public final class SftpUtil {
      * @param sftp
      */
 
-    public static final InputStream download(String directory, String downloadFile, String saveFile, ChannelSftp sftp) {
+    public static final InputStream download(String directory, String downloadFile, String saveFilePath, ChannelSftp sftp) {
     	LOG.error("开始读取文件：" +downloadFile);
     	try {
             sftp.cd(directory);
-            File file = new File(saveFile);
+            File dir = new File(saveFilePath);
+            if(!dir.exists()) {    
+            	dir.mkdir();    
+            }
+            File file = new File(saveFilePath+"/"+downloadFile);
+            if(!file.exists()){    
+                file.createNewFile();    
+            } 
             sftp.get(downloadFile, new FileOutputStream(file));
             InputStream inputStream =new FileInputStream(file);
             return inputStream;
@@ -194,8 +201,11 @@ public final class SftpUtil {
     	ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
     	try {
     		SftpUtil.download("/aifs01/tstusers/tstusr01", "office.txt", "/Users/meteor/Downloads/test/office.txt", sftp);
-    		File file = new File("/Users/meteor/Downloads/test/office.txt");
-    		
+    		File file = new File("/Users/meteor/Downloads/test/test/office.txt");
+    		if(!file.exists())    
+    		{    
+    		      file.createNewFile();    
+    		} 
     		 if(file.isFile() && file.exists()){ //判断文件是否存在
                  InputStreamReader read = new InputStreamReader(
                  new FileInputStream(file));//考虑到编码格式

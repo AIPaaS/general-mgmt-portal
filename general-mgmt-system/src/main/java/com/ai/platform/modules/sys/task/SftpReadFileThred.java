@@ -56,7 +56,7 @@ public class SftpReadFileThred extends Thread {
 		try {
 			// 从服务器上读取指定的文件
 			LOG.error("开始读取文件：" + fileName);
-			ins = SftpUtil.download(path, fileName, localpath + fileName, sftp);
+			ins = SftpUtil.download(path, fileName, localpath, sftp);
 			if (ins != null) {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
 				String line;
