@@ -43,19 +43,14 @@
 				errorPlacement: function(error, element) {
 					$("#messageBox").text("输入有误，请先更正。");
 					if(element.attr("name")=="oaNotifyRecordName"){
-						
 						$("#treeerro").find("label").remove();
 						$("<label for='title' class='error'>必填信息</label>").appendTo("#treeerro");
-						
 					}
 					else if (element.is(":radio")){
-						
 						$("#treeerro").find("label").remove();
-							error.appendTo(element.parent().parent());
-						
+						error.appendTo(element.parent().parent());
 					}else {
 						$("#treeerro").find("label").remove();
-						
 						error.insertAfter(element);
 					}
 				}
@@ -117,8 +112,8 @@
 			<div class="control-group">
 				<label class="control-label">接受人：</label>
 				<div class="controls">
-	                <sys:usertree id="oaNotifyRecord" name="oaNotifyRecordIds" value="${oaNotify.oaNotifyRecordIds}" labelName="oaNotifyRecordNames" labelValue="${oaNotify.oaNotifyRecordNames}"
-						title="用户" url="/sys/user/treeAsnyData?type=2" cssClass="input-xxlarge required" notAllowSelectParent="true" checked="true"/>
+	                <sys:usertree id="oaNotifyRecord" name="oaNotifyRecordIds" value="${oaNotify.oaNotifyRecordIds}" labelName="oaNotifyRecordName" labelValue="${oaNotify.oaNotifyRecordNames}"
+						title="用户" url="/sys/user/treeAsnyData?type=2" cssClass="input-xxlarge" notAllowSelectParent="true" checked="true"/>
 					<span id="treeerro" class="help-inline"><font color="red">*</font> </span>
 				</div>
 			</div>
