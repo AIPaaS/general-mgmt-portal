@@ -25,7 +25,7 @@ import com.jcraft.jsch.SftpException;
 
 public final class SftpUtil {
 	private static final Logger LOG = Logger.getLogger(SftpUtil.class);
-	
+
 	/**
 	 * 连接sftp服务器
 	 * 
@@ -117,15 +117,15 @@ public final class SftpUtil {
 			sftp.mkdir(directory);
 		}
 	}
-	
+
 	/*
-     * 关闭连接
-     */
-    public static void disconnect(ChannelSftp sftp){
-    	if(sftp == null){
-    		return;
-    	}
-        try {
+	 * 关闭连接
+	 */
+	public static void disconnect(ChannelSftp sftp) {
+		if (sftp == null) {
+			return;
+		}
+		try {
 			if (sftp.getSession() != null && sftp.getSession().isConnected()) {
 				sftp.getSession().disconnect();
 			}
@@ -135,87 +135,105 @@ public final class SftpUtil {
 		} catch (JSchException e) {
 			e.printStackTrace();
 		}
-    }
+	}
 
-    /**
-     * 下载文件
-     * 
-     * @param directory
-     *            下载目录
-     * @param downloadFile
-     *            下载的文件
-     * @param saveFile
-     *            存在本地的路径
-     * @param sftp
-     */
+	/**
+	 * 下载文件
+	 * 
+	 * @param directory
+	 *            下载目录
+	 * @param downloadFile
+	 *            下载的文件
+	 * @param saveFile
+	 *            存在本地的路径
+	 * @param sftp
+	 */
 
-    public static final InputStream download(String directory, String downloadFile, String saveFilePath, ChannelSftp sftp) {
-    	LOG.error("开始读取文件：" +downloadFile);
-    	try {
-            sftp.cd(directory);
-            File dir = new File(saveFilePath);
-            if(!dir.exists()) {    
-            	dir.mkdir();    
-            }
-            File file = new File(saveFilePath+"/"+downloadFile);
-            if(!file.exists()){    
-                file.createNewFile();    
-            } 
-            sftp.get(downloadFile, new FileOutputStream(file));
-            InputStream inputStream =new FileInputStream(file);
-            return inputStream;
-        } catch (Exception e) {
-        	LOG.error("读取文件失败" +e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    /**
-     * 下载文件到输出流
-     * @param directory
-     * @param fileName
-     * @param response
-     * @param sftp
-     * @throws IOException 
-     * @throws SftpException 
-     */
-    public static final void download(String directory, String fileName, HttpServletResponse response, ChannelSftp sftp) throws IOException, SftpException {
-        	OutputStream os = response.getOutputStream();// 取得输出流
-        	response.reset();// 清空输出流
-			response.setContentType("application/msexcel");// 定义输出类型
-			response.setHeader("Content-disposition", "attachment; filename=" + new String(fileName.getBytes("UTF-8"), "UTF-8"));// 设定输出文件头
+	public static final InputStream download(String directory, String downloadFile, String saveFilePath,
+			ChannelSftp sftp) {
+		LOG.error("开始读取文件：" + downloadFile);
+		try {
 			sftp.cd(directory);
-			// 获取文件
-			sftp.get(fileName, os);
-			os.flush();
-			os.close();
-    }
-    
-    
-    public static void main(String[] args) {
-    	String ip = "10.19.13.13"; // 服务器IP地址
+			File dir = new File(saveFilePath);
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
+			File file = new File(saveFilePath + "/" + downloadFile);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			sftp.get(downloadFile, new FileOutputStream(file));
+			InputStream inputStream = new FileInputStream(file);
+			return inputStream;
+		} catch (Exception e) {
+			LOG.error("读取文件失败" + e.getMessage());
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 下载文件到输出流
+	 * 
+	 * @param directory
+	 * @param fileName
+	 * @param response
+	 * @param sftp
+	 * @throws IOException
+	 * @throws SftpException
+	 */
+	public static final void download(String directory, String fileName, HttpServletResponse response, ChannelSftp sftp)
+			throws IOException, SftpException {
+		OutputStream os = response.getOutputStream();// 取得输出流
+		response.reset();// 清空输出流
+		response.setContentType("application/msexcel");// 定义输出类型
+		response.setHeader("Content-disposition",
+				"attachment; filename=" + new String(fileName.getBytes("UTF-8"), "UTF-8"));// 设定输出文件头
+		sftp.cd(directory);
+		// 获取文件
+		sftp.get(fileName, os);
+		os.flush();
+		os.close();
+	}
+	/**
+	 * 删除sftp上的文件
+	 * @param directory
+	 * @param deleteFile
+	 * @param sftp
+	 * @throws Exception
+	 * @author zhouxh
+	 * @ApiDocMethod
+	 * @ApiCode
+	 * @RestRelativeURL
+	 */
+	public  static final void delete(String directory, String deleteFile, ChannelSftp sftp) throws Exception {
+		sftp.cd(directory);
+		sftp.rm(deleteFile);
+	}
+
+	public static void main(String[] args) {
+		String ip = "10.19.13.13"; // 服务器IP地址
 		String userName = "tstusr01"; // 用户名
 		String userPwd = "chupiot@Ch8899"; // 密码
-		int port =22022; // 端口号
-    	ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
-    	try {
-    		SftpUtil.download("/aifs01/tstusers/tstusr01", "office.txt", "/Users/meteor/Downloads/test/office.txt", sftp);
-    		File file = new File("/Users/meteor/Downloads/test/test/office.txt");
-    		if(!file.exists())    
-    		{    
-    		      file.createNewFile();    
-    		} 
-    		 if(file.isFile() && file.exists()){ //判断文件是否存在
-                 InputStreamReader read = new InputStreamReader(
-                 new FileInputStream(file));//考虑到编码格式
-                 BufferedReader bufferedReader = new BufferedReader(read);
-                 String lineTxt = null;
-                 while((lineTxt = bufferedReader.readLine()) != null){
-                     System.out.println(lineTxt);
-                 }
-                 read.close();
-    		 }
+		int port = 22022; // 端口号
+		ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
+		try {
+			SftpUtil.download("/aifs01/tstusers/tstusr01", "office.txt", "/Users/meteor/Downloads/test/",
+					sftp);
+			File file = new File("/Users/meteor/Downloads/test/office.txt");
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			if (file.isFile() && file.exists()) { // 判断文件是否存在
+				InputStreamReader read = new InputStreamReader(new FileInputStream(file));// 考虑到编码格式
+				BufferedReader bufferedReader = new BufferedReader(read);
+				String lineTxt = null;
+				while ((lineTxt = bufferedReader.readLine()) != null) {
+					System.out.println(lineTxt);
+				}
+				read.close();
+			}
+			SftpUtil.delete("/aifs01/tstusers/tstusr01", "test.txt", sftp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
