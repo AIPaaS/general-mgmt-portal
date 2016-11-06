@@ -89,7 +89,9 @@ public class SftpReadFileThred extends Thread {
 				if (ins != null) {
 					ins.close();
 				}
+				SftpUtil.delete(path, fileName, sftp);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
