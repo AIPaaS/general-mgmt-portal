@@ -160,7 +160,7 @@ messenger.addTarget(iframe1.contentWindow, 'mainFrame');
     <!--左侧菜单-->
     <div id="nav-col">
     <section id="col-left" class="col-left-nano">
-        <div id="col-left-inner" class="col-left-nano-content">
+        <div id="col-left-inner" class="col-left-nano-content" style="overflow-y:auto; height:90%;">
             <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
                 <ul id="menu" class="nav nav-pills nav-stacked">
                 <li class="active"><a href="#"><i class="fa fa-home"></i><span><font>系统控制台</font></span></a></li>
