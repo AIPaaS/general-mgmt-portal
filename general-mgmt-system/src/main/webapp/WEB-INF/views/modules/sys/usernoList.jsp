@@ -63,7 +63,7 @@
 	</form:form>
 	<sys:message content="${message}"/>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>归属公司</th><!-- <th>归属部门</th> --><th >登录名</th><th >姓名</th><th>邮箱</th><th>手机</th><th>是否允许登录</th><%--<th>角色</th> --%><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+		<thead><tr><th>归属公司</th><!-- <th>归属部门</th> --><th >登录名</th><th >姓名</th><th >员工编号</th><th>邮箱</th><th>手机</th><th>是否允许登录</th><%--<th>角色</th> --%><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="user">
 			<tr>
@@ -71,6 +71,7 @@
 			<%-- 	<td>${user.office.name}</td> --%>
 				<td><a href="${ctx}/sys/user/formno?id=${user.id}">${user.loginName}</a></td>
 				<td>${user.name}</td>
+				<td>${user.no}</td>
 				<td>${user.email}</td>
 				<td>${user.mobile}</td>
 				<c:set var="loginFlag" value="${user.loginFlag}"/>
@@ -85,7 +86,7 @@
 					<c:if test="${user.loginFlag eq '0'}">
 						<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=1" onclick="return confirmx('确认要解冻该账号吗？', this.href)">解冻</a>   
 					</c:if>
-					<a href="${ctx}/sys/user/delete?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
+					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
 					
 				</td></shiro:hasPermission>
 			</tr>

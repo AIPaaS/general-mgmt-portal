@@ -321,12 +321,12 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		if (UserUtils.getUser().getId().equals(user.getId())) {
-			addMessage(redirectAttributes, "删除失败, 不允许删除当前员工信息");
+			addMessage(redirectAttributes, "删除员工信息失败, 不允许删除当前员工信息");
 		} else if (User.isAdmin(user.getId())) {
-			addMessage(redirectAttributes, "删除失败, 不允许删除超级管理员员工信息");
+			addMessage(redirectAttributes, "删除员工信息失败, 不允许删除超级管理员员工信息");
 		} else {
 			systemService.deleteUser(user);
-			addMessage(redirectAttributes, "删除成功");
+			addMessage(redirectAttributes, "删除员工信息成功");
 		}
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
@@ -336,20 +336,16 @@ public class UserController extends BaseController {
 	public String deleteno(User user, RedirectAttributes redirectAttributes) {
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/user/listno?repage";
+			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		if (UserUtils.getUser().getId().equals(user.getId())) {
-			addMessage(redirectAttributes, "删除账号失败, 不允许删除当前账号");
+			addMessage(redirectAttributes, "删除账号失败, 不允许删除当前员工信息");
 		} else if (User.isAdmin(user.getId())) {
-			addMessage(redirectAttributes, "删除账号失败, 不允许删除超级管理员账号");
+			addMessage(redirectAttributes, "删除账号失败, 不允许删除超级管理员员工信息");
 		} else {
-			user.setLoginName(null);
-			user.setOldLoginName(null);
-			user.setPassword(null);
-			systemService.saveUser(user);
+			systemService.deleteUser(user);
 			addMessage(redirectAttributes, "删除账号成功");
 		}
-		CacheUtils.remove(UserUtils.USER_CACHE);
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 
