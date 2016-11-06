@@ -50,7 +50,7 @@ public class HrTaskJob {
 			handlePool.execute(new SftpReadFileThred(userQueue, officeQueue));
 			while (true) {
 				LOG.error("部门信息开始导入，当前时间戳："+DateUtils.getDateTime());
-				String[] office = officeQueue.poll(60, TimeUnit.SECONDS);
+				String[] office = officeQueue.poll(30, TimeUnit.SECONDS);
 				if (null == office) {
 					break;
 				}
@@ -59,7 +59,7 @@ public class HrTaskJob {
 			}
 			while (true) {
 				LOG.error("员工信息开始导入，当前时间戳："+DateUtils.getDateTime());
-				String[] user = userQueue.poll(60, TimeUnit.SECONDS);
+				String[] user = userQueue.poll(30, TimeUnit.SECONDS);
 				if (null == user) {
 					break;
 				}

@@ -61,7 +61,6 @@ public class UserThead extends Thread {
 			User findUser = systemService.getUserByNo(userInfo[0]);
 			if (findUser != null) {
 				findUser.setNo(user.getNo());
-				findUser.setLoginName(user.getLoginName());
 				findUser.setName(user.getName());
 				findUser.setEmail(user.getEmail());
 				findUser.setMobile(user.getMobile());
