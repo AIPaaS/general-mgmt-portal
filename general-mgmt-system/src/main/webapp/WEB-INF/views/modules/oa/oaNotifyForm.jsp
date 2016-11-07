@@ -43,10 +43,9 @@
 				errorPlacement: function(error, element) {
 					$("#messageBox").text("输入有误，请先更正。");
 					if(element.attr("name")=="oaNotifyRecordName"){
-						$("#treeerro").find("label").remove();
-						$("<label for='title' class='error'>必填信息</label>").appendTo("#treeerro");
-					}
-					else if (element.is(":radio")){
+						$("#treeerro").find("label").remove(); 
+						$("<label for='oaNotifyRecordName' class='error'>必填信息</label>").appendTo("#treeerro");
+					}else if (element.is(":radio")){
 						$("#treeerro").find("label").remove();
 						error.appendTo(element.parent().parent());
 					}else {
