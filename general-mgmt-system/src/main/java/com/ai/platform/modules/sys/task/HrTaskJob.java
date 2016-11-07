@@ -32,6 +32,8 @@ public class HrTaskJob {
 
 	public static BlockingQueue<String[]> userQueue;
 	public static BlockingQueue<String[]> officeQueue;
+	public static BlockingQueue<String[]> officeRepeatQueue;
+	
 
 	public static ExecutorService handlePool;
 
@@ -46,11 +48,21 @@ public class HrTaskJob {
 			handlePool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 			userQueue = new LinkedBlockingQueue<String[]>(1000);
 			officeQueue = new LinkedBlockingQueue<String[]>(1000);
+			officeRepeatQueue = new LinkedBlockingQueue<String[]>(1000);
 
-			handlePool.execute(new SftpReadFileThred(userQueue, officeQueue));
+			handlePool.execute(new SftpReadFileThred(userQueue, officeQueue,officeRepeatQueue));
 			while (true) {
 				LOG.error("部门信息开始导入，当前时间戳："+DateUtils.getDateTime());
 				String[] office = officeQueue.poll(30, TimeUnit.SECONDS);
+				if (null == office) {
+					break;
+				}
+				LOG.error("部门名称:"+office[1]);
+				handlePool.execute(new OfficeThread(office, officeService, areaService));
+			}
+			while (true) {
+				LOG.error("部门信息开始更新，当前时间戳："+DateUtils.getDateTime());
+				String[] office = officeRepeatQueue.poll(30, TimeUnit.SECONDS);
 				if (null == office) {
 					break;
 				}

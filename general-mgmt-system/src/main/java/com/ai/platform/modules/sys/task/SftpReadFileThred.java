@@ -18,6 +18,8 @@ public class SftpReadFileThred extends Thread {
 	private static final Logger LOG = Logger.getLogger(SftpReadFileThred.class);
 	public BlockingQueue<String[]> userQueue;
 	public BlockingQueue<String[]> officeQueue;
+	public BlockingQueue<String[]> officeRepeatQueue;
+	
 
 	String ip = Global.getConfig("ftp.ip"); // 服务器IP地址
 	String userName = Global.getConfig("ftp.userName"); // 用户名
@@ -26,9 +28,10 @@ public class SftpReadFileThred extends Thread {
 	String path = Global.getConfig("ftp.path"); // 读取文件的存放目录
 	String localpath = Global.getConfig("ftp.localpath");// 本地存在的文件路径
 
-	public SftpReadFileThred(BlockingQueue<String[]> userQueue, BlockingQueue<String[]> officeQueue) {
+	public SftpReadFileThred(BlockingQueue<String[]> userQueue, BlockingQueue<String[]> officeQueue, BlockingQueue<String[]> officeRepeatQueue) {
 		this.userQueue = userQueue;
 		this.officeQueue = officeQueue;
+		this.officeRepeatQueue = officeRepeatQueue;
 	}
 
 	public void run() {
@@ -41,7 +44,6 @@ public class SftpReadFileThred extends Thread {
 			try {
 				if (file.equals("office.txt") || file.equals("user.txt")) {
 					readFile(file, sftp);
-					// ftp.deleteFile(file);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -72,6 +74,7 @@ public class SftpReadFileThred extends Thread {
 							if (hrInfo.length != 4)
 								continue;
 							officeQueue.put(hrInfo);
+							officeRepeatQueue.put(hrInfo);
 							LOG.error("部门信息：" + hrInfo[1]);
 						} else if (fileName.equals("user.txt")) {
 							if (hrInfo.length == 8 && "0".equals(hrInfo[7])) {
