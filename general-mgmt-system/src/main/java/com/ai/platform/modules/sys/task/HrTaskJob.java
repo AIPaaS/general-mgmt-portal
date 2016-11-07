@@ -47,8 +47,8 @@ public class HrTaskJob {
 		try {
 			handlePool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 			userQueue = new LinkedBlockingQueue<String[]>(1000);
-			officeQueue = new LinkedBlockingQueue<String[]>(1000);
-			officeRepeatQueue = new LinkedBlockingQueue<String[]>(1000);
+			officeQueue = new LinkedBlockingQueue<String[]>();
+			officeRepeatQueue = new LinkedBlockingQueue<String[]>();
 
 			handlePool.execute(new SftpReadFileThred(userQueue, officeQueue,officeRepeatQueue));
 			while (true) {
