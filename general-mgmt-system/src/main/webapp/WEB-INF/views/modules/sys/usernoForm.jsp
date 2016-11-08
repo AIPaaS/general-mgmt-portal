@@ -50,8 +50,8 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/user/listno">账号列表</a></li>
-		<li class="active"><a href="${ctx}/sys/user/formno?id=${user.id}">账号<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
+		<li><a href="${ctx}/sys/user/listno">工号列表</a></li>
+		<li class="active"><a href="${ctx}/sys/user/formno?id=${user.id}">工号<shiro:hasPermission name="sys:user:edit">${not empty user.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="sys:user:edit">查看</shiro:lacksPermission></a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/saveno" method="post" class="form-horizontal">
 		
@@ -143,11 +143,11 @@
 				<form:select path="loginFlag">
 					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
-				<span class="help-inline"><font color="red">*</font> “是”代表此账号允许登录，“否”则表示此账号不允许登录</span>
+				<span class="help-inline"><font color="red">*</font> “是”代表此工号允许登录，“否”则表示此工号不允许登录</span>
 			</div>
 		</div>
 <%-- 		<div class="control-group">
-			<label class="control-label">账号类型:</label>
+			<label class="control-label">工号类型:</label>
 			<div class="controls">
 				<form:select path="userType" class="input-xlarge">
 					<form:option value="" label="请选择"/>
@@ -164,7 +164,7 @@
 		</div>		
 		
 		<div class="control-group">
-			<label class="control-label">账号角色:</label>
+			<label class="control-label">工号角色:</label>
 			<div class="controls">
 				<form:checkboxes path="roleIdList" items="${allRoles}" itemLabel="name" itemValue="id" htmlEscape="false" class="required"/>
 				<span class="help-inline"><font color="red">*</font> </span>

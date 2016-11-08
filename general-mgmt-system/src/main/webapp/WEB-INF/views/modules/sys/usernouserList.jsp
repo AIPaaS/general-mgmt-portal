@@ -29,7 +29,7 @@
 <body>
 
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/user/listNOuser">未创建账号列表</a></li>
+		<li class="active"><a href="${ctx}/sys/user/listNOuser">未创建工号列表</a></li>
 
 	</ul>
 	<form:form id="searchForm" modelAttribute="user" action="${ctx}/sys/user/listNOuser" method="post" class="breadcrumb form-search ">

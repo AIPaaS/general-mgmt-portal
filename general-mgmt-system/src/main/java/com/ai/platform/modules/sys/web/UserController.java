@@ -32,7 +32,6 @@ import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
-import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
@@ -238,7 +237,7 @@ public class UserController extends BaseController {
 			}
 		}
 		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))) {
-			addMessage(model, "保存账号'" + user.getLoginName() + "'失败，登录名已存在");
+			addMessage(model, "保存工号'" + user.getLoginName() + "'失败，登录名已存在");
 			return formno(user, model);
 		}
 		
@@ -249,16 +248,16 @@ public class UserController extends BaseController {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			logger.error("保存账号发送邮件失败");
+			logger.error("保存工号发送邮件失败");
 		}
 		savemethod(user);
 		
-		addMessage(redirectAttributes, "保存账号'" + user.getLoginName() + "'成功");
+		addMessage(redirectAttributes, "保存工号'" + user.getLoginName() + "'成功");
 		LOG.error("结束执行添加员工工号添加，当前时间戳："+DateUtils.getDateTime());
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 	/**
-	 * 发送邮件-维护账号
+	 * 发送邮件-维护工号
 	 * @param user
 	 * @param resetPass
 	 * @throws Exception
@@ -339,12 +338,12 @@ public class UserController extends BaseController {
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		if (UserUtils.getUser().getId().equals(user.getId())) {
-			addMessage(redirectAttributes, "删除账号失败, 不允许删除当前员工信息");
+			addMessage(redirectAttributes, "删除工号失败, 不允许删除当前员工信息");
 		} else if (User.isAdmin(user.getId())) {
-			addMessage(redirectAttributes, "删除账号失败, 不允许删除超级管理员员工信息");
+			addMessage(redirectAttributes, "删除工号失败, 不允许删除超级管理员员工信息");
 		} else {
 			systemService.deleteUser(user);
-			addMessage(redirectAttributes, "删除账号成功");
+			addMessage(redirectAttributes, "删除工号成功");
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
@@ -618,7 +617,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * 冻结账号--不允许登录
+	 * 冻结工号--不允许登录
 	 * 
 	 * 
 	 */
@@ -628,10 +627,10 @@ public class UserController extends BaseController {
 		//user.setLoginFlag("0");
 		if(user.getLoginFlag()!=null && ("0").equals(user.getLoginFlag())){
 			systemService.updateLoginFalg(user);
-			addMessage(redirectAttributes, "冻结该账号成功");
+			addMessage(redirectAttributes, "冻结该工号成功");
 		}else if(user.getLoginFlag()!=null && ("1").equals(user.getLoginFlag())){
 			systemService.updateLoginFalg(user);
-			addMessage(redirectAttributes, "解冻该账号成功");
+			addMessage(redirectAttributes, "解冻该工号成功");
 		}
 
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
@@ -645,7 +644,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "resetPWD")
 	public String resetPWD(User user, RedirectAttributes redirectAttributes) {
 		if (StringUtils.isBlank(user.getEmail())) {
-			addMessage(redirectAttributes, "重置密码失败，该账号没有维护邮箱");
+			addMessage(redirectAttributes, "重置密码失败，该工号没有维护邮箱");
 			return "redirect:" + adminPath + "/sys/user/listno?repage";
 		}
 

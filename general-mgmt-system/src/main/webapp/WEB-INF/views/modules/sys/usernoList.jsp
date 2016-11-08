@@ -7,7 +7,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#btnExport").click(function(){
-				top.$.jBox.confirm("确认要导出账号数据吗？","系统提示",function(v,h,f){
+				top.$.jBox.confirm("确认要导出工号数据吗？","系统提示",function(v,h,f){
 					if(v=="ok"){
 						$("#searchForm").attr("action","${ctx}/sys/user/export");
 						$("#searchForm").submit();
@@ -39,8 +39,8 @@
 		</form>
 	</div>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/sys/user/listno">账号列表</a></li>
-		<shiro:hasPermission name="sys:user:edit"><li><a href="${ctx}/sys/user/formno">账号添加</a></li></shiro:hasPermission>
+		<li class="active"><a href="${ctx}/sys/user/listno">工号列表</a></li>
+		<shiro:hasPermission name="sys:user:edit"><li><a href="${ctx}/sys/user/formno">工号添加</a></li></shiro:hasPermission>
 	</ul>
 	<form:form id="searchForm" modelAttribute="user" action="${ctx}/sys/user/listno" method="post" class="breadcrumb form-search ">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -81,12 +81,12 @@
     				<a href="${ctx}/sys/user/formno?id=${user.id}">修改</a>
     				<a href="${ctx}/sys/user/resetPWD?id=${user.id}" onclick="return confirmx('确认要重置密码吗？', this.href)">密码重置</a>
     				<c:if test="${user.loginFlag eq '1'}">
-    					<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=0" onclick="return confirmx('确认要冻结该账号吗？', this.href)">冻结</a>    					
+    					<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=0" onclick="return confirmx('确认要冻结该工号吗？', this.href)">冻结</a>    					
 					</c:if>
 					<c:if test="${user.loginFlag eq '0'}">
-						<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=1" onclick="return confirmx('确认要解冻该账号吗？', this.href)">解冻</a>   
+						<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=1" onclick="return confirmx('确认要解冻该工号吗？', this.href)">解冻</a>   
 					</c:if>
-					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该账号吗？', this.href)">删除</a>
+					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该工号吗？', this.href)">删除</a>
 					
 				</td></shiro:hasPermission>
 			</tr>
