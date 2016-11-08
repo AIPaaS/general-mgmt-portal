@@ -66,7 +66,7 @@ public class OfficeThread extends Thread {
 						break;
 				}
 				office.setType("2");//部门
-
+				office.setParent(parentList.get(0));
 			}else{
 				office.setGrade("1");// 默认导入的部门级别为：一级
 				office.setType("1");//公司
