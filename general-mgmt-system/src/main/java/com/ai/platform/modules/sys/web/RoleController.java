@@ -126,8 +126,13 @@ public class RoleController extends BaseController {
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
 			return "redirect:" + adminPath + "/sys/role/?repage";
 		}
-		systemService.deleteRole(role);
-		addMessage(redirectAttributes, "删除角色成功");
+		List<User> userList = systemService.findUser(new User(new Role(role.getId())));
+		if(!userList.isEmpty()){
+			addMessage(redirectAttributes, "删除角色失败,该角色下存在用户");
+		}else{
+			systemService.deleteRole(role);
+			addMessage(redirectAttributes, "删除角色成功");
+		}
 		return "redirect:" + adminPath + "/sys/role/?repage";
 	}
 	
