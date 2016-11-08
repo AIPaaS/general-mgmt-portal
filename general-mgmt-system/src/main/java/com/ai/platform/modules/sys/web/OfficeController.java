@@ -37,6 +37,7 @@ import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
+import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.DictUtils;
 import com.ai.platform.modules.sys.utils.OfficeUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
@@ -57,6 +58,8 @@ public class OfficeController extends BaseController {
 	private OfficeService officeService;
 	@Autowired
 	private GnAreaService areaService;
+	@Autowired
+	private SystemService systemService;
 
 	@ModelAttribute("office")
 	public Office get(@RequestParam(required = false) String id) {
@@ -356,12 +359,13 @@ public class OfficeController extends BaseController {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/office/list";
 		}
-		// if (Office.isRoot(id)){
-		// addMessage(redirectAttributes, "删除部门失败, 不允许删除顶级部门或编号空");
-		// }else{
-		officeService.delete(office);
-		addMessage(redirectAttributes, "删除部门成功");
-		// }
+		List<User> user = systemService.findUserByOfficeId(office.getId());
+		 if (!user.isEmpty()){
+			 addMessage(redirectAttributes, "删除部门失败,该部门下存在员工");
+		 }else{
+			officeService.delete(office);
+			addMessage(redirectAttributes, "删除部门成功");
+		 }
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+office.getParentId()+"&parentIds="+office.getParentIds();
 		OfficeUtils.clearCache();
