@@ -2,6 +2,8 @@ package com.ai.platform.modules.sys.task;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ai.platform.common.config.Global;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
@@ -9,6 +11,8 @@ import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
 
 public class UserThead extends Thread {
+	private static final Logger LOG = Logger.getLogger(UserThead.class);
+	
 	private OfficeService officeService;
 	private SystemService systemService;
 	private String[] userInfo;
@@ -20,7 +24,6 @@ public class UserThead extends Thread {
 	}
 
 	public void run() {
-
 		try {
 			User user = new User();
 			user.setNo(userInfo[0]);
@@ -74,7 +77,7 @@ public class UserThead extends Thread {
 			}
 			System.out.println("NO:"+userInfo[0]+",Name:"+userInfo[2]);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.info("导入用户信息失败，员工编号:"+userInfo[0]+",姓名:"+userInfo[2]);
 		}
 	}
 

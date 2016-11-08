@@ -2,6 +2,8 @@ package com.ai.platform.modules.sys.task;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ai.platform.common.config.Global;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.entity.Office;
@@ -9,33 +11,41 @@ import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
 
 public class OfficeThread extends Thread {
+	private static final Logger LOG = Logger.getLogger(OfficeThread.class);
+
 	private OfficeService officeService;
 	private GnAreaService areaService;
-	
-	private String[] userInfo;
-	public OfficeThread(String[] userInfo,OfficeService officeService, GnAreaService areaService){
-		this.userInfo=userInfo;
-		this.officeService=officeService;
-		this.areaService =areaService;
-	}
-	
-	public void run() {
-		Office officeInfo = setOfficeInfo(userInfo);
-		Office office = new Office();
-		office.setCode(officeInfo.getCode());
-		List<Office> list = officeService.find(office);
-		if (!list.isEmpty()) {
-			office = list.get(0);
-			office.setCode(officeInfo.getCode());
-			office.setName(officeInfo.getName());
-			office.setParent(officeInfo.getParent());
-			office.setUseable(officeInfo.getUseable());
-			office.setType(officeInfo.getType());
-			office.setGrade(officeInfo.getGrade());
-			officeService.save(office);
 
-		} else {
-			officeService.save(officeInfo);
+	private String[] userInfo;
+
+	public OfficeThread(String[] userInfo, OfficeService officeService, GnAreaService areaService) {
+		this.userInfo = userInfo;
+		this.officeService = officeService;
+		this.areaService = areaService;
+	}
+
+	public void run() {
+		try {
+
+			Office officeInfo = setOfficeInfo(userInfo);
+			Office office = new Office();
+			office.setCode(officeInfo.getCode());
+			List<Office> list = officeService.find(office);
+			if (!list.isEmpty()) {
+				office = list.get(0);
+				office.setCode(officeInfo.getCode());
+				office.setName(officeInfo.getName());
+				office.setParent(officeInfo.getParent());
+				office.setUseable(officeInfo.getUseable());
+				office.setType(officeInfo.getType());
+				office.setGrade(officeInfo.getGrade());
+				officeService.save(office);
+
+			} else {
+				officeService.save(officeInfo);
+			}
+		} catch (Exception e) {
+			LOG.info("导入部门信息失败，部门编号:" + userInfo[0] + ",部门名称:" + userInfo[1]);
 		}
 	}
 
@@ -54,22 +64,23 @@ public class OfficeThread extends Thread {
 			parentOffice.setCode(officeInfo[2]);
 			List<Office> parentList = officeService.find(parentOffice);
 			if (!parentList.isEmpty()) {
-				switch(parentList.size()){
-					case 1:
-						office.setGrade("2");
-						break;
-					case 2:
-						office.setGrade("3");
-						break;
-					default:
-						office.setGrade("4");
-						break;
+				String[] parentIds = parentList.get(0).getParentIds().split(",");
+				switch (parentIds.length) {
+				case 1:
+					office.setGrade("2");
+					break;
+				case 2:
+					office.setGrade("3");
+					break;
+				default:
+					office.setGrade("4");
+					break;
 				}
-				office.setType("2");//部门
+				office.setType("2");// 部门
 				office.setParent(parentList.get(0));
-			}else{
+			} else {
 				office.setGrade("1");// 默认导入的部门级别为：一级
-				office.setType("1");//公司
+				office.setType("1");// 公司
 			}
 		}
 		GnArea gnArea = areaService.getByCode("00");
@@ -77,10 +88,9 @@ public class OfficeThread extends Thread {
 			office.setGnArea(gnArea);
 		}
 		office.setUseable(officeInfo[3]);
-		
+
 		office.setTenantId(Global.getTenantID());
 		return office;
 	}
-
 
 }
