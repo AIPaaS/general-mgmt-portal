@@ -30,6 +30,8 @@ public class OfficeThread extends Thread {
 			office.setName(officeInfo.getName());
 			office.setParent(officeInfo.getParent());
 			office.setUseable(officeInfo.getUseable());
+			office.setType(officeInfo.getType());
+			office.setGrade(officeInfo.getGrade());
 			officeService.save(office);
 
 		} else {
@@ -52,7 +54,22 @@ public class OfficeThread extends Thread {
 			parentOffice.setCode(officeInfo[2]);
 			List<Office> parentList = officeService.find(parentOffice);
 			if (!parentList.isEmpty()) {
-				office.setParent(parentList.get(0));
+				switch(parentList.size()){
+					case 1:
+						office.setGrade("2");
+						break;
+					case 2:
+						office.setGrade("3");
+						break;
+					default:
+						office.setGrade("4");
+						break;
+				}
+				office.setType("2");//部门
+
+			}else{
+				office.setGrade("1");// 默认导入的部门级别为：一级
+				office.setType("1");//公司
 			}
 		}
 		GnArea gnArea = areaService.getByCode("00");
@@ -60,7 +77,7 @@ public class OfficeThread extends Thread {
 			office.setGnArea(gnArea);
 		}
 		office.setUseable(officeInfo[3]);
-		office.setGrade("1");// 默认导入的部门级别为：一级
+		
 		office.setTenantId(Global.getTenantID());
 		return office;
 	}
