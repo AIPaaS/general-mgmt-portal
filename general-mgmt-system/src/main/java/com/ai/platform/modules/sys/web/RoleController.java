@@ -3,6 +3,7 @@
  */
 package com.ai.platform.modules.sys.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +75,7 @@ public class RoleController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
 		//model.addAttribute("menuList", systemService.findAllMenu());
-		model.addAttribute("officeList", officeService.findAll());
+		model.addAttribute("role",role);
 		return "modules/mgmtsys/roleForm";
 	}
 	
@@ -266,10 +267,14 @@ public class RoleController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "checkName")
 	public String checkName(String oldName, String name) {
-		if (name!=null && name.equals(oldName)) {
-			return "true";
-		} else if (name!=null && systemService.getRoleByName(name) == null) {
-			return "true";
+		try {
+			if (name!=null && name.equals(oldName)) {
+				return "true";
+			} else if (name!=null && systemService.getRoleByName(name) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return "false";
 	}
@@ -284,11 +289,16 @@ public class RoleController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "checkEnname")
 	public String checkEnname(String oldEnname, String enname) {
-		if (enname!=null && enname.equals(oldEnname)) {
-			return "true";
-		} else if (enname!=null && systemService.getRoleByEnname(enname) == null) {
-			return "true";
+		try {
+			if (enname!=null && enname.equals(oldEnname)) {
+				return "true";
+			} else if (enname!=null && systemService.getRoleByEnname(enname) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		return "false";
 	}
 

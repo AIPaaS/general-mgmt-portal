@@ -10,8 +10,25 @@
 			$("#name").focus();
 			$("#inputForm").validate({
 				rules: {
-					name: {remote: "${ctx}/sys/role/checkName?oldName=" + encodeURIComponent("${role.name}")},
-					enname: {remote: "${ctx}/sys/role/checkEnname?oldEnname=" + encodeURIComponent("${role.enname}")}
+					name: {
+							remote:{
+								type:"POST",	
+								url:"${ctx}/sys/role/checkName",
+								data:{
+									oldName:function(){return $("#role.name").val();}
+								}
+							}
+						},
+						
+					enname: {
+							remote:{
+								type:"POST",	
+								url:"${ctx}/sys/role/checkEnname",
+								data:{
+									oldEnname:function(){return $("#role.enname").val();}
+								}
+							}
+						}
 				},
 				messages: {
 					name: {remote: "角色名已存在"},
