@@ -9,15 +9,48 @@
 			$("#name").focus();
 			$("#inputForm").validate({
 				rules: {
+					name:{
+						 required:true,
+						 maxlength: 16
+					},
+					href:{
+						 maxlength: 200
+					},
 					sort:{
 						 required:true,
 						 maxlength: 9
+					},
+					remarks:{
+						 maxlength: 200
+					},
+					resourceType:{
+						 required:true,
+					},
+					gnTabSystem:{
+						 required:true,
 					}
+					
 				},
 				messages:{
+					name:{
+						 required:"请输入名称",
+						 maxlength: "名称字段不能超过16个字符"
+					},
+					href:{
+						 maxlength: "链接字段不能超过200个字符"
+					},
 					sort:{
 						 required:"请输入排序编号",
-						 maxlength: "排序字段不能超过9个字符", 
+						 maxlength: "排序字段不能超过9个字符"
+					},
+					remarks:{
+						 maxlength: "备注字段不能超过200个字符"
+					},
+					resourceType:{
+						required:"请选择资源类型"
+					},
+					gnTabSystem:{
+						required:"请选择所属应用"
 					}
 				},
 				submitHandler: function(form){
@@ -49,20 +82,20 @@
 			<label class="control-label">上级菜单:</label>
 			<div class="controls">
                 <sys:treeselect id="menu" name="parent.id" value="${menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
-					title="菜单" url="/sys/menu/treeData" notAllowSelectfourmenu="true" cssClass="required"/>
+					title="菜单" url="/sys/menu/treeData" notAllowSelectfourmenu="true" cssClass="required" dataMsgRequired="请选择上级菜单"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">名称:</label>
 			<div class="controls">
-				<form:input path="name" htmlEscape="false" maxlength="16" class="required menuName"/>
+				<form:input path="name" htmlEscape="false" maxlength="17" class="menuName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">所属应用:</label>
 			<div class="controls">
-				<form:select path="gnTabSystem" class="required input-xlarge">
+				<form:select path="gnTabSystem" class="input-xlarge">
 				
 					<form:option value="" label=""/>
 					<form:options items="${tableList}" itemLabel="systemName" itemValue="id" htmlEscape="false"/>
@@ -74,7 +107,7 @@
 		<div class="control-group">
 			<label class="control-label">资源类型:</label>
 			<div class="controls">
-				<form:radiobuttons path="resourceType" items="${fns:getDictList('resource_type')}" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
+				<form:radiobuttons path="resourceType" items="${fns:getDictList('resource_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 				<span class="help-inline">该资源属于菜单资源或是集成入口资源</span>
 			</div>
@@ -82,7 +115,7 @@
 		<div class="control-group">
 			<label class="control-label">链接:</label>
 			<div class="controls">
-				<form:input path="href" htmlEscape="false" maxlength="200" class="input-xxlarge"/>
+				<form:input path="href" htmlEscape="false" maxlength="201"  class="input-xxlarge"/>
 				<span class="help-inline">点击菜单跳转的页面</span>
 			</div>
 		</div>
@@ -123,7 +156,7 @@
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="200" class="input-xlarge"/>
+				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge"/>
 			</div>
 		</div>
 		<div class="form-actions">

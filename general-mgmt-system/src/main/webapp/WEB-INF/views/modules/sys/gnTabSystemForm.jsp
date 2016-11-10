@@ -10,12 +10,52 @@
 	
 			$("#inputForm").validate({
 				rules: {
-					systemId: { remote:"${ctx}/sys/gnTabSystem/checkSystemId?oldSystemId="+encodeURIComponent('${gnTabSystem.systemId}')},
-					systemName:{ remote:"${ctx}/sys/gnTabSystem/checkSystemName?oldSystemName="+encodeURIComponent('${gnTabSystem.systemName}')}			
+					systemId:{
+						required:true,
+						maxlength: 20,
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/gnTabSystem/checkSystemId",
+							data:{
+								oldSystemId:function(){return $("#gnTabSystem.systemId").val();}
+							}
+						}
+					},
+					systemName:{ 
+					 	required:true,
+					 	maxlength: 50,
+					 	remote:{
+							type:"POST",	
+							url:"${ctx}/sys/gnTabSystem/checkSystemName",
+							data:{
+								oldSystemName:function(){return $("#gnTabSystem.systemName").val();}
+							}
+						}
+					},
+					remarks:{
+						maxlength: 200
+					},
+					systemUrlContext:{
+						maxlength: 400
+					}
 				},
 				messages: {
-					systemId: {remote: "应用编码已存在"},
-					systemName: {remote: "应用名称已存在"}
+					systemId: {
+						required: "请输入应用编码", 
+						maxlength: "应用编码不能超过20个字符", 
+						remote: "应用编码已存在"
+					},
+					systemName: {
+						required: "请输入应用名称", 
+						maxlength: "应用名称不能超过50个字符", 
+						remote: "应用名称已存在"
+					},
+					remarks:{
+						maxlength: "备注字段不能超过200个字符"
+					},
+					systemUrlContext:{
+						maxlength: "应用上下文不能超过400个字符"
+					}
 				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
@@ -45,27 +85,27 @@
 		<div class="control-group">
 			<label class="control-label">应用编码：</label>
 			<div class="controls">
-				<form:input path="systemId" htmlEscape="false" maxlength="32" class="required username"/>
+				<form:input path="systemId" htmlEscape="false" maxlength="21" class="username"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">应用名称：</label>
 			<div class="controls">
-				<form:input path="systemName" htmlEscape="false" maxlength="50" class="required userName"/>
+				<form:input path="systemName" htmlEscape="false" maxlength="51" class="userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">备注：</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="200" class="input-xlarge"/>
+				<form:textarea path="remarks" htmlEscape="false" rows="4" maxlength="201" class="input-xlarge"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">应用上下文：</label>
 			<div class="controls">
-				<form:input path="systemUrlContext" htmlEscape="false" maxlength="400" class="input-xlarge"/>
+				<form:input path="systemUrlContext" htmlEscape="false" maxlength="401" class="input-xlarge"/>
 			</div>
 		</div>
 		<div class="form-actions">
