@@ -74,7 +74,7 @@
 			<tr>
 				<td>${user.company.name}</td>
 				<td>${user.office.name}</td>
-				<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
+				<td><a href="${ctx}/sys/user/formno?id=${user.id}">${user.loginName}</a></td>
 				<td>${user.name}</td>
 				<td>${user.phone}</td>
 				<td>${user.mobile}</td>

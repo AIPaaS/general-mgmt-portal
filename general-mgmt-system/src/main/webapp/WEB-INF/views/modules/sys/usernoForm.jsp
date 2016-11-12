@@ -114,7 +114,7 @@
 		<div class="control-group">
 			<label class="control-label">确认密码:</label>
 			<div class="controls">
-				<input id="confirmNewPassword" name="confirmNewPassword" onpaste="return false" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" type="password" value="" maxlength="50" minlength="3" equalTo="#newPassword" />
+				<input id="confirmNewPassword" name="confirmNewPassword" onpaste="return false" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;" type="password" class="${empty user.id?'required':''}  value="" maxlength="50" minlength="3" equalTo="#newPassword" />
 				<c:if test="${empty user.id}"><span class="help-inline"><font color="red">*</font> </span></c:if>
 			</div>
 		</div>
