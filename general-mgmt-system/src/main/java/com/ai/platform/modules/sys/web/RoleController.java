@@ -3,7 +3,6 @@
  */
 package com.ai.platform.modules.sys.web;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,7 +23,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.Collections3;
+import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.common.utils.StringUtils;
+import com.ai.platform.common.utils.excel.ExportExcel;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
@@ -135,6 +137,21 @@ public class RoleController extends BaseController {
 			addMessage(redirectAttributes, "删除角色成功");
 		}
 		return "redirect:" + adminPath + "/sys/role/?repage";
+	}
+	
+	@RequiresPermissions("sys:role:view")
+	@RequestMapping(value = "export", method = RequestMethod.POST)
+	public String exportFile(Role role, HttpServletRequest request, HttpServletResponse response,
+			RedirectAttributes redirectAttributes) {
+		try {
+			String fileName = "角色信息数据" + DateUtils.getDate("yyyyMMddHHmmss") + ".xlsx";
+			Page<Role> page = systemService.findRole(new Page<Role>(request, response, -1), role);
+			new ExportExcel("角色信息数据", Role.class).setDataList(page.getList()).write(response, fileName).dispose();
+			return null;
+		} catch (Exception e) {
+			addMessage(redirectAttributes, "导出角色信息失败！失败信息：" + e.getMessage());
+		}
+		return "redirect:" + adminPath + "/sys/role/list?repage";
 	}
 	
 	/**

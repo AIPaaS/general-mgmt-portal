@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.config.Global;
@@ -78,6 +79,31 @@ public class GnTenantController extends BaseController {
 		gnTenantService.delete(gnTenant);
 		addMessage(redirectAttributes, "删除业务平台成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnTenant/?repage";
+	}
+	
+	
+	@ResponseBody
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "checkTenantName")
+	public String checkTenantName(String oldTenantName, String tenantName) {
+		if (tenantName != null && tenantName.equals(oldTenantName)) {
+			return "true";
+		} else if (tenantName != null && gnTenantService.get(tenantName) == null) {
+			return "true";
+		}
+		return "false";
+	}
+	
+	@ResponseBody
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "checkTenantId")
+	public String checkTenantId(String oldTenantId, String tenantId) {
+		if (tenantId != null && tenantId.equals(oldTenantId)) {
+			return "true";
+		} else if (tenantId != null && gnTenantService.get(tenantId) == null) {
+			return "true";
+		}
+		return "false";
 	}
 
 }

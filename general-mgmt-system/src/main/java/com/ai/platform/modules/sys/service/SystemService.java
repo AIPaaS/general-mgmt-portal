@@ -110,6 +110,14 @@ public class SystemService extends BaseService implements InitializingBean {
 		return page;
 	}
 	
+	
+	public Page<Role> findRole(Page<Role> page, Role role) {
+		role.setPage(page);
+		// 执行分页查询
+		page.setList(roleDao.findList(role));
+//		page.setList(UserUtils.getUserList(user));
+		return page;
+	}
 	/**
 	 * 无分页查询人员列表
 	 * @param user

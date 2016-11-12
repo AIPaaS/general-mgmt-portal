@@ -20,7 +20,7 @@
 			<include refid="gnTenantColumns"/>
 		FROM gn_tenant a
 		<include refid="gnTenantJoins"/>
-		WHERE a.id = #{id}
+		WHERE a.tenant_id = #{id}
 	</select>
 	
 	<select id="findList" resultType="GnTenant">
@@ -66,9 +66,11 @@
 	<insert id="insert">
 		INSERT INTO gn_tenant(
 			tenant_id,
+			state,
 			tenant_name
 		) VALUES (
 			#{tenantId},
+			#{state},
 			#{tenantName}
 		)
 	</insert>
@@ -77,12 +79,12 @@
 		UPDATE gn_tenant SET 	
 			tenant_id = #{tenantId},
 			tenant_name = #{tenantName}
-		WHERE id = #{id}
+		WHERE tenant_id = #{id}
 	</update>
 	
 	<update id="delete">
 		DELETE FROM gn_tenant
-		WHERE id = #{id}
+		WHERE tenant_id = #{id}
 	</update>
 	
 </mapper>

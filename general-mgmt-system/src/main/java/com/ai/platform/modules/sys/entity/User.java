@@ -69,7 +69,6 @@ public class User extends DataEntity<User> {
 	private Role role;	// 根据角色查询用户条件
 	
 	private List<Role> roleList = Lists.newArrayList(); // 拥有角色列表
-	private List<GnTenant> tenantList = Lists.newArrayList(); // 拥有租户列表
 
 
 
@@ -120,7 +119,7 @@ public class User extends DataEntity<User> {
 
 	@JsonIgnore
 	@NotNull(message="归属公司为空或不存在")
-	@ExcelField(title="归属公司", align=2, sort=20)
+	@ExcelField(title="归属公司编码*", align=2, sort=20)
 	public Office getCompany() {
 		return company;
 	}
@@ -131,7 +130,7 @@ public class User extends DataEntity<User> {
 	
 	@JsonIgnore
 	@NotNull(message="归属部门为空或不存在")
-	@ExcelField(title="归属部门", align=2, sort=25)
+	@ExcelField(title="归属部门编码*", align=2, sort=25)
 	public Office getOffice() {
 		return office;
 	}
@@ -142,7 +141,7 @@ public class User extends DataEntity<User> {
 
 	@JsonIgnore
 	@Length(min=0, max=1,message="员工类别长度必须介于 0 和 1 之间")
-	@ExcelField(title="员工类别", align=2, sort=75)
+//	@ExcelField(title="员工类别", align=2, sort=75)
 	public String getCategory() {
 		return category;
 	}
@@ -182,7 +181,7 @@ public class User extends DataEntity<User> {
 		this.expiryDate = expiryDate;
 	}
 	@Pattern(regexp = "^[a-zA-Z0-9][a-zA-Z0-9_.]{2,20}$", message = "登录名格式不正确")
-	@ExcelField(title="登录名", align=2, sort=20)
+	@ExcelField(title="登录名*", align=2, sort=10)
 	public String getLoginName() {
 		return loginName;
 	}
@@ -201,13 +200,13 @@ public class User extends DataEntity<User> {
 		this.password = password;
 	}
 	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,20}$", message = "姓名格式不正确")
-	@ExcelField(title="姓名", align=2, sort=40)
+	@ExcelField(title="姓名*", align=2, sort=40)
 	public String getName() {
 		return name;
 	}
 	
 	@Pattern(regexp = "^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,50}$", message = "员工编号格式不正确")
-	@ExcelField(title="工号", align=2, sort=45)
+	@ExcelField(title="员工编号*", align=2, sort=45)
 	public String getNo() {
 		return no;
 	}
@@ -276,12 +275,12 @@ public class User extends DataEntity<User> {
 		this.userType = userType;
 	}
 
-	@ExcelField(title="创建时间", type=0, align=1, sort=90)
+//	@ExcelField(title="创建时间", type=0, align=1, sort=90)
 	public Date getCreateDate() {
 		return createDate;
 	}
 
-	@ExcelField(title="最后登录IP", type=1, align=1, sort=100)
+//	@ExcelField(title="最后登录IP", type=1, align=1, sort=100)
 	public String getLoginIp() {
 		return loginIp;
 	}
@@ -291,7 +290,7 @@ public class User extends DataEntity<User> {
 	}
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@ExcelField(title="最后登录日期", type=1, align=1, sort=110)
+//	@ExcelField(title="最后登录日期", type=1, align=1, sort=110)
 	public Date getLoginDate() {
 		return loginDate;
 	}
@@ -348,7 +347,7 @@ public class User extends DataEntity<User> {
 	}
 
 	@JsonIgnore
-	@ExcelField(title="拥有角色", align=1, sort=800, fieldType=RoleListType.class)
+	@ExcelField(title="拥有角色*", align=1, sort=800, fieldType=RoleListType.class)
 	public List<Role> getRoleList() {
 		return roleList;
 	}
@@ -356,15 +355,15 @@ public class User extends DataEntity<User> {
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
 	}
-
 	@JsonIgnore
-	@ExcelField(title="业务平台", align=1, sort=800)
-	public List<GnTenant> getTenantList() {
-		return tenantList;
+	@Length(min=1, max=64)
+	@ExcelField(title="业务平台*", align=1, sort=800)
+	public String getTenantId() {
+		return tenantId;
 	}
 
-	public void setTenantList(List<GnTenant> tenantList) {
-		this.tenantList = tenantList;
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
 	}
 	
 	@JsonIgnore
@@ -384,25 +383,7 @@ public class User extends DataEntity<User> {
 			roleList.add(role);
 		}
 	}
-	@JsonIgnore
-	public List<String> getTenantIdList() {
-		List<String> tenantIdList = Lists.newArrayList();
-		for (GnTenant GnTenant : tenantList) {
-			tenantIdList.add(GnTenant.getId());
-		}
 
-		return tenantIdList;
-	}
-
-	public void setTenantIdList(List<String> tenantIdList) {
-		tenantList = Lists.newArrayList();
-		for (String gnTenantId : tenantIdList) {
-			GnTenant  gnTenant= new GnTenant();
-			gnTenant.setId(gnTenantId);
-			gnTenant.setTenantId(gnTenantId);
-			tenantList.add(gnTenant);
-		}
-	}
 	
 	/**
 	 * 用户拥有的角色名称字符串, 多个角色名称用','分隔.
@@ -436,6 +417,8 @@ public class User extends DataEntity<User> {
 		}
 		this.updateDate = new Date();
 		this.createDate = this.updateDate;
-		this.tenantId = Global.getTenantID();
+		if(StringUtils.isBlank(user.getTenantId())){
+			this.tenantId = Global.getTenantID();
+		}
 	}
 }

@@ -103,7 +103,7 @@
 			
 				<c:set var="parentAreaCode" value="${gnArea.parentAreaCode}"/>
 			 <sys:treeasync id="parentAreaCode" name="parentAreaCode" value="${gnArea.parentAreaCode}" labelName="${fns:getAreaName(parentAreaCode)}" labelValue="${fns:getAreaName(parentAreaCode)}"
-		title="区域" url="/sys/gnArea/treeData?type=2" selectgnArea="true" cssClass="required" dataMsgRequired="必填信息"/>
+		title="区域" url="/sys/gnArea/treeData?type=2" selectgnArea="true" cssClass="required" dataMsgRequired="请选择所属区域"/>
 			<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>		

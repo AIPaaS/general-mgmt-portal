@@ -49,7 +49,7 @@ public class GnTenant extends DataEntity<GnTenant> {
 		this.tenantName = tenantName;
 	}
 	
-	@Length(min=1, max=128, message="业务平台密码长度必须介于 1 和 128 之间")
+	@Length(min=0, max=128, message="业务平台密码长度必须介于 0 和 128 之间")
 	public String getTenantPwd() {
 		return tenantPwd;
 	}

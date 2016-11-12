@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.DataEntity;
 import com.ai.platform.common.supcan.annotation.treelist.cols.SupCol;
+import com.ai.platform.common.utils.excel.annotation.ExcelField;
 import com.google.common.collect.Lists;
 
 /**
@@ -93,7 +94,6 @@ public class Role extends DataEntity<Role> {
 	public void setSysData(String sysData) {
 		this.sysData = sysData;
 	}
-
 	public Office getOffice() {
 		return office;
 	}
@@ -104,6 +104,7 @@ public class Role extends DataEntity<Role> {
 
 
 	@Length(min=1, max=100)
+	@ExcelField(title="角色名称", type=1, align=2, sort=1)
 	public String getName() {
 		return name;
 	}
@@ -114,6 +115,7 @@ public class Role extends DataEntity<Role> {
 
 
 	@Length(min=1, max=100)
+	@ExcelField(title="英文名称", type=1, align=2, sort=2)
 	public String getEnname() {
 		return enname;
 	}
@@ -277,6 +279,12 @@ public class Role extends DataEntity<Role> {
 			}
 		}
 		return permissions;
+	}
+	
+	@Length(min=0, max=200,message="备注长度必须介于0 和 200个字符之间")
+	@ExcelField(title="备注", type=1, align=2, sort=3)
+	public String getRemarks() {
+		return remarks;
 	}
 
 	public User getUser() {

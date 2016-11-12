@@ -15,7 +15,7 @@
 								type:"POST",	
 								url:"${ctx}/sys/role/checkName",
 								data:{
-									oldName:function(){return $("#role.name").val();}
+									oldName:function(){return ${role.name};}
 								}
 							}
 						},
@@ -25,7 +25,7 @@
 								type:"POST",	
 								url:"${ctx}/sys/role/checkEnname",
 								data:{
-									oldEnname:function(){return $("#role.enname").val();}
+									oldEnname:function(){return ${role.enname};}
 								}
 							}
 						}

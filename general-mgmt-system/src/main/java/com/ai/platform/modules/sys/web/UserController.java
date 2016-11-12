@@ -3,9 +3,6 @@
  */
 package com.ai.platform.modules.sys.web;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +30,9 @@ import com.ai.platform.common.beanvalidator.BeanValidators;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.DateUtils;
-import com.ai.platform.common.utils.FileUtils;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.common.utils.excel.ExportExcel;
+import com.ai.platform.common.utils.excel.ImportExcel;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.GnTenant;
 import com.ai.platform.modules.sys.entity.Office;
@@ -380,126 +377,63 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequiresPermissions("sys:user:edit")
-	@RequestMapping(value = "import", method = RequestMethod.POST)
-	public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
-		if (Global.isDemoMode()) {
+    @RequestMapping(value = "import", method=RequestMethod.POST)
+    public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
+		if(Global.isDemoMode()){
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
 		try {
-			// 验证导入文件是否合法
-			String fileName = file.getOriginalFilename();
-			if (StringUtils.isBlank(fileName)) {
-				throw new RuntimeException("导入文档为空!");
-			} else if (!fileName.toLowerCase().endsWith(".txt")) {
-				throw new RuntimeException("文档格式不正确!");
-			}else if(file.getSize()>1024*5){
-				throw new RuntimeException("导入文件超过5M!");
-			}
 			int successNum = 0;
-			int failureNum = 0;
-			int alldataNum = 0;
 			StringBuilder failureMsg = new StringBuilder();
-			InputStream is = file.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is,FileUtils.getCharset(is));
-			BufferedReader br = new BufferedReader(isr);
-			String lineContent;
-			while ((lineContent = br.readLine()) != null) {
-				User user = new User();
-				try {
-					if (alldataNum == 0) {
-//						if (!lineContent.contains("#LOGINNAME"))
-//							throw new RuntimeException("文档格式不正确!");
-//						else
-							continue;
+			ImportExcel ei = new ImportExcel(file, 1, 0);
+			List<User> list = ei.getDataList(User.class);
+			for (User user : list){
+				try{
+					boolean isValite=true;
+					if (!"true".equals(checkLoginName("", user.getLoginName()))){
+						failureMsg.append("<br/>登录名 "+user.getLoginName()+" 已存在; ");
+						isValite=false;
 					}
-					String[] userInfo = lineContent.split("\\\\t");
-					if (userInfo.length != 7) {
-						failureMsg.append("<br/>数据" + alldataNum + ":信息格式不正确;");
-						failureNum++;
-						continue;
+					if (!"true".equals(checkLoginName("", user.getMobile()))){
+						failureMsg.append("<br/>手机 "+user.getMobile()+" 已存在; ");
+						isValite=false;
 					}
-					// 封装导入用户信息
-					user = setUserInfo(userInfo);
-
-					if ("true".equals(checkLoginName("", user.getLoginName()))) {
-						user.setPassword(SystemService.entryptPassword(user.getLoginName() + Global.getPasswordRule()));
+					if (!"true".equals(checkLoginName("", user.getEmail()))){
+						failureMsg.append("<br/>邮箱 "+user.getEmail()+" 已存在; ");
+						isValite=false;
+					}
+					if (!"true".equals(checkNo("", user.getNo()))){
+						failureMsg.append("<br/>员工编号 "+user.getEmail()+" 已存在; ");
+						isValite=false;
+					}
+					if (isValite){
+						user.setPassword(SystemService.entryptPassword("123456"));
 						BeanValidators.validateWithException(validator, user);
-						systemService.saveImportUser(user);
+						systemService.saveUser(user);
 						successNum++;
-					} else {
-						failureMsg.append("<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 已存在; ");
-						failureNum++;
 					}
-
-				} catch (ConstraintViolationException ex) {
-					failureMsg.append("<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 导入失败：");
+					
+				}catch(ConstraintViolationException ex){
+					failureMsg.append("<br/>登录名 "+user.getLoginName()+" 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-					for (String message : messageList) {
-						failureMsg.append(message + "; ");
+					for (String message : messageList){
+						failureMsg.append(message+"; ");
 					}
-					failureNum++;
-				} catch (Exception ex) {
-					failureMsg.append(
-							"<br/>数据" + alldataNum + ":登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
-				} finally {
-					alldataNum++;
+				}catch (Exception ex) {
+					failureMsg.append("<br/>登录名 "+user.getLoginName()+" 导入失败："+ex.getMessage());
 				}
 			}
-			// 关闭文件流
-			br.close();
-			isr.close();
-			is.close();
-
-			if (failureNum > 0) {
-				failureMsg.insert(0, "，失败 " + failureNum + " 条工号信息，导入信息如下：");
+			if (successNum<list.size()){
+				failureMsg.insert(0, "，失败 "+(list.size()-successNum)+" 条用户，导入信息如下：");
 			}
-			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条工号信息" + failureMsg);
+			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条用户"+failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入工号信息失败！失败信息：" + e.getMessage());
+			addMessage(redirectAttributes, "导入用户失败！失败信息："+e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
-	}
-
-	/**
-	 * 封装导入用户信息
-	 * 
-	 * @param userInfo
-	 * @return user
-	 */
-	private User setUserInfo(String[] userInfo) {
-		User user = new User();
-		user.setLoginName(userInfo[0]);
-		user.setNo(userInfo[1]);
-		user.setName(userInfo[2]);
-		user.setEmail(userInfo[3]);
-		user.setMobile(userInfo[4]);
-		user.setDelFlag("0");
-		user.setLoginFlag("1");
-
-		// 验证公司编码
-		if(!userInfo[5].isEmpty()){
-			Office company = new Office();
-			company.setCode(userInfo[5]);
-			List<Office> companyList = officeService.find(company);
-			if (!companyList.isEmpty()) {
-				company = companyList.get(0);
-				user.setCompany(company);
-			}
-		}
-		// 验证部门编码
-		if(!userInfo[6].isEmpty()){
-			Office office = new Office();
-			office.setCode(userInfo[6]);
-			List<Office> officeList = officeService.find(office);
-			if (!officeList.isEmpty()) {
-				office = officeList.get(0);
-				user.setOffice(office);
-			}
-		}
-
-		return user;
-	}
+    }
+	
 
 	/**
 	 * 下载导入员工信息数据模板
@@ -515,12 +449,12 @@ public class UserController extends BaseController {
 			String fileName = "员工信息数据导入模板.xlsx";
 			List<User> list = Lists.newArrayList();
 			list.add(UserUtils.getUser());
-			new ExportExcel("员工信息数据", User.class, 2).setDataList(list).write(response, fileName).dispose();
+			new ExportExcel("员工信息数据(*表示必填)", User.class, 2).setDataList(list).write(response, fileName).dispose();
 			return null;
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入模板下载失败！失败信息：" + e.getMessage());
 		}
-		return "redirect:" + adminPath + "/sys/user/list?repage";
+		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
 
 	/**

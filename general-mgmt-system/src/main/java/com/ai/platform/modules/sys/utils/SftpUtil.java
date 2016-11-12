@@ -8,7 +8,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ai.opt.sdk.util.DateUtil;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.ChannelSftp.LsEntry;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -196,7 +203,35 @@ public final class SftpUtil {
 		os.close();
 	}
 	/**
+	 * 获取sftp文件列表
+	 * @param directory
+	 * @param sftp
+	 * @return
+	 * @throws SftpException
+	 * @author zhouxh
+	 */
+	public  static final List<String> listFiles(String directory, ChannelSftp sftp)
+			throws SftpException {
+		Pattern pattern = Pattern.compile("[^/\\\\]+$");  
+		List<String> ftpFileNameList = new ArrayList<String>();
+		Vector<LsEntry> sftpFile = sftp.ls(directory);
+		LsEntry isEntity = null;
+		String fileName = null;
+		Iterator<LsEntry> sftpFileNames = sftpFile.iterator();
+		while (sftpFileNames.hasNext()) {
+			isEntity = (LsEntry) sftpFileNames.next();
+			fileName = isEntity.getFilename();
+			Matcher matcher = pattern.matcher(fileName);  
+			if (matcher.find()) {
+				ftpFileNameList.add(fileName);
+			} 
+		}
+		return ftpFileNameList;
+	}
+
+	/**
 	 * 删除sftp上的文件
+	 * 
 	 * @param directory
 	 * @param deleteFile
 	 * @param sftp
@@ -206,7 +241,7 @@ public final class SftpUtil {
 	 * @ApiCode
 	 * @RestRelativeURL
 	 */
-	public  static final void delete(String directory, String deleteFile, ChannelSftp sftp) throws Exception {
+	public static final void delete(String directory, String deleteFile, ChannelSftp sftp) throws Exception {
 		sftp.cd(directory);
 		sftp.rm(deleteFile);
 	}
@@ -218,8 +253,9 @@ public final class SftpUtil {
 		int port = 22022; // 端口号
 		ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
 		try {
-			SftpUtil.download("/aifs01/tstusers/tstusr01", "office.txt", "/Users/meteor/Downloads/test/",
-					sftp);
+			SftpUtil.download("/aifs01/tstusers/tstusr01", "office.txt", "/Users/meteor/Downloads/test/", sftp);
+
+			SftpUtil.listFiles("/aifs01/tstusers/tstusr01", sftp);
 			File file = new File("/Users/meteor/Downloads/test/office.txt");
 			if (!file.exists()) {
 				file.createNewFile();
@@ -233,7 +269,7 @@ public final class SftpUtil {
 				}
 				read.close();
 			}
-			SftpUtil.delete("/aifs01/tstusers/tstusr01", "test.txt", sftp);
+//			SftpUtil.delete("/aifs01/tstusers/tstusr01", "test.txt", sftp);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
