@@ -36,6 +36,9 @@
 			<if test="tenantName != null and tenantName != ''">
 				AND a.tenant_name = #{tenantName}
 			</if>
+			<if test="state != null and state != ''">
+				AND a.state = #{state}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
@@ -78,6 +81,7 @@
 	<update id="update">
 		UPDATE gn_tenant SET 	
 			tenant_id = #{tenantId},
+			state = #{state},
 			tenant_name = #{tenantName}
 		WHERE tenant_id = #{id}
 	</update>
