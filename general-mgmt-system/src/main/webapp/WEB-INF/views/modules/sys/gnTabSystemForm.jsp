@@ -17,7 +17,7 @@
 							type:"POST",	
 							url:"${ctx}/sys/gnTabSystem/checkSystemId",
 							data:{
-								oldSystemId:function(){return  ${gnTabSystem.systemId};}
+								oldSystemId:function(){return  '${gnTabSystem.systemId}';}
 							}
 						}
 					},
@@ -28,7 +28,7 @@
 							type:"POST",	
 							url:"${ctx}/sys/gnTabSystem/checkSystemName",
 							data:{
-								oldSystemName:function(){return ${gnTabSystem.systemName};}
+								oldSystemName:function(){return '${gnTabSystem.systemName}';}
 							}
 						}
 					},

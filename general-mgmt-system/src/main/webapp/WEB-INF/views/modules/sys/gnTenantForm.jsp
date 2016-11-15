@@ -14,7 +14,7 @@
 							type:"POST",	
 							url:"${ctx}/sys/gnTenant/checkTenantName",
 							data:{
-								oldTenantName:function(){return ${gnTenant.tenantName};}
+								oldTenantName:function(){return '${gnTenant.tenantName}';}
 							}
 						}
 					},

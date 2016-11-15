@@ -44,7 +44,7 @@
 			<label class="control-label">上级部门:</label>
 			<div class="controls">
                 <sys:treeselect id="office" name="parent.id" value="${office.parent.id}" labelName="parent.name" labelValue="${office.parent.name}"
-					title="机构" url="/sys/office/treeData" extId="${office.id}" cssClass="" allowClear="${office.currentUser.admin}"/>
+					title="部门" url="/sys/office/treeData" extId="${office.id}" cssClass="" allowClear="${office.currentUser.admin}"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -125,7 +125,7 @@
 		<div class="control-group">
 			<label class="control-label">联系人:</label>
 			<div class="controls">
-				<form:input path="master" htmlEscape="false" maxlength="50"/>
+				<form:input path="master" htmlEscape="false" maxlength="20"/>
 			</div>
 		</div>
 		<div class="control-group">
