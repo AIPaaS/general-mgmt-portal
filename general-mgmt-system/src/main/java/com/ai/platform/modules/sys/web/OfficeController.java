@@ -164,20 +164,20 @@ public class OfficeController extends BaseController {
 		if (office.getGnArea() == null) {
 			office.setGnArea(user.getOffice().getGnArea());
 		}
-		// 自动获取排序号
-		if (StringUtils.isBlank(office.getId()) && office.getParent() != null) {
-			int size = 0;
-			List<Office> list = officeService.findAll();
-			for (int i = 0; i < list.size(); i++) {
-				Office e = list.get(i);
-				if (e.getParent() != null && e.getParent().getId() != null
-						&& e.getParent().getId().equals(office.getParent().getId())) {
-					size++;
-				}
-			}
-			office.setCode(office.getParent().getCode()
-					+ StringUtils.leftPad(String.valueOf(size > 0 ? size + 1 : 1), 3, "0"));
-		}
+//		// 自动获取排序号
+//		if (StringUtils.isBlank(office.getId()) && office.getParent() != null) {
+//			int size = 0;
+//			List<Office> list = officeService.findAll();
+//			for (int i = 0; i < list.size(); i++) {
+//				Office e = list.get(i);
+//				if (e.getParent() != null && e.getParent().getId() != null
+//						&& e.getParent().getId().equals(office.getParent().getId())) {
+//					size++;
+//				}
+//			}
+//			office.setCode(office.getParent().getCode()
+//					+ StringUtils.leftPad(String.valueOf(size > 0 ? size + 1 : 1), 3, "0"));
+//		}
 		model.addAttribute("office", office);
 		return "modules/sys/officeForm";
 	}
