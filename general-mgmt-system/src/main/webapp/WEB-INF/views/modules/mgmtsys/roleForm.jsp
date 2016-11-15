@@ -35,17 +35,6 @@
 					enname: {remote: "英文名已存在"}
 				},
 				submitHandler: function(form){
-					/* var ids = [], nodes = tree.getCheckedNodes(true);
-					for(var i=0; i<nodes.length; i++) {
-						ids.push(nodes[i].id);
-					}
-					$("#menuIds").val(ids);
-					var ids2 = [], nodes2 = tree2.getCheckedNodes(true);
-					for(var i=0; i<nodes2.length; i++) {
-						ids2.push(nodes2[i].id);
-					}
-					$("#officeIds").val(ids2);
-					loading('正在提交，请稍等...'); */
 					form.submit();
 				},
 				errorContainer: "#messageBox",
@@ -81,7 +70,7 @@
 			<label class="control-label">角色名称:</label>
 			<div class="controls">
 				<input id="oldName" name="oldName" type="hidden" value="${role.name}">
-				<form:input path="name" htmlEscape="false" maxlength="15" class="required"/>
+				<form:input path="name" htmlEscape="false" maxlength="15" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -89,7 +78,7 @@
 			<label class="control-label">英文名称:</label>
 			<div class="controls">
 				<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">
-				<form:input path="enname" htmlEscape="false" maxlength="20" class="required"/>
+				<form:input path="enname" htmlEscape="false" maxlength="20" class="required username"/>
 				<span class="help-inline"><font color="red">*</font></span>
 			</div>
 		</div>
