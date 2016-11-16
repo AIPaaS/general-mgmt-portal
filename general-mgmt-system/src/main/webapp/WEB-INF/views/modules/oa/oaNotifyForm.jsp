@@ -12,11 +12,11 @@
 					
 					title:{
 						required:true,
-						maxlength: 18
+						maxlength: 20
 					},
 					content:{
 						required:true,
-						maxlength: 224
+						maxlength: 225
 					},
 					oaNotifyRecordName:{
 						required:true
@@ -25,15 +25,15 @@
 				messages:{
 					
 					title:{
-						required: "必填信息", 
-						maxlength: "标题长度不能超过18个字符", 
+						required: "请输入标题", 
+						maxlength: "标题长度不能超过20个字符", 
 					},
 					content:{
-						required: "必填信息", 
-						maxlength: "内容不能超过224个字符", 
-					},oaNotifyRecordName:{
-						 required:"必填信息"
-					}
+						required: "请输入内容", 
+						maxlength: "内容不能超过225个字符", 
+					},
+					status:{required:"请选择状态"},
+					type:{required:"请选择类型"}
 				},
 				submitHandler: function(form){
 					loading('正在提交，请稍等...');
@@ -44,7 +44,7 @@
 					$("#messageBox").text("输入有误，请先更正。");
 					if(element.attr("name")=="oaNotifyRecordName"){
 						$("#treeerro").find("label").remove(); 
-						$("<label for='oaNotifyRecordName' class='error'>必填信息</label>").appendTo("#treeerro");
+						$("<label for='oaNotifyRecordName' class='error'>请选择接收人</label>").appendTo("#treeerro");
 					}else if (element.is(":radio")){
 						$("#treeerro").find("label").remove();
 						error.appendTo(element.parent().parent());
@@ -81,14 +81,14 @@
 		<div class="control-group">
 			<label class="control-label">标题：</label>
 			<div class="controls">
-				<form:input path="title" htmlEscape="false"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xlarge required"/>
+				<form:input path="title" htmlEscape="false" maxlength="21" disabled="${oaNotify.status eq '1' ? true : false}" class="input-xlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">内容：</label>
 			<div class="controls">
-				<form:textarea path="content" htmlEscape="false" rows="6"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xxlarge required"/>
+				<form:textarea path="content" htmlEscape="false" maxlength="226" rows="6"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xxlarge required"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

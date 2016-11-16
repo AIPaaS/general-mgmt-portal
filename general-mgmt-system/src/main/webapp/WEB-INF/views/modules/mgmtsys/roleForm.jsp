@@ -11,28 +11,38 @@
 			$("#inputForm").validate({
 				rules: {
 					name: {
-							remote:{
-								type:"POST",	
-								url:"${ctx}/sys/role/checkName",
-								data:{
-									oldName:function(){return '${role.name}';}
-								}
-							}
-						},
-						
-					enname: {
-							remote:{
-								type:"POST",	
-								url:"${ctx}/sys/role/checkEnname",
-								data:{
-									oldEnname:function(){return '${role.enname}';}
-								}
+						maxlength: 15,
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/role/checkName",
+							data:{
+								oldName:function(){return '${role.name}';}
 							}
 						}
+					},
+						
+					enname: {
+						maxlength: 20,
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/role/checkEnname",
+							data:{
+								oldEnname:function(){return '${role.enname}';}
+							}
+						}
+					},
+					remarks:{maxlength: 150}
 				},
 				messages: {
-					name: {remote: "角色名已存在"},
-					enname: {remote: "英文名已存在"}
+					name: {
+						required: "请输入角色名称", 
+						maxlength: "角色名称不能超过15个字符",
+						remote: "角色名已存在"},
+					enname: {
+						required: "请输入英文名称", 
+						maxlength: "英文名称不能超过20个字符",
+						remote: "英文名已存在"},
+					remarks: {maxlength: "备注不能超过150个字符"}
 				},
 				submitHandler: function(form){
 					form.submit();
@@ -59,18 +69,11 @@
 	<form:form id="inputForm" modelAttribute="role" action="${ctx}/sys/role/save" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>
-		<%-- <div class="control-group">
-			<label class="control-label">归属机构:</label>
-			<div class="controls">
-                <sys:treeselect id="office" name="office.id" value="${role.office.id}" labelName="office.name" labelValue="${role.office.name}"
-					title="机构" url="/sys/office/treeData" cssClass="required"/>
-			</div>
-		</div> --%>
 		<div class="control-group">
 			<label class="control-label">角色名称:</label>
 			<div class="controls">
 				<input id="oldName" name="oldName" type="hidden" value="${role.name}">
-				<form:input path="name" htmlEscape="false" maxlength="15" class="required userName"/>
+				<form:input path="name" htmlEscape="false" maxlength="16" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
@@ -78,7 +81,7 @@
 			<label class="control-label">英文名称:</label>
 			<div class="controls">
 				<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">
-				<form:input path="enname" htmlEscape="false" maxlength="20" class="required username"/>
+				<form:input path="enname" htmlEscape="false" maxlength="21" class="required username"/>
 				<span class="help-inline"><font color="red">*</font></span>
 			</div>
 		</div>
@@ -86,7 +89,7 @@
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="150" class="input-xlarge"/>
+				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="151" class="input-xlarge"/>
 			</div>
 		</div>
 		<div class="form-actions">
