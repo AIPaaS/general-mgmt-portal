@@ -85,6 +85,6 @@ public class RoleMenuController extends BaseController {
 		}
 		systemService.saveRoleMenu(roleMenu);
 		addMessage(redirectAttributes, "权限赋值成功");
-		return "redirect:" + adminPath + "/sys/rolemenu/form?id=" + roleMenu.getId();
+		return "redirect:" + adminPath + "/sys/rolemenu/list?repage";
 	}
 }
