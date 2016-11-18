@@ -51,7 +51,14 @@
 						nodes = tree.getSelectedNodes();
 					}
 				
-					for(var i=0; i<nodes.length; i++) {//<c:if test="${checked && notAllowSelectParent}">
+					for(var i=0; i<nodes.length; i++) {
+						//<c:if test="${notAllowSelectParent}">
+						if (nodes[i].level == 0){
+							top.$.jBox.tip("不能选择根节点（"+nodes[i].name+"）请重新选择。");
+							return false;
+						}
+						//</c:if>
+						//<c:if test="${checked && notAllowSelectParent}">
 					
 					if (nodes[i].isParent){
 							continue; // 如果为复选框选择，则过滤掉父节点
