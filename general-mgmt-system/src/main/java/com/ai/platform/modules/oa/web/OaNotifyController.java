@@ -122,7 +122,14 @@ public class OaNotifyController extends BaseController {
 	public String view(OaNotify oaNotify, Model model) {
 		if (StringUtils.isNotBlank(oaNotify.getId())){
 			oaNotifyService.updateReadFlag(oaNotify);
+			
+			
 			oaNotify = oaNotifyService.getRecordList(oaNotify);
+			OaNotify oaNotifyNum = oaNotifyService.get(oaNotify.getId());
+			oaNotify.setReadNum(oaNotifyNum.getReadNum());
+			oaNotify.setUnReadNum(oaNotifyNum.getUnReadNum());
+			
+			
 			model.addAttribute("oaNotify", oaNotify);
 			return "modules/oa/oaNotifyForm";
 		}
