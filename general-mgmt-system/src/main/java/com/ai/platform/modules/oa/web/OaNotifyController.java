@@ -131,7 +131,7 @@ public class OaNotifyController extends BaseController {
 			
 			
 			model.addAttribute("oaNotify", oaNotify);
-			return "modules/oa/oaNotifyForm";
+			return "modules/oa/oaNotifySelfForm";
 		}
 		return "redirect:" + adminPath + "/oa/oaNotify/self?repage";
 	}
