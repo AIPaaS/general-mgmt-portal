@@ -4,7 +4,6 @@
 <head>
 	<title>角色管理</title>
 	<meta name="decorator" content="default"/>
-	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#name").focus();

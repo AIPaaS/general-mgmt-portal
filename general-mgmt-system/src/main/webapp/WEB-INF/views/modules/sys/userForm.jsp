@@ -63,6 +63,7 @@
 			<div class="controls">
 				<form:hidden id="nameImage" path="photo" htmlEscape="false" maxlength="255" class="input-xlarge"/>
 				<sys:ckfinder input="nameImage" type="images" uploadPath="/photo" selectMultiple="false" maxWidth="100" maxHeight="100"/>
+				<span class="help-inline">双击选择头像。</span>
 			</div>
 		</div>
 		<div class="control-group">

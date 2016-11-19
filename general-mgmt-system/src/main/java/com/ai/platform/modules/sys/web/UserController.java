@@ -468,10 +468,14 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "checkLoginName")
 	public String checkLoginName(String oldLoginName, String loginName) {
-		if (loginName != null && loginName.equals(oldLoginName)) {
-			return "true";
-		} else if (loginName != null && systemService.getUserByLoginName(loginName) == null) {
-			return "true";
+		try {
+			if (loginName != null && loginName.equals(oldLoginName)) {
+				return "true";
+			} else if (loginName != null && systemService.getUserByLoginName(loginName) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
 		}
 		return "false";
 	}
@@ -479,10 +483,14 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "checkEmail")
 	public String checkEmail(String oldLoginName, String email) {
-		if (email != null && email.equals(oldLoginName)) {
-			return "true";
-		} else if (email != null && systemService.getUserByLoginName(email) == null) {
-			return "true";
+		try {
+			if (email != null && email.equals(oldLoginName)) {
+				return "true";
+			} else if (email != null && systemService.getUserByLoginName(email) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
 		}
 		return "false";
 	}
@@ -490,10 +498,14 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "checkMobile")
 	public String checkMobile(String oldMobile, String mobile) {
-		if (mobile != null && mobile.equals(oldMobile)) {
-			return "true";
-		} else if (mobile != null && systemService.getUserByLoginName(mobile) == null) {
-			return "true";
+		try {
+			if (mobile != null && mobile.equals(oldMobile)) {
+				return "true";
+			} else if (mobile != null && systemService.getUserByLoginName(mobile) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
 		}
 		return "false";
 	}
@@ -502,10 +514,14 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "checkNo")
 	public String checkNo(String oldNo, String no) {
-		if (no != null && no.equals(oldNo)) {
-			return "true";
-		} else if (no != null && systemService.getUserByNo(no) == null) {
-			return "true";
+		try {
+			if (no != null && no.equals(oldNo)) {
+				return "true";
+			} else if (no != null && systemService.getUserByNo(no) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
 		}
 		return "false";
 	}

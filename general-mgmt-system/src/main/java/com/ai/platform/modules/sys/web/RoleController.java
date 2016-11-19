@@ -291,7 +291,7 @@ public class RoleController extends BaseController {
 				return "true";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			return "false";
 		}
 		return "false";
 	}
@@ -314,6 +314,7 @@ public class RoleController extends BaseController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "false";
 		}
 		
 		return "false";

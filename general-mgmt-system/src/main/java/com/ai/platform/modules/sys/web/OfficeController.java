@@ -383,13 +383,17 @@ public class OfficeController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "checkName")
 	public String checkName(String oldName, String name) {
-		Office o = new Office();
-		o.setName(name);
-		List<Office> list = officeService.find(o);
-		if (name != null && name.equals(oldName)) {
-			return "true";
-		} else if (name != null && CollectionUtil.isEmpty(list)) {
-			return "true";
+		try {
+			Office o = new Office();
+			o.setName(name);
+			List<Office> list = officeService.find(o);
+			if (name != null && name.equals(oldName)) {
+				return "true";
+			} else if (name != null && CollectionUtil.isEmpty(list)) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
 		}
 		return "false";
 	}
@@ -405,13 +409,17 @@ public class OfficeController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "checkCode")
 	public String checkCode(String oldCode, String code) {
-		Office o = new Office();
-		o.setCode(code);
-		List<Office> list = officeService.find(o);
-		if (code != null && code.equals(oldCode)) {
-			return "true";
-		} else if (code != null && CollectionUtil.isEmpty(list)) {
-			return "true";
+		try {
+			Office o = new Office();
+			o.setCode(code);
+			List<Office> list = officeService.find(o);
+			if (code != null && code.equals(oldCode)) {
+				return "true";
+			} else if (code != null && CollectionUtil.isEmpty(list)) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
 		}
 		return "false";
 	}
