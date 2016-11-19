@@ -72,7 +72,7 @@
 	<!-- 定义Shiro安全管理配置 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="casRealm" />
-		<property name="sessionManager" ref="sessionManager" />
+		<!-- <property name="sessionManager" ref="sessionManager" /> -->
 		<property name="cacheManager" ref="shiroCacheManager" />
 		<property name="subjectFactory" ref="casSubjectFactory" />
 	</bean>
