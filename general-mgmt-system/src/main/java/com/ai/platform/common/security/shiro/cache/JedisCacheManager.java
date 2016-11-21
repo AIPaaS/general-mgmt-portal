@@ -15,9 +15,10 @@ import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import redis.clients.jedis.Jedis;
-
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.platform.common.utils.JedisUtils;
+import com.ai.platform.common.utils.UniSessionUtil;
 import com.ai.platform.common.web.Servlets;
 import com.google.common.collect.Sets;
 
@@ -29,6 +30,8 @@ import com.google.common.collect.Sets;
 public class JedisCacheManager implements CacheManager {
 
 	private String cacheKeyPrefix = "shiro_cache_";
+	private static final String cachens=UniSessionUtil.getSessionPassNameSpace();
+
 	
 	@Override
 	public <K, V> Cache<K, V> getCache(String name) throws CacheException {
@@ -80,15 +83,15 @@ public class JedisCacheManager implements CacheManager {
 			}
 			
 			V value = null;
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				value = (V)JedisUtils.toObject(jedis.hget(JedisUtils.getBytesKey(cacheKeyName), JedisUtils.getBytesKey(key)));
 				logger.debug("get {} {} {}", cacheKeyName, key, request != null ? request.getRequestURI() : "");
 			} catch (Exception e) {
 				logger.error("get {} {} {}", cacheKeyName, key, request != null ? request.getRequestURI() : "", e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 			
 			if (request != null && value != null){
@@ -104,15 +107,15 @@ public class JedisCacheManager implements CacheManager {
 				return null;
 			}
 			
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				jedis.hset(JedisUtils.getBytesKey(cacheKeyName), JedisUtils.getBytesKey(key), JedisUtils.toBytes(value));
 				logger.debug("put {} {} = {}", cacheKeyName, key, value);
 			} catch (Exception e) {
 				logger.error("put {} {}", cacheKeyName, key, e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 			return value;
 		}
@@ -121,47 +124,47 @@ public class JedisCacheManager implements CacheManager {
 		@Override
 		public V remove(K key) throws CacheException {
 			V value = null;
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				value = (V)JedisUtils.toObject(jedis.hget(JedisUtils.getBytesKey(cacheKeyName), JedisUtils.getBytesKey(key)));
 				jedis.hdel(JedisUtils.getBytesKey(cacheKeyName), JedisUtils.getBytesKey(key));
 				logger.debug("remove {} {}", cacheKeyName, key);
 			} catch (Exception e) {
 				logger.warn("remove {} {}", cacheKeyName, key, e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 			return value;
 		}
 
 		@Override
 		public void clear() throws CacheException {
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				jedis.hdel(JedisUtils.getBytesKey(cacheKeyName));
 				logger.debug("clear {}", cacheKeyName);
 			} catch (Exception e) {
 				logger.error("clear {}", cacheKeyName, e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 		}
 
 		@Override
 		public int size() {
 			int size = 0;
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				size = jedis.hlen(JedisUtils.getBytesKey(cacheKeyName)).intValue();
 				logger.debug("size {} {} ", cacheKeyName, size);
 				return size;
 			} catch (Exception e) {
 				logger.error("clear {}",  cacheKeyName, e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 			return size;
 		}
@@ -170,9 +173,9 @@ public class JedisCacheManager implements CacheManager {
 		@Override
 		public Set<K> keys() {
 			Set<K> keys = Sets.newHashSet();
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				Set<byte[]> set = jedis.hkeys(JedisUtils.getBytesKey(cacheKeyName));
 				for(byte[] key : set){
 					Object obj = (K)JedisUtils.getObjectKey(key);
@@ -185,7 +188,7 @@ public class JedisCacheManager implements CacheManager {
 			} catch (Exception e) {
 				logger.error("keys {}", cacheKeyName, e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 			return keys;
 		}
@@ -194,9 +197,9 @@ public class JedisCacheManager implements CacheManager {
 		@Override
 		public Collection<V> values() {
 			Collection<V> vals = Collections.emptyList();;
-			Jedis jedis = null;
+			ICacheClient jedis = null;
 			try {
-				jedis = JedisUtils.getResource();
+				jedis = MCSClientFactory.getCacheClient(cachens);
 				Collection<byte[]> col = jedis.hvals(JedisUtils.getBytesKey(cacheKeyName));
 				for(byte[] val : col){
 					Object obj = JedisUtils.toObject(val);
@@ -209,7 +212,7 @@ public class JedisCacheManager implements CacheManager {
 			} catch (Exception e) {
 				logger.error("values {}",  cacheKeyName, e);
 			} finally {
-				JedisUtils.returnResource(jedis);
+				//JedisUtils.returnResource(jedis);
 			}
 			return vals;
 		}
