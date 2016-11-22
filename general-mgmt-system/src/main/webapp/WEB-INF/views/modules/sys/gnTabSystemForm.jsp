@@ -105,7 +105,7 @@
 		<div class="control-group">
 			<label class="control-label">应用上下文：</label>
 			<div class="controls">
-				<form:input path="systemUrlContext" htmlEscape="false" maxlength="401" class="input-xlarge"/>
+				<form:input path="systemUrlContext" htmlEscape="false" maxlength="401" class="input-xlarge remarks"/>
 			</div>
 		</div>
 		<div class="form-actions">
