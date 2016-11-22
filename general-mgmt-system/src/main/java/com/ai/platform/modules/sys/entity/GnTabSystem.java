@@ -47,7 +47,7 @@ public class GnTabSystem extends DataEntity<GnTabSystem> {
 		this.systemName = systemName;
 	}
 	
-	@Length(min=0, max=500, message="应用上下文长度必须介于 0 和 400 个字符之间")
+//	@Length(min=0, max=500, message="应用上下文长度必须介于 0 和 400 个字符之间")
 	public String getSystemUrlContext() {
 		return systemUrlContext;
 	}
