@@ -39,6 +39,7 @@ public class User extends DataEntity<User> {
 	private String loginName;// 登录名
 	private String password;// 密码
 	private String no;		// 工号
+	private String oldNo;// 原工号
 	private String name;	// 姓名
 	private String email;	// 邮箱
 	private String phone;	// 电话
@@ -92,6 +93,14 @@ public class User extends DataEntity<User> {
 		this.role = role;
 	}
 	
+	public String getOldNo() {
+		return oldNo;
+	}
+
+	public void setOldNo(String oldNo) {
+		this.oldNo = oldNo;
+	}
+
 	public String getPhoto() {
 		if(StringUtils.isBlank(photo)){
 			return SSOClientUtil.getProperty("serverContextPath")+"/static/images/userinfo.jpg";

@@ -156,7 +156,7 @@
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge"/>
+				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge remarks"/>
 			</div>
 		</div>
 		<div class="form-actions">

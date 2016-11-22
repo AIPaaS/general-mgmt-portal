@@ -195,6 +195,10 @@ public class UserController extends BaseController {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
+		if (!"true".equals(checkNo(user.getOldNo(), user.getNo()))) {
+			addMessage(model, "保存工号'" + user.getNo() + "'失败，员工编号已存在");
+			return form(user, model);
+		}
 		// 修正引用赋值问题，不知道为何，Company和Office引用的一个实例地址，修改了一个，另外一个跟着修改。
 		user.setCompany(new Office(request.getParameter("company.id")));
 		user.setOffice(new Office(request.getParameter("office.id")));

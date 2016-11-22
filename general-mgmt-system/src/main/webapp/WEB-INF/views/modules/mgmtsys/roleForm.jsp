@@ -30,7 +30,7 @@
 							}
 						}
 					},
-					remarks:{maxlength: 150}
+					remarks:{maxlength: 200}
 				},
 				messages: {
 					name: {
@@ -41,7 +41,7 @@
 						required: "请输入英文名称", 
 						maxlength: "英文名称不能超过20个字符",
 						remote: "英文名已存在"},
-					remarks: {maxlength: "备注不能超过150个字符"}
+					remarks: {maxlength: "备注不能超过200个字符"}
 				},
 				submitHandler: function(form){
 					form.submit();
@@ -88,7 +88,7 @@
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge"/>
+				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge remarks"/>
 			</div>
 		</div>
 		<div class="form-actions">

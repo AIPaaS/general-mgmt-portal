@@ -85,6 +85,7 @@
 		<div class="control-group">
 			<label class="control-label">员工编号:</label>
 			<div class="controls">
+				<input id="oldNo" name="oldNo" type="hidden" value="${user.oldNo}">
 				<form:input path="no" htmlEscape="false" maxlength="51" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -120,7 +121,7 @@
 		<div class="control-group">
 			<label class="control-label">备注:</label>
 			<div class="controls">
-				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge"/>
+				<form:textarea path="remarks" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge remarks"/>
 			</div>
 		</div>
 		<c:if test="${not empty user.id}">
