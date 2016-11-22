@@ -75,7 +75,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.updateDate = new Date();
 	}
 	
-	@Length(min=0, max=255,message="备注长度必须介于0 和 255个字符之间")
+	@Length(min=0, max=255,message="备注长度必须介于0 和 200个字符之间")
 	public String getRemarks() {
 		return remarks;
 	}
