@@ -103,7 +103,7 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group"  hidden="true">
+		<div class="control-group" >
 			<label class="control-label">状态：</label>
 			<div class="controls">
 				<form:select path="state" class="input-medium">
