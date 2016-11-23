@@ -10,6 +10,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cas.CasRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.platform.common.config.Global;
@@ -22,19 +24,23 @@ import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
 public class UserCasRealm  extends CasRealm{
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SystemService systemService;
 
     @Override  
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {  
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
+    	logger.debug("UserCasRealm doGetAuthorizationInfo");
+    	logger.debug("UserCasRealm principals"+principals.toString());
 		String name = (String)getAvailablePrincipal(principals);
 		User user =systemService.getUserByLoginName(name);
-		System.out.println("UserCasRealm 1 . user=="+user.getName());
+		logger.debug("UserCasRealm 1 . user=="+user.getName());
 		Principal principal =new Principal(user, false);
 		// 获取当前已登录的用户
 		if (Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
 			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
-			System.out.println("UserCasRealm 2 . sessions=="+sessions.size());
+			logger.debug("UserCasRealm 2 . sessions=="+sessions.size());
 			if (sessions.size() > 0){
 				// 如果是登录进来的，则踢出已在线用户
 				if (UserUtils.getSubject().isAuthenticated()){
@@ -52,7 +58,7 @@ public class UserCasRealm  extends CasRealm{
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			List<Menu> list = UserUtils.getMenuList();
-			System.out.println("UserCasRealm 3 . List<Menu>=size====="+list.size());
+			logger.debug("UserCasRealm 3 . List<Menu>=size====="+list.size());
 			for (Menu menu : list){
 				if (StringUtils.isNotBlank(menu.getPermission())){
 					// 添加基于Permission的权限信息
