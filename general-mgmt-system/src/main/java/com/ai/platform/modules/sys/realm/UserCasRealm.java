@@ -29,10 +29,12 @@ public class UserCasRealm  extends CasRealm{
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {  
 		String name = (String)getAvailablePrincipal(principals);
 		User user =systemService.getUserByLoginName(name);
+		System.out.println("UserCasRealm 1 . user=="+user.getName());
 		Principal principal =new Principal(user, false);
 		// 获取当前已登录的用户
 		if (Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
 			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
+			System.out.println("UserCasRealm 2 . sessions=="+sessions.size());
 			if (sessions.size() > 0){
 				// 如果是登录进来的，则踢出已在线用户
 				if (UserUtils.getSubject().isAuthenticated()){
@@ -50,6 +52,7 @@ public class UserCasRealm  extends CasRealm{
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			List<Menu> list = UserUtils.getMenuList();
+			System.out.println("UserCasRealm 3 . List<Menu>=size====="+list.size());
 			for (Menu menu : list){
 				if (StringUtils.isNotBlank(menu.getPermission())){
 					// 添加基于Permission的权限信息

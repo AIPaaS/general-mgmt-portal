@@ -290,6 +290,7 @@ public class UserUtils {
 		
 		if (menuList == null) {
 			User user = getUser();
+			System.out.println("menuList menuList=user====="+user.getName());
 			if (user.isAdmin()) {
 				menuList = menuDao.findAllList(new Menu());
 			} else {
