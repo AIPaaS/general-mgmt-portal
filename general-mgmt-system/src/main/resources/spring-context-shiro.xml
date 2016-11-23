@@ -73,7 +73,7 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="casRealm" />
 		<property name="sessionManager" ref="sessionManager" />
-		<!-- <property name="cacheManager" ref="shiroCacheManager" /> -->
+		<property name="cacheManager" ref="shiroCacheManager" />
 		<property name="subjectFactory" ref="casSubjectFactory" />
 	</bean>
 	<!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
