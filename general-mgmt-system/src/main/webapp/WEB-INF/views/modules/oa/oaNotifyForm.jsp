@@ -88,7 +88,7 @@
 		<div class="control-group">
 			<label class="control-label">内容：</label>
 			<div class="controls">
-				<form:textarea path="content" htmlEscape="false" maxlength="226" rows="6"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xxlarge required"/>
+				<form:textarea path="content" htmlEscape="false" maxlength="226" rows="6"  disabled="${oaNotify.status eq '1' ? true : false}" class="input-xxlarge required remarks"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
