@@ -248,9 +248,9 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 			
 			s2 = (Session)request.getAttribute(sessionKeyPrefix+sessionId);
 			s = (Session)request.getAttribute("session_"+sessionId);
-			System.out.println("doReadSession  2.1sessionId ===s=="+s.getId());
+			System.out.println("doReadSession  2.1sessionId ===s=="+(s != null));
 			
-			System.out.println("doReadSession  2.1sessionId ===s2=="+s2.getId());
+			System.out.println("doReadSession  2.1sessionId ===s2=="+(s2 != null));
 		}
 		if (s != null){
 			return s;
