@@ -13,7 +13,7 @@
 						maxlength: 30,
 						remote: "${ctx}/sys/user/checkMobile?oldMobile=" + encodeURIComponent('${user.mobile}')},
 					no: {
-						maxlength: 50,
+						maxlength: 10,
 						remote: "${ctx}/sys/user/checkNo?oldNo=" + encodeURIComponent('${user.no}')},
 					name: {maxlength: 20},
 					phone: {maxlength: 30},
@@ -25,7 +25,7 @@
 						remote: "手机号已存在"},
 					no: {
 						required: "请输入员工编号", 
-						maxlength: "员工编号不能超过50个字符", 
+						maxlength: "员工编号不能超过10个字符", 
 						remote: "员工编号已存在"},
 					name: {
 						required: "请输入姓名", 
@@ -86,7 +86,7 @@
 			<label class="control-label">员工编号:</label>
 			<div class="controls">
 				<input id="oldNo" name="oldNo" type="hidden" value="${user.no}">
-				<form:input path="no" htmlEscape="false" maxlength="51" class="required userName"/>
+				<form:input path="no" htmlEscape="false" maxlength="11" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>

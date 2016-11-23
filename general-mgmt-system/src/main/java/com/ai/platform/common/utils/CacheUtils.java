@@ -11,6 +11,8 @@ import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.ai.platform.common.security.shiro.cache.JedisCacheManager;
+
 /**
  * Cache工具类
  * @author ThinkGem
@@ -19,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class CacheUtils {
 	
 	private static Logger logger = LoggerFactory.getLogger(CacheUtils.class);
-	private static CacheManager cacheManager = SpringContextHolder.getBean(CacheManager.class);
+	private static CacheManager cacheManager = SpringContextHolder.getBean(JedisCacheManager.class);
 	
 	private static final String SYS_CACHE = "sysCache";
 
