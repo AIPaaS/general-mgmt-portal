@@ -62,9 +62,6 @@ public class UserUtils {
 	public static final String CACHE_APPMENU_LIST = "menuAppList";
 	
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
-
-	private static Map<String, Object> CacheMap = new HashMap<String, Object>();
-	
 	public static final String BIND_EMAIL = "email/pwd-reset-binemail.xml";
 	public static final String SAVEUSER_EMAIL = "email/user-save-binemail.xml";
 	
@@ -290,7 +287,6 @@ public class UserUtils {
 		
 		if (menuList == null) {
 			User user = getUser();
-			System.out.println("menuList menuList=user====="+user.getName());
 			if (user.isAdmin()) {
 				menuList = menuDao.findAllList(new Menu());
 			} else {
@@ -441,7 +437,7 @@ public class UserUtils {
 	 if(principal!=null){
 		 return principal.getCacheMap();
 	 }
-	 return CacheMap;
+	 return null;
 	 }
 
 }
