@@ -236,6 +236,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 	protected Session doReadSession(Serializable sessionId) {
 		System.out.println("doReadSession  1.doReadSession =====");
 		Session s = null;
+		Session s2 = null;
 		HttpServletRequest request = Servlets.getRequest();
 		if (request != null){
 			String uri = request.getServletPath();
@@ -244,7 +245,12 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 				return null;
 			}
 			System.out.println("doReadSession  2.sessionId ====="+sessionId);
+			
+			s2 = (Session)request.getAttribute(sessionKeyPrefix+sessionId);
 			s = (Session)request.getAttribute("session_"+sessionId);
+			System.out.println("doReadSession  2.1sessionId ===s=="+s.getId());
+			
+			System.out.println("doReadSession  2.1sessionId ===s2=="+s2.getId());
 		}
 		if (s != null){
 			return s;
