@@ -29,7 +29,7 @@ import com.google.common.collect.Sets;
  */
 public class JedisCacheManager implements CacheManager {
 
-	private String cacheKeyPrefix = "shiro_cache_";
+	private String cacheKeyPrefix = "AIOPT_JSESSIONID";
 	private static final String cachens=UniSessionUtil.getSessionPassNameSpace();
 
 	
