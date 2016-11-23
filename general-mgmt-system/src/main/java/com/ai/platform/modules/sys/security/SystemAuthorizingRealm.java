@@ -31,10 +31,12 @@ import com.ai.platform.common.config.Global;
 import com.ai.platform.common.servlet.ValidateCodeServlet;
 import com.ai.platform.common.utils.Encodes;
 import com.ai.platform.common.utils.SpringContextHolder;
+import com.ai.platform.common.web.Servlets;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ai.platform.modules.sys.web.LoginController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -93,27 +95,33 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		Principal principal = (Principal) getAvailablePrincipal(principals);
+		System.out.println("进入SystemAuthorizingRealm 1 。");
 		// 获取当前已登录的用户
 		if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
 			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
+			System.out.println("进入SystemAuthorizingRealm 2   sessions.size()=="+sessions.size());
 			if (sessions.size() > 0){
 				// 如果是登录进来的，则踢出已在线用户
 				if (UserUtils.getSubject().isAuthenticated()){
+					System.out.println("进入SystemAuthorizingRealm 3  如果是登录进来的，则踢出已在线用户");
 					for (Session session : sessions){
 						getSystemService().getSessionDao().delete(session);
 					}
 				}
 				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
 				else{
+					System.out.println("4. 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。");
 					UserUtils.getSubject().logout();
 					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
 				}
 			}
 		}
 		User user = getSystemService().getUserByLoginName(principal.getLoginName());
+		System.out.println("4. 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。"+user.getName());
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			List<Menu> list = UserUtils.getMenuList();
+			System.out.println("5. 当前用户菜单----------。"+list.size());
 			for (Menu menu : list){
 				if (StringUtils.isNotBlank(menu.getPermission())){
 					// 添加基于Permission的权限信息
@@ -131,7 +139,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			// 更新登录IP和时间
 			getSystemService().updateUserLoginInfo(user);
 			// 记录登录日志
-//			LogUtils.saveLog(Servlets.getRequest(), "系统登录");
+			//LogUtils.saveLog(Servlets.getRequest(), "系统登录");
 			return info;
 		} else {
 			return null;
