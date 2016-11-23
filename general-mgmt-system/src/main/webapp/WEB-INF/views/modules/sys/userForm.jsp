@@ -85,7 +85,7 @@
 		<div class="control-group">
 			<label class="control-label">员工编号:</label>
 			<div class="controls">
-				<input id="oldNo" name="oldNo" type="hidden" value="${user.oldNo}">
+				<input id="oldNo" name="oldNo" type="hidden" value="${user.no}">
 				<form:input path="no" htmlEscape="false" maxlength="51" class="required userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
