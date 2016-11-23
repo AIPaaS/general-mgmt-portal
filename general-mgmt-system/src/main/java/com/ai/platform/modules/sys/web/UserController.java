@@ -60,8 +60,6 @@ public class UserController extends BaseController {
 	@Autowired
 	private SystemService systemService;
 	@Autowired
-	private OfficeService officeService;
-	@Autowired
 	private GnTenantService gnTenantService;
 	
 	@ModelAttribute
@@ -475,7 +473,7 @@ public class UserController extends BaseController {
 		try {
 			if (loginName != null && loginName.equals(oldLoginName)) {
 				return "true";
-			} else if (loginName != null && systemService.getUserByLoginName(loginName) == null) {
+			} else if (loginName != null && systemService.checkLoginName(loginName) == null) {
 				return "true";
 			}
 		} catch (Exception e) {
@@ -490,7 +488,7 @@ public class UserController extends BaseController {
 		try {
 			if (email != null && email.equals(oldLoginName)) {
 				return "true";
-			} else if (email != null && systemService.getUserByLoginName(email) == null) {
+			} else if (email != null && systemService.checkLoginName(email) == null) {
 				return "true";
 			}
 		} catch (Exception e) {
@@ -505,7 +503,7 @@ public class UserController extends BaseController {
 		try {
 			if (mobile != null && mobile.equals(oldMobile)) {
 				return "true";
-			} else if (mobile != null && systemService.getUserByLoginName(mobile) == null) {
+			} else if (mobile != null && systemService.checkLoginName(mobile) == null) {
 				return "true";
 			}
 		} catch (Exception e) {
@@ -767,28 +765,7 @@ public class UserController extends BaseController {
 			return true;
 		}
 	}
-	// @InitBinder
-	// public void initBinder(WebDataBinder b) {
-	// b.registerCustomEditor(List.class, "roleList", new
-	// PropertyEditorSupport(){
-	// @Autowired
-	// private SystemService systemService;
-	// @Override
-	// public void setAsText(String text) throws IllegalArgumentException {
-	// String[] ids = StringUtils.split(text, ",");
-	// List<Role> roles = new ArrayList<Role>();
-	// for (String id : ids) {
-	// Role role = systemService.getRole(Long.valueOf(id));
-	// roles.add(role);
-	// }
-	// setValue(roles);
-	// }
-	// @Override
-	// public String getAsText() {
-	// return Collections3.extractToString((List) getValue(), "id", ",");
-	// }
-	// });
-	// }
+
 
 	public static void main(String[] args) {
 		String a = "zhangsan\\t001\\t张三\\tzhangsan@163.com\\t13333333333\\t0001\\t00011";

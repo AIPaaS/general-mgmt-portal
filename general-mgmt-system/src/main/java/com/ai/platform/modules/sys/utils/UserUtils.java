@@ -67,7 +67,6 @@ public class UserUtils {
 	
 	public static final String BIND_EMAIL = "email/pwd-reset-binemail.xml";
 	public static final String SAVEUSER_EMAIL = "email/user-save-binemail.xml";
-	private static List<User> cache_user_data = new ArrayList<User>();
 	
 	
 	public static List<User> getUserList(User user){

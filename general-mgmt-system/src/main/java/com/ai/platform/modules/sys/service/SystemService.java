@@ -702,6 +702,14 @@ public class SystemService extends BaseService implements InitializingBean {
 		return UserUtils.getUserList(new User());
 //		return userDao.findList(new User());
 	}
+	
+	public  User checkLoginName(String loginName) {
+		User user =null;
+		if (user == null) {
+			user = userDao.getByLoginName(new User(null, loginName));
+		}
+		return user;
+	}
 	/**
 	 * 保存用户信息，不包括用户名、密码等
 	 * @param user
