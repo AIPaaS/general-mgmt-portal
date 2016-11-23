@@ -26,7 +26,7 @@
 					},
 					remark:{
 						
-						maxlength: 100
+						maxlength: 200
 					}
 				},
 				messages:{
@@ -44,7 +44,7 @@
 					},
 					remark:{
 						
-						maxlength: "备注长度不能超过100个字符"
+						maxlength: "备注长度不能超过200个字符"
 					}
 				},
 				submitHandler: function(form){
@@ -115,7 +115,7 @@
 		<div class="control-group">
 			<label class="control-label">备注：</label>
 			<div class="controls">
-				<form:textarea path="remark" htmlEscape="false" rows="3" maxlength="101" class="input-xlarge"/>
+				<form:textarea path="remark" htmlEscape="false" rows="3" maxlength="201" class="input-xlarge remarks"/>
 			</div>
 		</div>
 		<div class="form-actions">
