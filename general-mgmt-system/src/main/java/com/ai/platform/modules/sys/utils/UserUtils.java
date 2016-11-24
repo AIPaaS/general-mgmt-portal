@@ -49,7 +49,6 @@ public class UserUtils {
 	public static final String USER_CACHE_THEMEINX = "theme_index";
 
 	public static final String USER_DEFAULT_THEME = Global.getDefTheme();
-	public static final String CACHE_APPMENU_LIST = "menuAppList";
 	
 	public static final String SYS_USER_ID ="SYS$SYSUSER$ID";
 	public static final String BIND_EMAIL = "email/pwd-reset-binemail.xml";

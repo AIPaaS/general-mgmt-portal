@@ -147,7 +147,6 @@ public class OfficeController extends BaseController {
 					+ StringUtils.leftPad(String.valueOf(size > 0 ? size + 1 : 1), 3, "0"));
 		}
 		model.addAttribute("office", office);
-		OfficeUtils.clearCache();
 		return "modules/mgmtsys/officeForm";
 	}
 
@@ -203,7 +202,6 @@ public class OfficeController extends BaseController {
 			return form(office, model);
 		}
 		officeService.save(office);
-		OfficeUtils.clearCache();
 		if (office.getChildDeptList() != null) {
 			Office childOffice = null;
 			for (String id : office.getChildDeptList()) {
@@ -223,7 +221,6 @@ public class OfficeController extends BaseController {
 		// office.getParentId();
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+id+"&parentIds="+office.getParentIds();
-		OfficeUtils.clearCache();
 		return "redirect:" + adminPath + "/sys/office/page";
 	}
 
@@ -314,7 +311,6 @@ public class OfficeController extends BaseController {
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入部门信息失败！失败信息：" + e.getMessage());
 		}
-		OfficeUtils.clearCache();
 		return "redirect:" + adminPath + "/sys/office/page?repage";
 	}
 
@@ -368,7 +364,6 @@ public class OfficeController extends BaseController {
 		 }
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+office.getParentId()+"&parentIds="+office.getParentIds();
-		OfficeUtils.clearCache();
 		return "redirect:" + adminPath + "/sys/office/page";
 	}
 

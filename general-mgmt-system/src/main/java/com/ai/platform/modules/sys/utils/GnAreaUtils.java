@@ -1,6 +1,5 @@
 package com.ai.platform.modules.sys.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.modules.sys.dao.GnAreaDao;
-import com.ai.platform.modules.sys.entity.Dict;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.google.common.collect.Lists;
 

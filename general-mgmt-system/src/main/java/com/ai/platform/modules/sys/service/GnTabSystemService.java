@@ -48,7 +48,6 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	@Transactional(readOnly = false)
 	public void save(GnTabSystem gnTabSystem) {
 		super.save(gnTabSystem);
-		GnTabSystemUtils.clearCache();
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
@@ -58,7 +57,6 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	@Transactional(readOnly = false)
 	public void delete(GnTabSystem gnTabSystem) {
 		super.delete(gnTabSystem);
-		GnTabSystemUtils.clearCache();
 	}
 
 	public List<GnTabSystem> findAll() {

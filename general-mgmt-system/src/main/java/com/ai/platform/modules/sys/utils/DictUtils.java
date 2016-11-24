@@ -24,8 +24,6 @@ import com.google.common.collect.Maps;
 public class DictUtils {
 	
 	private static DictDao dictDao = SpringContextHolder.getBean(DictDao.class);
-
-	public static final String CACHE_DICT_MAP = "dictMap";
 	
 	public static String getDictLabel(String value, String type, String defaultValue){
 		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(value)){
@@ -61,8 +59,7 @@ public class DictUtils {
 	}
 	
 	public static List<Dict> getDictList(String type){
-		@SuppressWarnings("unchecked")
-		Map<String, List<Dict>> dictMap = (Map<String, List<Dict>>)CacheUtils.get(CACHE_DICT_MAP);
+		Map<String, List<Dict>> dictMap =null;
 		if (dictMap==null){
 			dictMap = Maps.newHashMap();
 			for (Dict dict : dictDao.findAllList(new Dict())){
@@ -73,7 +70,6 @@ public class DictUtils {
 					dictMap.put(dict.getType(), Lists.newArrayList(dict));
 				}
 			}
-			CacheUtils.put(CACHE_DICT_MAP, dictMap);
 		}
 		List<Dict> dictList = dictMap.get(type);
 		if (dictList == null){
