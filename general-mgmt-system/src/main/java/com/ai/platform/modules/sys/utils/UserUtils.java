@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
 import com.ai.platform.common.config.Global;
@@ -287,8 +288,14 @@ public class UserUtils {
 		Subject subject;
 		try{
 		    subject = SecurityUtils.getSubject();
-//			Principal principal = (Principal)subject.getPrincipal();
-		    User user =getByLoginName(subject.getPrincipal()+"");
+		    PrincipalCollection principals =subject.getPrincipals();
+			Map map =(Map)(principals.asList().get(1));
+			User loginUser = new User();
+			loginUser.setEmail(map.get("email").toString());
+			loginUser.setMobile(map.get("mobile").toString());
+			loginUser.setLoginName(map.get("loginName").toString());
+			
+			User user =userDao.getByLoginUser(loginUser);
 		    if(user == null)
 		    	return null;
 			Principal principal =new Principal(user, false);

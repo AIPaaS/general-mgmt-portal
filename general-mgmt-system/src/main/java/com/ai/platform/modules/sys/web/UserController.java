@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -210,7 +211,6 @@ public class UserController extends BaseController {
 		}
 		// 保存员工信息信息
 		systemService.saveUserNoUser(user);
-
 		addMessage(redirectAttributes, "保存员工信息'" + user.getName() + "'成功");
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
@@ -249,7 +249,6 @@ public class UserController extends BaseController {
 			logger.error("保存工号发送邮件失败");
 		}
 		savemethod(user);
-		
 		addMessage(redirectAttributes, "保存工号'" + user.getLoginName() + "'成功");
 		LOG.error("结束执行添加员工工号添加，当前时间戳："+DateUtils.getDateTime());
 		return "redirect:" + adminPath + "/sys/user/listno?repage";

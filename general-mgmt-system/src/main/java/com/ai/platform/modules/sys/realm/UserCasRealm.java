@@ -1,15 +1,19 @@
 package com.ai.platform.modules.sys.realm;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cas.CasRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +35,17 @@ public class UserCasRealm  extends CasRealm{
 
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
-    	logger.debug("UserCasRealm doGetAuthorizationInfo");
-    	logger.debug("UserCasRealm principals"+principals.toString());
-		String name = (String)getAvailablePrincipal(principals);
-		User user =systemService.getUserByLoginName(name);
-		logger.debug("UserCasRealm 1 . user=="+user.getName());
+		Map map =(Map)principals.asList().get(1);
+		User loginUser = new User();
+		loginUser.setEmail(map.get("email").toString());
+		loginUser.setMobile(map.get("mobile").toString());
+		loginUser.setLoginName(map.get("loginName").toString());
+		
+		User user =systemService.getByLoginUser(loginUser);
 		Principal principal =new Principal(user, false);
 		// 获取当前已登录的用户
 		if (Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
 			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
-			logger.debug("UserCasRealm 2 . sessions=="+sessions.size());
 			if (sessions.size() > 0){
 				// 如果是登录进来的，则踢出已在线用户
 				if (UserUtils.getSubject().isAuthenticated()){
@@ -58,7 +63,6 @@ public class UserCasRealm  extends CasRealm{
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			List<Menu> list = UserUtils.getMenuList();
-			logger.debug("UserCasRealm 3 . List<Menu>=size====="+list.size());
 			for (Menu menu : list){
 				if (StringUtils.isNotBlank(menu.getPermission())){
 					// 添加基于Permission的权限信息
@@ -82,6 +86,30 @@ public class UserCasRealm  extends CasRealm{
 			return null;
 		}
     }  
+    
+	
+	/**
+	 * 清空用户关联权限认证，待下次使用时重新加载
+	 */
+	@Deprecated
+	public void clearCachedAuthorizationInfo(User principal) {
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
+		clearCachedAuthorizationInfo(principals);
+	}
+
+	/**
+	 * 清空所有关联认证
+	 * @Deprecated 不需要清空，授权缓存保存到session中
+	 */
+	@Deprecated
+	public void clearAllCachedAuthorizationInfo() {
+		Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+		if (cache != null) {
+			for (Object key : cache.keys()) {
+				cache.remove(key);
+			}
+		}
+	}
       
 	/**
 	 * 获取系统业务对象

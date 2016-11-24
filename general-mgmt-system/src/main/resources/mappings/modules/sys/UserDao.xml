@@ -139,6 +139,15 @@
 			ON ro.role_id = r.id -->
 		WHERE (a.login_name = #{loginName} || a.email = #{loginName} || a.mobile = #{loginName}) AND a.del_flag = #{DEL_FLAG_NORMAL}
 	</select>
+	<select id="getByLoginUser" resultType="User" parameterType="User">
+		SELECT
+		<include refid="userColumns" /><!-- , ro.office_id AS "roleList.officeList.id" -->
+		FROM sys_user a
+		<include refid="userJoins" /><!-- LEFT JOIN sys_role_office ro 
+			ON ro.role_id = r.id -->
+		WHERE (a.login_name = #{loginName} || a.email = #{email} || a.mobile = #{mobile}) AND a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+	
 	<select id="getByNo" resultType="User" parameterType="User">
 		SELECT
 		<include refid="userColumns" />

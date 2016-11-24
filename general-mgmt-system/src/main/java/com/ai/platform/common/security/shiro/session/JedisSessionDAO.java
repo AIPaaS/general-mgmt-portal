@@ -44,7 +44,6 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 
 	@Override
 	public void update(Session session) throws UnknownSessionException {
-		logger.debug("updateSession  1、JedisSessionDAO.update(Session session) =====");
 		if (session == null || session.getId() == null) {  
             return;
         }
@@ -62,7 +61,6 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 				return;
 			}
 			// 手动控制不更新SESSION
-			logger.debug("updateSession  1.2、updateSession ====="+request.getParameter("updateSession"));
 			if (Global.NO.equals(request.getParameter("updateSession"))){
 				return;
 			}
@@ -76,7 +74,6 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 			// 获取登录者编号
 			PrincipalCollection pc = (PrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 			String principalId = pc != null ? pc.getPrimaryPrincipal().toString() : StringUtils.EMPTY;
-			logger.debug("updateSession  2、principalId ====="+principalId.toString());
 			jedis.hset(sessionKeyPrefix, session.getId().toString(), principalId + "|" + session.getTimeout() + "|" + session.getLastAccessTime().getTime());
 			jedis.set(JedisUtils.getBytesKey(sessionKeyPrefix + session.getId()), JedisUtils.toBytes(session));
 			
@@ -142,14 +139,11 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 		ICacheClient jedis = null;
 		try {
 			jedis = MCSClientFactory.getCacheClient(cachens);
-			logger.debug("1、获取paas,redis服务连接--"+jedis.toString());
 			Map<String, String> map = jedis.hgetAll(sessionKeyPrefix);
 			for (Map.Entry<String, String> e : map.entrySet()){
-				logger.debug("2、获取shiro_session_的key--"+e.getKey()+"获取shiro_session_的value--"+e.getValue());
 				if (StringUtils.isNotBlank(e.getKey()) && StringUtils.isNotBlank(e.getValue())){
 					
 					String[] ss = StringUtils.split(e.getValue(), "|");
-					logger.debug("3、获取shiro_session_的ss.length--"+ss.length);
 					if (ss != null && ss.length == 3){// jedis.exists(sessionKeyPrefix + e.getKey())){
 						// Session session = (Session)JedisUtils.toObject(jedis.get(JedisUtils.getBytesKey(sessionKeyPrefix + e.getKey())));
 						SimpleSession session = new SimpleSession();
@@ -159,9 +153,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 						session.setLastAccessTime(new Date(Long.valueOf(ss[2])));
 						try{
 							// 验证SESSION
-							logger.debug("4、验证session开始==========");
 							session.validate();
-							logger.debug("5、验证session结束==========");
 							boolean isActiveSession = false;
 							// 不包括离线并符合最后访问时间小于等于3分钟条件。
 							if (includeLeave || DateUtils.pastMinutes(session.getLastAccessTime()) <= 3){
@@ -169,10 +161,8 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 								isActiveSession = true;
 							}
 							// 符合登陆者条件。
-							logger.debug("7、principal===="+principal.toString());
 							if (principal != null){
 								PrincipalCollection pc = (PrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-								logger.debug("8、PrincipalCollection===="+pc.toString());
 								if (principal.toString().equals(pc != null ? pc.getPrimaryPrincipal().toString() : StringUtils.EMPTY)){
 									isActiveSession = true;
 								}
@@ -188,27 +178,22 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 						}
 						// SESSION验证失败
 						catch (Exception e2) {
-							logger.debug("9、SESSION验证失败=="+e.getKey());
 							jedis.hdel(sessionKeyPrefix, e.getKey());
 						}
 					}
 					// 存储的SESSION不符合规则
 					else{
-						logger.debug("10、e.getKey====="+e.getKey()+"value===="+e.getValue());
 						jedis.hdel(sessionKeyPrefix, e.getKey());
 					}
 				}
 				// 存储的SESSION无Value
 				
 				else if (StringUtils.isNotBlank(e.getKey())){
-					logger.debug("11、储的SESSION无Value====="+e.getKey()+"value===="+e.getValue());
 					jedis.hdel(sessionKeyPrefix, e.getKey());
 				}
 			}
-			logger.debug("13、sessions.size()====="+sessions.size());
 			logger.info("getActiveSessions size: {} ", sessions.size());
 		} catch (Exception e) {
-			logger.debug("13、异常=====");
 			logger.error("getActiveSessions", e);
 		} finally {
 			//JedisUtils.returnResource(jedis);
@@ -234,9 +219,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 
 	@Override
 	protected Session doReadSession(Serializable sessionId) {
-		logger.debug("doReadSession  1.doReadSession =====");
 		Session s = null;
-		Session s2 = null;
 		HttpServletRequest request = Servlets.getRequest();
 		if (request != null){
 			String uri = request.getServletPath();
@@ -244,13 +227,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 			if (Servlets.isStaticFile(uri)){
 				return null;
 			}
-			logger.debug("doReadSession  2.sessionId ====="+sessionId);
-			
-			
 			s = (Session)request.getAttribute("session_"+sessionId);
-			logger.debug("doReadSession  2.1sessionId ===s=="+(s != null));
-			
-			logger.debug("doReadSession  2.1sessionId ===s2=="+(s2 != null));
 		}
 		if (s != null){
 			return s;
@@ -261,10 +238,8 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 		try {
 			jedis = MCSClientFactory.getCacheClient(cachens);
 //			if (jedis.exists(sessionKeyPrefix + sessionId)){
-			logger.debug("doReadSession  3.+sessionId ====="+sessionId);
 				session = (Session)JedisUtils.toObject(jedis.get(
 						JedisUtils.getBytesKey(sessionKeyPrefix + sessionId)));
-				logger.debug("doReadSession  4.sessionId ====="+sessionId);
 //			}
 			logger.debug("doReadSession {} {}", sessionId, request != null ? request.getRequestURI() : "");
 		} catch (Exception e) {

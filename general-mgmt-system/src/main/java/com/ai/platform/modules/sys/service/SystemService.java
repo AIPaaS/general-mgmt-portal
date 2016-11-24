@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,9 @@ import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.RoleMenu;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.entity.Waitjobs;
+import com.ai.platform.modules.sys.realm.UserCasRealm;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
+import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
@@ -71,7 +73,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	@Autowired
 	private WaitjobsDao waitjobsDao;
 	@Autowired
-	private SystemAuthorizingRealm systemRealm;
+	private UserCasRealm systemRealm;
 	
 	public SessionDAO getSessionDao() {
 		return sessionDao;
@@ -97,6 +99,10 @@ public class SystemService extends BaseService implements InitializingBean {
 	 */
 	public User getUserByLoginName(String loginName) {
 		return UserUtils.getByLoginName(loginName);
+	}
+	
+	public User getByLoginUser(User loginName) {
+		return userDao.getByLoginUser(loginName);
 	}
 	
 	public Page<User> findUser(Page<User> page, User user) {

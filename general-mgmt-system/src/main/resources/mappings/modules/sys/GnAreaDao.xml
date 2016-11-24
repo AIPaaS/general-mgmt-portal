@@ -189,10 +189,7 @@
 	</update>
 	
 	<update id="delete">
-		UPDATE gn_area SET 
-			state = #{state}
-		WHERE area_code = #{areaCode} 	
-		
+		DELETE FROM gn_area WHERE  area_code = #{areaCode} 	
 	</update>
 	
 	
