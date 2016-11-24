@@ -21,8 +21,10 @@ messenger.listen(function (msg) {
 	}
 
 });
+if(iframe1!=null){
+	messenger.addTarget(iframe1.contentWindow, 'mainFrame');
+}
 
-messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 
 
 </script>
