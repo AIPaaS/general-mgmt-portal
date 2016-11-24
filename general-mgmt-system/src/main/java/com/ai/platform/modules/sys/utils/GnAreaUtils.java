@@ -24,14 +24,8 @@ public class GnAreaUtils {
 	 * 
 	 * @return
 	 */
-	public static List<GnArea>  cache_tree_data=new ArrayList<GnArea>();
 	public static List<GnArea> getGnAreaList() {
-		
-		if (cache_tree_data == null || cache_tree_data.isEmpty() ) {
-			
-			cache_tree_data.addAll(GnAreaUtils.gnAreaDao.findList(new GnArea()));
-		}
-		return cache_tree_data;
+		return GnAreaUtils.gnAreaDao.findList(new GnArea());
 	}
 
 	
@@ -79,12 +73,6 @@ public class GnAreaUtils {
 			}
 		}
 		return mapper;
-	}
-	/**
-	 * 清除数据缓存
-	 */
-	public static void clearCache(){
-		cache_tree_data = new ArrayList<GnArea>();
 	}
 
 }

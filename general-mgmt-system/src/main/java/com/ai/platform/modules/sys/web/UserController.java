@@ -302,11 +302,6 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			logger.error("保存员工信息时发送邮件出错");
 		}
-		// 清除当前员工信息缓存
-		if (user.getLoginName().equals(UserUtils.getUser().getLoginName())) {
-			UserUtils.clearCache();
-			// UserUtils.getCacheMap().clear();
-		}
 
 	}
 

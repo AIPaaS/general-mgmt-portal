@@ -49,8 +49,6 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	public void save(GnTabSystem gnTabSystem) {
 		super.save(gnTabSystem);
 		GnTabSystemUtils.clearCache();
-		// 清除用户菜单缓存
-		UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
