@@ -90,9 +90,15 @@
 		<div class="control-group">
 			<label class="control-label">登录名:</label>
 			<div class="controls">
-				<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
-				<form:input path="loginName" htmlEscape="false" maxlength="21" class="required username"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+				<c:if test="${empty user.id}">
+					<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
+					<form:input path="loginName" htmlEscape="false"  maxlength="21" class="required username"/>
+					<span class="help-inline"><font color="red">*</font> </span>
+				</c:if>
+				<c:if test="${not empty user.id}">
+					<input id="oldLoginName" name="oldLoginName" type="hidden" value="${user.loginName}">
+					<form:input path="loginName" htmlEscape="false" value="${user.loginName}"  maxlength="21" readonly="true"/>
+				</c:if>
 			</div>
 		</div>
 		<div class="control-group">
