@@ -192,7 +192,7 @@ if(iframe1!=null){
 						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
 						                        <c:set var="systemId" value="${menuNodethree.gnTabSystem}"/>
 						                        <c:if test="${not empty menuNodethree.href}">
-						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPathssl}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
 						                        </c:if>
 						                        <c:if test="${empty menuNodethree.href}">
 						                        	<li><a href="#" data-id="${menuNodethree.id}" >${menuNodethree.name}</a></li>
@@ -203,7 +203,7 @@ if(iframe1!=null){
 							     		</c:if>
 							     		<c:if test="${not empty menuNode.href &&menuNode.isShow eq '1'}">
 							     		
-							     			<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
+							     			<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPathssl}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
 							     	
 							     		</c:if>
 										<c:set var="systemId" value=""/>
