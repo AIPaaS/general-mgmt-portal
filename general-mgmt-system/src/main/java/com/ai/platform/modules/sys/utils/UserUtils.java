@@ -4,7 +4,6 @@
 package com.ai.platform.modules.sys.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,6 @@ import org.apache.shiro.subject.Subject;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.service.BaseService;
-import com.ai.platform.common.utils.CacheUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.MenuDao;
