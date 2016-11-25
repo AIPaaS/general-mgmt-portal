@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
+import com.ai.paas.ipaas.util.SerializeUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.utils.StringUtils;
@@ -39,7 +42,7 @@ import com.google.common.collect.Maps;
 public class GnAreaController extends BaseController {
 
 	
-	
+	private static final String AreaTreeCachens="com.ai.platform.common.cache.gnarea";
 	
 	@Autowired
 	private GnAreaService gnAreaService;
@@ -167,22 +170,35 @@ public class GnAreaController extends BaseController {
 	@RequestMapping(value = "treeData")
 	public List<Map<String, Object>> treeData(@RequestParam(required=false) String areaId,@RequestParam(required=false) boolean init, HttpServletResponse response) {
 		List<Map<String, Object>>  mapList = Lists.newArrayList();
+		ICacheClient jedis = null;
+		
+		jedis = MCSClientFactory.getCacheClient(AreaTreeCachens);
 		if(init==true){
-			 mapList = Lists.newArrayList();
+			
+			 byte[] in = jedis.get("findTreeInit".getBytes());  
+			 mapList = (List<Map<String, Object>>)SerializeUtil.deserialize(in);  
+			 if(mapList==null || mapList.isEmpty()){
+				 mapList = Lists.newArrayList();
+			
 			List<GnArea> listInit = gnAreaService.findTreeInit();
 
 			
-			for (int i=0; i<listInit.size(); i++){
-				GnArea e = listInit.get(i);
-				if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
-					Map<String, Object> map = Maps.newHashMap();
-					map.put("id", e.getId());
-					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
-					map.put("name", e.getAreaName());
-					map.put("isParent", isParent(e.getId()));
-					mapList.add(map);
+				for (int i=0; i<listInit.size(); i++){
+					GnArea e = listInit.get(i);
+					if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
+						Map<String, Object> map = Maps.newHashMap();
+						map.put("id", e.getId());
+						map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
+						map.put("name", e.getAreaName());
+						map.put("isParent", isParent(e.getId()));
+						mapList.add(map);
+						
+						
+						
+					}
 				}
-			}
+				jedis.set("findTreeInit".getBytes(),SerializeUtil.serialize(mapList));
+			 }
 		}else if(StringUtils.isNotBlank(areaId) ){
 			 mapList = Lists.newArrayList();
 			GnArea gnAreaParent = new GnArea();
