@@ -5,8 +5,10 @@ package com.ai.platform.modules.sys.service;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import com.ai.opt.sdk.components.mail.EmailFactory;
 import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 import com.ai.opt.sdk.util.Md5Encoder;
 import com.ai.platform.common.config.Global;
+import com.ai.platform.common.mail.MailMessageFactory;
+import com.ai.platform.common.mail.SendMailType;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.security.shiro.session.SessionDAO;
 import com.ai.platform.common.service.BaseService;
@@ -37,6 +41,8 @@ import com.ai.platform.modules.sys.entity.RoleMenu;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.entity.Waitjobs;
 import com.ai.platform.modules.sys.realm.UserCasRealm;
+import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
+import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
@@ -171,7 +177,6 @@ public class SystemService extends BaseService implements InitializingBean {
 				
 			}
 			
-			
 			// 将当前用户同步到Activiti
 			deleteActivitiUser(user);
 //			// 清除权限缓存
@@ -196,7 +201,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户缓存
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
-	
 	}
 	
 	@Transactional(readOnly = false)
@@ -208,7 +212,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.setLoginName(loginName);
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
-
 	}
 	
 	@Transactional(readOnly = false)
@@ -220,7 +223,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.setLoginIp(StringUtils.getRemoteAddr(Servlets.getRequest()));
 		user.setLoginDate(new Date());
 		userDao.updateLoginInfo(user);
-		
 	}
 	
 	/**
@@ -320,7 +322,6 @@ public class SystemService extends BaseService implements InitializingBean {
 //		saveActivitiGroup(role);
 		// 清除用户角色缓存
 //		// 清除权限缓存
-	
 		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
@@ -333,7 +334,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户角色缓存
 		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
-
 	}
 
 	@Transactional(readOnly = false)
@@ -344,7 +344,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户角色缓存
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
-		
 	}
 	
 	@Transactional(readOnly = false)
@@ -357,7 +356,6 @@ public class SystemService extends BaseService implements InitializingBean {
 				return true;
 			}
 		}
-	
 		return false;
 	}
 	
@@ -372,7 +370,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		}
 		user.getRoleList().add(role);
 		saveUser(user);
-	
 		return user;
 	}
 
@@ -420,7 +417,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
-		
 	}
 
 	@Transactional(readOnly = false)
@@ -431,7 +427,6 @@ public class SystemService extends BaseService implements InitializingBean {
 //		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
-		
 	}
 
 	@Transactional(readOnly = false)
@@ -442,7 +437,6 @@ public class SystemService extends BaseService implements InitializingBean {
 //		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
-	
 	}
 	
 	/**
@@ -585,7 +579,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		}
 		if(user!=null) {
 			String userId = user.getLoginName();//ObjectUtils.toString(user.getId());
-		
 //			identityService.deleteUser(userId);
 		}
 	}
@@ -619,8 +612,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.setPassword(entryptPassword(resetPass));
 		userDao.updatePasswordById(user);
 		sendMail(user,resetPass);
-		
-		
 	}
 	/**
 	 * 发送邮件-重置密码
@@ -664,7 +655,6 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.setTheme(UserUtils.USER_DEFAULT_THEME);	
 		}
 		userDao.updateThemeById(user);
-
 	}
 	
 	/**
@@ -689,7 +679,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.preUpdate();
 		userDao.updateLoginFalg(user);
 		// 清除用户缓存
-		
 	}
 	@Transactional(readOnly = true)
 	public List<User> findAllUser() {
@@ -719,7 +708,6 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.preUpdate();
 			userDao.updateUserNoUser(user);
 		}
-	
 	}
 	
 	@Transactional(readOnly = false)
@@ -733,7 +721,6 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.preUpdate();
 			userDao.updateUserNoUser(user);
 		}
-	
 	}
 	
 	

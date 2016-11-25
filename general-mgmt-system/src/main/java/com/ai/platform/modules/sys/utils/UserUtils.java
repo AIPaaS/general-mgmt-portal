@@ -7,19 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
-import com.ai.opt.sdk.components.mcs.MCSClientFactory;
-import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
-import com.ai.paas.ipaas.util.SerializeUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.service.BaseService;
-import com.ai.platform.common.utils.JedisUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.MenuDao;
@@ -31,7 +27,6 @@ import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
-import com.google.common.collect.Lists;
 
 /**
  * 用户工具类
@@ -59,7 +54,6 @@ public class UserUtils {
 	public static final String SAVEUSER_EMAIL = "email/user-save-binemail.xml";
 	
 	
-	
 	public static List<User> getUserList(User user){
 		return userDao.findList(user);
 	}
@@ -72,11 +66,11 @@ public class UserUtils {
 	 * @return 取不到返回null
 	 */
 	public static User get(String id) {
-		
-		User user  = userDao.get(id);
-			user.setRoleList(roleDao.findList(new Role(user)));
-		
-		
+		User user = userDao.get(id);
+		if (user == null) {
+			return null;
+		}
+		user.setRoleList(roleDao.findList(new Role(user)));
 		return user;
 	}
 
@@ -131,9 +125,10 @@ public class UserUtils {
 	 */
 	public static User getByLoginName(String loginName) {
 		User user = userDao.getByLoginName(new User(null, loginName));
+		if (user == null) {
+			return null;
+		}
 		user.setRoleList(roleDao.findList(new Role(user)));
-			
-		
 		return user;
 	}
 
@@ -221,16 +216,10 @@ public class UserUtils {
 	public static List<Menu> getMenuList(Menu menu) {
 		User user = getUser();
 		if (user.isAdmin()) {
-			
-			List<Menu> 	menuListAll = menuDao.findAllList(new Menu());
-		
-			return menuListAll;
+			return menuDao.findAllList(new Menu());
 		} else {
 			menu.setUserId(user.getId());
-			List<Menu> listByUser = menuDao.findByUserId(menu);
-	
-			
-			return listByUser;
+			return menuDao.findByUserId(menu);
 		}
 	}
 
@@ -305,13 +294,7 @@ public class UserUtils {
 			loginUser.setEmail(map.get("email").toString());
 			loginUser.setMobile(map.get("mobile").toString());
 			loginUser.setLoginName(map.get("loginName").toString());
-		
-	
-		
-				user =userDao.getByLoginUser(loginUser);
-				user.setRoleList(roleDao.findList(new Role(user)));
-			
-			
+			user =userDao.getByLoginUser(loginUser);
 		}catch (Exception e){
 			Subject subject = SecurityUtils.getSubject();
 		    user =getByLoginName(subject.getPrincipal()+"");
@@ -362,12 +345,9 @@ public class UserUtils {
 
 	public static void removeCache(String key) {
 		 getCacheMap().remove(key);
-
 		 //getSession().removeAttribute(key);
 	}
 
-	
-	
 	 public static Map<String, Object> getCacheMap(){
 	 Principal principal = getPrincipal();
 	 if(principal!=null){

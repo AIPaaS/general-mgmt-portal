@@ -157,7 +157,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 							boolean isActiveSession = false;
 							// 不包括离线并符合最后访问时间小于等于3分钟条件。
 							if (includeLeave || DateUtils.pastMinutes(session.getLastAccessTime()) <= 30){
-								
+								logger.debug("6、不包括离线并符合最后访问时间小于等于3分钟条件。");
 								isActiveSession = true;
 							}
 							// 符合登陆者条件。
