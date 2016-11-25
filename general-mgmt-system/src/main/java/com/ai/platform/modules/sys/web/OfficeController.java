@@ -186,7 +186,7 @@ public class OfficeController extends BaseController {
 	public String save(Office office, Model model, RedirectAttributes redirectAttributes) {
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/office/";
+			return "modules/sys/office/";
 		}
 		if (!beanValidator(model, office)) {
 			return form(office, model);
@@ -221,7 +221,7 @@ public class OfficeController extends BaseController {
 		// office.getParentId();
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+id+"&parentIds="+office.getParentIds();
-		return "redirect:" + adminPath + "/sys/office/page";
+		return "modules/sys/office/page";
 	}
 
 	/**
@@ -236,7 +236,7 @@ public class OfficeController extends BaseController {
 	public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/office/page?repage";
+			return "modules/sys/office/page?repage";
 		}
 		try {
 			// 验证导入文件是否合法
@@ -311,7 +311,7 @@ public class OfficeController extends BaseController {
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入部门信息失败！失败信息：" + e.getMessage());
 		}
-		return "redirect:" + adminPath + "/sys/office/page?repage";
+		return "modules/sys/office/page?repage";
 	}
 
 	/**
@@ -353,7 +353,7 @@ public class OfficeController extends BaseController {
 	public String delete(Office office, RedirectAttributes redirectAttributes) {
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:" + adminPath + "/sys/office/list";
+			return "modules/sys/office/list";
 		}
 		List<User> user = systemService.findUserByOfficeId(office.getId());
 		 if (!user.isEmpty()){
@@ -364,7 +364,7 @@ public class OfficeController extends BaseController {
 		 }
 		// return "redirect:" + adminPath +
 		// "/sys/office/list?id="+office.getParentId()+"&parentIds="+office.getParentIds();
-		return "redirect:" + adminPath + "/sys/office/page";
+		return "modules/sys/office/page";
 	}
 
 	/**
