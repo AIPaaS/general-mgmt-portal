@@ -1,7 +1,6 @@
 package com.ai.platform.modules.sys.utils;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,10 +86,6 @@ public class GnAreaUtils {
 			}
 		}
 		return mapper;
-	}
-	
-	public static void cleanAreaCache(){
-		jedis.del("areaTreeALL".getBytes());
 	}
 
 }

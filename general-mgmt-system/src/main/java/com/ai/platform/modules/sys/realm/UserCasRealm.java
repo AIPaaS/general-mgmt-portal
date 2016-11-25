@@ -1,12 +1,10 @@
 package com.ai.platform.modules.sys.realm;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -19,8 +17,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
+import com.ai.paas.ipaas.util.SerializeUtil;
 import com.ai.platform.common.config.Global;
+import com.ai.platform.common.utils.JedisUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
+import com.ai.platform.modules.sys.dao.RoleDao;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
@@ -33,7 +36,9 @@ public class UserCasRealm  extends CasRealm{
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SystemService systemService;
-
+	@Autowired
+	private RoleDao roleDao;
+	private final static ICacheClient jedisUserbyid = MCSClientFactory.getCacheClient("com.ai.platform.common.cache.userbyid");
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
     	User user=null;
@@ -43,9 +48,17 @@ public class UserCasRealm  extends CasRealm{
     		loginUser.setEmail(map.get("email").toString());
     		loginUser.setMobile(map.get("mobile").toString());
     		loginUser.setLoginName(map.get("loginName").toString());
-    		user =systemService.getByLoginUser(loginUser);
+    		user = (User) SerializeUtil.deserialize(jedisUserbyid.get(JedisUtils.getBytesKey(map.get("userId").hashCode())));
+    		
+    		if(user==null || StringUtils.isBlank(user.getId())){
+    			user =systemService.getByLoginUser(loginUser);
+    			user.setRoleList(roleDao.findList(new Role(user)));
+    			jedisUserbyid.set(JedisUtils.getBytesKey(map.get("userId").hashCode()), SerializeUtil.serialize(user));
+    		}
+    		
 		}catch (Exception e){
 			String name = (String)getAvailablePrincipal(principals);
+			
 			user =systemService.getUserByLoginName(name);
 		}
 		

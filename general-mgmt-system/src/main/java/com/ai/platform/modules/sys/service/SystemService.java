@@ -177,6 +177,7 @@ public class SystemService extends BaseService implements InitializingBean {
 				
 			}
 			
+			UserUtils.removeUserCache(user.getId());
 			// 将当前用户同步到Activiti
 			deleteActivitiUser(user);
 //			// 清除权限缓存
@@ -201,6 +202,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户缓存
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
+		UserUtils.removeUserCache(user.getId());
 	}
 	
 	@Transactional(readOnly = false)
@@ -212,6 +214,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.setLoginName(loginName);
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
+		UserUtils.removeUserCache(user.getId());
 	}
 	
 	@Transactional(readOnly = false)
@@ -223,6 +226,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.setLoginIp(StringUtils.getRemoteAddr(Servlets.getRequest()));
 		user.setLoginDate(new Date());
 		userDao.updateLoginInfo(user);
+		UserUtils.removeUserCache(user.getId());
 	}
 	
 	/**
@@ -322,6 +326,7 @@ public class SystemService extends BaseService implements InitializingBean {
 //		saveActivitiGroup(role);
 		// 清除用户角色缓存
 //		// 清除权限缓存
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
@@ -334,6 +339,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户角色缓存
 		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 	}
 
 	@Transactional(readOnly = false)
@@ -344,6 +350,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户角色缓存
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 	}
 	
 	@Transactional(readOnly = false)
@@ -356,6 +363,8 @@ public class SystemService extends BaseService implements InitializingBean {
 				return true;
 			}
 		}
+		UserUtils.removeUserCache(user.getId());
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 		return false;
 	}
 	
@@ -370,6 +379,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		}
 		user.getRoleList().add(role);
 		saveUser(user);
+		UserUtils.removeUserCache(user.getId());
 		return user;
 	}
 
@@ -417,6 +427,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 	}
 
 	@Transactional(readOnly = false)
@@ -427,6 +438,7 @@ public class SystemService extends BaseService implements InitializingBean {
 //		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 	}
 
 	@Transactional(readOnly = false)
@@ -437,6 +449,7 @@ public class SystemService extends BaseService implements InitializingBean {
 //		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
+		UserUtils.removeMenuCache(UserUtils.getUser().getId());
 	}
 	
 	/**
@@ -579,6 +592,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		}
 		if(user!=null) {
 			String userId = user.getLoginName();//ObjectUtils.toString(user.getId());
+			UserUtils.removeUserCache(user.getId());
 //			identityService.deleteUser(userId);
 		}
 	}
@@ -612,6 +626,8 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.setPassword(entryptPassword(resetPass));
 		userDao.updatePasswordById(user);
 		sendMail(user,resetPass);
+		UserUtils.removeUserCache(user.getId());
+		
 	}
 	/**
 	 * 发送邮件-重置密码
@@ -655,6 +671,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.setTheme(UserUtils.USER_DEFAULT_THEME);	
 		}
 		userDao.updateThemeById(user);
+		UserUtils.removeUserCache(user.getId());
 	}
 	
 	/**
@@ -679,6 +696,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		user.preUpdate();
 		userDao.updateLoginFalg(user);
 		// 清除用户缓存
+		UserUtils.removeUserCache(user.getId());
 	}
 	@Transactional(readOnly = true)
 	public List<User> findAllUser() {
@@ -708,6 +726,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.preUpdate();
 			userDao.updateUserNoUser(user);
 		}
+		UserUtils.removeUserCache(user.getId());
 	}
 	
 	@Transactional(readOnly = false)
@@ -721,6 +740,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.preUpdate();
 			userDao.updateUserNoUser(user);
 		}
+		UserUtils.removeUserCache(user.getId());
 	}
 	
 	

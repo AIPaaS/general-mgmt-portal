@@ -7,15 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
+import com.ai.paas.ipaas.util.SerializeUtil;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.service.BaseService;
+import com.ai.platform.common.utils.JedisUtils;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.common.utils.StringUtils;
 import com.ai.platform.modules.sys.dao.MenuDao;
@@ -27,6 +31,7 @@ import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
+import com.google.common.collect.Lists;
 
 /**
  * 用户工具类
@@ -54,6 +59,14 @@ public class UserUtils {
 	public static final String SAVEUSER_EMAIL = "email/user-save-binemail.xml";
 	
 	
+	private  static ICacheClient jedisUserbyid =MCSClientFactory.getCacheClient("com.ai.platform.common.cache.userbyid");
+	private  static ICacheClient jedisUserbyLoginname =MCSClientFactory.getCacheClient("com.ai.platform.common.cache.userbyname");
+	
+	private  static ICacheClient jedisMenuListAll = MCSClientFactory.getCacheClient("com.ai.platform.common.cache.menuAll");
+	private  static ICacheClient jedisMenuListByUserId = MCSClientFactory.getCacheClient("com.ai.platform.common.cache.menuById");
+	
+	
+	public static List<Menu> menuListAll = (List<Menu>) SerializeUtil.deserialize(jedisMenuListAll.get(("MenuAll").getBytes()));
 	public static List<User> getUserList(User user){
 		return userDao.findList(user);
 	}
@@ -66,11 +79,16 @@ public class UserUtils {
 	 * @return 取不到返回null
 	 */
 	public static User get(String id) {
-		User user = userDao.get(id);
+		
+		User user = (User) SerializeUtil.deserialize(jedisUserbyid.get(JedisUtils.getBytesKey(id)));
+		 
 		if (user == null) {
-			return null;
+			user = userDao.get(id);
+			user.setRoleList(roleDao.findList(new Role(user)));
+			jedisUserbyid.set(JedisUtils.getBytesKey(id), SerializeUtil.serialize(user));
+			return user;
 		}
-		user.setRoleList(roleDao.findList(new Role(user)));
+		
 		return user;
 	}
 
@@ -124,11 +142,16 @@ public class UserUtils {
 	 * @return 取不到返回null
 	 */
 	public static User getByLoginName(String loginName) {
-		User user = userDao.getByLoginName(new User(null, loginName));
+		User user = (User) SerializeUtil.deserialize(jedisUserbyLoginname.get(JedisUtils.getBytesKey(loginName)));
+		
+		
 		if (user == null) {
-			return null;
+			user = userDao.getByLoginName(new User(null, loginName));
+			user.setRoleList(roleDao.findList(new Role(user)));
+			jedisUserbyLoginname.set(JedisUtils.getBytesKey(loginName), SerializeUtil.serialize(user));
+			return user;
 		}
-		user.setRoleList(roleDao.findList(new Role(user)));
+		
 		return user;
 	}
 
@@ -216,10 +239,22 @@ public class UserUtils {
 	public static List<Menu> getMenuList(Menu menu) {
 		User user = getUser();
 		if (user.isAdmin()) {
-			return menuDao.findAllList(new Menu());
+			
+			if(menuListAll == null || menuListAll.isEmpty()){
+				menuListAll = Lists.newArrayList();
+				menuListAll = menuDao.findAllList(new Menu());
+				jedisMenuListAll.set(JedisUtils.getBytesKey(("MenuAll").getBytes()), SerializeUtil.serialize(menuListAll));
+			}
+			return menuListAll;
 		} else {
-			menu.setUserId(user.getId());
-			return menuDao.findByUserId(menu);
+			List<Menu> listByUser = (List<Menu>) SerializeUtil.deserialize(jedisMenuListByUserId.get(user.getId().getBytes()));
+			if(listByUser ==null || listByUser.isEmpty()){
+				listByUser= Lists.newArrayList();
+				menu.setUserId(user.getId());
+				listByUser = menuDao.findByUserId(menu);
+			}
+			
+			return listByUser;
 		}
 	}
 
@@ -294,7 +329,15 @@ public class UserUtils {
 			loginUser.setEmail(map.get("email").toString());
 			loginUser.setMobile(map.get("mobile").toString());
 			loginUser.setLoginName(map.get("loginName").toString());
-			user =userDao.getByLoginUser(loginUser);
+		
+			User userget = (User) SerializeUtil.deserialize(jedisUserbyid.get(JedisUtils.getBytesKey(map.get("userId"))));
+			BeanUtils.copyProperties(userget, user);
+			if(user==null || StringUtils.isBlank(user.getId())){
+				user =userDao.getByLoginUser(loginUser);
+				user.setRoleList(roleDao.findList(new Role(user)));
+				jedisUserbyid.set(JedisUtils.getBytesKey(map.get("userId")), SerializeUtil.serialize(user));
+			}
+			
 		}catch (Exception e){
 			Subject subject = SecurityUtils.getSubject();
 		    user =getByLoginName(subject.getPrincipal()+"");
@@ -345,9 +388,24 @@ public class UserUtils {
 
 	public static void removeCache(String key) {
 		 getCacheMap().remove(key);
+		 
+		 jedisUserbyid.del(JedisUtils.getBytesKey(key));
 		 //getSession().removeAttribute(key);
 	}
 
+	public static void removeUserCache(String key) {
+		User user = UserUtils.get(key);
+		 jedisUserbyLoginname.del(user.getLoginName().getBytes());
+		 jedisUserbyid.del(JedisUtils.getBytesKey(key));
+		 
+	}
+	public static void removeMenuCache(String key) {
+		jedisMenuListByUserId.del(JedisUtils.getBytesKey(key));
+		jedisMenuListAll.del(("MenuAll").getBytes());
+		menuListAll = Lists.newArrayList();
+		
+	}
+	
 	 public static Map<String, Object> getCacheMap(){
 	 Principal principal = getPrincipal();
 	 if(principal!=null){
