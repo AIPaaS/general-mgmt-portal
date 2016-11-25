@@ -120,8 +120,8 @@
 		FROM gn_area a
 	
 		<where>
-			AND a.parent_area_code = '00'
-			or a.parent_area_code is null
+			AND a.parent_area_code is null 
+			AND a.state = 1
 		</where>
 		ORDER BY sort_id
 	</select>

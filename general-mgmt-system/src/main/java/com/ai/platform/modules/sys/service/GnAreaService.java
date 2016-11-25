@@ -9,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.service.CrudService;
+import com.ai.platform.common.utils.JedisUtils;
+import com.ai.platform.common.utils.UniSessionUtil;
 import com.ai.platform.modules.sys.entity.GnArea;
+import com.ai.platform.modules.sys.utils.GnAreaUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ai.platform.modules.sys.dao.GnAreaDao;
 
@@ -23,6 +28,8 @@ import com.ai.platform.modules.sys.dao.GnAreaDao;
 @Service
 @Transactional(readOnly = true)
 public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
+
+	
 	@Autowired
 	private GnAreaDao areaDao;
 
@@ -49,15 +56,17 @@ public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
 	@Transactional(readOnly = false)
 	public void save(GnArea gnArea) {
 		super.save(gnArea);
+		GnAreaUtils.cleanAreaCache();
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GnArea gnArea) {
 		super.delete(gnArea);
+		GnAreaUtils.cleanAreaCache();
 	}
 
 	public List<GnArea> findTreeInit() {
-		// TODO Auto-generated method stub
+	
 		return areaDao.findTreeInit();
 	}
 
