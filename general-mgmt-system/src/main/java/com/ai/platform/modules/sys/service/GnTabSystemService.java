@@ -52,13 +52,13 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 		systemRealm.clearAllCachedAuthorizationInfo();
 		// 清除日志相关缓存
 		CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
-		UserUtils.removeMenuCache(UserUtils.getUser().getId());
+		
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GnTabSystem gnTabSystem) {
 		super.delete(gnTabSystem);
-		UserUtils.removeMenuCache(UserUtils.getUser().getId());
+
 	}
 
 	public List<GnTabSystem> findAll() {
