@@ -38,7 +38,7 @@ public class UserCasRealm  extends CasRealm{
 	private SystemService systemService;
 	@Autowired
 	private RoleDao roleDao;
-	private final static ICacheClient jedisUserbyid = MCSClientFactory.getCacheClient("com.ai.platform.common.cache.userbyid");
+
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
     	User user=null;
@@ -48,13 +48,11 @@ public class UserCasRealm  extends CasRealm{
     		loginUser.setEmail(map.get("email").toString());
     		loginUser.setMobile(map.get("mobile").toString());
     		loginUser.setLoginName(map.get("loginName").toString());
-    		user = (User) SerializeUtil.deserialize(jedisUserbyid.get(JedisUtils.getBytesKey(map.get("userId").hashCode())));
     		
-    		if(user==null || StringUtils.isBlank(user.getId())){
+    		
     			user =systemService.getByLoginUser(loginUser);
     			user.setRoleList(roleDao.findList(new Role(user)));
-    			jedisUserbyid.set(JedisUtils.getBytesKey(map.get("userId").hashCode()), SerializeUtil.serialize(user));
-    		}
+    		
     		
 		}catch (Exception e){
 			String name = (String)getAvailablePrincipal(principals);

@@ -5,10 +5,8 @@ package com.ai.platform.modules.sys.service;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ import com.ai.opt.sdk.components.mail.EmailFactory;
 import com.ai.opt.sdk.components.mail.EmailTemplateUtil;
 import com.ai.opt.sdk.util.Md5Encoder;
 import com.ai.platform.common.config.Global;
-import com.ai.platform.common.mail.MailMessageFactory;
-import com.ai.platform.common.mail.SendMailType;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.security.shiro.session.SessionDAO;
 import com.ai.platform.common.service.BaseService;
@@ -41,8 +37,6 @@ import com.ai.platform.modules.sys.entity.RoleMenu;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.entity.Waitjobs;
 import com.ai.platform.modules.sys.realm.UserCasRealm;
-import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
-import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.utils.LogUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
