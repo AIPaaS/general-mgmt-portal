@@ -285,30 +285,26 @@ public class UserUtils {
 	 * 获取当前登录者对象
 	 */
 	public static Principal getPrincipal(){
-		Subject subject;
+		User user =null;
 		try{
-		    subject = SecurityUtils.getSubject();
+			Subject subject = SecurityUtils.getSubject();
 		    PrincipalCollection principals =subject.getPrincipals();
 			Map map =(Map)(principals.asList().get(1));
 			User loginUser = new User();
 			loginUser.setEmail(map.get("email").toString());
 			loginUser.setMobile(map.get("mobile").toString());
 			loginUser.setLoginName(map.get("loginName").toString());
-			
-			User user =userDao.getByLoginUser(loginUser);
-		    if(user == null)
+			user =userDao.getByLoginUser(loginUser);
+		}catch (Exception e){
+			Subject subject = SecurityUtils.getSubject();
+		    user =getByLoginName(subject.getPrincipal()+"");
+		}finally{
+		   if(user == null)
 		    	return null;
 			Principal principal =new Principal(user, false);
 			if (principal != null){
 				return principal;
 			}
-		}catch (UnavailableSecurityManagerException e) {
-			
-		}catch (InvalidSessionException e){
-			
-		}finally{
-			//add by zhouxiaohu 
-//			subject =null;
 		}
 		return null;
 	}

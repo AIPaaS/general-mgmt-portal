@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -35,13 +36,19 @@ public class UserCasRealm  extends CasRealm{
 
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
-		Map map =(Map)principals.asList().get(1);
-		User loginUser = new User();
-		loginUser.setEmail(map.get("email").toString());
-		loginUser.setMobile(map.get("mobile").toString());
-		loginUser.setLoginName(map.get("loginName").toString());
+    	User user=null;
+    	try{
+    		Map map =(Map)principals.asList().get(1);
+    		User loginUser = new User();
+    		loginUser.setEmail(map.get("email").toString());
+    		loginUser.setMobile(map.get("mobile").toString());
+    		loginUser.setLoginName(map.get("loginName").toString());
+    		user =systemService.getByLoginUser(loginUser);
+		}catch (Exception e){
+			String name = (String)getAvailablePrincipal(principals);
+			user =systemService.getUserByLoginName(name);
+		}
 		
-		User user =systemService.getByLoginUser(loginUser);
 		Principal principal =new Principal(user, false);
 		// 获取当前已登录的用户
 		if (Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
