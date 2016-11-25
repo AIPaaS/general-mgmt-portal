@@ -20,7 +20,7 @@ public class GnAreaUtils {
 	
 	private final static ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.platform.common.cache.gnarea");
 	
-	
+	private static List<GnArea> listAll = Lists.newArrayList();
 	private GnAreaUtils(){
 		
 	}
@@ -32,7 +32,7 @@ public class GnAreaUtils {
 	public static List<GnArea> getGnAreaList() {
 		
 		byte[] in = jedis.get("areaTreeALL".getBytes());  
-		List<GnArea> listAll = (List<GnArea>)SerializeUtil.deserialize(in); 
+		listAll = (List<GnArea>)SerializeUtil.deserialize(in); 
 		if(listAll==null || listAll.isEmpty()){
 			listAll= Lists.newArrayList();
 			listAll = GnAreaUtils.gnAreaDao.findList(new GnArea());
