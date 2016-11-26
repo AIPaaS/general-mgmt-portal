@@ -1,28 +1,24 @@
 package com.ai.platform.modules.sys.realm;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cas.CasRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.SpringContextHolder;
+import com.ai.platform.modules.sys.dao.RoleDao;
 import com.ai.platform.modules.sys.entity.Menu;
 import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
-import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.service.SystemService;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
@@ -31,6 +27,8 @@ public class UserCasRealm  extends CasRealm{
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private SystemService systemService;
+	@Autowired
+	private RoleDao roleDao;
 
     @Override  
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) { 
@@ -42,9 +40,11 @@ public class UserCasRealm  extends CasRealm{
     		loginUser.setMobile(map.get("mobile").toString());
     		loginUser.setLoginName(map.get("loginName").toString());
     		user =systemService.getByLoginUser(loginUser);
+    		user.setRoleList(roleDao.findList(new Role(user)));
 		}catch (Exception e){
 			String name = (String)getAvailablePrincipal(principals);
 			user =systemService.getUserByLoginName(name);
+			user.setRoleList(roleDao.findList(new Role(user)));
 		}
 		
 //		Principal principal =new Principal(user, false);
