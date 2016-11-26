@@ -55,14 +55,14 @@
 				
 				// 默认展开一级节点
 				var nodes = tree.getNodesByParam("level", 0);
-				 for(var i=0; i<nodes.length; i++) {
+				/*  for(var i=0; i<nodes.length; i++) {
 					tree.expandNode(nodes[i], true, false, false);
-				} 
+				}  */
 				//异步加载子节点（加载用户）
-				var nodesOne = tree.getNodesByParam("isParent", true);
+				/* var nodesOne = tree.getNodesByParam("isParent", true);
 				for(var j=0; j<nodesOne.length; j++) {
 					tree.reAsyncChildNodes(nodesOne[j],"!refresh",true);
-				}
+				} */
 				selectCheckNode();
 			});
 			key = $("#key");

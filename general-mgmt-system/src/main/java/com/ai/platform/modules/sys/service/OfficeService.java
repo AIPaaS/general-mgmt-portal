@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.platform.common.service.TreeService;
 import com.ai.platform.modules.sys.dao.OfficeDao;
 import com.ai.platform.modules.sys.entity.Office;
+import com.ai.platform.modules.sys.utils.OfficeUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
 /**
@@ -52,11 +53,13 @@ public class OfficeService extends TreeService<OfficeDao, Office> {
 	@Transactional(readOnly = false)
 	public void save(Office office) {
 		super.save(office);
+		OfficeUtils.removeOfficeCache();
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(Office office) {
 		super.delete(office);
+		OfficeUtils.removeOfficeCache();
 	}
 	
 }

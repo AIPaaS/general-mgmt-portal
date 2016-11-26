@@ -44,6 +44,7 @@ import com.ai.platform.modules.sys.realm.UserCasRealm;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm.Principal;
 import com.ai.platform.modules.sys.utils.LogUtils;
+import com.ai.platform.modules.sys.utils.OfficeUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 
 /**
@@ -180,6 +181,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			// 将当前用户同步到Activiti
 			deleteActivitiUser(user);
 //			// 清除权限缓存
+			OfficeUtils.removeOfficeCache();
 			systemRealm.clearAllCachedAuthorizationInfo();
 		}
 	}
@@ -190,6 +192,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		userDao.updateUserInfo(user);
 		// 清除用户缓存
 //		// 清除权限缓存
+		OfficeUtils.removeOfficeCache();
 		systemRealm.clearAllCachedAuthorizationInfo();
 	}
 	
@@ -201,6 +204,7 @@ public class SystemService extends BaseService implements InitializingBean {
 		// 清除用户缓存
 //		// 清除权限缓存
 		systemRealm.clearAllCachedAuthorizationInfo();
+		OfficeUtils.removeOfficeCache();
 	}
 	
 	@Transactional(readOnly = false)
@@ -356,6 +360,7 @@ public class SystemService extends BaseService implements InitializingBean {
 				return true;
 			}
 		}
+		OfficeUtils.removeOfficeCache();
 		return false;
 	}
 	
@@ -708,6 +713,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.preUpdate();
 			userDao.updateUserNoUser(user);
 		}
+		OfficeUtils.removeOfficeCache();
 	}
 	
 	@Transactional(readOnly = false)
@@ -721,6 +727,7 @@ public class SystemService extends BaseService implements InitializingBean {
 			user.preUpdate();
 			userDao.updateUserNoUser(user);
 		}
+		OfficeUtils.removeOfficeCache();
 	}
 	
 	
