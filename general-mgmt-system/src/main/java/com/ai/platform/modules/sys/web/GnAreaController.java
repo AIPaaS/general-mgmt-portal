@@ -200,13 +200,11 @@ public class GnAreaController extends BaseController {
 				jedis.set("findTreeInit".getBytes(),SerializeUtil.serialize(mapList));
 			 }
 		}else if(StringUtils.isNotBlank(areaId) ){
-//			 mapList = (List<Map<String, Object>>) SerializeUtil.deserialize(jedis.get(("gnArea:findTreeaync:"+areaId).getBytes()));
-//			 if(mapList == null || mapList.isEmpty()){
-				 mapList = Lists.newArrayList();
+
 			
 				GnArea gnAreaParent = new GnArea();
 				gnAreaParent.setParentAreaCode(areaId);
-				List<GnArea> listAsyc = gnAreaService.findListByParentAreaCode(gnAreaParent);
+				List<GnArea> listAsyc = GnAreaUtils.findListByParentAreaCode(areaId);
 				for (int i=0; i<listAsyc.size(); i++){
 					GnArea e = listAsyc.get(i);
 					if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){

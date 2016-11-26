@@ -77,7 +77,20 @@ public class GnAreaUtils {
 		}
 		return null;
 	}
-	
+	public static List<GnArea> findListByParentAreaCode(String gnAreaParent){
+		List<GnArea> list = Lists.newArrayList();
+		if(StringUtils.isNotBlank(gnAreaParent) && StringUtils.isNotBlank(gnAreaParent)){
+			for (GnArea gnArea : GnAreaUtils.getGnAreaList()){
+				if((gnAreaParent).equals(gnArea.getParentAreaCode())){
+					list.add(gnArea);
+				
+				}
+			}
+			
+			return list;
+		}
+		return list;
+	}
 	
 	public static List<GnArea> getParentCodeList(String code){
 		List<GnArea> mapper = Lists.newArrayList();
