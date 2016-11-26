@@ -13,6 +13,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.ai.opt.sdk.components.lock.AbstractMutexLock;
+import com.ai.opt.sdk.components.lock.RedisMutexLockFactory;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
@@ -37,10 +39,34 @@ public class HrTaskJob {
 	
 
 	public static ExecutorService handlePool;
+	private final String REDISKEY="redislock.importhrinfo";
 
 	@Scheduled(cron = "${jobs.scheduled}")
 	public void hrImportJob() {
-		run();
+		AbstractMutexLock lock=null;
+        boolean lockflag=false;
+        try{
+        	lock=RedisMutexLockFactory.getRedisMutexLock(REDISKEY);
+        	//lock.acquire();//争锁，无限等待
+        	lockflag=lock.acquire(10, TimeUnit.SECONDS);//争锁，超时时间10秒。
+        	if(lockflag){
+        		LOG.info("SUCESS线程【"+Thread.currentThread().getName()+"】获取到分布式锁，执行任务");
+        		run();
+        	}else{
+        		LOG.info("FAILURE线程【"+Thread.currentThread().getName()+"】未获取到分布式锁，不执行任务");
+        	}
+        } catch (Exception e) {
+        	LOG.error("获取分布式锁出错："+e.getMessage(),e);
+		} finally {
+			if(lock!=null&&lockflag){
+        		try {
+					lock.release();
+					LOG.error("释放分布式锁OK");
+				} catch (Exception e) {
+					LOG.error("释放分布式锁出错："+e.getMessage(),e);
+				}
+        	}
+		}
 	}
 
 	public void run() {
@@ -82,7 +108,7 @@ public class HrTaskJob {
 				handlePool.execute(new UserThead(user, officeService, systemService));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("任务执行出错："+e.getMessage(),e);
 		} finally {
 			handlePool.shutdown();
 			if(isSynchronize)
