@@ -33,9 +33,6 @@
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="${casServerLoginUrl}?service=${serverName_Inner}${serverContextPath}${adminPath}/cas" />
-
-
-		<property name="successUrl" value="${adminPath}?index" />
 		<property name="filters">
 			<map>
 				<entry key="cas" value-ref="casFilter" />

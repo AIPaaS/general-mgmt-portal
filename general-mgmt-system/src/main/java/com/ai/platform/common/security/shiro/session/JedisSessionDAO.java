@@ -77,9 +77,9 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 			jedis.hset(sessionKeyPrefix, session.getId().toString(), principalId + "|" + session.getTimeout() + "|" + session.getLastAccessTime().getTime());
 			jedis.set(JedisUtils.getBytesKey(sessionKeyPrefix + session.getId()), JedisUtils.toBytes(session));
 			
-			// 设置超期时间
-			int timeoutSeconds = (int)(session.getTimeout() / 1000);
-			jedis.expire((sessionKeyPrefix + session.getId()), timeoutSeconds);
+//			// 设置超期时间
+//			int timeoutSeconds = (int)(session.getTimeout() / 1000);
+//			jedis.expire((sessionKeyPrefix + session.getId()), timeoutSeconds);
 
 			logger.debug("update {} {}", session.getId(), request != null ? request.getRequestURI() : "");
 		} catch (Exception e) {
@@ -155,11 +155,11 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 							// 验证SESSION
 							session.validate();
 							boolean isActiveSession = false;
-							// 不包括离线并符合最后访问时间小于等于3分钟条件。
-							if (includeLeave || DateUtils.pastMinutes(session.getLastAccessTime()) <= 30){
-								logger.debug("6、不包括离线并符合最后访问时间小于等于3分钟条件。");
-								isActiveSession = true;
-							}
+//							// 不包括离线并符合最后访问时间小于等于3分钟条件。
+//							if (includeLeave || DateUtils.pastMinutes(session.getLastAccessTime()) <= 3){
+//								logger.debug("6、不包括离线并符合最后访问时间小于等于3分钟条件。");
+//								isActiveSession = true;
+//							}
 							// 符合登陆者条件。
 							if (principal != null){
 								PrincipalCollection pc = (PrincipalCollection)session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
@@ -167,13 +167,13 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 									isActiveSession = true;
 								}
 							}
-							// 过滤掉的SESSION
-							if (filterSession != null && filterSession.getId().equals(session.getId())){
-								isActiveSession = false;
-							}
-							if (isActiveSession){
+//							// 过滤掉的SESSION
+//							if (filterSession != null && filterSession.getId().equals(session.getId())){
+//								isActiveSession = false;
+//							}
+//							if (isActiveSession){
 								sessions.add(session);
-							}
+//							}
 							
 						}
 						// SESSION验证失败
