@@ -96,26 +96,26 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		Principal principal = (Principal) getAvailablePrincipal(principals);
 		System.out.println("进入SystemAuthorizingRealm 1 。");
-		// 获取当前已登录的用户
-		if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
-			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
-			System.out.println("进入SystemAuthorizingRealm 2   sessions.size()=="+sessions.size());
-			if (sessions.size() > 0){
-				// 如果是登录进来的，则踢出已在线用户
-				if (UserUtils.getSubject().isAuthenticated()){
-					System.out.println("进入SystemAuthorizingRealm 3  如果是登录进来的，则踢出已在线用户");
-					for (Session session : sessions){
-						getSystemService().getSessionDao().delete(session);
-					}
-				}
-				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
-				else{
-					System.out.println("4. 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。");
-					UserUtils.getSubject().logout();
-					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
-				}
-			}
-		}
+//		// 获取当前已登录的用户
+//		if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
+//			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
+//			System.out.println("进入SystemAuthorizingRealm 2   sessions.size()=="+sessions.size());
+//			if (sessions.size() > 0){
+//				// 如果是登录进来的，则踢出已在线用户
+//				if (UserUtils.getSubject().isAuthenticated()){
+//					System.out.println("进入SystemAuthorizingRealm 3  如果是登录进来的，则踢出已在线用户");
+//					for (Session session : sessions){
+//						getSystemService().getSessionDao().delete(session);
+//					}
+//				}
+//				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
+//				else{
+//					System.out.println("4. 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。");
+//					UserUtils.getSubject().logout();
+//					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
+//				}
+//			}
+//		}
 		User user = getSystemService().getUserByLoginName(principal.getLoginName());
 		System.out.println("4. 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。"+user.getName());
 		if (user != null) {
