@@ -438,7 +438,7 @@ public class OfficeController extends BaseController {
 			@RequestParam(required = false) String type, @RequestParam(required = false) Long grade,
 			@RequestParam(required = false) Boolean isAll, HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
-		List<Office> list = officeService.findList(isAll);
+		List<Office> list = OfficeUtils.getOfficeList();
 		for (int i = 0; i < list.size(); i++) {
 			Office e = list.get(i);
 
