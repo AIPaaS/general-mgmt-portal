@@ -47,24 +47,24 @@ public class UserCasRealm  extends CasRealm{
 			user =systemService.getUserByLoginName(name);
 		}
 		
-		Principal principal =new Principal(user, false);
+//		Principal principal =new Principal(user, false);
 		// 获取当前已登录的用户
-		if (Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
-			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
-			if (sessions.size() > 0){
-				// 如果是登录进来的，则踢出已在线用户
-				if (UserUtils.getSubject().isAuthenticated()){
-					for (Session session : sessions){
-						getSystemService().getSessionDao().delete(session);
-					}
-				}
-				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
-				else{
-					UserUtils.getSubject().logout();
-					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
-				}
-			}
-		}
+//		if (Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
+//			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
+//			if (sessions.size() > 0){
+//				// 如果是登录进来的，则踢出已在线用户
+//				if (UserUtils.getSubject().isAuthenticated()){
+//					for (Session session : sessions){
+//						getSystemService().getSessionDao().delete(session);
+//					}
+//				}
+//				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
+//				else{
+//					UserUtils.getSubject().logout();
+//					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
+//				}
+//			}
+//		}
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			List<Menu> list = UserUtils.getMenuList();

@@ -47,7 +47,7 @@
 
 	<!-- CAS认证过滤器 -->
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
-		<property name="failureUrl" value="${adminPath}/index" />
+		<!-- <property name="failureUrl" value="${adminPath}/index" /> -->
 	</bean>
 	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 	   <property name="redirectUrl" value="${logOutServerUrl_Inner}?service=${logOutBackUrl_Inner}${serverContextPath}"/>  
