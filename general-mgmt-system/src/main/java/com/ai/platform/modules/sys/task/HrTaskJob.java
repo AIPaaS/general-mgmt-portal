@@ -45,6 +45,7 @@ public class HrTaskJob {
 
 	public void run() {
 		LOG.error("任务开始执行，当前时间戳："+DateUtils.getDateTime());
+		boolean isSynchronize =false;
 		try {
 			handlePool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 			userQueue = new LinkedBlockingQueue<String[]>(1000);
@@ -60,6 +61,7 @@ public class HrTaskJob {
 				}
 				LOG.error("部门名称:"+office[1]);
 				handlePool.execute(new OfficeThread(office, officeService, areaService));
+				isSynchronize =true;
 			}
 			while (true) {
 				LOG.error("部门信息开始更新，当前时间戳："+DateUtils.getDateTime());
@@ -83,7 +85,8 @@ public class HrTaskJob {
 			e.printStackTrace();
 		} finally {
 			handlePool.shutdown();
-			OfficeUtils.removeOfficeCache();
+			if(isSynchronize)
+				OfficeUtils.removeOfficeCache();
 			LOG.error("任务结束，当前时间戳："+DateUtils.getDateTime());
 		}
 	}
