@@ -200,22 +200,27 @@ public class GnAreaController extends BaseController {
 				jedis.set("findTreeInit".getBytes(),SerializeUtil.serialize(mapList));
 			 }
 		}else if(StringUtils.isNotBlank(areaId) ){
-			 mapList = Lists.newArrayList();
-			GnArea gnAreaParent = new GnArea();
-			gnAreaParent.setParentAreaCode(areaId);
-			List<GnArea> listAsyc = gnAreaService.findListByParentAreaCode(gnAreaParent);
-			for (int i=0; i<listAsyc.size(); i++){
-				GnArea e = listAsyc.get(i);
-				if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
-
-					Map<String, Object> map = Maps.newHashMap();
-					map.put("id", e.getId());
-					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
-					map.put("name", e.getAreaName());
-					map.put("isParent",isParent(e.getId()));
-					mapList.add(map);
+//			 mapList = (List<Map<String, Object>>) SerializeUtil.deserialize(jedis.get(("gnArea:findTreeaync:"+areaId).getBytes()));
+//			 if(mapList == null || mapList.isEmpty()){
+				 mapList = Lists.newArrayList();
+			
+				GnArea gnAreaParent = new GnArea();
+				gnAreaParent.setParentAreaCode(areaId);
+				List<GnArea> listAsyc = gnAreaService.findListByParentAreaCode(gnAreaParent);
+				for (int i=0; i<listAsyc.size(); i++){
+					GnArea e = listAsyc.get(i);
+					if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
+	
+						Map<String, Object> map = Maps.newHashMap();
+						map.put("id", e.getId());
+						map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
+						map.put("name", e.getAreaName());
+						map.put("isParent",isParent(e.getId()));
+						mapList.add(map);
+					}
 				}
-			}
+				
+			
 		}
 		
 		

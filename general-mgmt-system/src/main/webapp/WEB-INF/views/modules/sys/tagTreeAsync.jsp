@@ -27,6 +27,7 @@
 					},onAsyncSuccess: function(event, treeId, treeNode, msg){
 						var nodes = tree.getNodesByParam("pId", treeNode.id, null);
 						for (var i=0, l=nodes.length; i<l; i++) {
+						
 							try{tree.checkNode(nodes[i], treeNode.checked, true);}catch(e){}
 							//tree.selectNode(nodes[i], false);
 						}
@@ -59,10 +60,12 @@
 					tree.expandNode(nodes[i], true, false, false);
 				}
 				//异步加载子节点（加载用户）
-				var nodesOne = tree.getNodesByParam("isParent", true);
+				/* var nodesOne = tree.getNodesByParam("isParent", true);
+				
 				for(var j=0; j<nodesOne.length; j++) {
+					alert("j==="+j);
 					tree.reAsyncChildNodes(nodesOne[j],"!refresh",true);
-				}
+				} */
 				selectCheckNode();
 			});
 			key = $("#key");
@@ -74,6 +77,7 @@
 		// 默认选择节点
 		function selectCheckNode(){
 			var ids = "${selectIds}".split(",");
+			alert("selectCheckNode==="+ds.length);
 			for(var i=0; i<ids.length; i++) {
 				var node = tree.getNodeByParam("id", (type==3?"u_":"")+ids[i]);
 				if("${checked}" == "true"){

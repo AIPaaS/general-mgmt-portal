@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.service.CrudService;
 import com.ai.platform.modules.sys.entity.GnArea;
+import com.ai.platform.modules.sys.utils.GnAreaUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.ai.platform.modules.sys.dao.GnAreaDao;
 
@@ -48,11 +49,13 @@ public class GnAreaService extends CrudService<GnAreaDao, GnArea> {
 	
 	@Transactional(readOnly = false)
 	public void save(GnArea gnArea) {
+		GnAreaUtils.clearCache();
 		super.save(gnArea);
 	}
 	
 	@Transactional(readOnly = false)
 	public void delete(GnArea gnArea) {
+		GnAreaUtils.clearCache();
 		super.delete(gnArea);
 	}
 
