@@ -1,6 +1,9 @@
 package com.ai.platform.modules.sys.utils;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +77,20 @@ public class GnAreaUtils {
 		}
 		return null;
 	}
-	
+	public static List<GnArea> findListByParentAreaCode(String gnAreaParent){
+		List<GnArea> list = Lists.newArrayList();
+		if(StringUtils.isNotBlank(gnAreaParent) && StringUtils.isNotBlank(gnAreaParent)){
+			for (GnArea gnArea : GnAreaUtils.getGnAreaList()){
+				if((gnAreaParent).equals(gnArea.getParentAreaCode())){
+					list.add(gnArea);
+				
+				}
+			}
+			
+			return list;
+		}
+		return list;
+	}
 	
 	public static List<GnArea> getParentCodeList(String code){
 		List<GnArea> mapper = Lists.newArrayList();
@@ -86,6 +102,13 @@ public class GnAreaUtils {
 			}
 		}
 		return mapper;
+	}
+	
+	public static void clearCache(){
+		jedis.del("findTreeInit".getBytes());
+		jedis.del("areaTreeALL".getBytes());
+		
+		
 	}
 
 }

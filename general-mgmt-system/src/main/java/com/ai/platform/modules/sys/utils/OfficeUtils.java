@@ -4,10 +4,16 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
+import com.ai.paas.ipaas.util.SerializeUtil;
 import com.ai.platform.modules.sys.entity.Office;
 import com.google.common.collect.Lists;
 
 public class OfficeUtils {
+	
+	private final static ICacheClient jedis = MCSClientFactory.getCacheClient("com.ai.platform.common.cache.gnarea");
+	
 	private OfficeUtils(){
 		
 	}
@@ -17,7 +23,14 @@ public class OfficeUtils {
 	 * @return
 	 */
 	public static List<Office> getOfficeList() {
-		 return UserUtils.getOfficeAllList();
+		
+		List<Office> officeAllList = (List<Office>) SerializeUtil.deserialize(jedis.get(("OfficeAllList").getBytes()));
+		if(officeAllList==null || officeAllList.isEmpty()){
+			officeAllList = UserUtils.getOfficeAllList();
+			jedis.set(("OfficeAllList").getBytes(), SerializeUtil.serialize(officeAllList));
+		}
+		
+		return officeAllList;
 	}
 
 	
@@ -68,4 +81,7 @@ public class OfficeUtils {
 	}
 	
 
+	public static void removeOfficeCache(){
+		jedis.del(("OfficeAllList").getBytes());
+	}
 }

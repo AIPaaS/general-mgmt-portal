@@ -200,22 +200,25 @@ public class GnAreaController extends BaseController {
 				jedis.set("findTreeInit".getBytes(),SerializeUtil.serialize(mapList));
 			 }
 		}else if(StringUtils.isNotBlank(areaId) ){
-			 mapList = Lists.newArrayList();
-			GnArea gnAreaParent = new GnArea();
-			gnAreaParent.setParentAreaCode(areaId);
-			List<GnArea> listAsyc = gnAreaService.findListByParentAreaCode(gnAreaParent);
-			for (int i=0; i<listAsyc.size(); i++){
-				GnArea e = listAsyc.get(i);
-				if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
 
-					Map<String, Object> map = Maps.newHashMap();
-					map.put("id", e.getId());
-					map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
-					map.put("name", e.getAreaName());
-					map.put("isParent",isParent(e.getId()));
-					mapList.add(map);
+			
+				GnArea gnAreaParent = new GnArea();
+				gnAreaParent.setParentAreaCode(areaId);
+				List<GnArea> listAsyc = GnAreaUtils.findListByParentAreaCode(areaId);
+				for (int i=0; i<listAsyc.size(); i++){
+					GnArea e = listAsyc.get(i);
+					if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){
+	
+						Map<String, Object> map = Maps.newHashMap();
+						map.put("id", e.getId());
+						map.put("pId", (e.getParentAreaCode()==null ) ? "":e.getParentAreaCode());
+						map.put("name", e.getAreaName());
+						map.put("isParent",isParent(e.getId()));
+						mapList.add(map);
+					}
 				}
-			}
+				
+			
 		}
 		
 		
