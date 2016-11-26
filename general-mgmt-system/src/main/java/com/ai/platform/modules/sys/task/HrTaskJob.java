@@ -17,6 +17,7 @@ import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.OfficeUtils;
 
 @Service
 @Lazy(false)
@@ -82,6 +83,7 @@ public class HrTaskJob {
 			e.printStackTrace();
 		} finally {
 			handlePool.shutdown();
+			OfficeUtils.removeOfficeCache();
 			LOG.error("任务结束，当前时间戳："+DateUtils.getDateTime());
 		}
 	}
