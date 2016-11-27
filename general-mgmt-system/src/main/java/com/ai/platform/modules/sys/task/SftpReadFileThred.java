@@ -57,7 +57,7 @@ public class SftpReadFileThred extends Thread {
 		InputStream ins = null;
 		try {
 			// 从服务器上读取指定的文件
-			LOG.error("开始读取文件：" + fileName);
+			LOG.info("开始读取文件：" + fileName);
 			ins = SftpUtil.download(path, fileName, localpath, sftp);
 			if (ins != null) {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
@@ -75,11 +75,11 @@ public class SftpReadFileThred extends Thread {
 								continue;
 							officeQueue.put(hrInfo);
 							officeRepeatQueue.put(hrInfo);
-							LOG.error("部门信息：" + hrInfo[1]);
+							LOG.info("部门信息：" + hrInfo[1]);
 						} else if (fileName.equals("user.txt")) {
 							if (hrInfo.length == 8 && "0".equals(hrInfo[7])) {
 								userQueue.put(hrInfo);
-								LOG.error("员工名称：" + hrInfo[2]);
+								LOG.info("员工名称：" + hrInfo[2]);
 							}
 						}
 					} catch (Exception e) {

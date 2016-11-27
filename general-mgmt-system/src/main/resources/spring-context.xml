@@ -25,6 +25,14 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
+	
+	<bean id="schedulingHrImport" class="com.ai.platform.modules.sys.task.HrTaskJob" />
+
+	<task:scheduled-tasks>
+	    <task:scheduled ref="schedulingHrImport" method="hrImportJob" cron="0 42 15 * * *"/>
+	</task:scheduled-tasks>
+	
+	
  	<!-- MyBatis begin -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>

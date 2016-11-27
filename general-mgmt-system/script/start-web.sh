@@ -37,8 +37,7 @@ sed -i "s%ftp.userPwd=.*%ftp.userPwd=${ftp_userPwd}%g" ./mgmt.properties
 sed -i "s%ftp.port=.*%ftp.port=${ftp_port}%g" ./mgmt.properties
 sed -i "s%ftp.path=.*%ftp.path=${ftp_path}%g" ./mgmt.properties
 sed -i "s%ftp.localpath=.*%ftp.localpath=${ftp_localpath}%g" ./mgmt.properties
-
-sed -i "s%jobs.scheduled=.*%jobs.scheduled=${jobs_scheduled}%g" ./mgmt.properties
+sed -i "s%protocolName=.*%protocolName=${protocolName}%g" ./mgmt.properties
 popd
 
 nohup ${CATALINA_HOME}/bin/catalina.sh run >> /${APP_NAME}.log

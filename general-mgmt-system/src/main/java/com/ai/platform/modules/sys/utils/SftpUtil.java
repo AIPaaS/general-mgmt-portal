@@ -62,9 +62,9 @@ public final class SftpUtil {
 			channel = session.openChannel("sftp");
 			channel.connect();
 			sftp = (ChannelSftp) channel;
-			System.out.println("Connected to " + host + " success");
+			LOG.error( "Connected to " + host + " success");
 		} catch (Exception e) {
-			System.out.println("Connected to " + host + " failure");
+			LOG.error("Connected to " + host + " failure");
 			if (channel != null && channel.isConnected()) {
 				channel.disconnect();
 			}
@@ -160,10 +160,11 @@ public final class SftpUtil {
 			ChannelSftp sftp) {
 		LOG.error("开始读取文件：" + downloadFile);
 		try {
-			sftp.cd(directory);
+			String rootDir = sftp.pwd();
+			sftp.cd(rootDir+"/"+directory);
 			File dir = new File(saveFilePath);
 			if (!dir.exists()) {
-				dir.mkdir();
+				dir.mkdirs();
 			}
 			File file = new File(saveFilePath + "/" + downloadFile);
 			if (!file.exists()) {
@@ -247,14 +248,14 @@ public final class SftpUtil {
 	}
 
 	public static void main(String[] args) {
-		String ip = "10.19.13.13"; // 服务器IP地址
-		String userName = "tstusr01"; // 用户名
+		String ip = "54.223.101.85"; // 服务器IP地址
+		String userName = "tstusr"; // 用户名
 		String userPwd = "chupiot@Ch8899"; // 密码
-		int port = 22022; // 端口号
+		int port = 22; // 端口号
 		ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
 		try {
-			SftpUtil.download("/aifs01/tstusers/tstusr01", "office.txt", "/Users/meteor/Downloads/test/", sftp);
-
+			SftpUtil.download("/", "office.txt", "/Users/meteor/Downloads/test/", sftp);
+			System.out.println(sftp.pwd());
 			SftpUtil.listFiles("/aifs01/tstusers/tstusr01", sftp);
 			File file = new File("/Users/meteor/Downloads/test/office.txt");
 			if (!file.exists()) {
