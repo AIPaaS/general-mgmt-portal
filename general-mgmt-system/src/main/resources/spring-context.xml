@@ -29,7 +29,7 @@
 	<bean id="schedulingHrImport" class="com.ai.platform.modules.sys.task.HrTaskJob" />
 
 	<task:scheduled-tasks>
-	    <task:scheduled ref="schedulingHrImport" method="hrImportJob" cron="0 42 15 * * *"/>
+	    <task:scheduled ref="schedulingHrImport" method="hrImportJob" cron="0 15 1 * * *"/>
 	</task:scheduled-tasks>
 	
 	
