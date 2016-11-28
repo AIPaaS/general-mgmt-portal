@@ -21,7 +21,7 @@
 				/userfiles/** = anon
 				${adminPath}/cas = cas
 				${adminPath}/index = authc
-				<!-- ${adminPath}/logout = logout -->
+				${adminPath}/logout = logout
 				${adminPath}/** = user
 				/act/editor/** = user
 				/ReportServer/** = user
@@ -36,7 +36,7 @@
 		<property name="filters">
 			<map>
 				<entry key="cas" value-ref="casFilter" />
-				<!-- <entry key="logout" value-ref="logoutFilter" /> -->
+				<entry key="logout" value-ref="logoutFilter" />
 				<entry key="authc" value-ref="formAuthenticationFilter" />
 			</map>
 		</property>
@@ -49,9 +49,9 @@
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
 		<!-- <property name="failureUrl" value="${adminPath}/index" /> -->
 	</bean>
-	<!-- <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+	<bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
 	   <property name="redirectUrl" value="${logOutServerUrl_Inner}?service=${logOutBackUrl_Inner}${serverContextPath}"/>  
-	</bean> -->
+	</bean>
 
 	<bean id="casRealm" class="com.ai.platform.modules.sys.realm.UserCasRealm">
 		<property name="cachingEnabled" value="true" />
