@@ -3,31 +3,24 @@
  */
 package com.ai.platform.modules.sys.web;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.ListUtils;
-import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.persistence.Page;
-import com.ai.platform.common.web.BaseController;
 import com.ai.platform.common.utils.Encodes;
 import com.ai.platform.common.utils.StringUtils;
+import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.GnTabSystem;
 import com.ai.platform.modules.sys.service.GnTabSystemService;
 
