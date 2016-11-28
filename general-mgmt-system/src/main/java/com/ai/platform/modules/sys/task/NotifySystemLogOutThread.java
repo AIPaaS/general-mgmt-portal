@@ -22,7 +22,7 @@ public class NotifySystemLogOutThread extends Thread {
 			LOG.info("通知各中心退出系统开始："+DateUtils.getDateTime());
 			List<GnTabSystem> listSystem = gnTabSystemService.findAll(); 
 			for(GnTabSystem system:listSystem){
-				HttpClientUtil.sendPost(system.getSystemUrlContext()+"/logout","");
+				HttpClientUtil.sendPost(system.getSystemUrlContext()+"/ssologout","");
 			}
 			LOG.info("通知各中心退出系统结束："+DateUtils.getDateTime());
 		} catch (Exception e) {
