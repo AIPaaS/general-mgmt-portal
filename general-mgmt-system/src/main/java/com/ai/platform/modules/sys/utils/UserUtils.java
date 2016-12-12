@@ -290,11 +290,7 @@ public class UserUtils {
 			Subject subject = SecurityUtils.getSubject();
 		    PrincipalCollection principals =subject.getPrincipals();
 			Map map =(Map)(principals.asList().get(1));
-			User loginUser = new User();
-			loginUser.setEmail(map.get("email").toString());
-			loginUser.setMobile(map.get("mobile").toString());
-			loginUser.setLoginName(map.get("loginName").toString());
-			user =userDao.getByLoginUser(loginUser);
+			user =userDao.get(map.get("userId").toString());
 		}catch (Exception e){
 			Subject subject = SecurityUtils.getSubject();
 		    user =getByLoginName(subject.getPrincipal()+"");

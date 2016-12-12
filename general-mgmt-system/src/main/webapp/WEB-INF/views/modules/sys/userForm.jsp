@@ -11,10 +11,24 @@
 				rules: {
 					mobile: {
 						maxlength: 30,
-						remote: "${ctx}/sys/user/checkMobile?oldMobile=" + encodeURIComponent('${user.mobile}')},
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/user/checkMobile",
+							data:{
+								oldMobile:function(){return  '${user.mobile}';}
+							}
+						}
+					},
 					no: {
 						maxlength: 10,
-						remote: "${ctx}/sys/user/checkNo?oldNo=" + encodeURIComponent('${user.no}')},
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/user/checkNo",
+							data:{
+								oldNo:function(){return  '${user.no}';}
+							}
+						}
+					},
 					name: {maxlength: 20},
 					phone: {maxlength: 30},
 					remarks: {maxlength: 200}

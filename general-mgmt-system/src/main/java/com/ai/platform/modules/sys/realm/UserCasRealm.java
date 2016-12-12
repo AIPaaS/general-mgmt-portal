@@ -35,11 +35,7 @@ public class UserCasRealm  extends CasRealm{
     	User user=null;
     	try{
     		Map map =(Map)principals.asList().get(1);
-    		User loginUser = new User();
-    		loginUser.setEmail(map.get("email").toString());
-    		loginUser.setMobile(map.get("mobile").toString());
-    		loginUser.setLoginName(map.get("loginName").toString());
-    		user =systemService.getByLoginUser(loginUser);
+    		user =systemService.getUser(map.get("userId").toString());
     		user.setRoleList(roleDao.findList(new Role(user)));
 		}catch (Exception e){
 			String name = (String)getAvailablePrincipal(principals);

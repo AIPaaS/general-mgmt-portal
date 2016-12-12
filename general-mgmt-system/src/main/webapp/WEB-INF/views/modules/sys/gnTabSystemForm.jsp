@@ -85,6 +85,7 @@
 		<div class="control-group">
 			<label class="control-label">应用编码：</label>
 			<div class="controls">
+				<input id="oldSystemId" name="oldSystemId" type="hidden" value="${gnTabSystem.systemId}">
 				<form:input path="systemId" htmlEscape="false" maxlength="21" class="username"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
@@ -92,6 +93,7 @@
 		<div class="control-group">
 			<label class="control-label">应用名称：</label>
 			<div class="controls">
+				<input id="oldSystemName" name="oldSystemName" type="hidden" value="${gnTabSystem.systemName}">
 				<form:input path="systemName" htmlEscape="false" maxlength="51" class="userName"/>
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>

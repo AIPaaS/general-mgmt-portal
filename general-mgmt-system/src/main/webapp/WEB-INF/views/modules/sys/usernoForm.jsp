@@ -22,12 +22,26 @@
 				rules: {
 					loginName: {
 						maxlength: 20,
-						remote: "${ctx}/sys/user/checkLoginName?oldLoginName=" + encodeURIComponent('${user.loginName}')},
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/user/checkLoginName",
+							data:{
+								oldLoginName:function(){return  '${user.loginName}';}
+							}
+						}
+					},
 					newPassword: {maxlength: 50},
 					confirmNewPassword: {maxlength: 50},
 					email: {
 						maxlength: 50,
-						remote: "${ctx}/sys/user/checkEmail?oldLoginName=" + encodeURIComponent('${user.email}')}
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/user/checkEmail",
+							data:{
+								oldLoginName:function(){return  '${user.email}';}
+							}
+						}
+					}
 				},
 				messages: {
 					id: {required: "请选择员工"},

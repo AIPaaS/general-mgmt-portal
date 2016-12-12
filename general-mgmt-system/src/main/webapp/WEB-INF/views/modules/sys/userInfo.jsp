@@ -14,10 +14,24 @@
 			rules: {
 				mobile: {
 					maxlength: 30,
-					remote: "${ctx}/sys/user/checkMobile?oldMobile=" + encodeURIComponent('${user.mobile}')},
+					remote:{
+						type:"POST",	
+						url:"${ctx}/sys/user/checkMobile",
+						data:{
+							oldMobile:function(){return  '${user.mobile}';}
+						}
+					}
+				},
 				email: {
 					maxlength: 50,
-					remote: "${ctx}/sys/user/checkEmail?oldLoginName=" + encodeURIComponent('${user.email}')},
+					remote:{
+						type:"POST",	
+						url:"${ctx}/sys/user/checkEmail",
+						data:{
+							oldLoginName:function(){return  '${user.email}';}
+						}
+					}
+				},
 				name: {maxlength: 20},
 				phone: {maxlength: 30},
 				remarks: {maxlength: 200}

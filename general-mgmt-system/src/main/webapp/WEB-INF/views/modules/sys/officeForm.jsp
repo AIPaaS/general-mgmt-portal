@@ -13,7 +13,14 @@
 					name: {maxlength: 15},
 					code: {
 						maxlength: 20,
-						remote: "${ctx}/sys/office/checkCode?oldCode=" + encodeURIComponent("${office.code}")},
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/office/checkCode",
+							data:{
+								oldCode:function(){return  '${office.code}';}
+							}
+						}
+					},
 					address:{maxlength: 50},
 					zipCode:{maxlength: 50},
 					master:{maxlength: 20},

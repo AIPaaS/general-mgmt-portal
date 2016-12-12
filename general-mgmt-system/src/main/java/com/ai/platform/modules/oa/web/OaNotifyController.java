@@ -106,7 +106,7 @@ public class OaNotifyController extends BaseController {
 	/**
 	 * 我的站内信列表-数据
 	 */
-	@RequiresPermissions("oa:oaNotify:view")
+//	@RequiresPermissions("oa:oaNotify:view")
 	@RequestMapping(value = "selfData")
 	@ResponseBody
 	public Page<OaNotify> listData(OaNotify oaNotify, HttpServletRequest request, HttpServletResponse response, Model model) {

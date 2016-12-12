@@ -18,7 +18,15 @@
 							}
 						}
 					},
-					tenantId: {remote: "${ctx}/sys/gnTenant/checkTenantId?oldTenantId=" + encodeURIComponent('${gnTenant.tenantId}')}
+					tenantId: {
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/gnTenant/checkTenantId",
+							data:{
+								oldTenantId:function(){return  '${gnTenant.tenantId}';}
+							}
+						}
+					}
 				},
 				messages: {
 					tenantName: {remote: "平台编码已存在"},

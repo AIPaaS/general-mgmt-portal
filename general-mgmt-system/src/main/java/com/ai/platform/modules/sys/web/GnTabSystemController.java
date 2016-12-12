@@ -69,6 +69,17 @@ public class GnTabSystemController extends BaseController {
 		if (!beanValidator(model, gnTabSystem)){
 			return form(gnTabSystem, model);
 		}
+		
+		if (!"true".equals(checkSystemId(gnTabSystem.getSystemId(),gnTabSystem.getOldSystemId()))) {
+			addMessage(model, "保存应用配置'" + gnTabSystem.getSystemId() + "'失败，应用编号已存在");
+			return form(gnTabSystem, model);
+		}
+		if (!"true".equals(checkSystemName(gnTabSystem.getSystemName(),gnTabSystem.getOldSystemName()))) {
+			addMessage(model, "保存应用配置'" + gnTabSystem.getSystemName() + "'失败，应用名称已存在");
+			return form(gnTabSystem, model);
+		}
+		
+		
 		gnTabSystemService.save(gnTabSystem);
 		addMessage(redirectAttributes, "保存应用配置成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnTabSystem/?repage";
