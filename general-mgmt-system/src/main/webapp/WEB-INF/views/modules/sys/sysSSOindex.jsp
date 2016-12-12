@@ -35,10 +35,8 @@
 			</div>	
 		</div>
 		</div>
-
-			<div class="col-xs-12 work-bottom">
-				©2016 版权所有 亚信集团股份有限公司 京ICP备11005544号-15 京公网安备110108007119号
-			</div>
-			
+		<div class="col-xs-12 work-bottom">
+				©2016 版权所有 四川长虹股份电器有限公司  蜀ICP备09001737号-1   蜀公网安备51078202110037号
+		</div>
 </body>
 </html>
