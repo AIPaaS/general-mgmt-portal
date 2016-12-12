@@ -16,14 +16,10 @@
     <filter>
         <filter-name>replay-firewall</filter-name>
         <filter-class>com.ai.platform.common.filter.ReplayAttacksFilter</filter-class>
-        <init-param>
-            <param-name>ignorePath</param-name>
-            <param-value>.png,.jpg,.jpeg,.gif,.css,.js,.html,.htm,.woff</param-value>
-        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>replay-firewall</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/home/*</url-pattern>
     </filter-mapping>
    <filter>
     <filter-name>encodingFilter</filter-name>
