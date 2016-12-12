@@ -67,7 +67,6 @@ public class ReplayAttacksFilter implements Filter {
 //		}
 
 		String clientToken = "";
-		
 		Cookie[] cookies = req.getCookies();
 		if(cookies !=null){
 			for(Cookie cookie : cookies){
@@ -77,13 +76,14 @@ public class ReplayAttacksFilter implements Filter {
 			}
 		}
 		String serverToken = (String) session.getAttribute(USER_TOKEN_KEY);
+		log.error("path[" + uriPath + "] Start,clientToken:"+clientToken+"||serverToken:"+serverToken);
 		if (serverToken != null && !clientToken.equals(serverToken)) {
 		 	((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/404.jsp");
 		 	UserUtils.getSubject().logout();
 		 	log.error("path[" + uriPath + "] error,clientToken:"+clientToken+"||serverToken:"+serverToken);
 		}else{
-			setToken(res, req);
 			chain.doFilter(request, response);
+			setToken(res, req);
 		}
 	}
 
@@ -110,6 +110,7 @@ public class ReplayAttacksFilter implements Filter {
 		}
 		HttpSession session = req.getSession();
 		session.setAttribute(USER_TOKEN_KEY, token);
+		log.error("set token:"+token);
 	}
 
 	public void destroy() {
