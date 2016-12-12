@@ -13,7 +13,7 @@
         <filter-name>xss-firewall</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!-- <filter>
+    <filter>
         <filter-name>replay-firewall</filter-name>
         <filter-class>com.ai.platform.common.filter.ReplayAttacksFilter</filter-class>
         <init-param>
@@ -24,7 +24,7 @@
     <filter-mapping>
         <filter-name>replay-firewall</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
    <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
