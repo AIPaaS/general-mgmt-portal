@@ -14,6 +14,12 @@
 			$("#searchForm").submit();
         	return false;
         }
+		function updateArea(view,id){
+			window.location.href='${ctx}/sys/gnArea/form?id='+id;
+	    }
+		function deleteArea(id){
+			return confirmx('确认要删除该区域信息吗？','${ctx}/sys/gnArea/delete?areaCode='+id);
+	    }
 	</script>
 </head>
 <body>
@@ -55,7 +61,7 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="gnArea">
 			<tr>
-				<td><a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">
+				<td><a href="javascript:void(0)" onclick="updateArea('${gnArea.id}')">
 					${gnArea.areaCode}
 				</a></td>
 				<td>
@@ -71,10 +77,9 @@
 					${fns:getDictLabel(gnArea.state, 'gn_area_state', '')}
 				</td>
 				<shiro:hasPermission name="sys:gnArea:edit"><td>
-				<c:if test="${gnArea.areaLevel ne '0'}">		
-    				<a href="${ctx}/sys/gnArea/form?id=${gnArea.id}">修改</a>
-    			
-					<a href="${ctx}/sys/gnArea/delete?areaCode=${gnArea.areaCode}" onclick="return confirmx('确认要删除该区域信息吗？', this.href)">删除</a>
+				<c:if test="${gnArea.areaLevel ne '0'}">
+					<a href="javascript:void(0)" onclick="updateArea('${gnArea.id}')">修改</a>
+    				<a href="javascript:void(0)" onclick="deleteArea('${gnArea.areaCode}')">删除</a>
 				</c:if>		
 				</td></shiro:hasPermission>
 			</tr>

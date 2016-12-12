@@ -14,6 +14,12 @@
 			$("#searchForm").submit();
         	return false;
         }
+		function updateNotify(view,id){
+			window.location.href='${ctx}/oa/oaNotify/'+view+'?id='+id;
+	    }
+		function deleteNotify(id){
+			return confirmx('确认要删除该站内信吗？','${ctx}/oa/oaNotify/delete?id='+id);
+	    }
 	</script>
 </head>
 <body>
@@ -56,7 +62,7 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="oaNotify">
 			<tr>
-				<td><a href="${ctx}/oa/oaNotify/${requestScope.oaNotify.self?'view':'form'}?id=${oaNotify.id}">
+				<td><a href="javascript:void(0)" onclick="updateNotify('${requestScope.oaNotify.self?'view':'form'}','${oaNotify.id}')">
 					${fns:abbr(oaNotify.title,50)}
 				</a></td>
 				<td>
@@ -78,9 +84,9 @@
 				</td>
 				<c:if test="${!requestScope.oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><td>
 					<c:if test="${oaNotify.status ne '1'}">
-						<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">修改</a>
+						<a href="javascript:void(0)" onclick="updateNotify('form','${oaNotify.id}')">修改</a>
 					</c:if>
-					<a href="${ctx}/oa/oaNotify/delete?id=${oaNotify.id}" onclick="return confirmx('确认要删除该站内信吗？', this.href)">删除</a>
+					<a href="javascript:void(0)" onclick="deleteNotify('${oaNotify.id}')">删除</a>
 				</td></shiro:hasPermission></c:if>
 			</tr>
 		</c:forEach>

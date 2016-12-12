@@ -27,6 +27,13 @@
 			$("#searchForm").submit();
 	    	return false;
 	    }
+		
+		function formno(id){
+			window.location.href='${ctx}/sys/user/form?id='+id;
+	    }
+		function deleteno(id){
+			return confirmx('确认要删除该员工吗？','${ctx}/sys/user/delete?id='+id);
+	    }
 	</script>
 </head>
 <body>
@@ -69,14 +76,14 @@
 				<td>${user.company.name}</td>
 				<td>${user.office.name}</td>
 			  <%--   <td>${user.loginName}</a></td> --%>
-				<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.name}</td>
+				<td><a href="javascript:void(0)" onclick="formno('${user.id}')">${user.name}</td>
 				<td>${user.no}</td>
 				<td>${user.phone}</td>
 				<td>${user.mobile}</td><%--
 				<td>${user.roleNames}</td> --%>
 				<shiro:hasPermission name="sys:user:edit"><td>
-    				<a href="${ctx}/sys/user/form?id=${user.id}">修改</a>
-					<a href="${ctx}/sys/user/delete?id=${user.id}" onclick="return confirmx('确认要删除该员工吗？', this.href)">删除</a>
+    				<a href="javascript:void(0)" onclick="formno('${user.id}')">修改</a>
+					<a href="javascript:void(0)" onclick="deleteno('${user.id}')">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

@@ -14,6 +14,12 @@
 			$("#searchForm").submit();
         	return false;
         }
+		function formTabSystem(id){
+			window.location.href='${ctx}/sys/gnTabSystem/form?id='+id;
+	    }
+		function deleteTabSystem(id){
+			return confirmx('确认要删除该应用配置吗？','${ctx}/sys/gnTabSystem/delete?id='+id);
+	    }
 	</script>
 </head>
 <body>
@@ -48,7 +54,7 @@
 		<tbody>
 		<c:forEach items="${page.list}" var="gnTabSystem">
 			<tr>
-				<td><a href="${ctx}/sys/gnTabSystem/form?id=${gnTabSystem.id}">
+				<td><a href="javascript:void(0)" onclick="formTabSystem('${gnTabSystem.id}')">
 					${gnTabSystem.systemId}
 				</a></td>
 				<td>
@@ -58,8 +64,8 @@
 					${gnTabSystem.systemUrlContext}
 				</td>
 				<shiro:hasPermission name="sys:gnTabSystem:edit"><td>
-    				<a href="${ctx}/sys/gnTabSystem/form?id=${gnTabSystem.id}">修改</a>
-					<a href="${ctx}/sys/gnTabSystem/delete?id=${gnTabSystem.id}" onclick="return confirmx('确认要删除该应用配置吗？', this.href)">删除</a>
+					<a href="javascript:void(0)" onclick="formTabSystem('${gnTabSystem.id}')">修改</a>
+					<a href="javascript:void(0)" onclick="deleteTabSystem('${gnTabSystem.id}')">删除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

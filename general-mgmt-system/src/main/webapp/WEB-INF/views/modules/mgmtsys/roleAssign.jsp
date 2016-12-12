@@ -65,6 +65,14 @@
 					}
 				});
 			});
+			
+			
+			function formno(id){
+				window.location.href='${ctx}/sys/user/formno?id='+id;
+		    }
+			function outrole(userid,roleid,username,rolename){
+				return confirmx('确认要将用户<b>['+username+'}]</b>从<b>['+rolename+']</b>角色中移除吗？','${ctx}/sys/role/outrole?userId='+userid+'&roleId='+roleid);
+		    }
 		</script>
 	</div>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
@@ -74,13 +82,12 @@
 			<tr>
 				<td>${user.company.name}</td>
 				<td>${user.office.name}</td>
-				<td><a href="${ctx}/sys/user/formno?id=${user.id}">${user.loginName}</a></td>
+				<td><a href="javascript:void(0)" onclick="formno('${user.id}')">${user.loginName}</a></td>
 				<td>${user.name}</td>
 				<td>${user.phone}</td>
 				<td>${user.mobile}</td>
 				<shiro:hasPermission name="sys:role:edit"><td>
-					<a href="${ctx}/sys/role/outrole?userId=${user.id}&roleId=${role.id}" 
-						onclick="return confirmx('确认要将用户<b>[${user.name}]</b>从<b>[${role.name}]</b>角色中移除吗？', this.href)">移除</a>
+					<a href="javascript:void(0)" onclick="outrole('${user.id}','${role.id}','${user.name}','${role.name}')">移除</a>
 				</td></shiro:hasPermission>
 			</tr>
 		</c:forEach>

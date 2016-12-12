@@ -33,7 +33,15 @@
 			});
 			
 		});
-		
+		function updateOffice(id){
+			window.location.href='${ctx}/sys/office/form?id='+id;
+	    }
+		function deleteOffice(id){
+			return confirmx('要删除该部门及所有子部门项吗？','${ctx}/sys/office/delete?id='+id);
+	    }
+		function formOffice(id){
+			window.location.href='${ctx}/sys/office/form?parent.id='+id;
+	    }
 	</script>
 </head>
 <body>
@@ -87,15 +95,15 @@
           </thead>
 	    <c:forEach items="${page.list}" var="office">
 			<tr>
-				<td><a href="${ctx}/sys/office/form?id=${office.id}">${office.name}</a></td>
+				<td><a href="javascript:void(0)" onclick="updateOffice('${office.id}')">${office.name}</a></td>
 				<td>${office.gnArea.areaName}</td>
 				<td>${office.code}</td>
 				<td>${office.type}</td>
 				<td>${office.grade}</td>
 				<shiro:hasPermission name="sys:office:edit"><td>
-					<a href="${ctx}/sys/office/form?id=${office.id}">修改</a>
-					<a href="${ctx}/sys/office/delete?id=${office.id}" onclick="return confirmx('要删除该部门及所有子部门项吗？', this.href)">删除</a>
-					<a href="${ctx}/sys/office/form?parent.id=${office.id}">添加下级部门</a> 
+					<a href="javascript:void(0)" onclick="updateOffice('${office.id}')">修改</a>
+					<a href="javascript:void(0)" onclick="deleteOffice('${office.id}')">删除</a>
+					<a href="javascript:void(0)" onclick="formOffice('${office.id}')">添加下级部门</a> 
 				</td></shiro:hasPermission>
 			</tr>
 	    </c:forEach>

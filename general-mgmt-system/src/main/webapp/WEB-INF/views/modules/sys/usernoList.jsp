@@ -27,6 +27,21 @@
 			$("#searchForm").submit();
 	    	return false;
 	    }
+		
+		function formno(id){
+			window.location.href='${ctx}/sys/user/formno?id='+id;
+	    }
+		function resetPWD(id){
+			return confirmx('确认要重置密码吗？','${ctx}/sys/user/resetPWD?id='+id);
+	    }
+		function prohibit(confirmxInfo,id,loginFlag){
+			return confirmx(confirmxInfo,'${ctx}/sys/user/prohibit?loginFlag'+loginFlag+'&id='+id);
+	    }
+		function deleteno(id){
+			return confirmx('确认要删除该工号吗？','${ctx}/sys/user/deleteno?id='+id);
+	    }
+		
+		
 	</script>
 </head>
 <body>
@@ -70,7 +85,7 @@
 			<tr>
 				<td>${user.company.name}</td>
 			<%-- 	<td>${user.office.name}</td> --%>
-				<td><a href="${ctx}/sys/user/formno?id=${user.id}">${user.loginName}</a></td>
+				<td><a href="javascript:void(0)" onclick="formno('${user.id}')">${user.loginName}</a></td>
 				<td>${user.name}</td>
 				<td>${user.no}</td>
 				<td>${user.email}</td>
@@ -79,15 +94,15 @@
 				<td>${fns:getDictLabel(loginFlag, 'yes_no', '')}</td><%--
 				<td>${user.roleNames}</td> --%>
 				<shiro:hasPermission name="sys:user:edit"><td>
-    				<a href="${ctx}/sys/user/formno?id=${user.id}">修改</a>
-    				<a href="${ctx}/sys/user/resetPWD?id=${user.id}" onclick="return confirmx('确认要重置密码吗？', this.href)">密码重置</a>
+    				<a href="javascript:void(0)" onclick="formno('${user.id}')">修改</a>
+    				<a href="javascript:void(0)" onclick="resetPWD('${user.id}')">密码重置</a>
     				<c:if test="${user.loginFlag eq '1'}">
-    					<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=0" onclick="return confirmx('确认要冻结该工号吗？', this.href)">冻结</a>    					
+    					<a href="javascript:void(0)" onclick="prohibit('确认要冻结该工号吗？',0,'${user.id}')">冻结</a>    					
 					</c:if>
 					<c:if test="${user.loginFlag eq '0'}">
-						<a href="${ctx}/sys/user/prohibit?id=${user.id}&loginFlag=1" onclick="return confirmx('确认要解冻该工号吗？', this.href)">解冻</a>   
+						<a href="javascript:void(0)" onclick="prohibit('确认要解冻该工号吗？',1,'${user.id}')">解冻</a> 
 					</c:if>
-					<a href="${ctx}/sys/user/deleteno?id=${user.id}" onclick="return confirmx('确认要删除该工号吗？', this.href)">删除</a>
+					<a href="javascript:void(0)" onclick="deleteno('${user.id}')">删除</a>
 					
 				</td></shiro:hasPermission>
 			</tr>

@@ -11,6 +11,13 @@
 			$("#searchForm").submit();
 	    	return false;
 	    }
+		
+		function updateDict(id){
+			window.location.href='${ctx}/sys/dict/form?id='+id;
+	    }
+		function deleteDict(id,type){
+			return confirmx('确认要删除该区域信息吗？','${ctx}/sys/dict/delete?id='+id+'&type='+type);
+	    }
 	</script>
 </head>
 <body>
@@ -32,13 +39,13 @@
 		<c:forEach items="${page.list}" var="dict">
 			<tr>
 				<td>${dict.value}</td>
-				<td><a href="${ctx}/sys/dict/form?id=${dict.id}">${dict.label}</a></td>
+				<td><a href="javascript:void(0)" onclick="updateDict('${dict.id}')">${dict.label}</a></td>
 				<td><a href="javascript:" onclick="$('#type').val('${dict.type}');$('#searchForm').submit();return false;">${dict.type}</a></td>
 				<td>${dict.description}</td>
 				<td>${dict.sort}</td>
 				<shiro:hasPermission name="sys:dict:edit"><td>
-    				<a href="${ctx}/sys/dict/form?id=${dict.id}">修改</a>
-					<a href="${ctx}/sys/dict/delete?id=${dict.id}&type=${dict.type}" onclick="return confirmx('确认要删除该字典吗？', this.href)">删除</a>
+					<a href="javascript:void(0)" onclick="updateDict('${dict.id}')">修改</a>
+					<a href="javascript:void(0)" onclick="deleteDict('${dict.id}')">删除</a>
 					<c:set var="description" value="${dict.description}"/>
     				<a href="<c:url value='${fns:getAdminPath()}/sys/dict/form?type=${dict.type}&sort=${dict.sort}'><c:param name='description' value='${fns:urlEncode(dict.description)}'/></c:url>">添加键值</a>
     				<c:set var="description" value=""/>

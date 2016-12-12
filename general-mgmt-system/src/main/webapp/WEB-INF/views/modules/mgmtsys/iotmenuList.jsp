@@ -15,6 +15,16 @@
 		var a = $("#searchName").val();//取出值
 		 $("#menuName").val(a);
 	});
+	
+	function formMenu(id){
+		window.location.href='${ctx}/sys/menu/form?id='+id;
+    }
+	function deleteMenu(id){
+		return confirmx('要删除该菜单及所有子菜单项吗？','${ctx}/sys/menu/delete?id='+id);
+    }
+	function formParentMenu(id){
+		window.location.href='${ctx}/sys/menu/form?parent.id=='+id;
+    }
 	</script>
 </head>
 <body>
@@ -49,7 +59,7 @@
 		              <c:forEach items="${page.list}" var="menu">
 						<tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
 						   <td >${fns:getGnTabSystem(menu.gnTabSystem)}</td>
-							<td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
+							<td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a href="javascript:void(0)" onclick="formMenu('${menu.id}')">${menu.name}</a></td>
 							<td>${fns:getDictLabel(menu.resourceType, 'resource_type', '')}</td>
 							<td title="${menu.href}">${fns:abbr(menu.href,30)}</td>
 							<!--<td style="text-align:center;">
@@ -63,9 +73,9 @@
 						<!--  <td>${menu.isShow eq '1'?'显示':'隐藏'}</td>
 						<td title="${menu.permission}">${fns:abbr(menu.permission,30)}</td>-->
 						<shiro:hasPermission name="sys:menu:edit"><td nowrap>
-							<a href="${ctx}/sys/menu/form?id=${menu.id}">修改</a>
-							<a href="${ctx}/sys/menu/delete?id=${menu.id}" onclick="return confirmx('要删除该菜单及所有子菜单项吗？', this.href)">删除</a>
-							<a href="${ctx}/sys/menu/form?parent.id=${menu.id}">添加下级菜单</a> 
+							<a href="javascript:void(0)" onclick="formMenu('${menu.id}')">修改</a>
+							<a href="javascript:void(0)" onclick="deleteMenu('${menu.id}')">删除</a>
+							<a href="javascript:void(0)" onclick="formParentMenu('${menu.id}')">添加下级菜单</a> 
 						</td></shiro:hasPermission>
 					</tr>
 					</c:forEach>
