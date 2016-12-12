@@ -107,6 +107,13 @@
     <function-class>com.ai.platform.modules.sys.utils.GnTabSystemUtils</function-class>
     <function-signature>java.lang.String getGnTabSystemUrl(java.lang.String)</function-signature>
     <example>${fns:getGnTabSystemUrl(id)}</example>  
+  </function> 
+  <function>
+    <description>获取基础服务应用上下文</description>
+    <name>getHomeContextUrl</name>
+    <function-class>com.ai.platform.modules.sys.utils.GnTabSystemUtils</function-class>
+    <function-signature>java.lang.String getHomeContextUrl()</function-signature>
+    <example>${fns:getHomeContextUrl()}</example>  
   </function>  
     <function>
     <description>获取当前用户的应用对象的名称</description>

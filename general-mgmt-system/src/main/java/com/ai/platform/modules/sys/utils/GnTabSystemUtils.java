@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.modules.sys.dao.GnTabSystemDao;
 import com.ai.platform.modules.sys.entity.GnTabSystem;
@@ -58,6 +59,19 @@ public class GnTabSystemUtils {
 		return null;
 	}
 
-	
+	/**
+	 * 获取serverContext
+	 * @return
+	 * @author zhouxh
+	 */
+	public static String getHomeContextUrl(){
+		 GnTabSystem  gnTabSystem =gnTabSystemDao.getHomeContextUrl();
+		 if(gnTabSystem !=null){
+			 String serverContext = gnTabSystem.getSystemUrlContext();
+			 if(serverContext.length()>0)
+				return  serverContext.substring(0, serverContext.indexOf(Global.getAdminPath()));
+		 }
+		 return "";
+	}
 
 }

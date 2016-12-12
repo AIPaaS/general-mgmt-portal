@@ -11,4 +11,4 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}${fns:getAdminPath()}"/>
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
 <c:set var="mgmtStatic" value="${pageContext.request.contextPath}/mgmtstatic"/>
-<c:set var="mgmtPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}"/>
+<c:set var="mgmtPath" value="${fns:getHomeContextUrl()}"/>
