@@ -53,8 +53,7 @@ public class ReplayAttacksFilter implements Filter {
 		HttpSession session = req.getSession();
 //		String contextPath = req.getContextPath() + "/";
 		if (isIgnorePath(uriPath)) {
-			log.info(
-					"ignore ReplayAttacksfilter,path[" + uriPath + "] pass through ReplayAttacksFilter, go ahead...");
+			log.info("ignore ReplayAttacksfilter,path[" + uriPath + "] pass through ReplayAttacksFilter, go ahead...");
 			chain.doFilter(request, response);
 			return;
 		}
@@ -76,11 +75,11 @@ public class ReplayAttacksFilter implements Filter {
 			}
 		}
 		String serverToken = (String) session.getAttribute(USER_TOKEN_KEY);
-		log.error("path[" + uriPath + "] Start,clientToken:"+clientToken+"||serverToken:"+serverToken);
+		log.info("path[" + uriPath + "] Start,clientToken:"+clientToken+"||serverToken:"+serverToken);
 		if (serverToken != null && !clientToken.equals(serverToken)) {
 		 	((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/404.jsp");
 		 	UserUtils.getSubject().logout();
-		 	log.error("path[" + uriPath + "] error,clientToken:"+clientToken+"||serverToken:"+serverToken);
+		 	log.info("path[" + uriPath + "] error,clientToken:"+clientToken+"||serverToken:"+serverToken);
 		}else{
 			setToken(res, req);
 			chain.doFilter(request, response);
@@ -110,7 +109,7 @@ public class ReplayAttacksFilter implements Filter {
 		}
 		HttpSession session = req.getSession();
 		session.setAttribute(USER_TOKEN_KEY, token);
-		log.error("set token:"+token);
+		log.info("set token:"+token);
 	}
 
 	public void destroy() {
