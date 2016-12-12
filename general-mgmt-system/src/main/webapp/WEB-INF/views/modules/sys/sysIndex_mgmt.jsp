@@ -21,8 +21,10 @@ messenger.listen(function (msg) {
 	}
 
 });
+if(iframe1!=null){
+	messenger.addTarget(iframe1.contentWindow, 'mainFrame');
+}
 
-messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 
 
 </script>
@@ -190,7 +192,7 @@ messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 						                        <!-- <li  class="three-list-active"><a href="#" >新建路由</a></li> -->
 						                        <c:set var="systemId" value="${menuNodethree.gnTabSystem}"/>
 						                        <c:if test="${not empty menuNodethree.href}">
-						                        <li><a href="http://127.0.0.1:8080/portal/home${menuNodethree.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
+						                        <li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNodethree.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNodethree.id}"  target="mainFrame">${menuNodethree.name}</a></li>
 						                        </c:if>
 						                        <c:if test="${empty menuNodethree.href}">
 						                        	<li><a href="#" data-id="${menuNodethree.id}" >${menuNodethree.name}</a></li>
@@ -201,7 +203,7 @@ messenger.addTarget(iframe1.contentWindow, 'mainFrame');
 							     		</c:if>
 							     		<c:if test="${not empty menuNode.href &&menuNode.isShow eq '1'}">
 							     		
-							     			<li><a href="http://127.0.0.1:8080/portal/home${menuNode.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
+							     			<li><a href="${fns:getGnTabSystemUrl(systemId)}${menuNode.href}?theme=${fns:getThemeIndex()}&mgmtPath=${mgmtPath}" data-id="${menuNode.id}"  target="mainFrame">${menuNode.name}</a>
 							     	
 							     		</c:if>
 										<c:set var="systemId" value=""/>
