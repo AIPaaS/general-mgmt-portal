@@ -82,8 +82,8 @@ public class ReplayAttacksFilter implements Filter {
 		 	UserUtils.getSubject().logout();
 		 	log.error("path[" + uriPath + "] error,clientToken:"+clientToken+"||serverToken:"+serverToken);
 		}else{
-			chain.doFilter(request, response);
 			setToken(res, req);
+			chain.doFilter(request, response);
 		}
 	}
 
