@@ -14,6 +14,5 @@ import com.ai.platform.modules.sys.entity.GnTabSystem;
  */
 @MyBatisDao
 public interface GnTabSystemDao extends CrudDao<GnTabSystem> {
-	public GnTabSystem getHomeContextUrl();
 	
 }

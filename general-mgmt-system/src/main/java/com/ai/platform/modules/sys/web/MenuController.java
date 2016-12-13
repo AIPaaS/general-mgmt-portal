@@ -61,21 +61,12 @@ public class MenuController extends BaseController {
 	}
 
 	@RequiresPermissions("sys:menu:view")
-	@RequestMapping(value = {"list", ""})
-	public String list(Model model) {
-		List<Menu> list = Lists.newArrayList();
-		List<Menu> sourcelist = systemService.findAllMenu();
-		Menu.sortList(list, sourcelist, Menu.getRootId(), true);
-        model.addAttribute("list", list);
-		return "modules/sys/menuList";
-	}
-	@RequiresPermissions("sys:menu:view")
 	@RequestMapping(value = {"page"})
 	public String page(MgmtMenu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
 		 request.setAttribute("searchName", menu.getName());
 		Page<MgmtMenu> page = mgmtMenuService.findPage(new Page<MgmtMenu>(request, response), menu); 
         model.addAttribute("page", page);
-		return "modules/mgmtsys/iotmenuList";
+		return "modules/sys/menuList";
 	}
 	
 	@RequiresPermissions("sys:menu:view")

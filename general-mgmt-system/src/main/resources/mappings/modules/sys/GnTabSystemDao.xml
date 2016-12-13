@@ -26,15 +26,7 @@
 		<include refid="gnTabSystemJoins"/>
 		WHERE a.id = #{id}
 	</select>
-	
-	<select id="getHomeContextUrl" resultType="GnTabSystem">
-		SELECT 
-			<include refid="gnTabSystemColumns"/>
-		FROM gn_tab_system a
-		<include refid="gnTabSystemJoins"/>
-		WHERE a.system_url_context  LIKE '%/home'
-	</select>
-	
+
 	<select id="findList" resultType="GnTabSystem">
 		SELECT 
 			<include refid="gnTabSystemColumns"/>

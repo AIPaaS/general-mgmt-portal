@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ai.platform.common.config.Global;
+import com.ai.opt.sso.client.filter.SSOClientUtil;
 import com.ai.platform.common.utils.SpringContextHolder;
 import com.ai.platform.modules.sys.dao.GnTabSystemDao;
 import com.ai.platform.modules.sys.entity.GnTabSystem;
@@ -14,6 +14,7 @@ public class GnTabSystemUtils {
 	@Autowired
 	private final static GnTabSystemDao gnTabSystemDao = SpringContextHolder.getBean(GnTabSystemDao.class);
 	
+	private static String homeContextUrl;
 	private GnTabSystemUtils(){
 		
 	}
@@ -65,13 +66,10 @@ public class GnTabSystemUtils {
 	 * @author zhouxh
 	 */
 	public static String getHomeContextUrl(){
-		 GnTabSystem  gnTabSystem =gnTabSystemDao.getHomeContextUrl();
-		 if(gnTabSystem !=null){
-			 String serverContext = gnTabSystem.getSystemUrlContext();
-			 if(serverContext.length()>0)
-				return  serverContext.substring(0, serverContext.indexOf(Global.getAdminPath()));
-		 }
-		 return "";
+		if(homeContextUrl==null){
+			homeContextUrl =SSOClientUtil.getProperty("serverName")+SSOClientUtil.getProperty("serverContextPath");
+		}
+		return homeContextUrl;
 	}
 
 }

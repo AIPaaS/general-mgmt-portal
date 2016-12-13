@@ -14,7 +14,7 @@
 			$("#searchForm").submit();
         	return false;
         }
-		function updateArea(view,id){
+		function updateArea(id){
 			window.location.href='${ctx}/sys/gnArea/form?id='+id;
 	    }
 		function deleteArea(id){
