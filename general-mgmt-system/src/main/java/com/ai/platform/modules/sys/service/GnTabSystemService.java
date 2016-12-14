@@ -12,12 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.service.CrudService;
 import com.ai.platform.common.utils.CacheUtils;
+import com.ai.platform.modules.sys.dao.GnTabSystemDao;
 import com.ai.platform.modules.sys.entity.GnTabSystem;
 import com.ai.platform.modules.sys.security.SystemAuthorizingRealm;
-import com.ai.platform.modules.sys.utils.GnTabSystemUtils;
 import com.ai.platform.modules.sys.utils.LogUtils;
-import com.ai.platform.modules.sys.utils.UserUtils;
-import com.ai.platform.modules.sys.dao.GnTabSystemDao;
 
 /**
  * 应用配置Service
@@ -62,12 +60,10 @@ public class GnTabSystemService extends CrudService<GnTabSystemDao, GnTabSystem>
 	}
 
 	public List<GnTabSystem> findAll() {
-		// TODO Auto-generated method stub
 		return gnTabSystemDao.findAllList(new GnTabSystem());
 	}
 
 	public List<GnTabSystem> findvalidateList(GnTabSystem gnTabSystem) {
-		// TODO Auto-generated method stub
 		return gnTabSystemDao.findAllList(gnTabSystem);
 	}
 	

@@ -32,6 +32,7 @@ import com.ai.platform.modules.sys.entity.Role;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.OfficeService;
 import com.ai.platform.modules.sys.service.SystemService;
+import com.ai.platform.modules.sys.utils.OfficeUtils;
 import com.ai.platform.modules.sys.utils.UserUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -48,8 +49,6 @@ public class RoleController extends BaseController {
 	@Autowired
 	private SystemService systemService;
 	
-	@Autowired
-	private OfficeService officeService;
 	
 	@ModelAttribute("role")
 	public Role get(@RequestParam(required=false) String id) {
@@ -181,7 +180,7 @@ public class RoleController extends BaseController {
 		model.addAttribute("role", role);
 		model.addAttribute("userList", userList);
 		model.addAttribute("selectIds", Collections3.extractToString(userList, "name", ","));
-		model.addAttribute("officeList", officeService.findAll());
+		model.addAttribute("officeList", OfficeUtils.getOfficeList());
 		return "modules/mgmtsys/selectUserToRole";
 	}
 	
