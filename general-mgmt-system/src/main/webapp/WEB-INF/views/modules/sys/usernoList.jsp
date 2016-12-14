@@ -34,8 +34,8 @@
 		function resetPWD(id){
 			return confirmx('确认要重置密码吗？','${ctx}/sys/user/resetPWD?id='+id);
 	    }
-		function prohibit(confirmxInfo,id,loginFlag){
-			return confirmx(confirmxInfo,'${ctx}/sys/user/prohibit?loginFlag'+loginFlag+'&id='+id);
+		function prohibit(confirmxInfo,loginFlag,id){
+			return confirmx(confirmxInfo,'${ctx}/sys/user/prohibit?loginFlag='+loginFlag+'&id='+id);
 	    }
 		function deleteno(id){
 			return confirmx('确认要删除该工号吗？','${ctx}/sys/user/deleteno?id='+id);
@@ -97,10 +97,10 @@
     				<a href="javascript:void(0)" onclick="formno('${user.id}')">修改</a>
     				<a href="javascript:void(0)" onclick="resetPWD('${user.id}')">密码重置</a>
     				<c:if test="${user.loginFlag eq '1'}">
-    					<a href="javascript:void(0)" onclick="prohibit('确认要冻结该工号吗？',0,'${user.id}')">冻结</a>    					
+    					<a href="javascript:void(0)" onclick="prohibit('确认要冻结该工号吗？','0','${user.id}')">冻结</a>    					
 					</c:if>
 					<c:if test="${user.loginFlag eq '0'}">
-						<a href="javascript:void(0)" onclick="prohibit('确认要解冻该工号吗？',1,'${user.id}')">解冻</a> 
+						<a href="javascript:void(0)" onclick="prohibit('确认要解冻该工号吗？','1','${user.id}')">解冻</a> 
 					</c:if>
 					<a href="javascript:void(0)" onclick="deleteno('${user.id}')">删除</a>
 					
