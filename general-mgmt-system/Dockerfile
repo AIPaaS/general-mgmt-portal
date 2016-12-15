@@ -3,7 +3,7 @@ FROM 10.19.13.36:5000/tomcat:7.x
 MAINTAINER gucl<gucl@asiainfo.com>
 
 #调整jvm内存大小（会覆盖tomcat基础镜像中的jvm内存大小）
-RUN sed -i '/\# OS/i JAVA_OPTS="$JAVA_OPTS -server -Xms4096M -Xmx4096M -XX:PermSize=128M -XX:MaxPermSize=256M " '  /opt/tomcat/bin/catalina.sh
+RUN sed -i '/\# OS/i JAVA_OPTS="$JAVA_OPTS -server -Xms1024M -Xmx1024M -XX:PermSize=128M -XX:MaxPermSize=256M " '  /opt/tomcat/bin/catalina.sh
 
 # Install tomcat7
 RUN rm -rf /opt/tomcat/webapps/* && mkdir /opt/tomcat/webapps/ROOT
