@@ -44,6 +44,8 @@
 					remarks: {maxlength: "备注不能超过200个字符"}
 				},
 				submitHandler: function(form){
+					btnSubmit.disabled=true;
+					loading('正在提交，请稍等...');
 					form.submit();
 				},
 				errorContainer: "#messageBox",
@@ -93,7 +95,7 @@
 		</div>
 		<div class="form-actions">
 			<c:if test="${(role.sysData eq fns:getDictValue('是', 'yes_no', '1') && fns:getUser().admin)||!(role.sysData eq fns:getDictValue('是', 'yes_no', '1'))}">
-				<shiro:hasPermission name="sys:role:edit"><input id="btnSubmit" class="btn btn-primary"  onclick="this.disabled=true;inputForm.submit();" value="保 存"/>&nbsp;</shiro:hasPermission>
+				<shiro:hasPermission name="sys:role:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 			</c:if>
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="javaScript:window.location.href='${ctx}/sys/role/'"/>
 		</div>
