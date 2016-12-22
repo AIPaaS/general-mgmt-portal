@@ -2,6 +2,7 @@ package com.ai.platform.modules.sys.task;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -19,7 +20,6 @@ public class SftpReadFileThred extends Thread {
 	public BlockingQueue<String[]> userQueue;
 	public BlockingQueue<String[]> officeQueue;
 	public BlockingQueue<String[]> officeRepeatQueue;
-	
 
 	String ip = Global.getConfig("ftp.ip"); // 服务器IP地址
 	String userName = Global.getConfig("ftp.userName"); // 用户名
@@ -28,7 +28,8 @@ public class SftpReadFileThred extends Thread {
 	String path = Global.getConfig("ftp.path"); // 读取文件的存放目录
 	String localpath = Global.getConfig("ftp.localpath");// 本地存在的文件路径
 
-	public SftpReadFileThred(BlockingQueue<String[]> userQueue, BlockingQueue<String[]> officeQueue, BlockingQueue<String[]> officeRepeatQueue) {
+	public SftpReadFileThred(BlockingQueue<String[]> userQueue, BlockingQueue<String[]> officeQueue,
+			BlockingQueue<String[]> officeRepeatQueue) {
 		this.userQueue = userQueue;
 		this.officeQueue = officeQueue;
 		this.officeRepeatQueue = officeRepeatQueue;
@@ -90,24 +91,34 @@ public class SftpReadFileThred extends Thread {
 				}
 				reader.close();
 				if (ins != null) {
-					ins.close();
+					safeClose(ins);
 				}
 				SftpUtil.delete(path, fileName, sftp);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			deleteFile(localpath + fileName);
 		}
 	}
-	
-	public void deleteFile(String sPath) {  
-		File file = new File(sPath);  
-	    // 路径为文件且不为空则进行删除  
-	    if (file.isFile() && file.exists()) {  
-	        file.delete();  
-	    }  
+
+	public void deleteFile(String sPath) {
+		File file = new File(sPath);
+		// 路径为文件且不为空则进行删除
+		if (file.isFile() && file.exists()) {
+			file.delete();
+		}
+	}
+
+	public static void safeClose(InputStream fis) {
+		if (fis != null) {
+			try {
+				fis.close();
+			} catch (IOException e) {
+				LOG.error(e.getMessage());
+			}
+		}
 	}
 
 }

@@ -241,8 +241,9 @@ public class GenTableColumn extends DataEntity<GenTableColumn> {
 	 */
 	public String[][] getJavaFieldAttrs(){
 		String[] ss = StringUtils.split(StringUtils.substringAfter(getJavaField(), "|"), "|");
-		String[][] sss = new String[ss.length][2];
+		String[][] sss =null;
 		if (ss!=null){
+			sss = new String[ss.length][2];
 			for (int i=0; i<ss.length; i++){
 				sss[i][0] = ss[i];
 				sss[i][1] = StringUtils.toUnderScoreCase(ss[i]);

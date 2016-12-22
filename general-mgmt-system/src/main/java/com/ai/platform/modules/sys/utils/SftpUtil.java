@@ -268,7 +268,13 @@ public final class SftpUtil {
 				while ((lineTxt = bufferedReader.readLine()) != null) {
 					System.out.println(lineTxt);
 				}
-				read.close();
+				if (read != null) {
+					try {
+						read.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 //			SftpUtil.delete("/aifs01/tstusers/tstusr01", "test.txt", sftp);
 		} catch (Exception e) {

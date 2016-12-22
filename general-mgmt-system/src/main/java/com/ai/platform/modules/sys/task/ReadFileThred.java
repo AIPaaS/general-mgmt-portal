@@ -47,7 +47,6 @@ public class ReadFileThred extends Thread {
 			// 从服务器上读取指定的文件
 			LOG.error("开始读取文件："+fileName);
 			ins = ftp.readFile(fileName);
-			LOG.error("读取文件成功："+ins.toString());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
 			String line;
 			int lintNum = 0;

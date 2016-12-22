@@ -76,8 +76,13 @@ public class UserfilesDownloadServlet extends HttpServlet {
                 sos.flush();
             }
             sos.close();
-            fis.close();
-             
+            if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					logger.error(e.getMessage());
+				}
+			}
 			return;
 		} catch (FileNotFoundException e) {
 //			req.setAttribute("exception", new FileNotFoundException("请求的文件不存在"));

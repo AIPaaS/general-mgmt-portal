@@ -524,7 +524,13 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 				while ((readByte = is.read(buf)) != -1) {
 					os.write(buf, 0, readByte);
 				}
-				os.close();
+				if (os != null) {
+					try {
+						os.close();
+					} catch (IOException e) {
+						logger.error(e.getMessage());
+					}
+				}
 				is.close();
 			}
 			zipFile.close();
@@ -603,10 +609,20 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 					zouts.write(buf, 0, readByte);
 				}
 				zouts.closeEntry();
-				fin.close();
+				if(fin != null)
+					safeClose(fin);
 				System.out.println("添加文件 " + file.getAbsolutePath() + " 到zip文件中!");
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		}
+	}
+	public static void safeClose(FileInputStream fis) {
+		if (fis != null) {
+			try {
+				fis.close();
+			} catch (IOException e) {
+				logger.error(e.getMessage());
 			}
 		}
 	}
@@ -807,8 +823,11 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			logger.debug("---------------" + file + " " + error);
 			return error;
 		}
-
-		long fileLength = file.length(); // 记录文件大小
+		
+		long fileLength = 0; // 记录文件大小
+		if(file != null){
+			fileLength = file.length();
+		}
 		long pastLength = 0; // 记录已下载文件大小
 		int rangeSwitch = 0; // 0：从头开始的全文下载；1：从某字节开始的下载（bytes=27000-）；2：从某字节开始到某字节结束的下载（bytes=27000-39000）
 		long toLength = 0; // 记录客户端需要下载的字节段的最后一个字节偏移量（比如bytes=27000-39000，则这个值是为39000）

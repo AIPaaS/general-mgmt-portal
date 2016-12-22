@@ -189,6 +189,10 @@ public class ExportExcel {
 		this.wb = new SXSSFWorkbook(500);
 		this.sheet = wb.createSheet("Export");
 		this.styles = createStyles(wb);
+		// Create header
+		if (headerList == null){
+			throw new RuntimeException("headerList not null!");
+		}
 		// Create title
 		if (StringUtils.isNotBlank(title)){
 			Row titleRow = sheet.createRow(rownum++);
@@ -198,10 +202,6 @@ public class ExportExcel {
 			titleCell.setCellValue(title);
 			sheet.addMergedRegion(new CellRangeAddress(titleRow.getRowNum(),
 					titleRow.getRowNum(), titleRow.getRowNum(), headerList.size()-1));
-		}
-		// Create header
-		if (headerList == null){
-			throw new RuntimeException("headerList not null!");
 		}
 		Row headerRow = sheet.createRow(rownum++);
 		headerRow.setHeightInPoints(16);
@@ -437,7 +437,18 @@ public class ExportExcel {
 	public ExportExcel writeFile(String name) throws FileNotFoundException, IOException{
 		FileOutputStream os = new FileOutputStream(name);
 		this.write(os);
+		if(os!=null)
+			safeClose(os);
 		return this;
+	}
+	public void safeClose(FileOutputStream fis) {
+		if (fis != null) {
+			try {
+				fis.close();
+			} catch (IOException e) {
+				log.error(e.getMessage());
+			}
+		}
 	}
 	
 	/**

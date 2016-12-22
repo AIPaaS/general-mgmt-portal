@@ -3,6 +3,7 @@ package org.apache.ibatis.thread;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,8 +138,15 @@ public class Runnable implements java.lang.Runnable {
 							.getAbsolutePath(), mappingPath));
 			log.debug("refresh file:" + refreshs.get(i).getAbsolutePath());
 			log.debug("refresh filename:" + refreshs.get(i).getName());
-			SqlSessionFactoryBean.refresh(new FileInputStream(refreshs.get(i)),
-					refreshs.get(i).getAbsolutePath(), configuration);
+			FileInputStream fin = new FileInputStream(refreshs.get(i));
+			SqlSessionFactoryBean.refresh(fin,refreshs.get(i).getAbsolutePath(), configuration);
+			if (fin != null) {
+				try {
+					fin.close();
+				} catch (IOException e) {
+					log.error(e.getMessage());
+				}
+			}
 		}
 		// 如果刷新了文件，则修改刷新时间，否则不修改
 		if (refreshs.size() > 0) {

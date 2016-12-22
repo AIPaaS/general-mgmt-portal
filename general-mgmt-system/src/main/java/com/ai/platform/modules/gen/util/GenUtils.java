@@ -214,6 +214,9 @@ public class GenUtils {
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			StringBuilder sb = new StringBuilder();  
 			while (true) {
+				if (br == null){
+					break;
+				}
 				String line = br.readLine();
 				if (line == null){
 					break;

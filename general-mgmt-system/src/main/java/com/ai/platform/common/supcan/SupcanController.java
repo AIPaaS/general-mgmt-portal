@@ -49,7 +49,7 @@ public class SupcanController extends BaseController {
 	public TreeList treeList(@PathVariable("typeAlias") String typeAlias) {
 		
 		// 如果使用Cache，并且在Cache里存在，则直接返回。
-		boolean useCache = Global.getConfig("supcan.useCache") == "true";
+		boolean useCache = Global.getConfig("supcan.useCache").equals("true");
 		if (useCache){
 			Object object = CacheUtils.get(SUPCAN_CACHE, typeAlias);
 			if (object != null){

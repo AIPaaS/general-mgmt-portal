@@ -123,7 +123,7 @@
 				<form:input path="mobile" htmlEscape="false" maxlength="31" class="mobile"/>
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="control-group" hidden="true">
 			<label class="control-label">员工类型:</label>
 			<div class="controls">
 				<form:select path="userType" class="input-xlarge">

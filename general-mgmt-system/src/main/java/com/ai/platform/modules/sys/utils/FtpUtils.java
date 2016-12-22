@@ -104,7 +104,6 @@ public class FtpUtils {
 		FTPFile[] ftpFiles = null;
 		try {
 			ftpFiles = ftpClient.listFiles(Global.getConfig("ftp.path"));
-			LOG.error("ftpFiles：" + ftpFiles.length + "，当前时间戳：" + DateUtils.getDateTime());
 		} catch (IOException e) {
 			e.printStackTrace();
 			LOG.error("读取ftp文件异常,当前时间戳：" + DateUtils.getDateTime());

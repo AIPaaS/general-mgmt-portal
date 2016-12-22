@@ -160,7 +160,7 @@ public class OfficeController extends BaseController {
 			}
 		}
 		office.setParent(officeService.get(office.getParent().getId()));
-		if (office.getGnArea() == null) {
+		if (office.getGnArea() == null &&(user!=null &&user.getOffice()!=null)) {
 			office.setGnArea(user.getOffice().getGnArea());
 		}
 //		// 自动获取排序号
