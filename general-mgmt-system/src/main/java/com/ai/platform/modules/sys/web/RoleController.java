@@ -95,28 +95,9 @@ public class RoleController extends BaseController {
 			return form(role, model);
 		}
 		
-		Role isUniqueByName = (Role) systemService.getRoleByName(role.getName());
-		
-		Role isUniqueByEnName = (Role) systemService.getRoleByEnname(role.getEnname());
-		if(StringUtils.isBlank(role.getId())){
-		if(!StringUtils.isNullOrEmpty(isUniqueByName)){
-			addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
-			return form(role, model);
+		if ("true".equals(checkName(role.getOldName(), role.getName())) && "true".equals(checkEnname(role.getOldEnname(), role.getEnname()))){
+			systemService.saveRole(role);
 		}
-		if(!StringUtils.isNullOrEmpty(isUniqueByEnName)){
-			addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
-			return form(role, model);
-		}
-		if (!"true".equals(checkName(role.getOldName(), role.getName()))){
-			addMessage(model, "保存角色'" + role.getName() + "'失败, 角色名已存在");
-			return form(role, model);
-		}
-		if (!"true".equals(checkEnname(role.getOldEnname(), role.getEnname()))){
-			addMessage(model, "保存角色'" + role.getName() + "'失败, 英文名已存在");
-			return form(role, model);
-		}
-		}
-		systemService.saveRole(role);
 		addMessage(redirectAttributes, "保存角色'" + role.getName() + "'成功");
 		return "redirect:" + adminPath + "/sys/role/list?repage";
 	}

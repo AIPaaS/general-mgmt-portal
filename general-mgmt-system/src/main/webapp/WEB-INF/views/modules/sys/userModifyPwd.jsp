@@ -14,6 +14,7 @@
 					confirmNewPassword: {equalTo: "输入与上面相同的密码"}
 				},
 				submitHandler: function(form){
+					btnSubmit.disabled=true;
 					loading('正在提交，请稍等...');
 					form.submit();
 				},

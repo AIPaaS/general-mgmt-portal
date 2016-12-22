@@ -33,6 +33,7 @@
 					tenantId: {remote: "平台编码已存在"}
 				},
 				submitHandler: function(form){
+					btnSubmit.disabled=true;
 					loading('正在提交，请稍等...');
 					form.submit();
 				},
@@ -60,6 +61,8 @@
 		<div class="control-group">
 			<label class="control-label">平台名称：</label>
 			<div class="controls">
+				<input id="oldTenantId" name="oldTenantId" type="hidden" value="${gnTenant.tenantId}">
+				<input id="oldTenantName" name="oldTenantName" type="hidden" value="${gnTenant.tenantName}">
 				<form:input path="tenantName" htmlEscape="false"  maxlength="50"  class="input-xlarge required userName" />
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>

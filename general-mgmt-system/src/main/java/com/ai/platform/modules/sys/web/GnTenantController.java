@@ -68,6 +68,12 @@ public class GnTenantController extends BaseController {
 		if (!beanValidator(model, gnTenant)){
 			return form(gnTenant, model);
 		}
+		if (!"true".equals(checkTenantId(gnTenant.getOldTenantId(), gnTenant.getTenantId()))) {
+			addMessage(model, "保存平台编码已存在");
+			return form(gnTenant, model);
+		}
+		
+		
 		gnTenantService.save(gnTenant);
 		addMessage(redirectAttributes, "保存业务平台成功");
 		return "redirect:"+Global.getAdminPath()+"/sys/gnTenant/?repage";

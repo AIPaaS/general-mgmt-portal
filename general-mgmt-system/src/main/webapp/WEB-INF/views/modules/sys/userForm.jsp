@@ -48,6 +48,7 @@
 					remarks: {maxlength: "备注不能超过200个字符"}
 				},
 				submitHandler: function(form){
+					btnSubmit.disabled=true;
 					loading('正在提交，请稍等...');
 					form.submit();
 				},

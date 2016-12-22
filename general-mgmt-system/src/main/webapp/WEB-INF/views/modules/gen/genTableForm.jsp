@@ -9,6 +9,7 @@
 			$("#comments").focus();
 			$("#inputForm").validate({
 				submitHandler: function(form){
+					btnSubmit.disabled=true;
 					loading('正在提交，请稍等...');
 					$("input[type=checkbox]").each(function(){
 						$(this).after("<input type=\"hidden\" name=\""+$(this).attr("name")+"\" value=\""

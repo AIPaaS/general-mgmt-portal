@@ -16,7 +16,9 @@ public class GnTenant extends DataEntity<GnTenant> {
 	
 	private static final long serialVersionUID = 1L;
 	private String tenantId;		// 业务平台编号
+	private String oldTenantId;
 	private String tenantName;		// 业务平台名称
+	private String oldTenantName;
 	private String tenantPwd;		// 业务平台密码
 	private String state;		// 状态
 	private String industryCode;		// industry_code
@@ -93,5 +95,22 @@ public class GnTenant extends DataEntity<GnTenant> {
 	public void setFramePageTemplate(String framePageTemplate) {
 		this.framePageTemplate = framePageTemplate;
 	}
+
+	public String getOldTenantId() {
+		return oldTenantId;
+	}
+
+	public void setOldTenantId(String oldTenantId) {
+		this.oldTenantId = oldTenantId;
+	}
+
+	public String getOldTenantName() {
+		return oldTenantName;
+	}
+
+	public void setOldTenantName(String oldTenantName) {
+		this.oldTenantName = oldTenantName;
+	}
+	
 	
 }
