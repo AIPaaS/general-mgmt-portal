@@ -44,7 +44,7 @@
 					$("#messageBox").text("输入有误，请先更正。");
 					if(element.attr("name")=="oaNotifyRecordName"){
 						$("#treeerro").find("label").remove(); 
-						$("<label for='oaNotifyRecordName' class='error'>请选择接收人</label>").appendTo("#treeerro");
+						$("<label for='oaNotifyRecordName' class='error'>请选择接受人</label>").appendTo("#treeerro");
 					}else if (element.is(":radio")){
 						$("#treeerro").find("label").remove();
 						error.appendTo(element.parent().parent());
@@ -112,7 +112,7 @@
 				<label class="control-label">接受人：</label>
 				<div class="controls">
 	                <sys:usertree id="oaNotifyRecord" name="oaNotifyRecordIds" value="${oaNotify.oaNotifyRecordIds}" labelName="oaNotifyRecordName" labelValue="${oaNotify.oaNotifyRecordNames}"
-						title="用户" url="/sys/user/treeAsnyData?type=2" cssClass="input-xxlarge" notAllowSelectParent="true" checked="true"/>
+						title="用户" url="/sys/user/treeAsnyData?type=2" cssClass="input-xxlarge" notAllowSelectParent="true" checked="true" dataMsgRequired="请选择接受人" />
 					<span id="treeerro" class="help-inline"><font color="red">*</font> </span>
 				</div>
 			</div>
