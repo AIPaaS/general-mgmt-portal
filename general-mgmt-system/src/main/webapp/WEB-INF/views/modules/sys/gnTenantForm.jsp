@@ -33,7 +33,7 @@
 					tenantId: {remote: "平台编码已存在"}
 				},
 				submitHandler: function(form){
-					btnSubmit.disabled=true;
+					$('#btnSubmit').attr('disabled', true);
 					loading('正在提交，请稍等...');
 					form.submit();
 				},

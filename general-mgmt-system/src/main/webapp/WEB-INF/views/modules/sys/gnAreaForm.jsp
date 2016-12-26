@@ -48,7 +48,7 @@
 					}
 				},
 				submitHandler: function(form){
-					btnSubmit.disabled=true;
+					$('#btnSubmit').attr('disabled', true);
 					loading('正在提交，请稍等...');
 					form.submit();
 				},
