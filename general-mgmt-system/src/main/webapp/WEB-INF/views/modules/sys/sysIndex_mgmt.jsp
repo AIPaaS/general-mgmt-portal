@@ -130,8 +130,6 @@ if(iframe1!=null){
 		            -->
                 </ul>
       	 </li>
-         <!--/颜色设置结束-->      
-           <li class="dropdown hidden-xs"><a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-info-circle"></i></a></li>
          <!--用户信息-->
             <li class="dropdown profile-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
