@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import org.springframework.core.io.DefaultResourceLoader;
 
+import com.ai.opt.sdk.util.CryptUtils;
 import com.ai.platform.common.utils.PropertiesLoader;
 import com.ai.platform.common.utils.StringUtils;
 import com.ckfinder.connector.ServletContextFactory;
@@ -197,9 +198,7 @@ public class Global {
 	 * @return
 	 */
 	public static String getPasswordRule() {
-
-		return getConfig("user.password.rule");
-
+		return CryptUtils.decrypt(getConfig("user.password.rule"));
 	}
 	
     

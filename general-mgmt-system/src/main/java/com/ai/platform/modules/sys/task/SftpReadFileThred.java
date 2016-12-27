@@ -10,6 +10,7 @@ import java.util.concurrent.BlockingQueue;
 
 import org.apache.log4j.Logger;
 
+import com.ai.opt.sdk.util.CryptUtils;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.modules.sys.utils.SftpUtil;
@@ -23,7 +24,7 @@ public class SftpReadFileThred extends Thread {
 
 	String ip = Global.getConfig("ftp.ip"); // 服务器IP地址
 	String userName = Global.getConfig("ftp.userName"); // 用户名
-	String userPwd = Global.getConfig("ftp.userPwd"); // 密码
+	String userPwd = CryptUtils.decrypt(Global.getConfig("ftp.userPwd")); // 密码
 	int port = Integer.parseInt(Global.getConfig("ftp.port")); // 端口号
 	String path = Global.getConfig("ftp.path"); // 读取文件的存放目录
 	String localpath = Global.getConfig("ftp.localpath");// 本地存在的文件路径
