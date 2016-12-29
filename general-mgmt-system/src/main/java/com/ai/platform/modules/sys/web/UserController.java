@@ -56,12 +56,12 @@ import com.google.common.collect.Maps;
 @RequestMapping(value = "${adminPath}/sys/user")
 public class UserController extends BaseController {
 	private static final Logger LOG = Logger.getLogger(UserController.class);
-	
+
 	@Autowired
 	private SystemService systemService;
 	@Autowired
 	private GnTenantService gnTenantService;
-	
+
 	@ModelAttribute
 	public User get(@RequestParam(required = false) String id) {
 		if (StringUtils.isNotBlank(id)) {
@@ -80,25 +80,24 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "list", "" })
 	public String list(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
-		LOG.error("开始执行员工信息查询，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("开始执行员工信息查询，当前时间戳：" + DateUtils.getDateTime());
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
 		model.addAttribute("page", page);
-		LOG.error("结束执行员工信息查询，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("结束执行员工信息查询，当前时间戳：" + DateUtils.getDateTime());
 		return "modules/sys/userList";
 	}
 
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "listno" })
 	public String listno(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
-    	LOG.error("开始执行员工工号查询，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("开始执行员工工号查询，当前时间戳：" + DateUtils.getDateTime());
 		user.getSqlMap().put("dsf", " AND a.login_name IS NOT NULL");
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
 		model.addAttribute("page", page);
-    	LOG.error("结束执行员工工号查询，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("结束执行员工工号查询，当前时间戳：" + DateUtils.getDateTime());
 		return "modules/sys/usernoList";
 	}
-	
-	
+
 	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = { "listNOuser" })
 	public String listNOuser(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -107,7 +106,6 @@ public class UserController extends BaseController {
 		model.addAttribute("page", page);
 		return "modules/sys/usernouserList";
 	}
-	
 
 	@ResponseBody
 	@RequiresPermissions("sys:user:view")
@@ -159,7 +157,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "save")
 	public String save(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-		LOG.error("开始执行添加员工信息添加，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("开始执行添加员工信息添加，当前时间戳：" + DateUtils.getDateTime());
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/list?repage";
@@ -171,9 +169,9 @@ public class UserController extends BaseController {
 		if (StringUtils.isNotBlank(user.getNewPassword())) {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
 		}
-//		if (!beanValidator(model, user)) {
-//			return form(user, model);
-//		}
+		// if (!beanValidator(model, user)) {
+		// return form(user, model);
+		// }
 		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))) {
 			addMessage(model, "保存员工信息'" + user.getLoginName() + "'失败，登录名已存在");
 			return form(user, model);
@@ -181,7 +179,7 @@ public class UserController extends BaseController {
 
 		savemethod(user);
 		addMessage(redirectAttributes, "保存员工信息'" + user.getLoginName() + "'成功");
-		LOG.error("结束执行添加员工信息添加，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("结束执行添加员工信息添加，当前时间戳：" + DateUtils.getDateTime());
 		return "redirect:" + adminPath + "/sys/user/list?repage";
 	}
 
@@ -218,7 +216,7 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "saveno")
 	public String saveno(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-		LOG.error("开始执行添加员工工号添加，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("开始执行添加员工工号添加，当前时间戳：" + DateUtils.getDateTime());
 		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/listno?repage";
@@ -228,21 +226,21 @@ public class UserController extends BaseController {
 		// user.setOffice(new Office(request.getParameter("office.id")));
 		// 如果新密码为空，则不更换密码
 		try {
-		if (StringUtils.isNotBlank(user.getNewPassword())) {
-			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
-			if(StringUtils.isNotBlank(user.getOldLoginName())){
-				systemService.sendMail(user, user.getNewPassword());
+			if (StringUtils.isNotBlank(user.getNewPassword())) {
+				user.setPassword(SystemService.entryptPassword(user.getNewPassword()));
+				if (StringUtils.isNotBlank(user.getOldLoginName())) {
+					systemService.sendMail(user, user.getNewPassword());
+				}
 			}
-		}
-		if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))) {
-			addMessage(model, "保存工号'" + user.getLoginName() + "'失败，登录名已存在");
-			return formno(user, model);
-		}
-		
-			if(StringUtils.isBlank(user.getOldLoginName())){
-				
-					sendSaveMail(user,"注册");
-				
+			if (!"true".equals(checkLoginName(user.getOldLoginName(), user.getLoginName()))) {
+				addMessage(model, "保存工号'" + user.getLoginName() + "'失败，登录名已存在");
+				return formno(user, model);
+			}
+
+			if (StringUtils.isBlank(user.getOldLoginName())) {
+
+				sendSaveMail(user, "注册");
+
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -250,24 +248,27 @@ public class UserController extends BaseController {
 		}
 		savemethod(user);
 		addMessage(redirectAttributes, "保存工号'" + user.getLoginName() + "'成功");
-		LOG.error("结束执行添加员工工号添加，当前时间戳："+DateUtils.getDateTime());
+		LOG.error("结束执行添加员工工号添加，当前时间戳：" + DateUtils.getDateTime());
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
 	}
+
 	/**
 	 * 发送邮件-维护工号
+	 * 
 	 * @param user
 	 * @param resetPass
 	 * @throws Exception
 	 */
-	public void sendSaveMail(User user,String type) throws Exception{
+	public void sendSaveMail(User user, String type) throws Exception {
 
 		String[] tomails = new String[] { user.getEmail() };
 		String subject = "运营管理平台新增用户登录信息通知";
-		String[] data = new String[] { user.getName(),user.getNewPassword(),type,user.getLoginName()};
-		String htmlcontext= EmailTemplateUtil.buildHtmlTextFromTemplate(UserUtils.SAVEUSER_EMAIL, data);
+		String[] data = new String[] { user.getName(), user.getNewPassword(), type, user.getLoginName() };
+		String htmlcontext = EmailTemplateUtil.buildHtmlTextFromTemplate(UserUtils.SAVEUSER_EMAIL, data);
 		EmailFactory.SendEmail(tomails, null, subject, htmlcontext);
-	
+
 	}
+
 	public void savemethod(User user) {
 		// 角色数据有效性验证，过滤不在授权内的角色
 		List<Role> roleList = Lists.newArrayList();
@@ -278,18 +279,16 @@ public class UserController extends BaseController {
 			}
 		}
 		user.setRoleList(roleList);
-		
-		
-//		List<GnTenant> gnTenantList = Lists.newArrayList();
-//		List<String> gnTenantIdList = user.getTenantIdList();
-//		for (GnTenant g : gnTenantService.findList(new GnTenant())) {
-//			if (gnTenantIdList.contains(g.getTenantId())) {
-//				gnTenantList.add(g);
-//			}
-//		}
-//		user.setTenantId(gnTenantList.get(0).getTenantId());
-		
-		
+
+		// List<GnTenant> gnTenantList = Lists.newArrayList();
+		// List<String> gnTenantIdList = user.getTenantIdList();
+		// for (GnTenant g : gnTenantService.findList(new GnTenant())) {
+		// if (gnTenantIdList.contains(g.getTenantId())) {
+		// gnTenantList.add(g);
+		// }
+		// }
+		// user.setTenantId(gnTenantList.get(0).getTenantId());
+
 		// 插入员工信息时给予员工信息默认主题
 		if (StringUtils.isNotBlank(user.getTheme())) {
 			user.setTheme(Global.getDefTheme());
@@ -372,9 +371,9 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequiresPermissions("sys:user:edit")
-    @RequestMapping(value = "import", method=RequestMethod.POST)
-    public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
-		if(Global.isDemoMode()){
+	@RequestMapping(value = "import", method = RequestMethod.POST)
+	public String importFile(MultipartFile file, RedirectAttributes redirectAttributes) {
+		if (Global.isDemoMode()) {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/user/list?repage";
 		}
@@ -383,52 +382,51 @@ public class UserController extends BaseController {
 			StringBuilder failureMsg = new StringBuilder();
 			ImportExcel ei = new ImportExcel(file, 1, 0);
 			List<User> list = ei.getDataList(User.class);
-			for (User user : list){
-				try{
-					boolean isValite=true;
-					if (!"true".equals(checkLoginName("", user.getLoginName()))){
-						failureMsg.append("<br/>登录名 "+user.getLoginName()+" 已存在; ");
-						isValite=false;
+			for (User user : list) {
+				try {
+					boolean isValite = true;
+					if (!"true".equals(checkLoginName("", user.getLoginName()))) {
+						failureMsg.append("<br/>登录名 " + user.getLoginName() + " 已存在; ");
+						isValite = false;
 					}
-					if (!"true".equals(checkLoginName("", user.getMobile()))){
-						failureMsg.append("<br/>手机 "+user.getMobile()+" 已存在; ");
-						isValite=false;
+					if (!"true".equals(checkLoginName("", user.getMobile()))) {
+						failureMsg.append("<br/>手机 " + user.getMobile() + " 已存在; ");
+						isValite = false;
 					}
-					if (!"true".equals(checkLoginName("", user.getEmail()))){
-						failureMsg.append("<br/>邮箱 "+user.getEmail()+" 已存在; ");
-						isValite=false;
+					if (!"true".equals(checkLoginName("", user.getEmail()))) {
+						failureMsg.append("<br/>邮箱 " + user.getEmail() + " 已存在; ");
+						isValite = false;
 					}
-					if (!"true".equals(checkNo("", user.getNo()))){
-						failureMsg.append("<br/>员工编号 "+user.getEmail()+" 已存在; ");
-						isValite=false;
+					if (!"true".equals(checkNo("", user.getNo()))) {
+						failureMsg.append("<br/>员工编号 " + user.getEmail() + " 已存在; ");
+						isValite = false;
 					}
-					if (isValite){
+					if (isValite) {
 						user.setPassword(SystemService.entryptPassword("123456"));
 						BeanValidators.validateWithException(validator, user);
 						systemService.saveUser(user);
 						successNum++;
 					}
-					
-				}catch(ConstraintViolationException ex){
-					failureMsg.append("<br/>登录名 "+user.getLoginName()+" 导入失败：");
+
+				} catch (ConstraintViolationException ex) {
+					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：");
 					List<String> messageList = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-					for (String message : messageList){
-						failureMsg.append(message+"; ");
+					for (String message : messageList) {
+						failureMsg.append(message + "; ");
 					}
-				}catch (Exception ex) {
-					failureMsg.append("<br/>登录名 "+user.getLoginName()+" 导入失败："+ex.getMessage());
+				} catch (Exception ex) {
+					failureMsg.append("<br/>登录名 " + user.getLoginName() + " 导入失败：" + ex.getMessage());
 				}
 			}
-			if (successNum<list.size()){
-				failureMsg.insert(0, "，失败 "+(list.size()-successNum)+" 条用户，导入信息如下：");
+			if (successNum < list.size()) {
+				failureMsg.insert(0, "，失败 " + (list.size() - successNum) + " 条用户，导入信息如下：");
 			}
-			addMessage(redirectAttributes, "已成功导入 "+successNum+" 条用户"+failureMsg);
+			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条用户" + failureMsg);
 		} catch (Exception e) {
-			addMessage(redirectAttributes, "导入用户失败！失败信息："+e.getMessage());
+			addMessage(redirectAttributes, "导入用户失败！失败信息：" + e.getMessage());
 		}
 		return "redirect:" + adminPath + "/sys/user/listno?repage";
-    }
-	
+	}
 
 	/**
 	 * 下载导入员工信息数据模板
@@ -474,6 +472,7 @@ public class UserController extends BaseController {
 		}
 		return "false";
 	}
+
 	@ResponseBody
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "checkEmail")
@@ -489,6 +488,7 @@ public class UserController extends BaseController {
 		}
 		return "false";
 	}
+
 	@ResponseBody
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "checkMobile")
@@ -520,6 +520,7 @@ public class UserController extends BaseController {
 		}
 		return "false";
 	}
+
 	/**
 	 * 员工信息信息显示及保存
 	 * 
@@ -569,11 +570,11 @@ public class UserController extends BaseController {
 	@RequiresPermissions("sys:user:edit")
 	@RequestMapping(value = "prohibit")
 	public String prohibitLogin(User user, RedirectAttributes redirectAttributes) {
-		//user.setLoginFlag("0");
-		if(user.getLoginFlag()!=null && ("0").equals(user.getLoginFlag())){
+		// user.setLoginFlag("0");
+		if (user.getLoginFlag() != null && ("0").equals(user.getLoginFlag())) {
 			systemService.updateLoginFalg(user);
 			addMessage(redirectAttributes, "冻结该工号成功");
-		}else if(user.getLoginFlag()!=null && ("1").equals(user.getLoginFlag())){
+		} else if (user.getLoginFlag() != null && ("1").equals(user.getLoginFlag())) {
 			systemService.updateLoginFalg(user);
 			addMessage(redirectAttributes, "解冻该工号成功");
 		}
@@ -649,18 +650,14 @@ public class UserController extends BaseController {
 		return mapList;
 	}
 
-	
 	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "treeAsnyData")
-	public List<Map<String, Object>> treeAsnyData(@RequestParam(required = false) String officeId,@RequestParam(required = false) boolean init,
-			HttpServletResponse response) {
+	public List<Map<String, Object>> treeAsnyData(@RequestParam(required = false) String officeId,
+			@RequestParam(required = false) boolean init, HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
-	
-		if(init==true){
-			
+		if (init == true) {
 			List<Office> listInit = OfficeUtils.getChildIdsList("0");
-			
 			for (int i = 0; i < listInit.size(); i++) {
 				Office e = listInit.get(i);
 				Map<String, Object> map = Maps.newHashMap();
@@ -670,8 +667,7 @@ public class UserController extends BaseController {
 				map.put("name", e.getName());
 				map.put("code", e.getCode());
 				map.put("isParent", true);
-				if(isParentUser(e.getId())){
-
+				if (isParentUser(e.getId())) {
 					List<User> list = systemService.findUserByOfficeId(e.getId());
 					for (int j = 0; j < list.size(); j++) {
 						User u = list.get(j);
@@ -681,84 +677,63 @@ public class UserController extends BaseController {
 						mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
 						mapList.add(mapu);
 					}
-				
 				}
-				
 				mapList.add(map);
 			}
-			
-		}else if(StringUtils.isNotBlank(officeId)){
-			
-			
-			if(isParentOffice(officeId)){
 
-				List<Office> list =OfficeUtils.getChildIdsList(officeId);
-			
-				for (int i = 0; i < list.size(); i++) {
-					Office a = list.get(i);
-					Map<String, Object> map = Maps.newHashMap();
-					map.put("id", a.getId());
-					map.put("pId", a.getParentId());
-					map.put("pIds", a.getParentIds());
-					map.put("name", a.getName());
-					map.put("code", a.getCode());
-					map.put("isParent", isParentOffice(officeId));
-					if(isParentUser(a.getId())){
-
-						List<User> listuser = systemService.findUserByOfficeId(a.getId());
-						for (int j = 0; j < listuser.size(); j++) {
-							User u = listuser.get(j);
-							Map<String, Object> mapu = Maps.newHashMap();
-							mapu.put("id", "u_" + u.getId());
-							mapu.put("pId", a.getId());
-							mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
-							mapList.add(mapu);
-						}
-					
-					}
-					
-					mapList.add(map);
-				}
-			}else{
-				List<User> list = systemService.findUserByOfficeId(officeId);
-				for (int i = 0; i < list.size(); i++) {
-					User e = list.get(i);
-					Map<String, Object> map = Maps.newHashMap();
-					map.put("id", "u_" + e.getId());
-					map.put("pId", officeId);
-					map.put("name", StringUtils.replace(e.getName(), " ", ""));
-					mapList.add(map);
-				}
-			}
-			
-			
+		} else if (StringUtils.isNotBlank(officeId)) {
+			putUserByOffice(officeId,mapList);
 		}
-		
-		return mapList;	
-	}
+		return mapList;
 
+	}
 	
-	
-	private boolean isParentOffice(String officeId){
+	private void putUserByOffice(String officeId,List<Map<String, Object>> mapList){
 		List<Office> list = OfficeUtils.getChildIdsList(officeId);
-		if(list.isEmpty()){
+		for (int i = 0; i < list.size(); i++) {
+			Office a = list.get(i);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("id", a.getId());
+			map.put("pId", a.getParentId());
+			map.put("pIds", a.getParentIds());
+			map.put("name", a.getName());
+			map.put("code", a.getCode());
+			map.put("isParent", isParentOffice(officeId));
+			mapList.add(map);
+			if (isParentUser(a.getId())) {
+				List<User> listuser = systemService.findUserByOfficeId(a.getId());
+				for (int j = 0; j < listuser.size(); j++) {
+					User u = listuser.get(j);
+					Map<String, Object> mapu = Maps.newHashMap();
+					mapu.put("id", "u_" + u.getId());
+					mapu.put("pId", a.getId());
+					mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
+					mapList.add(mapu);
+				}
+
+			}
+			putUserByOffice(a.getId(),mapList);
+		}
+	}
+
+	private boolean isParentOffice(String officeId) {
+		List<Office> list = OfficeUtils.getChildIdsList(officeId);
+		if (list.isEmpty()) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
-	
-	
-	private boolean isParentUser(String officeId){
 
-		List<User> list =systemService.findUserByOfficeId(officeId);
-		if(list.isEmpty()){
+	private boolean isParentUser(String officeId) {
+
+		List<User> list = systemService.findUserByOfficeId(officeId);
+		if (list.isEmpty()) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
-
 
 	public static void main(String[] args) {
 		String a = "zhangsan\\t001\\t张三\\tzhangsan@163.com\\t13333333333\\t0001\\t00011";

@@ -13,6 +13,13 @@
 			$("#inputForm").validate({
 				rules: {
 					areaCode:{
+						remote:{
+							type:"POST",	
+							url:"${ctx}/sys/gnArea/checkAreaCode",
+							data:{
+								oldAreaCode:function(){return  '${gnArea.areaCode}';}
+							}
+						},
 						 required:true,
 						 maxlength: 10
 					},
@@ -32,7 +39,8 @@
 				messages:{
 					areaCode:{
 						 required:"请输入区域编码", 
-						 maxlength: "区域编码长度不能超过10个字符"
+						 maxlength: "区域编码长度不能超过10个字符",
+						 remote: "区域编码已存在"
 					},
 					areaName:{
 						required: "请输入区域名称", 

@@ -238,4 +238,20 @@ public class GnAreaController extends BaseController {
 			return false;
 		}
 	}
+	
+	@ResponseBody
+	@RequiresPermissions("sys:user:edit")
+	@RequestMapping(value = "checkAreaCode")
+	public String checkAreaCode(String oldAreaCode, String areaCode) {
+		try {
+			if (areaCode != null && areaCode.equals(oldAreaCode)) {
+				return "true";
+			} else if (areaCode != null && gnAreaService.getByCode(areaCode) == null) {
+				return "true";
+			}
+		} catch (Exception e) {
+			return "false";
+		}
+		return "false";
+	}
 }

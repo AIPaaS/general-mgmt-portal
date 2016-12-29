@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Log;
-import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.LogService;
-import com.ai.platform.modules.sys.service.SystemService;
 
 /**
  * 日志Controller

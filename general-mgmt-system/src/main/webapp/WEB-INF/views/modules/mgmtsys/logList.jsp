@@ -49,7 +49,7 @@
 					                <li  class="col-md-6">
 					                    <p class="word">开始日期：</p>
 					                    <p><input type="text" class="int-text int-medium" id="beginDate" name="beginDate" readonly="readonly"  width="300ox；"
-											value="<fmt:formatDate value="${log.beginDate}" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"
+											value="<fmt:formatDate value="${log.beginDate}" pattern="yyyy-MM-dd hh:mm:ss"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss',isShowClear:false});"
 					                    >
 					                </li>  
 					            </ul> 
@@ -57,12 +57,12 @@
 								 <li  class="col-md-6">
 					                    <p class="word">结束日期：</p>
 					                    <input id="endDate" name="endDate" type="text" readonly="readonly" class="int-text int-medium"
-										value="<fmt:formatDate value="${log.endDate}" pattern="yyyy-MM-dd"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+										value="<fmt:formatDate value="${log.endDate}" pattern="yyyy-MM-dd hh:mm:ss"/>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss',isShowClear:false});"/>
 					                    </p>
 					              </li>  
 					              <li class="width-xlag">
 					                <p class="word">&nbsp;</p>
-					                <p><input type="submit" id="btnSubmit" class="biu-btn  btn-primary btn-blue btn-large ml-15" value="查  询"></p>
+					                <p><input type="submit" id="btnSubmit" class="biu-btn  btn-primary btn-blue btn-large ml-15" value="查  询1"></p>
 					                </li>
 					            </ul>
 					         </div>
