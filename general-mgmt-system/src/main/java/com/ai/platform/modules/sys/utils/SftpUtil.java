@@ -243,7 +243,8 @@ public final class SftpUtil {
 	 * @RestRelativeURL
 	 */
 	public static final void delete(String directory, String deleteFile, ChannelSftp sftp) throws Exception {
-		sftp.cd(directory);
+		String rootDir = sftp.pwd();
+		sftp.cd(rootDir+"/"+directory);
 		sftp.rm(deleteFile);
 	}
 
@@ -254,10 +255,10 @@ public final class SftpUtil {
 		int port = 22; // 端口号
 		ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
 		try {
-			SftpUtil.download("/", "office.txt", "/Users/meteor/Downloads/test/", sftp);
+			SftpUtil.download("/", "user.txt", "/Users/meteor/Downloads/test/", sftp);
 			System.out.println(sftp.pwd());
-			SftpUtil.listFiles("/aifs01/tstusers/tstusr01", sftp);
-			File file = new File("/Users/meteor/Downloads/test/office.txt");
+//			SftpUtil.listFiles("/aifs01/tstusers/tstusr01", sftp);
+			File file = new File("/Users/meteor/Downloads/test/user.txt");
 			if (!file.exists()) {
 				file.createNewFile();
 			}

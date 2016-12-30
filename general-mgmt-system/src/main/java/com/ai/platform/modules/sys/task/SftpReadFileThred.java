@@ -39,25 +39,26 @@ public class SftpReadFileThred extends Thread {
 	public void run() {
 		LOG.error("开始获取ftp文件：" + DateUtils.getDateTime());
 
-		ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
+		
 		String[] fileList = new String[] { "office.txt", "user.txt" };
 		for (String file : fileList) {
 			LOG.error("ftp文件名：" + file);
 			try {
 				if (file.equals("office.txt") || file.equals("user.txt")) {
-					readFile(file, sftp);
+					readFile(file);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
 		LOG.error("获取ftp文件结束：" + DateUtils.getDateTime());
-		SftpUtil.disconnect(sftp);
+		
 	}
 
-	public void readFile(String fileName, ChannelSftp sftp) throws ParseException {
+	public void readFile(String fileName) throws ParseException {
 		InputStream ins = null;
 		try {
+			ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
 			// 从服务器上读取指定的文件
 			LOG.info("开始读取文件：" + fileName);
 			ins = SftpUtil.download(path, fileName, localpath, sftp);
@@ -95,11 +96,13 @@ public class SftpReadFileThred extends Thread {
 					safeClose(ins);
 				}
 				SftpUtil.delete(path, fileName, sftp);
+				SftpUtil.disconnect(sftp);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			
 			deleteFile(localpath + fileName);
 		}
 	}
