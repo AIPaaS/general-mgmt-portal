@@ -9,11 +9,11 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.ai.opt.sdk.components.lock.AbstractMutexLock;
 import com.ai.opt.sdk.components.lock.RedisMutexLockFactory;
+import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.modules.sys.service.GnAreaService;
 import com.ai.platform.modules.sys.service.OfficeService;
@@ -94,6 +94,7 @@ public class HrTaskJob {
 				LOG.info("部门名称:"+office[1]);
 				handlePool.execute(new OfficeThread(office, officeService, areaService));
 			}
+			String password = SystemService.entryptPassword(Global.getPasswordRule());
 			while (true) {
 				LOG.info("员工信息开始导入，当前时间戳："+DateUtils.getDateTime());
 				String[] user = userQueue.poll(30, TimeUnit.SECONDS);
@@ -101,7 +102,7 @@ public class HrTaskJob {
 					break;
 				}
 				LOG.info("员工姓名:"+user[2]);
-				handlePool.execute(new UserThead(user, officeService, systemService));
+				handlePool.execute(new UserThead(user,password,officeService, systemService));
 			}
 		} catch (Exception e) {
 			LOG.error("任务执行出错："+e.getMessage(),e);

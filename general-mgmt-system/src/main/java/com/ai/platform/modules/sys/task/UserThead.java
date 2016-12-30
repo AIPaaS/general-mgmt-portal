@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.ai.platform.common.config.Global;
 import com.ai.platform.modules.sys.entity.Office;
 import com.ai.platform.modules.sys.entity.User;
 import com.ai.platform.modules.sys.service.OfficeService;
@@ -16,9 +15,11 @@ public class UserThead extends Thread {
 	private OfficeService officeService;
 	private SystemService systemService;
 	private String[] userInfo;
+	private String password;
 
-	UserThead(String[] userInfo, OfficeService officeService, SystemService systemService) {
+	UserThead(String[] userInfo,String password, OfficeService officeService, SystemService systemService) {
 		this.userInfo = userInfo;
+		this.password = password;
 		this.officeService = officeService;
 		this.systemService = systemService;
 	}
@@ -29,7 +30,7 @@ public class UserThead extends Thread {
 			user.setNo(userInfo[0]);
 			if (!userInfo[1].isEmpty() && userInfo[1].length() >= 1) {
 				user.setLoginName(userInfo[1]);
-				user.setPassword(SystemService.entryptPassword(Global.getPasswordRule()));
+				user.setPassword(password);
 			} 
 			user.setName(userInfo[2]);
 			if (!userInfo[3].isEmpty()) 
