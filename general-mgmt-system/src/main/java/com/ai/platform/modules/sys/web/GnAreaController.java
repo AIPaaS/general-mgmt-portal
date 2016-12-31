@@ -204,7 +204,7 @@ public class GnAreaController extends BaseController {
 			
 				GnArea gnAreaParent = new GnArea();
 				gnAreaParent.setParentAreaCode(areaId);
-				List<GnArea> listAsyc = GnAreaUtils.findListByParentAreaCode(areaId);
+				List<GnArea> listAsyc = gnAreaService.findListByParentAreaCode(gnAreaParent);
 				for (int i=0; i<listAsyc.size(); i++){
 					GnArea e = listAsyc.get(i);
 					if (StringUtils.isBlank(areaId) || (areaId!=null && !areaId.equals(e.getId()) )){

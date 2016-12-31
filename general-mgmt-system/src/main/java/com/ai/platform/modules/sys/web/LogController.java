@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.platform.common.persistence.Page;
+import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.common.web.BaseController;
 import com.ai.platform.modules.sys.entity.Log;
 import com.ai.platform.modules.sys.service.LogService;
@@ -37,6 +39,10 @@ public class LogController extends BaseController {
 //			User user = systemService.getUserByName(log.getCreateBy().getName());
 //			log.setCreateBy(user);
 //		}
+		if (log.getEndDate() != null){
+	        String str = DateUtils.formatDate(log.getEndDate(), "yyyy-MM-dd") +" 23:59:59";
+	        log.setEndDate(DateUtils.parseDate(str));
+		}
 		Page<Log> page = logService.findPage(new Page<Log>(request, response), log); 
         model.addAttribute("page", page);
 		return "modules/sys/logList";

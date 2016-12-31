@@ -21,9 +21,6 @@ import com.ai.platform.modules.sys.entity.Log;
 @Service
 @Transactional(readOnly = true)
 public class LogService extends CrudService<LogDao, Log> {
-
-	@Autowired
-	private LogDao logDao;
 	
 	public Page<Log> findPage(Page<Log> page, Log log) {
 		

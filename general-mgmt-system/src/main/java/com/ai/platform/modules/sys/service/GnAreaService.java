@@ -11,10 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.platform.common.persistence.Page;
 import com.ai.platform.common.service.CrudService;
+import com.ai.platform.modules.sys.dao.GnAreaDao;
 import com.ai.platform.modules.sys.entity.GnArea;
 import com.ai.platform.modules.sys.utils.GnAreaUtils;
-import com.ai.platform.modules.sys.utils.UserUtils;
-import com.ai.platform.modules.sys.dao.GnAreaDao;
 
 /**
  * Common工程统一区域代码Service

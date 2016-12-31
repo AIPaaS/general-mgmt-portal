@@ -120,6 +120,7 @@
 		FROM gn_area a
 	
 		<where>
+			AND a.state = 1
 			AND a.parent_area_code = '00'
 			or a.parent_area_code is null
 		</where>
