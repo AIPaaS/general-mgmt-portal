@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.Logger;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -682,6 +681,17 @@ public class UserController extends BaseController {
 			}
 
 		} else if (StringUtils.isNotBlank(officeId)) {
+			if (isParentUser(officeId)) {
+				List<User> listuser = systemService.findUserByOfficeId(officeId);
+				for (int j = 0; j < listuser.size(); j++) {
+					User u = listuser.get(j);
+					Map<String, Object> mapu = Maps.newHashMap();
+					mapu.put("id", "u_" + u.getId());
+					mapu.put("pId", officeId);
+					mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
+					mapList.add(mapu);
+				}
+			}
 			putUserByOffice(officeId,mapList);
 		}
 		return mapList;
@@ -700,19 +710,8 @@ public class UserController extends BaseController {
 			map.put("code", a.getCode());
 			map.put("isParent", isParentOffice(officeId));
 			mapList.add(map);
-			if (isParentUser(a.getId())) {
-				List<User> listuser = systemService.findUserByOfficeId(a.getId());
-				for (int j = 0; j < listuser.size(); j++) {
-					User u = listuser.get(j);
-					Map<String, Object> mapu = Maps.newHashMap();
-					mapu.put("id", "u_" + u.getId());
-					mapu.put("pId", a.getId());
-					mapu.put("name", StringUtils.replace(u.getName(), " ", ""));
-					mapList.add(mapu);
-				}
-
-			}
-			putUserByOffice(a.getId(),mapList);
+			
+//			putUserByOffice(a.getId(),mapList);
 		}
 	}
 

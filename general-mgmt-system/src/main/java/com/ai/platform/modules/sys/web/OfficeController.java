@@ -201,6 +201,13 @@ public class OfficeController extends BaseController {
 			addMessage(model, "保存部门'" + office.getCode() + "'失败, 部门编码已存在");
 			return form(office, model);
 		}
+		if(office.getParent() != null){
+			if(office.getParent().getId().equals(office.getId())){
+				addMessage(model, "保存部门'" + office.getName() + "'失败, 不能选择自己为上级");
+				return form(office, model);
+			}
+		}
+		
 		officeService.save(office);
 		if (office.getChildDeptList() != null) {
 			Office childOffice = null;
