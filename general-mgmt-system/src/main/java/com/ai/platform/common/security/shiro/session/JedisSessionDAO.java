@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
+import com.ai.opt.uni.session.impl.SessionManager;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.DateUtils;
@@ -39,7 +40,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private String sessionKeyPrefix = "shiro_session_";
+	private String sessionKeyPrefix = SessionManager.SESSION_ID_PREFIX;
 	private static final String cachens=UniSessionUtil.getSessionPassNameSpace();
 
 	@Override

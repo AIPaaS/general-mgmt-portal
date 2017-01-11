@@ -103,7 +103,6 @@
 	<!-- 自定义Session存储容器 -->
 	<bean id="sessionDAO" class="com.ai.platform.common.security.shiro.session.JedisSessionDAO">
 		<property name="sessionIdGenerator" ref="idGen" />
-	 	<property name="sessionKeyPrefix" value="shiro_session_"/>
 	</bean>			
 	<!-- <bean id="sessionDAO"
 		class="com.ai.platform.common.security.shiro.session.CacheSessionDAO">
