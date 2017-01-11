@@ -105,9 +105,9 @@ public final class SingleSignOutHandler {
      */
     public void invalidateSession(final HttpServletRequest request, final SessionManager sessionManager) {
         final String logoutMessage = CommonUtils.safeGetParameter(request, this.logoutParameterName);
-        if (log.isTraceEnabled()) {
-            log.trace ("Logout request:\n" + logoutMessage);
-        }
+//        if (log.isTraceEnabled()) {
+            log.info("Logout request:\n" + logoutMessage);
+//        }
 
         final String token = XmlUtils.getTextForElement(logoutMessage, "SessionIndex");
         if (CommonUtils.isNotBlank(token)) {
@@ -115,7 +115,7 @@ public final class SingleSignOutHandler {
             if (sessionId!=null) {
                 try {
                     Session session = sessionManager.getSession(new DefaultSessionKey(sessionId));
-                    log.debug ("Invalidating session [" + session.getId() + "] for token [" + token + "]");
+                    log.info("Invalidating session [" + session.getId() + "] for token [" + token + "]");
                     if(session != null) {
                         //设置会话的logoutParameterName 属性表示无效了，这里直接使用了request的参数名
                         session.setAttribute(logoutParameterName, true);
