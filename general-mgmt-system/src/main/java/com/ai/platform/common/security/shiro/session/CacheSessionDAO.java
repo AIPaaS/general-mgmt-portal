@@ -61,8 +61,7 @@ public class CacheSessionDAO extends EnterpriseCacheSessionDAO implements Sessio
 			}
 		}
     	super.doUpdate(session);
-    	logger.info("sessionId:"+session.getId());
-    	logger.info("update {} {}", session.getId(), request != null ? request.getRequestURI() : "");
+    	logger.debug("update {} {}", session.getId(), request != null ? request.getRequestURI() : "");
     }
 
     @Override
@@ -72,7 +71,7 @@ public class CacheSessionDAO extends EnterpriseCacheSessionDAO implements Sessio
         }
     	
     	super.doDelete(session);
-    	logger.info("delete {} ", session.getId());
+    	logger.debug("delete {} ", session.getId());
     }
 
     @Override

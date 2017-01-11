@@ -80,7 +80,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 			// 设置超期时间
 			int timeoutSeconds = (int)(session.getTimeout() / 1000);
 			jedis.expire((sessionKeyPrefix + session.getId()), timeoutSeconds);
-
+			logger.info("sessionId:"+session.getId());
 			logger.debug("update {} {}", session.getId(), request != null ? request.getRequestURI() : "");
 		} catch (Exception e) {
 			logger.error("update {} {}", session.getId(), request != null ? request.getRequestURI() : "", e);
