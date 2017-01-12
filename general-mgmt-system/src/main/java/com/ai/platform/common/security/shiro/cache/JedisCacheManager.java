@@ -16,9 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
-import com.ai.opt.uni.session.impl.SessionClient;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.platform.common.utils.JedisUtils;
+import com.ai.platform.common.utils.UniSessionUtil;
 import com.ai.platform.common.web.Servlets;
 import com.google.common.collect.Sets;
 
@@ -30,7 +30,7 @@ import com.google.common.collect.Sets;
 public class JedisCacheManager implements CacheManager {
 
 	private String cacheKeyPrefix = "shiro_cache_";
-	private static final String cachens=SessionClient.getSessionPassNameSpace();
+	private static final String cachens=UniSessionUtil.getSessionPassNameSpace();
 
 	
 	@Override

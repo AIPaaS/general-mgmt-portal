@@ -21,12 +21,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
-import com.ai.opt.uni.session.impl.SessionClient;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
 import com.ai.platform.common.config.Global;
 import com.ai.platform.common.utils.DateUtils;
 import com.ai.platform.common.utils.JedisUtils;
 import com.ai.platform.common.utils.StringUtils;
+import com.ai.platform.common.utils.UniSessionUtil;
 import com.ai.platform.common.web.Servlets;
 import com.google.common.collect.Sets;
 
@@ -39,8 +39,8 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private String sessionKeyPrefix = "R_JSID_";
-	private static final String cachens=SessionClient.getSessionPassNameSpace();
+	private String sessionKeyPrefix = "shiro_session_";
+	private static final String cachens=UniSessionUtil.getSessionPassNameSpace();
 
 	@Override
 	public void update(Session session) throws UnknownSessionException {
@@ -80,7 +80,7 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 			// 设置超期时间
 			int timeoutSeconds = (int)(session.getTimeout() / 1000);
 			jedis.expire((sessionKeyPrefix + session.getId()), timeoutSeconds);
-			logger.info("sessionId:"+session.getId());
+
 			logger.debug("update {} {}", session.getId(), request != null ? request.getRequestURI() : "");
 		} catch (Exception e) {
 			logger.error("update {} {}", session.getId(), request != null ? request.getRequestURI() : "", e);

@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ai.opt.sdk.components.mcs.MCSClientFactory;
-import com.ai.opt.uni.session.impl.SessionClient;
 import com.ai.paas.ipaas.mcs.interfaces.ICacheClient;
+import com.ai.platform.common.config.Global;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -27,7 +27,8 @@ public class JedisUtils {
 
 	private static Logger logger = LoggerFactory.getLogger(JedisUtils.class);
 
-	private static final String cachens=SessionClient.getSessionPassNameSpace();
+	public static final String KEY_PREFIX = Global.getConfig("redis.keyPrefix");
+	private static final String cachens=UniSessionUtil.getSessionPassNameSpace();
 	
 	/**
 	 * 获取缓存
