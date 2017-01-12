@@ -20,6 +20,7 @@
 				/mgmtstatic/** = anon
 				/userfiles/** = anon
 				${adminPath}/cas = casLogout,cas
+				${adminPath}/index = authc,casLogout
 				${adminPath}/logout =logout
 				${adminPath}/** = casLogout,user
 				/act/editor/** = user
