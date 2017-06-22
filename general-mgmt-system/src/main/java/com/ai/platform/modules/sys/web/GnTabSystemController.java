@@ -130,7 +130,7 @@ public class GnTabSystemController extends BaseController {
 	@RequestMapping(value = "checkSystemName" )
 	public String checkSystemName(String systemName,String oldSystemName) {
 		if(systemName!=null) {
-			if (oldSystemName != null &&systemName systemName.equals(oldSystemName)) {
+			if (oldSystemName != null && systemName.equals(oldSystemName)) {
 				return "true";
 			}
 		}
