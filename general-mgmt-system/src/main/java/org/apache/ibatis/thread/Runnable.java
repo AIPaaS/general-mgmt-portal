@@ -122,24 +122,32 @@ public class Runnable implements java.lang.Runnable {
 	 *             文件未找到
 	 */
 	public void refresh(String filePath, Long beforeTime) throws Exception {
-
-		// 本次刷新时间
-		Long refrehTime = System.currentTimeMillis();
-
-		List<File> refreshs = this.getRefreshFile(new File(filePath),
-				beforeTime);
-		if (refreshs.size() > 0) {
-			log.debug("refresh files:" + refreshs.size());
-		}
-		for (int i = 0; i < refreshs.size(); i++) {
-			System.out.println("Refresh file: "
-					+ mappingPath
-					+ StringUtils.substringAfterLast(refreshs.get(i)
-							.getAbsolutePath(), mappingPath));
-			log.debug("refresh file:" + refreshs.get(i).getAbsolutePath());
-			log.debug("refresh filename:" + refreshs.get(i).getName());
-			FileInputStream fin = new FileInputStream(refreshs.get(i));
-			SqlSessionFactoryBean.refresh(fin,refreshs.get(i).getAbsolutePath(), configuration);
+		try {
+			// 本次刷新时间
+			Long refrehTime = System.currentTimeMillis();
+			List<File> refreshs = this.getRefreshFile(new File(filePath),
+					beforeTime);
+			if (refreshs.size() > 0) {
+				log.debug("refresh files:" + refreshs.size());
+			}
+			for (int i = 0; i < refreshs.size(); i++) {
+				System.out.println("Refresh file: "
+						+ mappingPath
+						+ StringUtils.substringAfterLast(refreshs.get(i)
+								.getAbsolutePath(), mappingPath));
+				log.debug("refresh file:" + refreshs.get(i).getAbsolutePath());
+				log.debug("refresh filename:" + refreshs.get(i).getName());
+				FileInputStream fin = new FileInputStream(refreshs.get(i));
+				SqlSessionFactoryBean.refresh(fin,refreshs.get(i).getAbsolutePath(), configuration);
+				
+			}
+			// 如果刷新了文件，则修改刷新时间，否则不修改
+			if (refreshs.size() > 0) {
+				this.beforeTime = refrehTime;
+			}
+		} catch (Exception e) {
+			throw new Exception();
+		}finally {
 			if (fin != null) {
 				try {
 					fin.close();
@@ -147,10 +155,6 @@ public class Runnable implements java.lang.Runnable {
 					log.error(e.getMessage());
 				}
 			}
-		}
-		// 如果刷新了文件，则修改刷新时间，否则不修改
-		if (refreshs.size() > 0) {
-			this.beforeTime = refrehTime;
 		}
 	}
 
