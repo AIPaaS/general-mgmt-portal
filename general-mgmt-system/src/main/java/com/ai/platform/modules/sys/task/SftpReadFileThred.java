@@ -103,7 +103,13 @@ public class SftpReadFileThred extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			reader.close();
+			try {
+				if(reader!=null) {
+					reader.close();
+				}
+			} catch (IOException e) {
+				LOG.error(e.getMessage());
+			}
 			if (ins != null) {
 				safeClose(ins);
 			}
