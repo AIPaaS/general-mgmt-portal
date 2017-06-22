@@ -4,6 +4,7 @@
 package com.ai.platform.modules.sys.web;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -320,15 +321,19 @@ public class OfficeController extends BaseController {
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入部门信息失败！失败信息：" + e.getMessage());
 		}finally {
-			// 关闭文件流
-			if(br!=null) {
-				br.close();
-			}
-			if(isr!=null) {
-				isr.close();
-			}
-			if(is!=null) {
-				is.close();
+			try {
+				// 关闭文件流
+				if(br!=null) {
+					br.close();
+				}
+				if(isr!=null) {
+					isr.close();
+				}
+				if(is!=null) {
+					is.close();
+				}
+			} catch (IOException e) {
+				logger.error(e.getMessage());
 			}
 		}
 		return "redirect:" + adminPath + "/sys/office/page?repage";

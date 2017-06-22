@@ -212,8 +212,8 @@ public class GenUtils {
 			String pathName = "/templates/modules/gen/" + fileName;
 //			logger.debug("File to object: {}", pathName);
 			Resource resource = new ClassPathResource(pathName); 
-			InputStream is = resource.getInputStream();
-			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			is = resource.getInputStream();
+			br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 			StringBuilder sb = new StringBuilder();  
 			while (true) {
 				if (br == null){
@@ -236,11 +236,15 @@ public class GenUtils {
 		} catch (IOException e) {
 			logger.warn("Error file convert: {}", e.getMessage());
 		}finally {
-			if (is != null) {
-				is.close();
-			}
-			if (br != null) {
-				br.close();
+			try {
+				if (is != null) {
+					is.close();
+				}
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				logger.error(e.getMessage());
 			}
 		}
 //		String pathName = StringUtils.replace(getTemplatePath() + "/" + fileName, "/", File.separator);
