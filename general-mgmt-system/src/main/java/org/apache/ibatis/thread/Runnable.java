@@ -122,6 +122,7 @@ public class Runnable implements java.lang.Runnable {
 	 *             文件未找到
 	 */
 	public void refresh(String filePath, Long beforeTime) throws Exception {
+		FileInputStream fin =null;
 		try {
 			// 本次刷新时间
 			Long refrehTime = System.currentTimeMillis();
@@ -137,7 +138,7 @@ public class Runnable implements java.lang.Runnable {
 								.getAbsolutePath(), mappingPath));
 				log.debug("refresh file:" + refreshs.get(i).getAbsolutePath());
 				log.debug("refresh filename:" + refreshs.get(i).getName());
-				FileInputStream fin = new FileInputStream(refreshs.get(i));
+				fin = new FileInputStream(refreshs.get(i));
 				SqlSessionFactoryBean.refresh(fin,refreshs.get(i).getAbsolutePath(), configuration);
 				
 			}
