@@ -91,7 +91,11 @@ public class UserfilesDownloadServlet extends HttpServlet {
 //			req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req, resp);
 		}finally {
 			if(sos!=null) {
-				sos.close();
+				try {
+					sos.close();
+				} catch (IOException e) {
+					logger.error(e.getMessage());
+				}
 			}
             if (fis != null) {
 				try {
