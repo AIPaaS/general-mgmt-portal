@@ -91,10 +91,10 @@ public class SftpReadFileThred extends Thread {
 					}
 
 				}
-				reader.close();
-				if (ins != null) {
+				/*reader.close();*/
+				/*if (ins != null) {
 					safeClose(ins);
-				}
+				}*/
 				SftpUtil.delete(path, fileName, sftp);
 				SftpUtil.disconnect(sftp);
 			}
@@ -102,7 +102,10 @@ public class SftpReadFileThred extends Thread {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			
+			reader.close();
+			if (ins != null) {
+				safeClose(ins);
+			}
 			deleteFile(localpath + fileName);
 		}
 	}
