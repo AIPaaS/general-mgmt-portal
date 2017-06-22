@@ -75,7 +75,22 @@ public class UserfilesDownloadServlet extends HttpServlet {
                 sos.write(buffer, 0, i);
                 sos.flush();
             }
-            sos.close();
+           /* sos.close();
+            if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					logger.error(e.getMessage());
+				}
+			}*/
+			return;
+		} catch (FileNotFoundException e) {
+//			req.setAttribute("exception", new FileNotFoundException("请求的文件不存在"));
+//			req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req, resp);
+		}finally {
+			if(sos!=null) {
+				sos.close();
+			}
             if (fis != null) {
 				try {
 					fis.close();
@@ -83,10 +98,6 @@ public class UserfilesDownloadServlet extends HttpServlet {
 					logger.error(e.getMessage());
 				}
 			}
-			return;
-		} catch (FileNotFoundException e) {
-//			req.setAttribute("exception", new FileNotFoundException("请求的文件不存在"));
-//			req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req, resp);
 		}
 	}
 
