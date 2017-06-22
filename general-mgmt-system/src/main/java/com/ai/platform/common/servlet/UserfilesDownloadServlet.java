@@ -42,6 +42,8 @@ public class UserfilesDownloadServlet extends HttpServlet {
 			logger.error(String.format("解释文件路径失败，URL地址为%s", filepath), e1);
 		}
 		File file = new File(Global.getUserfilesBaseDir() + Global.USERFILES_BASE_URL + filepath);
+		ServletOutputStream sos = null;
+        FileInputStream fis = null;
 		try {
 //			FileCopyUtils.copy(new FileInputStream(file), resp.getOutputStream());
 //			resp.setContentType("application/x-msdownload");
@@ -67,8 +69,8 @@ public class UserfilesDownloadServlet extends HttpServlet {
             // 添加文件的大小信息
 			resp.setContentLength((int) file.length());
             // 获得输出网络流
-            ServletOutputStream sos = resp.getOutputStream();
-            FileInputStream fis = new FileInputStream(file);
+			sos = resp.getOutputStream();
+            fis = new FileInputStream(file);
             byte[] buffer = new byte[1024];
             int i = 0;
             while ((i = fis.read(buffer)) != -1) {

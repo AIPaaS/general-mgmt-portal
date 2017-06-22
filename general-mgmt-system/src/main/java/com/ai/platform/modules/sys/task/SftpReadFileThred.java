@@ -57,13 +57,14 @@ public class SftpReadFileThred extends Thread {
 
 	public void readFile(String fileName) throws ParseException {
 		InputStream ins = null;
+		BufferedReader reader=null;
 		try {
 			ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
 			// 从服务器上读取指定的文件
 			LOG.info("开始读取文件：" + fileName);
 			ins = SftpUtil.download(path, fileName, localpath, sftp);
 			if (ins != null) {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
+				reader = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
 				String line;
 				int lintNum = 0;
 				while ((line = reader.readLine()) != null) {

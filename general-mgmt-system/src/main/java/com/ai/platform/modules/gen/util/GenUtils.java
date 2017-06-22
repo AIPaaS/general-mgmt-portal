@@ -206,6 +206,8 @@ public class GenUtils {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T fileToObject(String fileName, Class<?> clazz){
+		InputStream is = null;
+		BufferedReader br = null;
 		try {
 			String pathName = "/templates/modules/gen/" + fileName;
 //			logger.debug("File to object: {}", pathName);

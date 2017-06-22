@@ -254,6 +254,7 @@ public final class SftpUtil {
 		String userPwd = "chupiot@Ch8899"; // 密码
 		int port = 22; // 端口号
 		ChannelSftp sftp = SftpUtil.connect(ip, port, userName, userPwd);
+		InputStreamReader read=null;
 		try {
 			SftpUtil.download("/", "user.txt", "/Users/meteor/Downloads/test/", sftp);
 			System.out.println(sftp.pwd());
@@ -263,7 +264,7 @@ public final class SftpUtil {
 				file.createNewFile();
 			}
 			if (file.isFile() && file.exists()) { // 判断文件是否存在
-				InputStreamReader read = new InputStreamReader(new FileInputStream(file));// 考虑到编码格式
+				read = new InputStreamReader(new FileInputStream(file));// 考虑到编码格式
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String lineTxt = null;
 				while ((lineTxt = bufferedReader.readLine()) != null) {

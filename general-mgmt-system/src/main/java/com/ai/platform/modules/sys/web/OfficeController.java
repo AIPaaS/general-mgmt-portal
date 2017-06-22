@@ -245,6 +245,9 @@ public class OfficeController extends BaseController {
 			addMessage(redirectAttributes, "演示模式，不允许操作！");
 			return "redirect:" + adminPath + "/sys/office/page?repage";
 		}
+		InputStream is=null;
+		InputStreamReader isr = null;
+		BufferedReader br = null;
 		try {
 			// 验证导入文件是否合法
 			String fileName = file.getOriginalFilename();
@@ -259,10 +262,9 @@ public class OfficeController extends BaseController {
 			int failureNum = 0;
 			int alldataNum = 0;
 			StringBuilder failureMsg = new StringBuilder();
-			InputStream is;
 			is = file.getInputStream();
-			InputStreamReader isr = new InputStreamReader(is,FileUtils.getCharset(is));
-			BufferedReader br = new BufferedReader(isr);
+			isr = new InputStreamReader(is,FileUtils.getCharset(is));
+			br = new BufferedReader(isr);
 			String lineContent;
 			while ((lineContent = br.readLine()) != null) {
 				Office office = new Office();
