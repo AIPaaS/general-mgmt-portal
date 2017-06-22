@@ -306,10 +306,10 @@ public class OfficeController extends BaseController {
 					alldataNum++;
 				}
 			}
-			// 关闭文件流
+			/*// 关闭文件流
 			br.close();
 			isr.close();
-			is.close();
+			is.close();*/
 
 			if (failureNum > 0) {
 				failureMsg.insert(0, "，失败 " + failureNum + " 条部门信息，导入信息如下：");
@@ -317,6 +317,17 @@ public class OfficeController extends BaseController {
 			addMessage(redirectAttributes, "已成功导入 " + successNum + " 条部门信息" + failureMsg);
 		} catch (Exception e) {
 			addMessage(redirectAttributes, "导入部门信息失败！失败信息：" + e.getMessage());
+		}finally {
+			// 关闭文件流
+			if(br!=null) {
+				br.close();
+			}
+			if(isr!=null) {
+				isr.close();
+			}
+			if(is!=null) {
+				is.close();
+			}
 		}
 		return "redirect:" + adminPath + "/sys/office/page?repage";
 	}
