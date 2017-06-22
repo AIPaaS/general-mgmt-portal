@@ -609,11 +609,14 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 					zouts.write(buf, 0, readByte);
 				}
 				zouts.closeEntry();
-				if(fin != null)
+				/*if(fin != null)
 					safeClose(fin);
-				System.out.println("添加文件 " + file.getAbsolutePath() + " 到zip文件中!");
+				System.out.println("添加文件 " + file.getAbsolutePath() + " 到zip文件中!");*/
 			} catch (Exception e) {
 				e.printStackTrace();
+			}finally {
+				if(fin != null)
+					safeClose(fin);
 			}
 		}
 	}
