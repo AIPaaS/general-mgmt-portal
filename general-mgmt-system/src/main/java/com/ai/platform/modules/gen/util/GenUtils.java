@@ -223,16 +223,23 @@ public class GenUtils {
 				}
 				sb.append(line).append("\r\n");
 			}
+			/*if (is != null) {
+				is.close();
+			}
+			if (br != null) {
+				br.close();
+			}*/
+//			logger.debug("Read file content: {}", sb.toString());
+			return (T) JaxbMapper.fromXml(sb.toString(), clazz);
+		} catch (IOException e) {
+			logger.warn("Error file convert: {}", e.getMessage());
+		}finally {
 			if (is != null) {
 				is.close();
 			}
 			if (br != null) {
 				br.close();
 			}
-//			logger.debug("Read file content: {}", sb.toString());
-			return (T) JaxbMapper.fromXml(sb.toString(), clazz);
-		} catch (IOException e) {
-			logger.warn("Error file convert: {}", e.getMessage());
 		}
 //		String pathName = StringUtils.replace(getTemplatePath() + "/" + fileName, "/", File.separator);
 //		logger.debug("file to object: {}", pathName);
