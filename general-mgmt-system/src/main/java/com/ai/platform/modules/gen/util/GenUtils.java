@@ -235,8 +235,7 @@ public class GenUtils {
 			return (T) JaxbMapper.fromXml(sb.toString(), clazz);
 		} catch (IOException e) {
 			logger.warn("Error file convert: {}", e.getMessage());
-		}
-	/*	finally {
+		}finally {
 			try {
 				if (is != null) {
 					is.close();
@@ -247,7 +246,7 @@ public class GenUtils {
 			} catch (IOException e) {
 				logger.error(e.getMessage());
 			}
-		}*/
+		}
 //		String pathName = StringUtils.replace(getTemplatePath() + "/" + fileName, "/", File.separator);
 //		logger.debug("file to object: {}", pathName);
 //		String content = "";
