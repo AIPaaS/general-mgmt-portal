@@ -117,7 +117,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 //			}
 //		}
 		User user = getSystemService().getUserByLoginName(principal.getLoginName());
-		System.out.println("4. 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。"+user.getName());
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			List<Menu> list = UserUtils.getMenuList();
